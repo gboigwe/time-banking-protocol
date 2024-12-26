@@ -123,15 +123,11 @@ clarinet test
 
 ## Roadmap
 
-- [x] Core smart contract development
+- [ ] Core smart contract development
 - [ ] Frontend interface development
 - [ ] Skill marketplace implementation
 - [ ] Mobile application development
 - [ ] Cross-chain integration capabilities
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
