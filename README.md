@@ -1,5 +1,9 @@
 # Time Banking Protocol
 
+![Stacks](https://img.shields.io/badge/Stacks-Blockchain-blue)
+![Clarity](https://img.shields.io/badge/Clarity-Smart%20Contracts-brightgreen)
+![Status](https://img.shields.io/badge/Status-In%20Development-yellow)
+
 A decentralized time-skill trading platform built on the Stacks blockchain that enables users to exchange expertise and services using time as currency. The platform leverages smart contracts to ensure secure, verifiable skill attestation and automatic time-value tracking.
 
 ## Tags
