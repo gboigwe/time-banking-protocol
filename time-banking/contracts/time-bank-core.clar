@@ -250,11 +250,16 @@
         (/ (+ weighted-current weighted-new) u10)))
 
 ;; Helper Functions
-(define-private (update-user-stats (user principal) (hours uint))
-    (let ((user-data (unwrap! (map-get? users user) ERR_NOT_FOUND)))
-        (map-set users user 
-            (merge user-data {
-                total-hours-given: (+ (get total-hours-given user-data) hours)
+(define-private (update-user-stats (provider principal) (receiver principal) (hours uint))
+    (let ((provider-data (unwrap! (map-get? users provider) ERR_NOT_FOUND))
+          (receiver-data (unwrap! (map-get? users receiver) ERR_NOT_FOUND)))
+        (map-set users provider 
+            (merge provider-data {
+                total-hours-given: (+ (get total-hours-given provider-data) hours)
+            }))
+        (map-set users receiver 
+            (merge receiver-data {
+                total-hours-received: (+ (get total-hours-received receiver-data) hours)
             }))
         (ok true)))
 
