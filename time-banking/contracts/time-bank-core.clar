@@ -12,6 +12,26 @@
 (define-constant ERR_NOT_FOUND (err u1007))
 (define-constant ERR_ALREADY_COMPLETED (err u1008))
 
+;; Add persistent event logging
+(define-map event-log 
+    uint 
+    {
+        event-type: (string-ascii 32),
+        data: (string-ascii 256),
+        block: uint
+    })
+
+(define-data-var event-nonce uint u0)
+
+(define-private (log-event (event-type (string-ascii 32)) (data (string-ascii 256)))
+    (let ((event-id (+ (var-get event-nonce) u1)))
+        (var-set event-nonce event-id)
+        (map-set event-log event-id {
+            event-type: event-type,
+            data: data,
+            block: block-height
+        })))
+
 ;; Data Structures
 (define-map users
     principal
@@ -143,6 +163,7 @@
 
 (define-public (create-exchange (skill (string-ascii 64)) (hours uint) (receiver principal))
     (let ((exchange-id (+ (var-get exchange-nonce) u1)))
+        (try! (validate-exchange-creation skill tx-sender))
         (asserts! (and (>= hours (var-get min-exchange-duration)) 
                       (<= hours (var-get max-exchange-duration))) 
                  ERR_INVALID_PARAMS)
