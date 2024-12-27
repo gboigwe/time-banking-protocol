@@ -7,7 +7,7 @@
 A decentralized time-skill trading platform built on the Stacks blockchain that enables users to exchange expertise and services using time as currency. The platform leverages smart contracts to ensure secure, verifiable skill attestation and automatic time-value tracking.
 
 ## Tags
-`#stacks` `#blockchain` `#smartcontracts` `#clarity` `#maritime` `#trade` `#gps` `#logistics` `#shipping` `#decentralized` `#dapp` `#bitcoin`
+`#stacks` `#blockchain` `#smartcontracts` `#clarity` `#trade` `#gps` `#logistics` `#shipping` `#decentralized` `#dapp` `#bitcoin`
 
 ## Overview
 
