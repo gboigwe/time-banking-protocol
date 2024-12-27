@@ -11,6 +11,7 @@
 (define-constant ERR_ALREADY_VERIFIED (err u1006))
 (define-constant ERR_NOT_FOUND (err u1007))
 (define-constant ERR_ALREADY_COMPLETED (err u1008))
+(define-constant ERR_SELF_EXCHANGE (err u1009))
 
 ;; Add persistent event logging
 (define-map event-log 
