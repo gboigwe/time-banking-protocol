@@ -57,9 +57,9 @@
 (define-data-var min-exchange-duration uint u1) ;; Minimum 1 hour
 (define-data-var max-exchange-duration uint u8) ;; Maximum 8 hours
 
-;; Events
-(define-public (print-event (event-type (string-ascii 32)) (data (string-ascii 256)))
-    (ok (print {event-type: event-type, data: data})))
+;; Event Logging
+(define-private (log-event (event-type (string-ascii 32)) (data (string-ascii 256)))
+    (print {event-type: event-type, data: data}))
 
 ;; Administrative Functions
 (define-public (set-min-exchange-duration (hours uint))
@@ -67,17 +67,15 @@
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
         (asserts! (>= hours u1) ERR_INVALID_PARAMS)
         (var-set min-exchange-duration hours)
-        (print-event "config-update" "min-exchange-duration-updated")
-        (ok true)
-    )
-)
+        (log-event "config-update" "min-exchange-duration-updated")
+        (ok true)))
 
 (define-public (set-max-exchange-duration (hours uint))
     (begin
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
         (asserts! (>= hours (var-get min-exchange-duration)) ERR_INVALID_PARAMS)
         (var-set max-exchange-duration hours)
-        (print-event "config-update" "max-exchange-duration-updated")
+        (log-event "config-update" "max-exchange-duration-updated")
         (ok true)))
 
 ;; User Management
@@ -91,7 +89,7 @@
             reputation-score: u0,
             is-active: true
         })
-        (print-event "user-action" "user-registered")
+        (log-event "user-action" "user-registered")
         (ok true)))
 
 ;; Skill Management
@@ -104,7 +102,7 @@
             min-reputation: u0,
             verification-required: true
         })
-        (print-event "skill-action" "skill-registered")
+        (log-event "skill-action" "skill-registered")
         (ok true)))
 
 ;; Exchange Functions
@@ -125,7 +123,7 @@
             completed-at: none
         })
         (var-set exchange-nonce exchange-id)
-        (print-event "exchange-action" "exchange-created")
+        (log-event "exchange-action" "exchange-created")
         (ok exchange-id)))
 
 (define-public (complete-exchange (exchange-id uint))
@@ -137,8 +135,8 @@
                 status: "completed",
                 completed-at: (some block-height)
             }))
-        (update-user-stats (get provider exchange) (get hours exchange))
-        (print-event "exchange-action" "exchange-completed")
+        (try! (update-user-stats (get provider exchange) (get hours exchange)))
+        (log-event "exchange-action" "exchange-completed")
         (ok true)))
 
 ;; Helper Functions
