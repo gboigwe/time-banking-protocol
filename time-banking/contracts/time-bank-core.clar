@@ -165,6 +165,9 @@
 (define-public (create-exchange (skill (string-ascii 64)) (hours uint) (receiver principal))
     (let ((exchange-id (+ (var-get exchange-nonce) u1)))
         (try! (validate-exchange-creation skill tx-sender))
+        (asserts! (not (is-eq tx-sender receiver)) ERR_SELF_EXCHANGE)
+        (asserts! (is-some (map-get? user-skills 
+            {user: tx-sender, skill: skill})) ERR_SKILL_NOT_VERIFIED)
         (asserts! (and (>= hours (var-get min-exchange-duration)) 
                       (<= hours (var-get max-exchange-duration))) 
                  ERR_INVALID_PARAMS)
