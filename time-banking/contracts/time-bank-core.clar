@@ -132,6 +132,15 @@
         (ok true)))
 
 ;; Exchange Functions
+(define-private (validate-exchange-creation (skill (string-ascii 64)) (provider principal))
+    (let ((skill-info (unwrap! (map-get? skills skill) ERR_NOT_FOUND))
+          (user-skill (map-get? user-skills {user: provider, skill: skill})))
+        (asserts! (or (not (get verification-required skill-info))
+                     (and (is-some user-skill)
+                          (get verified (unwrap! user-skill ERR_SKILL_NOT_VERIFIED))))
+                 ERR_SKILL_NOT_VERIFIED)
+        (ok true)))
+
 (define-public (create-exchange (skill (string-ascii 64)) (hours uint) (receiver principal))
     (let ((exchange-id (+ (var-get exchange-nonce) u1)))
         (asserts! (and (>= hours (var-get min-exchange-duration)) 
