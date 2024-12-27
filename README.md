@@ -60,7 +60,7 @@ The protocol consists of several key components:
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/time-banking-protocol.git
+git clone https://github.com/gboigwe/time-banking-protocol.git
 cd time-banking-protocol
 ```
 
