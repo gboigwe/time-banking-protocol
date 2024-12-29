@@ -11,6 +11,7 @@
 (define-constant ERR_ALREADY_VERIFIED (err u1006))
 (define-constant ERR_NOT_FOUND (err u1007))
 (define-constant ERR_ALREADY_COMPLETED (err u1008))
+(define-constant ERR_SELF_EXCHANGE (err u1009))
 
 ;; Data Structures
 (define-map users
@@ -57,9 +58,26 @@
 (define-data-var min-exchange-duration uint u1) ;; Minimum 1 hour
 (define-data-var max-exchange-duration uint u8) ;; Maximum 8 hours
 
-;; Event Logging
+;; Event Map for persistent logging
+(define-map event-log 
+    uint 
+    {
+        event-type: (string-ascii 32),
+        data: (string-ascii 256),
+        block: uint
+    })
+
+(define-data-var event-nonce uint u0)
+
+;; Event Logging - Fixed to be persistent and type-safe
 (define-private (log-event (event-type (string-ascii 32)) (data (string-ascii 256)))
-    (print {event-type: event-type, data: data}))
+    (let ((event-id (+ (var-get event-nonce) u1)))
+        (var-set event-nonce event-id)
+        (map-set event-log event-id {
+            event-type: event-type,
+            data: data,
+            block: block-height
+        })))
 
 ;; Administrative Functions
 (define-public (set-min-exchange-duration (hours uint))
@@ -105,14 +123,32 @@
         (log-event "skill-action" "skill-registered")
         (ok true)))
 
+(define-public (verify-user-skill (user principal) (skill-name (string-ascii 64)))
+    (begin
+        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
+        (asserts! (is-some (map-get? skills skill-name)) ERR_NOT_FOUND)
+        (asserts! (is-some (map-get? users user)) ERR_NOT_FOUND)
+        (map-set user-skills {user: user, skill: skill-name} 
+            {
+                verified: true,
+                verified-by: (some tx-sender),
+                verified-at: (some block-height),
+                rating: u0
+            })
+        (log-event "skill-action" "skill-verified")
+        (ok true)))
+
 ;; Exchange Functions
 (define-public (create-exchange (skill (string-ascii 64)) (hours uint) (receiver principal))
     (let ((exchange-id (+ (var-get exchange-nonce) u1)))
+        (asserts! (is-some (map-get? users tx-sender)) ERR_UNAUTHORIZED)
+        (asserts! (is-some (map-get? users receiver)) ERR_NOT_FOUND)
+        (asserts! (not (is-eq tx-sender receiver)) ERR_SELF_EXCHANGE)
         (asserts! (and (>= hours (var-get min-exchange-duration)) 
                       (<= hours (var-get max-exchange-duration))) 
                  ERR_INVALID_PARAMS)
-        (asserts! (is-some (map-get? users tx-sender)) ERR_UNAUTHORIZED)
-        (asserts! (is-some (map-get? users receiver)) ERR_NOT_FOUND)
+        (asserts! (is-some (map-get? user-skills 
+            {user: tx-sender, skill: skill})) ERR_SKILL_NOT_VERIFIED)
         (map-set time-exchanges exchange-id {
             provider: tx-sender,
             receiver: receiver,
@@ -126,25 +162,58 @@
         (log-event "exchange-action" "exchange-created")
         (ok exchange-id)))
 
-(define-public (complete-exchange (exchange-id uint))
+(define-public (accept-exchange (exchange-id uint))
     (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
         (asserts! (is-eq (get receiver exchange) tx-sender) ERR_UNAUTHORIZED)
         (asserts! (is-eq (get status exchange) "pending") ERR_ALREADY_COMPLETED)
+        (map-set time-exchanges exchange-id 
+            (merge exchange {status: "active"}))
+        (log-event "exchange-action" "exchange-accepted")
+        (ok true)))
+
+(define-public (complete-exchange (exchange-id uint))
+    (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
+        (asserts! (is-eq (get receiver exchange) tx-sender) ERR_UNAUTHORIZED)
+        (asserts! (is-eq (get status exchange) "active") ERR_ALREADY_COMPLETED)
+        (try! (update-user-stats 
+            (get provider exchange) 
+            (get receiver exchange) 
+            (get hours exchange)))
         (map-set time-exchanges exchange-id 
             (merge exchange {
                 status: "completed",
                 completed-at: (some block-height)
             }))
-        (try! (update-user-stats (get provider exchange) (get hours exchange)))
         (log-event "exchange-action" "exchange-completed")
         (ok true)))
 
+(define-public (cancel-exchange (exchange-id uint))
+    (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
+        (asserts! (or (is-eq (get provider exchange) tx-sender)
+                     (is-eq (get receiver exchange) tx-sender)) 
+                 ERR_UNAUTHORIZED)
+        (asserts! (or (is-eq (get status exchange) "pending")
+                     (is-eq (get status exchange) "active"))
+                 ERR_ALREADY_COMPLETED)
+        (map-set time-exchanges exchange-id 
+            (merge exchange {
+                status: "cancelled",
+                completed-at: (some block-height)
+            }))
+        (log-event "exchange-action" "exchange-cancelled")
+        (ok true)))
+
 ;; Helper Functions
-(define-private (update-user-stats (user principal) (hours uint))
-    (let ((user-data (unwrap! (map-get? users user) ERR_NOT_FOUND)))
-        (map-set users user 
-            (merge user-data {
-                total-hours-given: (+ (get total-hours-given user-data) hours)
+(define-private (update-user-stats (provider principal) (receiver principal) (hours uint))
+    (let ((provider-data (unwrap! (map-get? users provider) ERR_NOT_FOUND))
+          (receiver-data (unwrap! (map-get? users receiver) ERR_NOT_FOUND)))
+        (map-set users provider 
+            (merge provider-data {
+                total-hours-given: (+ (get total-hours-given provider-data) hours)
+            }))
+        (map-set users receiver 
+            (merge receiver-data {
+                total-hours-received: (+ (get total-hours-received receiver-data) hours)
             }))
         (ok true)))
 
@@ -160,3 +229,6 @@
 
 (define-read-only (get-contract-owner)
     (ok CONTRACT_OWNER))
+
+(define-read-only (get-event (event-id uint))
+    (map-get? event-log event-id))
