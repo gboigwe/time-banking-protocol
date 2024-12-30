@@ -110,11 +110,24 @@
         (log-event "user-action" "user-registered")
         (ok true)))
 
+;; String Validation Functions
+(define-private (is-valid-string (input (string-ascii 64)))
+    (and
+        (>= (len input) u1)
+        (<= (len input) u64)))
+
+(define-private (is-valid-category (input (string-ascii 32)))
+    (and
+        (>= (len input) u1)
+        (<= (len input) u32)))
+
 ;; Skill Management
 (define-public (register-skill (skill-name (string-ascii 64)) (category (string-ascii 32)))
     (begin
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
         (asserts! (is-none (map-get? skills skill-name)) ERR_ALREADY_VERIFIED)
+        (asserts! (is-valid-string skill-name) ERR_INVALID_PARAMS)
+        (asserts! (is-valid-category category) ERR_INVALID_PARAMS)
         (map-set skills skill-name {
             category: category,
             min-reputation: u0,
@@ -140,7 +153,9 @@
 
 ;; Exchange Functions
 (define-public (create-exchange (skill (string-ascii 64)) (hours uint) (receiver principal))
-    (let ((exchange-id (+ (var-get exchange-nonce) u1)))
+    (begin
+        (asserts! (is-valid-string skill) ERR_INVALID_PARAMS)
+        (let ((exchange-id (+ (var-get exchange-nonce) u1)))
         (asserts! (is-some (map-get? users tx-sender)) ERR_UNAUTHORIZED)
         (asserts! (is-some (map-get? users receiver)) ERR_NOT_FOUND)
         (asserts! (not (is-eq tx-sender receiver)) ERR_SELF_EXCHANGE)
@@ -160,7 +175,7 @@
         })
         (var-set exchange-nonce exchange-id)
         (log-event "exchange-action" "exchange-created")
-        (ok exchange-id)))
+        (ok exchange-id))))
 
 (define-public (accept-exchange (exchange-id uint))
     (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
