@@ -39,3 +39,10 @@ export class BroadcastManager {
     this.pendingCallbacks.push(cb);
     return this;
   }
+
+  async broadcast(_txHex: string): Promise<BroadcastResult> {
+    const result: BroadcastResult = { txId: 'placeholder', status: 'ok' };
+    this.successCallbacks.forEach(cb => cb(result));
+    return result;
+  }
+}
