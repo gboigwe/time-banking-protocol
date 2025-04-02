@@ -6,3 +6,4 @@ export * from './governance-types';
 export * from './error-constants';
 export * from './exchange-status-helpers';
 export * from './time-record-validators';
+export * from './skill-validators';
