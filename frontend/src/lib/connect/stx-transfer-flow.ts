@@ -32,3 +32,6 @@ export function formatTransferAmount(...args: unknown[]): unknown {
 
 /** TRANSFER_LIMIT constant 1 */
 export const TRANSFER_LIMIT_1 = 7;
+
+/** TRANSFER_LIMIT constant 2 */
+export const TRANSFER_LIMIT_2 = 14;
