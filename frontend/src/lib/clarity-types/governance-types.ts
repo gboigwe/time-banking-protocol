@@ -7,3 +7,6 @@ export type QuorumThreshold = number;
 export interface VotingPeriod {
   /** Start block height */
   startBlock: number;
+  /** End block height */
+  endBlock: number;
+}
