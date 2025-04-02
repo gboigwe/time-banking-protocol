@@ -21,3 +21,8 @@ export function buildContractCallRequest(...args: unknown[]): unknown {
 export function validateContractArgs(...args: unknown[]): unknown {
   return args;
 }
+
+/** openContractCallDialog */
+export function openContractCallDialog(...args: unknown[]): unknown {
+  return args;
+}
