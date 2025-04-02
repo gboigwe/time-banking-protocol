@@ -178,3 +178,11 @@ export interface TupleCV extends ClarityValue {
   type: 'tuple';
   data: Record<string, ClarityValue>;
 }
+
+/**
+ * Create a tuple ClarityValue
+ * @param data - record of field names to ClarityValues
+ */
+export function tupleCV(data: Record<string, ClarityValue>): TupleCV {
+  return { type: 'tuple', data };
+}
