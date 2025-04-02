@@ -21,3 +21,11 @@ export function validateHours(hours: number): string | null {
   }
   return null;
 }
+
+/** Validate provider and requester are not the same */
+export function validateNotSelfExchange(provider: string, requester: string): string | null {
+  if (provider === requester) {
+    return 'Provider and requester cannot be the same address';
+  }
+  return null;
+}
