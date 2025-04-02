@@ -35,3 +35,9 @@ export interface ModalState {
   active: boolean;
   data?: unknown;
 }
+
+/** ToastState UI type */
+export interface ToastState {
+  active: boolean;
+  data?: unknown;
+}
