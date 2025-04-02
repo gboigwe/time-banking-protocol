@@ -52,3 +52,5 @@ export interface TimeRecord {
 export interface SkillExchangeResponse {
   /** Whether the response is ok or err */
   type: 'ok' | 'err';
+  /** The exchange record if successful */
+  value?: TimeRecord;
