@@ -15,3 +15,8 @@ export function isValidStacksAddress(address: string): boolean {
 export function isTestnetAddress(address: string): boolean {
   return address.startsWith('ST');
 }
+
+/** Check if address is on mainnet */
+export function isMainnetAddress(address: string): boolean {
+  return address.startsWith('SM') || address.startsWith('SP');
+}
