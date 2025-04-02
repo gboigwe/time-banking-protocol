@@ -45,3 +45,5 @@ export const ERR_VOTING_CLOSED = 502;
 export const ERR_QUORUM_NOT_REACHED = 503;
 export const ERR_PROPOSAL_NOT_PASSED = 504;
 export const ERR_PROPOSAL_ALREADY_EXECUTED = 505;
+
+// ---- reputation-system errors ----
