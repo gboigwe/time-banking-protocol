@@ -35,3 +35,15 @@ export function validateQuorumThreshold(quorum: number): string | null {
   }
   return null;
 }
+
+/** Validate voting period block range */
+export function validateVotingPeriod(startBlock: number, endBlock: number): string | null {
+  const duration = endBlock - startBlock;
+  if (duration < MIN_VOTING_PERIOD_BLOCKS) {
+    return `Voting period must be at least ${MIN_VOTING_PERIOD_BLOCKS} blocks`;
+  }
+  if (duration > MAX_VOTING_PERIOD_BLOCKS) {
+    return `Voting period cannot exceed ${MAX_VOTING_PERIOD_BLOCKS} blocks`;
+  }
+  return null;
+}
