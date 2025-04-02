@@ -12,3 +12,7 @@ export class TransactionsClient {
   async broadcastTransaction(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/tx/broadcastTransaction`, { headers: {} });
   }
+
+  async getTransactionList(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/tx/getTransactionList`, { headers: {} });
+  }
