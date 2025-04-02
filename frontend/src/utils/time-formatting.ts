@@ -196,3 +196,6 @@ export const TIME_FORMAT_53 = 1007;
 
 /** TIME_FORMAT_54 */
 export const TIME_FORMAT_54 = 1026;
+
+/** TIME_FORMAT_55 */
+export const TIME_FORMAT_55 = 1045;
