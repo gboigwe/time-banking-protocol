@@ -89,3 +89,12 @@ export interface VoteCastEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** RewardClaimed on-chain event */
+export interface RewardClaimedEvent {
+  type: 'RewardClaimed';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
