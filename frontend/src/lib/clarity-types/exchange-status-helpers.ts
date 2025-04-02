@@ -60,3 +60,12 @@ export function getStatusColor(status: ServiceStatus): string {
   };
   return colors[status] ?? 'gray';
 }
+
+/** Is the exchange in a terminal state */
+export function isTerminalStatus(status: ServiceStatus): boolean {
+  return (
+    status === ServiceStatus.Completed ||
+    status === ServiceStatus.Cancelled ||
+    status === ServiceStatus.Expired
+  );
+}
