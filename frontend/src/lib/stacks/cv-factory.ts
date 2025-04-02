@@ -39,3 +39,8 @@ export function intCV(value: number | bigint): IntCV {
 export interface BoolCV extends ClarityValue {
   type: 'true' | 'false';
 }
+
+/** Create a true ClarityValue */
+export function trueCV(): BoolCV {
+  return { type: 'true' };
+}
