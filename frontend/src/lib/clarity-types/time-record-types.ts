@@ -35,3 +35,5 @@ export interface TimeRecord {
   skillId: number;
   /** Current status of the service */
   status: ServiceStatus;
+  /** Block height when exchange was created */
+  createdAt: number;
