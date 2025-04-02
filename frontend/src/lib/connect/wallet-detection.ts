@@ -6,3 +6,11 @@ export enum WalletType {
   Xverse = 'xverse',
   Unknown = 'unknown',
 }
+
+/** Detect installed wallet */
+export function detectWallet(): WalletType {
+  if (typeof window === 'undefined') return WalletType.Unknown;
+  if ((window as Record<string, unknown>)['LeatherProvider']) return WalletType.Leather;
+  if ((window as Record<string, unknown>)['XverseProviders']) return WalletType.Xverse;
+  return WalletType.Unknown;
+}
