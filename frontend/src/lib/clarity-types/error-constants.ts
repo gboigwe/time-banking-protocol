@@ -24,3 +24,5 @@ export const ERR_EXCHANGE_EXPIRED = 202;
 export const ERR_EXCHANGE_NOT_ACTIVE = 203;
 export const ERR_SELF_EXCHANGE = 204;
 export const ERR_EXCHANGE_LIMIT_REACHED = 205;
+
+// ---- skill-registry errors ----
