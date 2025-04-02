@@ -17,3 +17,9 @@ export interface WalletSession {
   type: string;
   address?: string;
 }
+
+/** AuthProfile wallet type */
+export interface AuthProfile {
+  type: string;
+  address?: string;
+}
