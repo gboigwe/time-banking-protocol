@@ -15,3 +15,13 @@ export interface TimeRange {
   /** End time */
   endTime: Date;
 }
+
+/**
+ * Check if a block height is within a BlockRange
+ * @param block - block height to check
+ * @param range - range to check against
+ * @returns true if block is in range
+ */
+export function isInBlockRange(block: number, range: BlockRange): boolean {
+  return block >= range.startBlock && block < range.endBlock;
+}
