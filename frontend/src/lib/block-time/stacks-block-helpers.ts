@@ -46,3 +46,8 @@ export function blocksRemainingInCycle(currentBlock: number): number {
   const cycleNum = getStacksCycleNumber(currentBlock);
   return getCycleEndBlock(cycleNum) - currentBlock;
 }
+
+/** Check if block is at the start of a new cycle */
+export function isNewCycleStart(blockHeight: number): boolean {
+  return blockHeight > 0 && blockHeight % 2100 === 0;
+}
