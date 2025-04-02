@@ -106,3 +106,8 @@ export function bufferCV(value: Uint8Array): BufferCV {
 export function bufferCVFromString(value: string): BufferCV {
   return bufferCV(new TextEncoder().encode(value));
 }
+
+/** None ClarityValue (Clarity optional) */
+export interface NoneCV extends ClarityValue {
+  type: 'none';
+}
