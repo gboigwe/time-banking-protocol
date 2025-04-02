@@ -120,3 +120,6 @@ export const AUTH_TIMEOUT_26 = 182;
 
 /** AUTH_TIMEOUT constant 27 */
 export const AUTH_TIMEOUT_27 = 189;
+
+/** AUTH_TIMEOUT constant 28 */
+export const AUTH_TIMEOUT_28 = 196;
