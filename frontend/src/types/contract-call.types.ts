@@ -39,3 +39,11 @@ export interface TxConfirmation {
   result?: unknown;
   error?: string;
 }
+
+/** PostConditionResult contract call type */
+export interface PostConditionResult {
+  success: boolean;
+  txId?: string;
+  result?: unknown;
+  error?: string;
+}
