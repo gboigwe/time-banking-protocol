@@ -28,3 +28,16 @@ export function unwrapOkOrNull<T>(response: ClarityResponse<T>): T | null {
 export function isOkResponse<T>(response: ClarityResponse<T>): boolean {
   return response.type === 'ok';
 }
+
+/** Convert Clarity tuple response to typed SkillMetadata */
+export function clarityToSkillMetadata(tuple: Record<string, unknown>): SkillMetadata {
+  return {
+    skillId: Number(tuple['skill-id'] ?? 0),
+    name: String(tuple['name'] ?? ''),
+    categoryId: Number(tuple['category-id'] ?? 0),
+    minLevel: (Number(tuple['min-level'] ?? 1)) as 1 | 2 | 3 | 4 | 5,
+    maxLevel: (Number(tuple['max-level'] ?? 5)) as 1 | 2 | 3 | 4 | 5,
+    requiresCertification: Boolean(tuple['requires-certification'] ?? false),
+    tags: Array.isArray(tuple['tags']) ? tuple['tags'].map(String) : [],
+  };
+}
