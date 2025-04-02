@@ -5,3 +5,4 @@ import { useState, useCallback, useEffect } from 'react';
 export interface useTimeTokenState {
   balance: unknown;
   allowance: unknown;
+  isLoading: unknown;
