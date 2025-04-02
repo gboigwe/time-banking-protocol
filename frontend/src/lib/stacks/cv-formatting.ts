@@ -36,3 +36,11 @@ export function cvToString(cv: ClarityValue): string {
     default: return JSON.stringify(cv);
   }
 }
+
+/**
+ * Format ClarityValue for user-facing display (simplified)
+ * @param cv - ClarityValue to format
+ */
+export function cvToDisplayString(cv: ClarityValue): string {
+  return cvToString(cv);
+}
