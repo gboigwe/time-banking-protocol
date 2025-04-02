@@ -44,3 +44,12 @@ export interface SkillVerifiedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** ParticipantRegistered on-chain event */
+export interface ParticipantRegisteredEvent {
+  type: 'ParticipantRegistered';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
