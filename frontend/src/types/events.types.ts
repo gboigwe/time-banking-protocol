@@ -8,3 +8,12 @@ export interface ExchangeCreatedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** ExchangeCompleted on-chain event */
+export interface ExchangeCompletedEvent {
+  type: 'ExchangeCompleted';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
