@@ -14,3 +14,8 @@ export function isUIntCV(cv: ClarityValue): cv is UIntCV {
 export function isIntCV(cv: ClarityValue): cv is IntCV {
   return cv.type === 'int';
 }
+
+/** Type guard for StringAsciiCV */
+export function isStringAsciiCV(cv: ClarityValue): cv is StringAsciiCV {
+  return cv.type === 'stringascii';
+}
