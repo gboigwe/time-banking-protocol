@@ -3,3 +3,4 @@ import { useState, useCallback, useEffect } from 'react';
 
 /** State interface for useTimeBalance */
 export interface useTimeBalanceState {
+  balance: unknown;
