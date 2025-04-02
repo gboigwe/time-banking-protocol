@@ -4,3 +4,7 @@ import { describe, it, expect } from 'vitest';
 it('should handle block-time-usage case 1', () => {
   expect(true).toBe(true);
 });
+
+it('should handle block-time-usage case 2', () => {
+  expect(true).toBe(true);
+});
