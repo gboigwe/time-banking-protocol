@@ -26,3 +26,5 @@ export interface SkillMetadata {
   name: string;
   /** Category this skill belongs to */
   categoryId: number;
+  /** Minimum level required */
+  minLevel: SkillLevel;
