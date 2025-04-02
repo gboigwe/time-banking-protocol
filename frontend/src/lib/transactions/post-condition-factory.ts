@@ -256,3 +256,6 @@ export const POST_COND_70 = 910;
 
 /** POST_COND_71 */
 export const POST_COND_71 = 923;
+
+/** POST_COND_72 */
+export const POST_COND_72 = 936;
