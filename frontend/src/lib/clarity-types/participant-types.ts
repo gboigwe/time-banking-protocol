@@ -55,3 +55,8 @@ export function isParticipantProfile(value: unknown): value is ParticipantProfil
     'balance' in value
   );
 }
+
+/** Compute net balance from a TimeBalance */
+export function computeNetBalance(balance: TimeBalance): number {
+  return balance.earned - balance.spent - balance.escrowed;
+}
