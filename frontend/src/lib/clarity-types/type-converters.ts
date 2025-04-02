@@ -9,3 +9,11 @@ export interface ClarityResponse<T> {
   type: 'ok' | 'err';
   value: T | number;
 }
+
+/** Extract value from ok response or throw */
+export function unwrapOk<T>(response: ClarityResponse<T>): T {
+  if (response.type === 'err') {
+    throw new Error(`Contract returned error: ${response.value}`);
+  }
+  return response.value as T;
+}
