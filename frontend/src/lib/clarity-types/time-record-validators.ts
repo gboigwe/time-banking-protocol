@@ -10,3 +10,14 @@ export const MAX_EXCHANGE_HOURS = toHoursUnit(100);
 
 /** Maximum length for exchange description */
 export const MAX_DESCRIPTION_LENGTH = 500;
+
+/** Validate hours amount is in acceptable range */
+export function validateHours(hours: number): string | null {
+  if (hours < MIN_EXCHANGE_HOURS) {
+    return `Hours must be at least ${MIN_EXCHANGE_HOURS}`;
+  }
+  if (hours > MAX_EXCHANGE_HOURS) {
+    return `Hours cannot exceed ${MAX_EXCHANGE_HOURS}`;
+  }
+  return null;
+}
