@@ -3,3 +3,7 @@ import { HttpClient } from './http-client';
 
 export class BlocksClient {
   constructor(private readonly http: HttpClient) {}
+
+  async getLatestBlock(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/extended/v1/block/getLatestBlock`);
+  }
