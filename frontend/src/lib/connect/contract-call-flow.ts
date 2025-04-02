@@ -8,3 +8,4 @@ export enum CallStatus {
   Failed = 'failed',
 }
 export const CALL_STATUS_IDLE: CallStatus = CallStatus.Idle;
+export const CALL_STATUS_PENDING: CallStatus = CallStatus.Pending;
