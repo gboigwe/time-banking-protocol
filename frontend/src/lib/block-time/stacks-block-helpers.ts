@@ -57,3 +57,6 @@ export function daysRemainingInCycle(currentBlock: number): number {
   const blocksLeft = blocksRemainingInCycle(currentBlock);
   return blocksLeft / BLOCKS_PER_DAY;
 }
+
+// Additional block utility 1 — block sequence helper 1
+export const BLOCK_SEQUENCE_CONST_1 = 100;
