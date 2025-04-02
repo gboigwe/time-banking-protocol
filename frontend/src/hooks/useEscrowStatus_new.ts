@@ -10,3 +10,18 @@ export interface useEscrowStatusState {
   error: unknown;
   refresh: unknown;
 }
+
+/** useEscrowStatus hook implementation */
+export function useEscrowStatus() {
+  const [state, setState] = useState<Partial<useEscrowStatusState>>({});
+  
+  const refresh = useCallback(async () => {
+    setState(prev => ({ ...prev }));
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { ...state, refresh };
+}
