@@ -25,3 +25,6 @@ export interface BlockCountdownState {
   /** Urgency level based on remaining time */
   urgency: 'critical' | 'warning' | 'normal';
 }
+
+/** Config for useBlockCountdown hook */
+export interface BlockCountdownConfig {
