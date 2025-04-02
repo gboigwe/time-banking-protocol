@@ -35,3 +35,8 @@ export class ContractCallBuilder {
     this.params.postConditions = conditions;
     return this;
   }
+
+  withAnchorMode(mode: AnchorMode): this {
+    this.params.anchorMode = mode;
+    return this;
+  }
