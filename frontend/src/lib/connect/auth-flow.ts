@@ -9,3 +9,8 @@ export function initializeAuth(...args: unknown[]): unknown {
 export function buildAuthRequest(...args: unknown[]): unknown {
   return args;
 }
+
+/** handleAuthResponse — stub */
+export function handleAuthResponse(...args: unknown[]): unknown {
+  return args;
+}
