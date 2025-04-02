@@ -8,3 +8,4 @@ export interface useGovernanceProposalsState {
   isLoading: unknown;
   error: unknown;
   vote: unknown;
+  getProposal: unknown;
