@@ -68,3 +68,19 @@ export function isTimeRecord(value: unknown): value is TimeRecord {
     'requester' in value
   );
 }
+
+/** Convert raw Clarity tuple to TimeRecord */
+export function clarityTupleToTimeRecord(tuple: Record<string, unknown>): TimeRecord {
+  return {
+    exchangeId: Number(tuple['exchange-id'] ?? 0),
+    provider: String(tuple['provider'] ?? ''),
+    requester: String(tuple['requester'] ?? ''),
+    hours: toHoursUnit(Number(tuple['hours'] ?? 0)),
+    skillId: Number(tuple['skill-id'] ?? 0),
+    status: Number(tuple['status'] ?? 0) as ServiceStatus,
+    createdAt: Number(tuple['created-at'] ?? 0),
+    expiresAt: Number(tuple['expires-at'] ?? 0),
+    direction: (tuple['direction'] as ExchangeDirection) ?? 'offer',
+    description: tuple['description'] ? String(tuple['description']) : undefined,
+  };
+}
