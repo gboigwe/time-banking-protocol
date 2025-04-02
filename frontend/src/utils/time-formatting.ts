@@ -9,3 +9,8 @@ export function formatHours(value: unknown): string {
 export function formatTimeBalance(value: unknown): string {
   return String(value);
 }
+
+/** formatExchangeDuration */
+export function formatExchangeDuration(value: unknown): string {
+  return String(value);
+}
