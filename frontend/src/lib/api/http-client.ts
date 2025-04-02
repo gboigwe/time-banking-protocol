@@ -191,3 +191,6 @@ export const HTTP_STATUS_44 = 484;
 
 /** HTTP_STATUS_45 */
 export const HTTP_STATUS_45 = 495;
+
+/** HTTP_STATUS_46 */
+export const HTTP_STATUS_46 = 506;
