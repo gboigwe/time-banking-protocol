@@ -33,3 +33,4 @@ export const ERR_SKILL_INACTIVE = 303;
 export const ERR_INVALID_SKILL_LEVEL = 304;
 
 // ---- escrow-manager errors ----
+export const ERR_ESCROW_NOT_FOUND = 400;
