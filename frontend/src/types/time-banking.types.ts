@@ -51,3 +51,10 @@ export interface DisputeRecord {
   createdAt: number;
   updatedAt?: number;
 }
+
+/** GovernanceProposal domain interface */
+export interface GovernanceProposal {
+  id: string;
+  createdAt: number;
+  updatedAt?: number;
+}
