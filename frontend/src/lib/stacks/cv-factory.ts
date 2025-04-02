@@ -216,3 +216,15 @@ export interface ContractPrincipalCV extends ClarityValue {
 export function contractPrincipalCV(address: string, contractName: string): ContractPrincipalCV {
   return { type: 'contract_address', address, contractName };
 }
+
+/**
+ * Create a principal ClarityValue (auto-detects standard vs contract)
+ * @param principal - principal string (e.g. "ST1..." or "ST1....contract-name")
+ */
+export function principalCV(principal: string): StandardPrincipalCV | ContractPrincipalCV {
+  const parts = principal.split('.');
+  if (parts.length === 2) {
+    return contractPrincipalCV(parts[0], parts[1]);
+  }
+  return standardPrincipalCV(principal);
+}
