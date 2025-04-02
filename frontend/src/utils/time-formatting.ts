@@ -139,3 +139,6 @@ export const TIME_FORMAT_34 = 646;
 
 /** TIME_FORMAT_35 */
 export const TIME_FORMAT_35 = 665;
+
+/** TIME_FORMAT_36 */
+export const TIME_FORMAT_36 = 684;
