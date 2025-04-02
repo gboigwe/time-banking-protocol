@@ -15,3 +15,8 @@ export function canCompleteExchange(status: ServiceStatus): boolean {
 export function canCancelExchange(status: ServiceStatus): boolean {
   return status === ServiceStatus.Pending || status === ServiceStatus.Active;
 }
+
+/** Check if an exchange can be disputed */
+export function canDisputeExchange(status: ServiceStatus): boolean {
+  return status === ServiceStatus.Active;
+}
