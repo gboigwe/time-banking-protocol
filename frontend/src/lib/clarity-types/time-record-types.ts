@@ -29,3 +29,5 @@ export interface TimeRecord {
   provider: string;
   /** Address of the service requester */
   requester: string;
+  /** Number of hours exchanged */
+  hours: HoursUnit;
