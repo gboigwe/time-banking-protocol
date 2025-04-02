@@ -118,3 +118,6 @@ export const POST_COND_24 = 312;
 
 /** POST_COND_25 */
 export const POST_COND_25 = 325;
+
+/** POST_COND_26 */
+export const POST_COND_26 = 338;
