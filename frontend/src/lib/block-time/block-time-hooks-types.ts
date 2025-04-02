@@ -35,3 +35,6 @@ export interface BlockCountdownConfig {
   /** Polling interval in milliseconds */
   pollIntervalMs?: number;
 }
+
+/** Poll interval option 1: 5000 ms */
+export const POLL_INTERVAL_1 = 5000;
