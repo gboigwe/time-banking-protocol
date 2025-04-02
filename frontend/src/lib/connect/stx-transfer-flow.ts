@@ -53,3 +53,6 @@ export const TRANSFER_LIMIT_7 = 49;
 
 /** TRANSFER_LIMIT constant 8 */
 export const TRANSFER_LIMIT_8 = 56;
+
+/** TRANSFER_LIMIT constant 9 */
+export const TRANSFER_LIMIT_9 = 63;
