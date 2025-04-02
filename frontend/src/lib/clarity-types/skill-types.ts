@@ -10,3 +10,5 @@ export type CertificationStatus = 'none' | 'pending' | 'verified' | 'revoked';
 export interface SkillCategory {
   /** Unique category identifier */
   categoryId: number;
+  /** Human-readable category name */
+  name: string;
