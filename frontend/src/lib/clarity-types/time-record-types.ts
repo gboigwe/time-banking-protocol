@@ -14,3 +14,4 @@ export enum ServiceStatus {
   Active = 1,
   Completed = 2,
   Cancelled = 3,
+  Disputed = 4,
