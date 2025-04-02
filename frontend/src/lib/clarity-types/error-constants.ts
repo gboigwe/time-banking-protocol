@@ -39,3 +39,4 @@ export const ERR_ESCROW_NOT_MATURED = 402;
 export const ERR_INVALID_GUARDIAN = 403;
 
 // ---- governance errors ----
+export const ERR_PROPOSAL_NOT_FOUND = 500;
