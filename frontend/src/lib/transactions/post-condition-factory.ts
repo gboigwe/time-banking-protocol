@@ -43,3 +43,6 @@ export function makeNFTPostCondition(
 ): Record<string, unknown> {
   return { type: 'nft', address, assetInfo, code, tokenId };
 }
+
+/** POST_COND_1 */
+export const POST_COND_1 = 13;
