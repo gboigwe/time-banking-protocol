@@ -16,3 +16,8 @@ export const CALL_STATUS_FAILED: CallStatus = CallStatus.Failed;
 export function buildContractCallRequest(...args: unknown[]): unknown {
   return args;
 }
+
+/** validateContractArgs */
+export function validateContractArgs(...args: unknown[]): unknown {
+  return args;
+}
