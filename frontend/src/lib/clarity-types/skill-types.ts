@@ -2,3 +2,6 @@
 
 /** SkillLevel represents a uint in range 1–5 from Clarity contract */
 export type SkillLevel = 1 | 2 | 3 | 4 | 5;
+
+/** CertificationStatus mirrors optional in Clarity contract */
+export type CertificationStatus = 'none' | 'pending' | 'verified' | 'revoked';
