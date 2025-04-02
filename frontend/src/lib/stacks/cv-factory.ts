@@ -200,3 +200,10 @@ export interface StandardPrincipalCV extends ClarityValue {
 export function standardPrincipalCV(address: string): StandardPrincipalCV {
   return { type: 'address', value: address };
 }
+
+/** Contract principal ClarityValue */
+export interface ContractPrincipalCV extends ClarityValue {
+  type: 'contract_address';
+  address: string;
+  contractName: string;
+}
