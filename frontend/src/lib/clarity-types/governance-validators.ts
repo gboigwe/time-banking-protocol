@@ -47,3 +47,14 @@ export function validateVotingPeriod(startBlock: number, endBlock: number): stri
   }
   return null;
 }
+
+/** Validate a VoteRecord before submission */
+export function validateVoteRecord(vote: Partial<VoteRecord>): string[] {
+  const errors: string[] = [];
+  if (!vote.voter) errors.push('Voter address is required');
+  if (vote.proposalId == null) errors.push('Proposal ID is required');
+  if (!['for', 'against', 'abstain'].includes(vote.vote ?? '')) {
+    errors.push('Vote must be for, against, or abstain');
+  }
+  return errors;
+}
