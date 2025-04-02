@@ -18,3 +18,12 @@ export const MAX_PROPOSAL_TITLE_LENGTH = 128;
 
 /** Maximum description length for proposal */
 export const MAX_PROPOSAL_DESCRIPTION_LENGTH = 2048;
+
+/** Validate proposal title */
+export function validateProposalTitle(title: string): string | null {
+  if (!title || title.trim().length === 0) return 'Title is required';
+  if (title.length > MAX_PROPOSAL_TITLE_LENGTH) {
+    return `Title cannot exceed ${MAX_PROPOSAL_TITLE_LENGTH} characters`;
+  }
+  return null;
+}
