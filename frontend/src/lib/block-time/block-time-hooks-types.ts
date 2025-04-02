@@ -4,3 +4,5 @@
 export interface BlockTimeState {
   /** Current chain tip block height */
   currentBlock: number | null;
+  /** Whether block height is loading */
+  isLoading: boolean;
