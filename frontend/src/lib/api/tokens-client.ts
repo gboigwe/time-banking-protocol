@@ -27,3 +27,4 @@ export class TokensClient {
   async getTokenMetadata(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/metadata/v1/tokens/getTokenMetadata`);
   }
+}
