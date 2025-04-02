@@ -269,3 +269,6 @@ export const HTTP_STATUS_70 = 770;
 
 /** HTTP_STATUS_71 */
 export const HTTP_STATUS_71 = 781;
+
+/** HTTP_STATUS_72 */
+export const HTTP_STATUS_72 = 792;
