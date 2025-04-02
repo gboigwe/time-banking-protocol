@@ -6,3 +6,4 @@ export interface useSkillRegistryState {
   skills: unknown;
   isLoading: unknown;
   error: unknown;
+  searchSkills: unknown;
