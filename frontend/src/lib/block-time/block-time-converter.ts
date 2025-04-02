@@ -70,3 +70,13 @@ export function getBlockHeightAge(blockHeight: number, currentBlockHeight: numbe
   const days = Math.round(hours / 24);
   return `${prefix}${days} day${days !== 1 ? 's' : ''}${suffix}`;
 }
+
+/**
+ * Check if a block height is in the past
+ * @param blockHeight - block height to check
+ * @param currentBlockHeight - current chain tip
+ * @returns true if block is in the past
+ */
+export function isBlockInPast(blockHeight: number, currentBlockHeight: number): boolean {
+  return blockHeight < currentBlockHeight;
+}
