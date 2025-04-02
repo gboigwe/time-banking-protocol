@@ -85,3 +85,23 @@ export function blockRangeIntersection(a: BlockRange, b: BlockRange): BlockRange
   if (start >= end) return null;
   return { startBlock: start, endBlock: end };
 }
+
+/**
+ * Split a BlockRange into N equal sub-ranges
+ * @param range - range to split
+ * @param count - number of sub-ranges
+ * @returns array of sub-ranges
+ */
+export function splitBlockRange(range: BlockRange, count: number): BlockRange[] {
+  const total = blockRangeSize(range);
+  const chunkSize = Math.ceil(total / count);
+  const result: BlockRange[] = [];
+  for (let i = 0; i < count; i++) {
+    const start = range.startBlock + i * chunkSize;
+    const end = Math.min(start + chunkSize, range.endBlock);
+    if (start < range.endBlock) {
+      result.push({ startBlock: start, endBlock: end });
+    }
+  }
+  return result;
+}
