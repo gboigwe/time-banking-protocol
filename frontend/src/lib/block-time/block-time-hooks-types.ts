@@ -11,3 +11,6 @@ export interface BlockTimeState {
   /** Last time block height was fetched */
   lastUpdated: Date | null;
 }
+
+/** State shape for useBlockCountdown hook */
+export interface BlockCountdownState {
