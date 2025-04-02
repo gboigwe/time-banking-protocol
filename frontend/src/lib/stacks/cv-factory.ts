@@ -207,3 +207,12 @@ export interface ContractPrincipalCV extends ClarityValue {
   address: string;
   contractName: string;
 }
+
+/**
+ * Create a contract principal ClarityValue
+ * @param address - deployer address
+ * @param contractName - contract name
+ */
+export function contractPrincipalCV(address: string, contractName: string): ContractPrincipalCV {
+  return { type: 'contract_address', address, contractName };
+}
