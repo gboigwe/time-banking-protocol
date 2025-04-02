@@ -53,3 +53,21 @@ export function validateBlockRange(startBlock: number, endBlock: number): string
 export function clampBlockHeight(blockHeight: number): number {
   return Math.max(MIN_BLOCK_HEIGHT, Math.min(MAX_BLOCK_HEIGHT, Math.round(blockHeight)));
 }
+
+/**
+ * Ensure a block height is in the future relative to current
+ * @param blockHeight - target block
+ * @param currentBlock - current tip
+ * @param minBlocksInFuture - minimum blocks ahead required
+ * @returns error string or null
+ */
+export function validateFutureBlock(
+  blockHeight: number,
+  currentBlock: number,
+  minBlocksInFuture = 1
+): string | null {
+  if (blockHeight < currentBlock + minBlocksInFuture) {
+    return `Block height must be at least ${minBlocksInFuture} block(s) in the future`;
+  }
+  return null;
+}
