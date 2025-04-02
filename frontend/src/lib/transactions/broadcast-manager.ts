@@ -64,3 +64,6 @@ export const RETRY_DELAY_5 = 65;
 
 /** RETRY_DELAY_6 */
 export const RETRY_DELAY_6 = 78;
+
+/** RETRY_DELAY_7 */
+export const RETRY_DELAY_7 = 91;
