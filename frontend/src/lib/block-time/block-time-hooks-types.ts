@@ -18,3 +18,5 @@ export interface BlockCountdownState {
   remainingBlocks: number;
   /** Human-readable time remaining */
   timeRemaining: string;
+  /** Whether target has been reached */
+  isExpired: boolean;
