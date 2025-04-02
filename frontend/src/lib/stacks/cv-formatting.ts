@@ -122,3 +122,6 @@ export const CV_FORMAT_18 = 'format_18';
 
 /** CV display format option 19 */
 export const CV_FORMAT_19 = 'format_19';
+
+/** CV display format option 20 */
+export const CV_FORMAT_20 = 'format_20';
