@@ -34,3 +34,10 @@ export interface BlockResponse {
   error?: string;
   status: number;
 }
+
+/** NFTResponse response from Hiro API */
+export interface NFTResponse {
+  result: unknown;
+  error?: string;
+  status: number;
+}
