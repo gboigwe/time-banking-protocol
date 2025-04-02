@@ -5,3 +5,4 @@ import { useState, useCallback, useEffect } from 'react';
 export interface useSkillRegistryState {
   skills: unknown;
   isLoading: unknown;
+  error: unknown;
