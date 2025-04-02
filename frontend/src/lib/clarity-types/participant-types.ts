@@ -29,3 +29,5 @@ export interface ParticipantProfile {
   address: string;
   /** Display name */
   displayName: string;
+  /** Bio description */
+  bio: string;
