@@ -19,3 +19,11 @@ export function cvEquals(a: ClarityValue, b: ClarityValue): boolean {
 export function cvDeepEquals(a: ClarityValue, b: ClarityValue): boolean {
   return JSON.stringify(serializeCV(a)) === JSON.stringify(serializeCV(b));
 }
+
+/**
+ * Convert ClarityValue to a comparable string for sorting
+ * @param cv - ClarityValue
+ */
+export function cvToComparable(cv: ClarityValue): string {
+  return `${cv.type}:${JSON.stringify(serializeCV(cv))}`;
+}
