@@ -15,3 +15,7 @@ export class ContractsClient {
   async getSource(address: string, name: string): Promise<unknown> {
     return this.http.get(`/extended/v1/contract/${address}.${name}/getSource`);
   }
+
+  async getDataMapEntry(address: string, name: string): Promise<unknown> {
+    return this.http.get(`/extended/v1/contract/${address}.${name}/getDataMapEntry`);
+  }
