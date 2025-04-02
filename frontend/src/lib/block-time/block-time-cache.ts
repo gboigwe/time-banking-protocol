@@ -45,3 +45,16 @@ export function clearBlockTimeCache(): void {
 export function getBlockTimeCacheSize(): number {
   return blockTimeCache.size;
 }
+
+/** Prune expired entries from cache */
+export function pruneBlockTimeCache(): number {
+  const now = Date.now();
+  let pruned = 0;
+  for (const [key, entry] of blockTimeCache.entries()) {
+    if (now - entry.cachedAt > CACHE_TTL_MS) {
+      blockTimeCache.delete(key);
+      pruned++;
+    }
+  }
+  return pruned;
+}
