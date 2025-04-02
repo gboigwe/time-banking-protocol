@@ -4,3 +4,6 @@ import { SKILL_LEVELS } from './skill-types';
 
 /** Maximum name length for a skill */
 export const MAX_SKILL_NAME_LENGTH = 64;
+
+/** Maximum description length for a skill */
+export const MAX_SKILL_DESCRIPTION_LENGTH = 256;
