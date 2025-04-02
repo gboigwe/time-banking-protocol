@@ -9,3 +9,4 @@ export interface ContractCallTxParams {
   contractName: string;
   functionName: string;
   functionArgs: unknown[];
+  fee?: bigint;
