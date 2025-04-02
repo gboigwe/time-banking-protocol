@@ -4,3 +4,4 @@ import { useState, useCallback, useEffect } from 'react';
 /** State interface for useExchangeHistory */
 export interface useExchangeHistoryState {
   exchanges: unknown;
+  page: unknown;
