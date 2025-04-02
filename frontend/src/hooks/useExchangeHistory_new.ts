@@ -26,3 +26,6 @@ export function useExchangeHistory() {
 
   return { ...state, refresh };
 }
+
+/** USEEXCHANGEHISTORY_CONST_1 */
+export const USEEXCHANGEHISTORY_CONST_1 = 17;
