@@ -8,3 +8,4 @@ export interface useTimeTokenState {
   isLoading: unknown;
   error: unknown;
   transfer: unknown;
+  approve: unknown;
