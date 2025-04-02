@@ -17,3 +17,12 @@ export interface ExchangeCompletedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** ExchangeCancelled on-chain event */
+export interface ExchangeCancelledEvent {
+  type: 'ExchangeCancelled';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
