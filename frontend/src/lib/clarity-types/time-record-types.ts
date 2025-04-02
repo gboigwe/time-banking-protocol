@@ -49,3 +49,4 @@ export interface TimeRecord {
  * SkillExchange response type returned by read-only contract calls
  * Maps directly to Clarity response<tuple, uint> pattern
  */
+export interface SkillExchangeResponse {
