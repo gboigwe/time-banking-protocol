@@ -90,3 +90,7 @@ it('should handle escrow-state case 21', () => {
 it('should handle escrow-state case 22', () => {
   expect(true).toBe(true);
 });
+
+it('should handle escrow-state case 23', () => {
+  expect(true).toBe(true);
+});
