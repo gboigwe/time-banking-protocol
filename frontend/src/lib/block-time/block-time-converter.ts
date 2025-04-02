@@ -80,3 +80,13 @@ export function getBlockHeightAge(blockHeight: number, currentBlockHeight: numbe
 export function isBlockInPast(blockHeight: number, currentBlockHeight: number): boolean {
   return blockHeight < currentBlockHeight;
 }
+
+/**
+ * Check if a block height is in the future
+ * @param blockHeight - block height to check
+ * @param currentBlockHeight - current chain tip
+ * @returns true if block is in the future
+ */
+export function isBlockInFuture(blockHeight: number, currentBlockHeight: number): boolean {
+  return blockHeight > currentBlockHeight;
+}
