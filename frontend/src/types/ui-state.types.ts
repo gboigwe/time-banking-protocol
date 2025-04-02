@@ -17,3 +17,9 @@ export interface PaginationState {
   active: boolean;
   data?: unknown;
 }
+
+/** FilterState UI type */
+export interface FilterState {
+  active: boolean;
+  data?: unknown;
+}
