@@ -79,3 +79,6 @@ export const TIME_FORMAT_14 = 266;
 
 /** TIME_FORMAT_15 */
 export const TIME_FORMAT_15 = 285;
+
+/** TIME_FORMAT_16 */
+export const TIME_FORMAT_16 = 304;
