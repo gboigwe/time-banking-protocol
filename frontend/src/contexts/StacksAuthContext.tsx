@@ -7,3 +7,5 @@ export interface StacksAuthState {
   isConnected: boolean;
   isConnecting: boolean;
   network: 'mainnet' | 'testnet';
+  error: string | null;
+}
