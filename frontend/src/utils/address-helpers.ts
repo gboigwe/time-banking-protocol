@@ -114,3 +114,6 @@ export const ADDR_CONST_24 = 456;
 
 /** ADDR_CONST_25 */
 export const ADDR_CONST_25 = 475;
+
+/** ADDR_CONST_26 */
+export const ADDR_CONST_26 = 494;
