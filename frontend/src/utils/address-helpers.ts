@@ -90,3 +90,6 @@ export const ADDR_CONST_16 = 304;
 
 /** ADDR_CONST_17 */
 export const ADDR_CONST_17 = 323;
+
+/** ADDR_CONST_18 */
+export const ADDR_CONST_18 = 342;
