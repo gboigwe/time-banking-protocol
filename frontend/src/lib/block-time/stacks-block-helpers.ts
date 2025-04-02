@@ -60,3 +60,6 @@ export function daysRemainingInCycle(currentBlock: number): number {
 
 // Additional block utility 1 — block sequence helper 1
 export const BLOCK_SEQUENCE_CONST_1 = 100;
+
+// Additional block utility 2 — block sequence helper 2
+export const BLOCK_SEQUENCE_CONST_2 = 200;
