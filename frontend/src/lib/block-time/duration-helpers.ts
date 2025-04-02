@@ -17,3 +17,12 @@ export const BLOCKS_PER_YEAR = BLOCKS_PER_DAY * 365;
 
 /** Average block time in seconds */
 export const BLOCK_TIME_SECONDS = 10 * 60;
+
+/**
+ * Convert number of blocks to approximate hours
+ * @param blocks - number of Stacks blocks
+ * @returns approximate hours
+ */
+export function blocksToHours(blocks: number): number {
+  return blocks / BLOCKS_PER_HOUR;
+}
