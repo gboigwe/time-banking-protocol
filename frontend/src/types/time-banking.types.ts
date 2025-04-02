@@ -14,3 +14,6 @@ export type ParticipantRole = string;
 
 /** ReputationTier domain type */
 export type ReputationTier = string;
+
+/** ServiceCategory domain type */
+export type ServiceCategory = string;
