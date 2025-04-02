@@ -123,3 +123,6 @@ export const TIME_BALANCE_REFRESH_12 = 36000;
 
 /** refresh interval option 13 */
 export const TIME_BALANCE_REFRESH_13 = 39000;
+
+/** refresh interval option 14 */
+export const TIME_BALANCE_REFRESH_14 = 42000;
