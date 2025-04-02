@@ -10,3 +10,4 @@ export interface useReputationScoreState {
   isLoading: unknown;
   error: unknown;
   refresh: unknown;
+}
