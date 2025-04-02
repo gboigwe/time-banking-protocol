@@ -15,3 +15,7 @@ export class BlocksClient {
   async getBlockByHash(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/extended/v1/block/getBlockByHash`);
   }
+
+  async getBlockTransactions(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/extended/v1/block/getBlockTransactions`);
+  }
