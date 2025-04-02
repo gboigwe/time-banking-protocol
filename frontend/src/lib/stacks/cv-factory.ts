@@ -54,3 +54,9 @@ export function falseCV(): BoolCV {
 export function boolCV(value: boolean): BoolCV {
   return value ? trueCV() : falseCV();
 }
+
+/** StringAscii ClarityValue */
+export interface StringAsciiCV extends ClarityValue {
+  type: 'string-ascii';
+  value: string;
+}
