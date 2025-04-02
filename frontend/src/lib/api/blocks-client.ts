@@ -27,3 +27,4 @@ export class BlocksClient {
   async getBlockList(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/extended/v1/block/getBlockList`);
   }
+}
