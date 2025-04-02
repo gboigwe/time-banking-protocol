@@ -8,3 +8,7 @@ export class TransactionsClient {
   async getTransaction(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/tx/getTransaction`, { headers: {} });
   }
+
+  async broadcastTransaction(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/tx/broadcastTransaction`, { headers: {} });
+  }
