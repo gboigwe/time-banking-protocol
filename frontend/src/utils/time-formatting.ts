@@ -29,3 +29,8 @@ export function formatReputationTier(value: unknown): string {
 export function formatExchangeStatus(value: unknown): string {
   return String(value);
 }
+
+/** formatDisputeStatus */
+export function formatDisputeStatus(value: unknown): string {
+  return String(value);
+}
