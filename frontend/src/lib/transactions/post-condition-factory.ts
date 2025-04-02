@@ -8,3 +8,9 @@ export enum FungibleConditionCode {
   Less = 0x04,
   LessEqual = 0x05,
 }
+
+/** Non-fungible condition code */
+export enum NonFungibleConditionCode {
+  Sends = 0x10,
+  DoesNotSend = 0x11,
+}
