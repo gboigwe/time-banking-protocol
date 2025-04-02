@@ -24,3 +24,8 @@ export function isStringAsciiCV(cv: ClarityValue): cv is StringAsciiCV {
 export function isStringUtf8CV(cv: ClarityValue): cv is StringUtf8CV {
   return cv.type === 'stringutf8';
 }
+
+/** Type guard for BufferCV */
+export function isBufferCV(cv: ClarityValue): cv is BufferCV {
+  return cv.type === 'buffer';
+}
