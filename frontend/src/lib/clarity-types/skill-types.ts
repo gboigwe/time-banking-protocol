@@ -14,3 +14,6 @@ export interface SkillCategory {
   name: string;
   /** Category description */
   description: string;
+  /** Whether this category is active */
+  isActive: boolean;
+}
