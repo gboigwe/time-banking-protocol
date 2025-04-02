@@ -26,3 +26,4 @@ export const ERR_SELF_EXCHANGE = 204;
 export const ERR_EXCHANGE_LIMIT_REACHED = 205;
 
 // ---- skill-registry errors ----
+export const ERR_SKILL_NOT_FOUND = 300;
