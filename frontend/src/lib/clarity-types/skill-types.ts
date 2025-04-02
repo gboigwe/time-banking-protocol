@@ -38,3 +38,5 @@ export interface SkillMetadata {
 
 /** VerifiedSkill response combining skill data and certification */
 export interface VerifiedSkill {
+  /** The skill metadata */
+  skill: SkillMetadata;
