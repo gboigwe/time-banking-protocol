@@ -61,3 +61,6 @@ export interface GovernanceProposal {
 
 /** TB_BRAND type alias 1 */
 export type TB_BRAND_1 = string & { readonly _brand: 'TB_BRAND_1' };
+
+/** TB_BRAND type alias 2 */
+export type TB_BRAND_2 = string & { readonly _brand: 'TB_BRAND_2' };
