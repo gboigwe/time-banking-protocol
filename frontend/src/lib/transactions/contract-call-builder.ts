@@ -30,3 +30,8 @@ export class ContractCallBuilder {
     this.params.nonce = nonce;
     return this;
   }
+
+  withPostConditions(conditions: unknown[]): this {
+    this.params.postConditions = conditions;
+    return this;
+  }
