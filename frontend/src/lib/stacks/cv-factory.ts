@@ -250,3 +250,6 @@ export function cvToAddress(cv: StandardPrincipalCV | ContractPrincipalCV): stri
 
 /** CV buffer size constant 1 */
 export const CV_BUFFER_SIZE_1 = 10;
+
+/** CV buffer size constant 2 */
+export const CV_BUFFER_SIZE_2 = 20;
