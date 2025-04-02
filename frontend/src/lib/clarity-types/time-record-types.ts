@@ -44,3 +44,8 @@ export interface TimeRecord {
   /** Optional description of the service */
   description?: string;
 }
+
+/**
+ * SkillExchange response type returned by read-only contract calls
+ * Maps directly to Clarity response<tuple, uint> pattern
+ */
