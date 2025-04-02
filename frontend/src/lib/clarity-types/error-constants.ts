@@ -77,3 +77,5 @@ export const ERR_CLAIM_ALREADY_PROCESSED = 1002;
 // ---- analytics-tracker errors ----
 export const ERR_TRACKER_NOT_AUTHORIZED = 1100;
 export const ERR_METRIC_NOT_FOUND = 1101;
+
+// ---- rewards-distributor errors ----
