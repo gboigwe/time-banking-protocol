@@ -115,3 +115,6 @@ export const TIME_FORMAT_26 = 494;
 
 /** TIME_FORMAT_27 */
 export const TIME_FORMAT_27 = 513;
+
+/** TIME_FORMAT_28 */
+export const TIME_FORMAT_28 = 532;
