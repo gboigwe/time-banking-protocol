@@ -43,3 +43,4 @@ export const ERR_PROPOSAL_NOT_FOUND = 500;
 export const ERR_ALREADY_VOTED = 501;
 export const ERR_VOTING_CLOSED = 502;
 export const ERR_QUORUM_NOT_REACHED = 503;
+export const ERR_PROPOSAL_NOT_PASSED = 504;
