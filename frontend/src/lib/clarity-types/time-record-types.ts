@@ -39,3 +39,5 @@ export interface TimeRecord {
   createdAt: number;
   /** Block height when exchange expires */
   expiresAt: number;
+  /** Direction of the exchange */
+  direction: ExchangeDirection;
