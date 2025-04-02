@@ -19,3 +19,6 @@ export interface TimeBalance {
   spent: number;
   /** Net balance: earned minus spent */
   net: number;
+  /** Hours currently in escrow */
+  escrowed: number;
+}
