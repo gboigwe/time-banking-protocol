@@ -98,3 +98,12 @@ export interface RewardClaimedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** EscrowCreated on-chain event */
+export interface EscrowCreatedEvent {
+  type: 'EscrowCreated';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
