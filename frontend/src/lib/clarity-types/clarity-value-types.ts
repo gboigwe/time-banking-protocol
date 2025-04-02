@@ -10,3 +10,4 @@ export enum ClarityType {
   ContractPrincipal = 'contract_address',
   ResponseOk = 'ok',
   ResponseErr = 'err',
+  OptionalNone = 'none',
