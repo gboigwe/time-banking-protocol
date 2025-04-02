@@ -37,3 +37,10 @@ export interface SkillRegistration {
   createdAt: number;
   updatedAt?: number;
 }
+
+/** ParticipantProfile domain interface */
+export interface ParticipantProfile {
+  id: string;
+  createdAt: number;
+  updatedAt?: number;
+}
