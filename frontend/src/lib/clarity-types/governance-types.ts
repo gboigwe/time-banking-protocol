@@ -33,3 +33,5 @@ export interface VoteRecord {
   voter: string;
   /** Vote direction */
   vote: 'for' | 'against' | 'abstain';
+  /** Voting power used */
+  power: number;
