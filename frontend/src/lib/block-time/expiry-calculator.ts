@@ -69,3 +69,14 @@ export function getProgressPercent(
   const elapsed = Math.min(currentBlock - startBlock, total);
   return Math.max(0, Math.round((elapsed / total) * 100));
 }
+
+/**
+ * Determine urgency level based on remaining blocks
+ * @param remainingBlocks - blocks until expiry
+ * @returns 'critical' | 'warning' | 'normal'
+ */
+export function getExpiryUrgency(remainingBlocks: number): 'critical' | 'warning' | 'normal' {
+  if (remainingBlocks <= 6) return 'critical';   // < 1 hour
+  if (remainingBlocks <= 144) return 'warning';  // < 1 day
+  return 'normal';
+}
