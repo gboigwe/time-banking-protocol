@@ -54,3 +54,8 @@ export const CLARITY_TYPE_TS_MAP: Record<ClarityType, string> = {
   [ClarityType.StringASCII]: 'string',
   [ClarityType.StringUTF8]: 'string',
 };
+
+/** Check if ClarityType is a principal type */
+export function isPrincipalType(type: ClarityType): boolean {
+  return type === ClarityType.StandardPrincipal || type === ClarityType.ContractPrincipal;
+}
