@@ -9,3 +9,6 @@ export const MAX_VOTING_PERIOD_BLOCKS = 4320;
 
 /** Minimum quorum threshold percentage */
 export const MIN_QUORUM_THRESHOLD = 10;
+
+/** Maximum quorum threshold percentage */
+export const MAX_QUORUM_THRESHOLD = 100;
