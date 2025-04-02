@@ -47,3 +47,14 @@ export interface VerifiedSkill {
   /** Block height when certified */
   certifiedAt?: number;
 }
+
+/** Type guard for SkillMetadata */
+export function isSkillMetadata(value: unknown): value is SkillMetadata {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'skillId' in value &&
+    'name' in value &&
+    'categoryId' in value
+  );
+}
