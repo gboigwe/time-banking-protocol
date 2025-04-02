@@ -25,3 +25,6 @@ export function useSkillRegistry() {
 
   return { ...state, refresh };
 }
+
+/** USESKILLREGISTRY_CONST_1 */
+export const USESKILLREGISTRY_CONST_1 = 17;
