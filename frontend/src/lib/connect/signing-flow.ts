@@ -21,3 +21,8 @@ export function signMessage(...args: unknown[]): unknown {
 export function signStructuredData(...args: unknown[]): unknown {
   return args;
 }
+
+/** verifySignature */
+export function verifySignature(...args: unknown[]): unknown {
+  return args;
+}
