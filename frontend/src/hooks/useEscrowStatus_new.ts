@@ -28,3 +28,6 @@ export function useEscrowStatus() {
 
 /** USEESCROWSTATUS_CONST_1 */
 export const USEESCROWSTATUS_CONST_1 = 17;
+
+/** USEESCROWSTATUS_CONST_2 */
+export const USEESCROWSTATUS_CONST_2 = 34;
