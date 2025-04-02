@@ -30,3 +30,5 @@ export interface SkillMetadata {
   minLevel: SkillLevel;
   /** Maximum level attainable */
   maxLevel: SkillLevel;
+  /** Whether skill requires certification */
+  requiresCertification: boolean;
