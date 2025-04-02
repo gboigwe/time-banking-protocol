@@ -69,3 +69,18 @@ export function memoize<T extends (...args: unknown[]) => unknown>(fn: T): T {
     return result;
   }) as T;
 }
+
+/** Cancel token for aborting async operations */
+export interface CancelToken {
+  cancelled: boolean;
+  cancel(): void;
+}
+
+/** Create a cancel token */
+export function createCancelToken(): CancelToken {
+  const token: CancelToken = {
+    cancelled: false,
+    cancel() { this.cancelled = true; },
+  };
+  return token;
+}
