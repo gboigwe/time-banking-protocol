@@ -42,3 +42,6 @@ export function getSessionExpiry(...args: unknown[]): unknown {
 
 /** AUTH_TIMEOUT constant 1 */
 export const AUTH_TIMEOUT_1 = 7;
+
+/** AUTH_TIMEOUT constant 2 */
+export const AUTH_TIMEOUT_2 = 14;
