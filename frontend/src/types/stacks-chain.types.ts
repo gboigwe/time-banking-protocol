@@ -11,3 +11,6 @@ export type StacksPrincipal = string;
 
 /** TxId on-chain type */
 export type TxId = string;
+
+/** ContractId on-chain type */
+export type ContractId = string;
