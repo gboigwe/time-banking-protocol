@@ -7,3 +7,6 @@ export enum ParticipantStatus {
   Suspended = 2,
   Banned = 3,
 }
+
+/** ReputationScore maps to optional<uint> in Clarity */
+export type ReputationScore = number | null;
