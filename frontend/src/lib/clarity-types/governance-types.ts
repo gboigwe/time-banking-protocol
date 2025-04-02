@@ -45,3 +45,5 @@ export interface ProposalTuple {
   proposalId: number;
   /** Proposal title */
   title: string;
+  /** Full description of the proposal */
+  description: string;
