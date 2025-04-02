@@ -49,3 +49,4 @@ export const ERR_PROPOSAL_ALREADY_EXECUTED = 505;
 // ---- reputation-system errors ----
 export const ERR_CANNOT_RATE_SELF = 600;
 export const ERR_RATING_ALREADY_SUBMITTED = 601;
+export const ERR_INVALID_RATING = 602;
