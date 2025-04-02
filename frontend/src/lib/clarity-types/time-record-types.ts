@@ -37,3 +37,5 @@ export interface TimeRecord {
   status: ServiceStatus;
   /** Block height when exchange was created */
   createdAt: number;
+  /** Block height when exchange expires */
+  expiresAt: number;
