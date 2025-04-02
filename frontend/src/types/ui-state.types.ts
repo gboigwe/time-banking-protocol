@@ -11,3 +11,9 @@ export interface ErrorState {
   active: boolean;
   data?: unknown;
 }
+
+/** PaginationState UI type */
+export interface PaginationState {
+  active: boolean;
+  data?: unknown;
+}
