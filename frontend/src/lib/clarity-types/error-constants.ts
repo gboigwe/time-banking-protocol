@@ -105,3 +105,4 @@ export const ERR_EMERGENCY_COOLDOWN = 1602;
 
 // ---- skill-matching-engine errors ----
 export const ERR_NO_MATCH_FOUND = 1700;
+export const ERR_MATCH_LIMIT_REACHED = 1701;
