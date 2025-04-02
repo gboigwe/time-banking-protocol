@@ -42,3 +42,9 @@ function stacksAuthReducer(state: StacksAuthState, action: StacksAuthAction): St
       return state;
   }
 }
+
+/** Context type */
+interface StacksAuthContextType {
+  state: StacksAuthState;
+  dispatch: React.Dispatch<StacksAuthAction>;
+}
