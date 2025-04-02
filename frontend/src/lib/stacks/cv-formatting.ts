@@ -68,3 +68,6 @@ export function formatCVForUser(cv: ClarityValue): string {
 
 /** CV display format option 1 */
 export const CV_FORMAT_1 = 'format_1';
+
+/** CV display format option 2 */
+export const CV_FORMAT_2 = 'format_2';
