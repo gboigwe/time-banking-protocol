@@ -62,3 +62,5 @@ export const ERR_DISPUTE_PERIOD_EXPIRED = 703;
 export const ERR_INSUFFICIENT_BALANCE = 800;
 export const ERR_INVALID_AMOUNT = 801;
 export const ERR_MINT_LIMIT_REACHED = 802;
+
+// ---- multi-sig-wallet errors ----
