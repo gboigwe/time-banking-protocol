@@ -19,3 +19,5 @@ export interface CouncilMember {
   weight: number;
   /** Block when membership starts */
   startBlock: number;
+  /** Block when membership expires */
+  endBlock: number;
