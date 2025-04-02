@@ -6,3 +6,10 @@ export interface RequestConfig {
   retries?: number;
   headers?: Record<string, string>;
 }
+
+/** Response configuration */
+export interface ResponseConfig<T> {
+  data: T;
+  status: number;
+  headers: Record<string, string>;
+}
