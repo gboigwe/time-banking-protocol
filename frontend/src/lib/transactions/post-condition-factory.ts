@@ -76,3 +76,6 @@ export const POST_COND_10 = 130;
 
 /** POST_COND_11 */
 export const POST_COND_11 = 143;
+
+/** POST_COND_12 */
+export const POST_COND_12 = 156;
