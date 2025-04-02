@@ -35,3 +35,22 @@ export function unwrapSome(v: ClarityValueShape): unknown | null {
   if (v.type === ClarityType.OptionalSome) return v.value;
   return v.value ?? null;
 }
+
+/** Map ClarityType to its TypeScript equivalent type name */
+export const CLARITY_TYPE_TS_MAP: Record<ClarityType, string> = {
+  [ClarityType.Int]: 'bigint',
+  [ClarityType.UInt]: 'bigint',
+  [ClarityType.Buffer]: 'Uint8Array',
+  [ClarityType.BoolTrue]: 'true',
+  [ClarityType.BoolFalse]: 'false',
+  [ClarityType.StandardPrincipal]: 'string',
+  [ClarityType.ContractPrincipal]: 'string',
+  [ClarityType.ResponseOk]: 'ClarityValueShape',
+  [ClarityType.ResponseErr]: 'ClarityValueShape',
+  [ClarityType.OptionalNone]: 'null',
+  [ClarityType.OptionalSome]: 'ClarityValueShape',
+  [ClarityType.List]: 'ClarityValueShape[]',
+  [ClarityType.Tuple]: 'Record<string, ClarityValueShape>',
+  [ClarityType.StringASCII]: 'string',
+  [ClarityType.StringUTF8]: 'string',
+};
