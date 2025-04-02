@@ -3,3 +3,7 @@ import { HttpClient } from './http-client';
 
 export class TokensClient {
   constructor(private readonly http: HttpClient) {}
+
+  async getFTInfo(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/metadata/v1/tokens/getFTInfo`);
+  }
