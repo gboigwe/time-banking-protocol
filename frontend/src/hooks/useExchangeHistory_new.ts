@@ -9,3 +9,4 @@ export interface useExchangeHistoryState {
   error: unknown;
   loadMore: unknown;
   refresh: unknown;
+  totalCount: unknown;
