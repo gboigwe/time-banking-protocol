@@ -19,3 +19,14 @@ export async function withRetry<T>(
   }
   throw lastError;
 }
+
+/** Wrap a promise with a timeout */
+export async function withTimeout<T>(
+  promise: Promise<T>,
+  timeoutMs: number
+): Promise<T> {
+  const timeoutPromise = new Promise<never>((_, reject) =>
+    setTimeout(() => reject(new Error(`Timeout after ${timeoutMs}ms`)), timeoutMs)
+  );
+  return Promise.race([promise, timeoutPromise]);
+}
