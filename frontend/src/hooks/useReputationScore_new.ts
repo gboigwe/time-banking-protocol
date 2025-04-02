@@ -26,3 +26,6 @@ export function useReputationScore() {
 
   return { ...state, refresh };
 }
+
+/** USEREPUTATIONSCORE_CONST_1 */
+export const USEREPUTATIONSCORE_CONST_1 = 17;
