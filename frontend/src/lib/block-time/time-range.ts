@@ -48,3 +48,12 @@ export function mergeBlockRanges(a: BlockRange, b: BlockRange): BlockRange {
     endBlock: Math.max(a.endBlock, b.endBlock),
   };
 }
+
+/**
+ * Get the block count of a range
+ * @param range - block range
+ * @returns number of blocks in range
+ */
+export function blockRangeSize(range: BlockRange): number {
+  return Math.max(0, range.endBlock - range.startBlock);
+}
