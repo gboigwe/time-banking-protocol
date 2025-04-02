@@ -61,3 +61,6 @@ export function isSkillMetadata(value: unknown): value is SkillMetadata {
 
 /** Default SkillLevel value */
 export const DEFAULT_SKILL_LEVEL: SkillLevel = 1;
+
+/** All valid skill levels as array */
+export const SKILL_LEVELS: SkillLevel[] = [1, 2, 3, 4, 5];
