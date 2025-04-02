@@ -96,3 +96,4 @@ export const ERR_SELF_REFERRAL = 1402;
 // ---- automation-scheduler errors ----
 export const ERR_JOB_NOT_FOUND = 1500;
 export const ERR_JOB_NOT_DUE = 1501;
+export const ERR_JOB_ALREADY_RUNNING = 1502;
