@@ -53,3 +53,12 @@ export function daysToBlocks(days: number): number {
 export function blocksToDays(blocks: number): number {
   return blocks / BLOCKS_PER_DAY;
 }
+
+/**
+ * Convert weeks to approximate block count
+ * @param weeks - number of weeks
+ * @returns approximate block count
+ */
+export function weeksToBlocks(weeks: number): number {
+  return Math.ceil(weeks * BLOCKS_PER_WEEK);
+}
