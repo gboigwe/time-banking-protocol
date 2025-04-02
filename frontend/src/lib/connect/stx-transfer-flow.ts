@@ -9,3 +9,8 @@ export function buildTransferRequest(...args: unknown[]): unknown {
 export function validateTransferAmount(...args: unknown[]): unknown {
   return args;
 }
+
+/** validateRecipient */
+export function validateRecipient(...args: unknown[]): unknown {
+  return args;
+}
