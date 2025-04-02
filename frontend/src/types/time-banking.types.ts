@@ -44,3 +44,10 @@ export interface ParticipantProfile {
   createdAt: number;
   updatedAt?: number;
 }
+
+/** DisputeRecord domain interface */
+export interface DisputeRecord {
+  id: string;
+  createdAt: number;
+  updatedAt?: number;
+}
