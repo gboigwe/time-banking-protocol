@@ -7,3 +7,7 @@ export class BlocksClient {
   async getLatestBlock(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/extended/v1/block/getLatestBlock`);
   }
+
+  async getBlockByHeight(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/extended/v1/block/getBlockByHeight`);
+  }
