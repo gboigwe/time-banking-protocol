@@ -34,3 +34,16 @@ export function getAllowedTransitions(status: ServiceStatus): ServiceStatus[] {
       return [];
   }
 }
+
+/** Human-readable label for ServiceStatus */
+export function getStatusLabel(status: ServiceStatus): string {
+  const labels: Record<ServiceStatus, string> = {
+    [ServiceStatus.Pending]: 'Pending',
+    [ServiceStatus.Active]: 'Active',
+    [ServiceStatus.Completed]: 'Completed',
+    [ServiceStatus.Cancelled]: 'Cancelled',
+    [ServiceStatus.Disputed]: 'Disputed',
+    [ServiceStatus.Expired]: 'Expired',
+  };
+  return labels[status] ?? 'Unknown';
+}
