@@ -12,3 +12,5 @@ export interface ContractCallTxParams {
   fee?: bigint;
   nonce?: number;
   anchorMode?: AnchorMode;
+  postConditions?: unknown[];
+}
