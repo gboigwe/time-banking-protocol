@@ -7,3 +7,4 @@ export enum ClarityType {
   BoolTrue = 'true',
   BoolFalse = 'false',
   StandardPrincipal = 'address',
+  ContractPrincipal = 'contract_address',
