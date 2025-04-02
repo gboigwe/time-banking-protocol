@@ -23,3 +23,5 @@ export type ExchangeDirection = 'offer' | 'request';
 
 // TimeRecord tuple shape representing Clarity tuple from exchange-manager
 export interface TimeRecord {
+  /** Unique exchange identifier */
+  exchangeId: number;
