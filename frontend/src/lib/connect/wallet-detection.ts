@@ -24,3 +24,13 @@ export function isLeatherInstalled(): boolean {
 export function isXverseInstalled(): boolean {
   return typeof window !== 'undefined' && !!(window as Record<string, unknown>)['XverseProviders'];
 }
+
+/** Get wallet download URL */
+export function getWalletDownloadUrl(wallet: WalletType): string {
+  const urls: Record<WalletType, string> = {
+    [WalletType.Leather]: 'https://leather.io/install-extension',
+    [WalletType.Xverse]: 'https://www.xverse.app/download',
+    [WalletType.Unknown]: 'https://stacks.co/wallets',
+  };
+  return urls[wallet];
+}
