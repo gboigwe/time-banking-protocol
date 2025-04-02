@@ -8,3 +8,6 @@ import { TokensClient } from './tokens-client';
 
 /** Mainnet Hiro API base URL */
 export const HIRO_MAINNET_URL = 'https://api.hiro.so';
+
+/** Testnet Hiro API base URL */
+export const HIRO_TESTNET_URL = 'https://api.testnet.hiro.so';
