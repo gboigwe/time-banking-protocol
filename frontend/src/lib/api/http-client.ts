@@ -59,3 +59,6 @@ export class HttpClient {
 
 /** HTTP_STATUS_1 */
 export const HTTP_STATUS_1 = 11;
+
+/** HTTP_STATUS_2 */
+export const HTTP_STATUS_2 = 22;
