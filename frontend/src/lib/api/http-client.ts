@@ -98,3 +98,6 @@ export const HTTP_STATUS_13 = 143;
 
 /** HTTP_STATUS_14 */
 export const HTTP_STATUS_14 = 154;
+
+/** HTTP_STATUS_15 */
+export const HTTP_STATUS_15 = 165;
