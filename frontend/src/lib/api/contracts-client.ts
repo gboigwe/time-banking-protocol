@@ -19,3 +19,7 @@ export class ContractsClient {
   async getDataMapEntry(address: string, name: string): Promise<unknown> {
     return this.http.get(`/extended/v1/contract/${address}.${name}/getDataMapEntry`);
   }
+
+  async callReadOnly(address: string, name: string): Promise<unknown> {
+    return this.http.get(`/extended/v1/contract/${address}.${name}/callReadOnly`);
+  }
