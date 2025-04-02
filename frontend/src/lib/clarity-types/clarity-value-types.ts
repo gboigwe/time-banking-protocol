@@ -15,3 +15,5 @@ export enum ClarityType {
   List = 'list',
   Tuple = 'tuple',
   StringASCII = 'string-ascii',
+  StringUTF8 = 'string-utf8',
+}
