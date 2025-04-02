@@ -35,3 +35,6 @@ export interface VoteRecord {
   vote: 'for' | 'against' | 'abstain';
   /** Voting power used */
   power: number;
+  /** Block height when vote was cast */
+  castedAt: number;
+}
