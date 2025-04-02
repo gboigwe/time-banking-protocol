@@ -20,3 +20,8 @@ export class ContractCallBuilder {
     this.params.functionArgs = args;
     return this;
   }
+
+  withFee(fee: bigint): this {
+    this.params.fee = fee;
+    return this;
+  }
