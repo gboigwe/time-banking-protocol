@@ -10,3 +10,4 @@ export interface useNetworkHealthState {
   isLoading: unknown;
   error: unknown;
   refresh: unknown;
+}
