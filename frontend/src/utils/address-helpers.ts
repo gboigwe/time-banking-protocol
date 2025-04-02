@@ -39,3 +39,6 @@ export function getAddressVersion(address: string): 'mainnet' | 'testnet' | 'unk
   if (isTestnetAddress(address)) return 'testnet';
   return 'unknown';
 }
+
+/** ADDR_CONST_1 */
+export const ADDR_CONST_1 = 19;
