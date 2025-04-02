@@ -3,3 +3,4 @@
 /** ParticipantStatus maps to Clarity uint status codes */
 export enum ParticipantStatus {
   Unregistered = 0,
+  Active = 1,
