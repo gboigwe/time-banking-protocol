@@ -23,3 +23,15 @@ export class WalletError extends StacksError {
     this.name = 'WalletError';
   }
 }
+
+/** Parse a contract error code to message */
+export function parseContractError(errorCode: number): string {
+  const messages: Record<number, string> = {
+    100: 'Not registered',
+    101: 'Already registered',
+    102: 'Insufficient hours',
+    200: 'Exchange not found',
+    201: 'Exchange not pending',
+  };
+  return messages[errorCode] ?? `Contract error: ${errorCode}`;
+}
