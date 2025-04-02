@@ -10,3 +10,8 @@ export function shortenAddress(address: string, start = 6, end = 4): string {
 export function isValidStacksAddress(address: string): boolean {
   return /^S[MT][0-9A-Z]{38,39}$/.test(address);
 }
+
+/** Check if address is on testnet */
+export function isTestnetAddress(address: string): boolean {
+  return address.startsWith('ST');
+}
