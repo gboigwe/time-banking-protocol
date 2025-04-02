@@ -6,3 +6,4 @@ export enum ClarityType {
   Buffer = 'buffer',
   BoolTrue = 'true',
   BoolFalse = 'false',
+  StandardPrincipal = 'address',
