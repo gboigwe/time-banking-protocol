@@ -4,3 +4,6 @@
 export interface BlockRange {
   /** Starting block height (inclusive) */
   startBlock: number;
+  /** Ending block height (exclusive) */
+  endBlock: number;
+}
