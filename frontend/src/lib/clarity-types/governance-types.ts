@@ -21,3 +21,6 @@ export interface CouncilMember {
   startBlock: number;
   /** Block when membership expires */
   endBlock: number;
+  /** Whether member is currently active */
+  isActive: boolean;
+}
