@@ -6,3 +6,4 @@ export interface useDisputeStatusState {
   dispute: unknown;
   isLoading: unknown;
   error: unknown;
+  votingStatus: unknown;
