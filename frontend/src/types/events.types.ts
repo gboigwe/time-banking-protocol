@@ -62,3 +62,12 @@ export interface DisputeOpenedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** DisputeResolved on-chain event */
+export interface DisputeResolvedEvent {
+  type: 'DisputeResolved';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
