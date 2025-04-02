@@ -29,3 +29,8 @@ export function clearSession(...args: unknown[]): unknown {
 export function isSessionValid(...args: unknown[]): unknown {
   return args;
 }
+
+/** refreshSession — stub */
+export function refreshSession(...args: unknown[]): unknown {
+  return args;
+}
