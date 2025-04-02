@@ -65,3 +65,6 @@ export function truncateCVPrincipal(
 export function formatCVForUser(cv: ClarityValue): string {
   return `[${cv.type}] ${cvToString(cv)}`;
 }
+
+/** CV display format option 1 */
+export const CV_FORMAT_1 = 'format_1';
