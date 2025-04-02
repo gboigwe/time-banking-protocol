@@ -15,3 +15,5 @@ export type ReputationScore = number | null;
 export interface TimeBalance {
   /** Hours earned from providing services */
   earned: number;
+  /** Hours spent on receiving services */
+  spent: number;
