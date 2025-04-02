@@ -25,3 +25,6 @@ export function useEscrowStatus() {
 
   return { ...state, refresh };
 }
+
+/** USEESCROWSTATUS_CONST_1 */
+export const USEESCROWSTATUS_CONST_1 = 17;
