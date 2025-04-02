@@ -5,3 +5,4 @@ import { useState, useCallback, useEffect } from 'react';
 export interface useEscrowStatusState {
   escrow: unknown;
   releaseStatus: unknown;
+  guardianAddress: unknown;
