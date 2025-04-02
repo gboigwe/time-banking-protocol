@@ -10,3 +10,6 @@ export enum ParticipantStatus {
 
 /** ReputationScore maps to optional<uint> in Clarity */
 export type ReputationScore = number | null;
+
+/** TimeBalance represents a participant's time balance map value */
+export interface TimeBalance {
