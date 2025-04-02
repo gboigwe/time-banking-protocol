@@ -2,3 +2,5 @@
 
 /** A range defined by start and end block heights */
 export interface BlockRange {
+  /** Starting block height (inclusive) */
+  startBlock: number;
