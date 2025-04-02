@@ -140,3 +140,6 @@ export function expiresWithin(
   const remaining = getRemainingBlocks(expiryBlock, currentBlock);
   return remaining > 0 && remaining <= withinBlocks;
 }
+
+/** Standard expiry duration 1: 144 blocks */
+export const EXPIRY_DURATION_1 = 144;
