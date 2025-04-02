@@ -5,3 +5,4 @@ export type AnchorMode = 'onChainOnly' | 'offChainOnly' | 'any';
 
 /** Contract call transaction parameters */
 export interface ContractCallTxParams {
+  contractAddress: string;
