@@ -64,3 +64,4 @@ export const ERR_INVALID_AMOUNT = 801;
 export const ERR_MINT_LIMIT_REACHED = 802;
 
 // ---- multi-sig-wallet errors ----
+export const ERR_NOT_SIGNER = 900;
