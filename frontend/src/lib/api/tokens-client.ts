@@ -19,3 +19,7 @@ export class TokensClient {
   async getNFTHoldings(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/metadata/v1/tokens/getNFTHoldings`);
   }
+
+  async getFTHoldings(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/metadata/v1/tokens/getFTHoldings`);
+  }
