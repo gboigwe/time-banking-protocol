@@ -42,3 +42,6 @@ export const TX_LIMIT_2 = 22;
 
 /** TX_LIMIT_3 */
 export const TX_LIMIT_3 = 33;
+
+/** TX_LIMIT_4 */
+export const TX_LIMIT_4 = 44;
