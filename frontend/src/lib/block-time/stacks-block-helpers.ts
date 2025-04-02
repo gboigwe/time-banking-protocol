@@ -30,3 +30,8 @@ export function blocksUntilNextHalving(currentBlock: number): number {
 export function getStacksCycleNumber(blockHeight: number): number {
   return Math.floor(blockHeight / 2100);
 }
+
+/** Get start block of a Stacks reward cycle */
+export function getCycleStartBlock(cycleNumber: number): number {
+  return cycleNumber * 2100;
+}
