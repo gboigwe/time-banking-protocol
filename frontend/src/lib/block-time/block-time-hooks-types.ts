@@ -14,3 +14,5 @@ export interface BlockTimeState {
 
 /** State shape for useBlockCountdown hook */
 export interface BlockCountdownState {
+  /** Remaining blocks until target */
+  remainingBlocks: number;
