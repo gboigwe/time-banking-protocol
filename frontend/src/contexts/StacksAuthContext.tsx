@@ -60,3 +60,10 @@ export function StacksAuthProvider({ children }: { children: ReactNode }) {
     </StacksAuthContext.Provider>
   );
 }
+
+/** Hook to consume StacksAuthContext */
+export function useStacksAuth(): StacksAuthContextType {
+  const ctx = useContext(StacksAuthContext);
+  if (!ctx) throw new Error('useStacksAuth must be used within StacksAuthProvider');
+  return ctx;
+}
