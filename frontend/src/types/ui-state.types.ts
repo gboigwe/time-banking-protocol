@@ -110,3 +110,6 @@ export const UI_STATE_22 = 110;
 
 /** UI constant 23 */
 export const UI_STATE_23 = 115;
+
+/** UI constant 24 */
+export const UI_STATE_24 = 120;
