@@ -80,3 +80,12 @@ export function blocksToWeeks(blocks: number): number {
 export function monthsToBlocks(months: number): number {
   return Math.ceil(months * BLOCKS_PER_MONTH);
 }
+
+/**
+ * Convert blocks to approximate months
+ * @param blocks - number of Stacks blocks
+ * @returns approximate months
+ */
+export function blocksToMonths(blocks: number): number {
+  return blocks / BLOCKS_PER_MONTH;
+}
