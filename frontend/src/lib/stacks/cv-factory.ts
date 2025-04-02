@@ -144,3 +144,9 @@ export interface OkCV extends ClarityValue {
 export function okCV(value: ClarityValue): OkCV {
   return { type: 'ok', value };
 }
+
+/** Err response ClarityValue */
+export interface ErrCV extends ClarityValue {
+  type: 'err';
+  value: ClarityValue;
+}
