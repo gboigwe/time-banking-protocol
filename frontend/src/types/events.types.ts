@@ -80,3 +80,12 @@ export interface ProposalCreatedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** VoteCast on-chain event */
+export interface VoteCastEvent {
+  type: 'VoteCast';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
