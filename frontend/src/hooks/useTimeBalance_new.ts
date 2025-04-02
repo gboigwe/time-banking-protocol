@@ -27,3 +27,6 @@ export function useTimeBalance() {
 
 /** USETIMEBALANCE_CONST_1 */
 export const USETIMEBALANCE_CONST_1 = 17;
+
+/** USETIMEBALANCE_CONST_2 */
+export const USETIMEBALANCE_CONST_2 = 34;
