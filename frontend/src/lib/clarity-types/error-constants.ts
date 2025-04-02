@@ -65,3 +65,4 @@ export const ERR_MINT_LIMIT_REACHED = 802;
 
 // ---- multi-sig-wallet errors ----
 export const ERR_NOT_SIGNER = 900;
+export const ERR_ALREADY_SIGNED = 901;
