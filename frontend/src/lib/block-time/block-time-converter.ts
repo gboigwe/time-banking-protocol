@@ -139,3 +139,18 @@ export function blockToTimestamp(
   const diff = blockHeight - anchorBlock;
   return new Date(anchorTime.getTime() + diff * BLOCK_TIME_SECONDS * 1000);
 }
+
+/**
+ * Check if block is within N blocks of current tip
+ * @param blockHeight - block to check
+ * @param currentBlock - current chain tip
+ * @param tolerance - how many blocks to allow
+ * @returns true if within tolerance
+ */
+export function isBlockNearCurrent(
+  blockHeight: number,
+  currentBlock: number,
+  tolerance = 10
+): boolean {
+  return Math.abs(blockHeight - currentBlock) <= tolerance;
+}
