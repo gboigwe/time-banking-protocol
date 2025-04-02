@@ -219,3 +219,6 @@ export const ADDR_CONST_59 = 1121;
 
 /** ADDR_CONST_60 */
 export const ADDR_CONST_60 = 1140;
+
+/** ADDR_CONST_61 */
+export const ADDR_CONST_61 = 1159;
