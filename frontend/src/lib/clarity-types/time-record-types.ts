@@ -20,3 +20,5 @@ export enum ServiceStatus {
 
 // ExchangeDirection union type
 export type ExchangeDirection = 'offer' | 'request';
+
+// TimeRecord tuple shape representing Clarity tuple from exchange-manager
