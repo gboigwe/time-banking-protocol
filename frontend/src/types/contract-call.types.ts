@@ -15,3 +15,11 @@ export interface ReadOnlyResult {
   result?: unknown;
   error?: string;
 }
+
+/** WriteResult contract call type */
+export interface WriteResult {
+  success: boolean;
+  txId?: string;
+  result?: unknown;
+  error?: string;
+}
