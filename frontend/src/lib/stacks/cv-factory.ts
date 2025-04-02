@@ -150,3 +150,11 @@ export interface ErrCV extends ClarityValue {
   type: 'err';
   value: ClarityValue;
 }
+
+/**
+ * Create an err response ClarityValue
+ * @param value - the error value
+ */
+export function errCV(value: ClarityValue): ErrCV {
+  return { type: 'err', value };
+}
