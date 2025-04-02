@@ -33,3 +33,8 @@ export class AccountsClient {
     const path = `/extended/v1/address/${address}/getNonces`;
     return this.http.get(path);
   }
+
+  async getTransactions(address: string): Promise<unknown> {
+    const path = `/extended/v1/address/${address}/getTransactions`;
+    return this.http.get(path);
+  }
