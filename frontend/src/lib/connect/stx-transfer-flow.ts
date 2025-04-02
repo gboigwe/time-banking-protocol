@@ -24,3 +24,8 @@ export function openTransferDialog(...args: unknown[]): unknown {
 export function handleTransferResponse(...args: unknown[]): unknown {
   return args;
 }
+
+/** formatTransferAmount */
+export function formatTransferAmount(...args: unknown[]): unknown {
+  return args;
+}
