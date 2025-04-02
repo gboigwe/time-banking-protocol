@@ -23,3 +23,8 @@ export function unwrapOkOrNull<T>(response: ClarityResponse<T>): T | null {
   if (response.type === 'err') return null;
   return response.value as T;
 }
+
+/** Check if a Clarity response is ok */
+export function isOkResponse<T>(response: ClarityResponse<T>): boolean {
+  return response.type === 'ok';
+}
