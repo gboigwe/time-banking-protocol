@@ -161,3 +161,6 @@ export const TRANSFER_LIMIT_43 = 301;
 
 /** TRANSFER_LIMIT constant 44 */
 export const TRANSFER_LIMIT_44 = 308;
+
+/** TRANSFER_LIMIT constant 45 */
+export const TRANSFER_LIMIT_45 = 315;
