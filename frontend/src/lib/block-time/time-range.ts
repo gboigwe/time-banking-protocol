@@ -57,3 +57,13 @@ export function mergeBlockRanges(a: BlockRange, b: BlockRange): BlockRange {
 export function blockRangeSize(range: BlockRange): number {
   return Math.max(0, range.endBlock - range.startBlock);
 }
+
+/**
+ * Check if a date is within a TimeRange
+ * @param date - date to check
+ * @param range - time range
+ * @returns true if date is in range
+ */
+export function isInTimeRange(date: Date, range: TimeRange): boolean {
+  return date >= range.startTime && date < range.endTime;
+}
