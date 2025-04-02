@@ -35,3 +35,6 @@ export interface SkillMetadata {
   /** Tags associated with this skill */
   tags: string[];
 }
+
+/** VerifiedSkill response combining skill data and certification */
+export interface VerifiedSkill {
