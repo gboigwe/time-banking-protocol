@@ -17,3 +17,11 @@ export type StacksAuthAction =
   | { type: 'CONNECT_FAILED'; error: string }
   | { type: 'DISCONNECT' }
   | { type: 'SET_NETWORK'; network: 'mainnet' | 'testnet' };
+
+const initialState: StacksAuthState = {
+  address: null,
+  isConnected: false,
+  isConnecting: false,
+  network: 'mainnet',
+  error: null,
+};
