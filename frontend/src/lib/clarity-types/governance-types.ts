@@ -79,3 +79,8 @@ export function hasReachedQuorum(proposal: ProposalTuple, totalVotingPower: numb
   const totalVotes = proposal.forVotes + proposal.againstVotes + proposal.abstainVotes;
   return totalVotingPower > 0 && (totalVotes / totalVotingPower) * 100 >= proposal.quorum;
 }
+
+/** Check if proposal passed based on for vs against votes */
+export function didProposalPass(proposal: ProposalTuple): boolean {
+  return proposal.forVotes > proposal.againstVotes;
+}
