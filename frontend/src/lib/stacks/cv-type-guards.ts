@@ -9,3 +9,8 @@ import type {
 export function isUIntCV(cv: ClarityValue): cv is UIntCV {
   return cv.type === 'uint';
 }
+
+/** Type guard for IntCV */
+export function isIntCV(cv: ClarityValue): cv is IntCV {
+  return cv.type === 'int';
+}
