@@ -130,3 +130,6 @@ export const POST_COND_28 = 364;
 
 /** POST_COND_29 */
 export const POST_COND_29 = 377;
+
+/** POST_COND_30 */
+export const POST_COND_30 = 390;
