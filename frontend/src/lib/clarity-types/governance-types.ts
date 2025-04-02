@@ -27,3 +27,5 @@ export interface CouncilMember {
 
 /** VoteRecord from governance contract */
 export interface VoteRecord {
+  /** Proposal being voted on */
+  proposalId: number;
