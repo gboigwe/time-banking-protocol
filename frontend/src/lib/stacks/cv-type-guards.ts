@@ -19,3 +19,8 @@ export function isIntCV(cv: ClarityValue): cv is IntCV {
 export function isStringAsciiCV(cv: ClarityValue): cv is StringAsciiCV {
   return cv.type === 'stringascii';
 }
+
+/** Type guard for StringUtf8CV */
+export function isStringUtf8CV(cv: ClarityValue): cv is StringUtf8CV {
+  return cv.type === 'stringutf8';
+}
