@@ -32,3 +32,10 @@ export function parseContractId(contractId: string): { address: string; name: st
 export function addressToBuffer(address: string): Uint8Array {
   return new TextEncoder().encode(address);
 }
+
+/** Get address version byte (mainnet vs testnet) */
+export function getAddressVersion(address: string): 'mainnet' | 'testnet' | 'unknown' {
+  if (isMainnetAddress(address)) return 'mainnet';
+  if (isTestnetAddress(address)) return 'testnet';
+  return 'unknown';
+}
