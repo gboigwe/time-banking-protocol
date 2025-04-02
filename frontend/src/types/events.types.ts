@@ -125,3 +125,12 @@ export interface TokenTransferredEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** NFTMinted on-chain event */
+export interface NFTMintedEvent {
+  type: 'NFTMinted';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
