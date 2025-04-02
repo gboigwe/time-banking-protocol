@@ -16,3 +16,6 @@ export interface ResponseConfig<T> {
 
 /** Default timeout in milliseconds */
 export const DEFAULT_TIMEOUT_MS = 30000;
+
+/** Default retry count */
+export const DEFAULT_RETRIES = 3;
