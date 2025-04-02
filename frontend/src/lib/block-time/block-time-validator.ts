@@ -89,3 +89,23 @@ export function validateNotTooFarFuture(
   }
   return null;
 }
+
+/**
+ * Validate a pair of blocks forming a valid duration
+ * @param startBlock - start of period
+ * @param endBlock - end of period
+ * @param minDuration - minimum duration in blocks
+ * @param maxDuration - maximum duration in blocks
+ * @returns error string or null
+ */
+export function validateBlockDuration(
+  startBlock: number,
+  endBlock: number,
+  minDuration: number,
+  maxDuration: number
+): string | null {
+  const duration = endBlock - startBlock;
+  if (duration < minDuration) return `Duration must be at least ${minDuration} blocks`;
+  if (duration > maxDuration) return `Duration cannot exceed ${maxDuration} blocks`;
+  return null;
+}
