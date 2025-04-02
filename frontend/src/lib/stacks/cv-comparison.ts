@@ -40,3 +40,11 @@ export function compareCVs(a: ClarityValue, b: ClarityValue): number {
   if (aStr > bStr) return 1;
   return 0;
 }
+
+/**
+ * Sort an array of ClarityValues
+ * @param list - array to sort (does not mutate)
+ */
+export function sortCVList(list: ClarityValue[]): ClarityValue[] {
+  return [...list].sort(compareCVs);
+}
