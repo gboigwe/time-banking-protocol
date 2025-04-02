@@ -55,3 +55,4 @@ export const ERR_EXCHANGE_NOT_COMPLETED = 603;
 // ---- dispute-arbitration errors ----
 export const ERR_DISPUTE_NOT_FOUND = 700;
 export const ERR_DISPUTE_ALREADY_RESOLVED = 701;
+export const ERR_NOT_ARBITRATOR = 702;
