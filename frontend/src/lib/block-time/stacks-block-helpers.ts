@@ -25,3 +25,8 @@ export function getNextHalvingBlock(currentBlock: number): number {
 export function blocksUntilNextHalving(currentBlock: number): number {
   return getNextHalvingBlock(currentBlock) - currentBlock;
 }
+
+/** Get cycle number for a given block (Stacks uses 2100-block cycles) */
+export function getStacksCycleNumber(blockHeight: number): number {
+  return Math.floor(blockHeight / 2100);
+}
