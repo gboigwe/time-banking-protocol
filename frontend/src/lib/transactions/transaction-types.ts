@@ -11,3 +11,4 @@ export interface ContractCallTxParams {
   functionArgs: unknown[];
   fee?: bigint;
   nonce?: number;
+  anchorMode?: AnchorMode;
