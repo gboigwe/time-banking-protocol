@@ -53,3 +53,5 @@ export interface ProposalTuple {
   period: VotingPeriod;
   /** Number of for votes */
   forVotes: number;
+  /** Number of against votes */
+  againstVotes: number;
