@@ -19,3 +19,9 @@ export class AverageFeeStrategy implements FeeStrategy {
 export class HighPriorityFeeStrategy implements FeeStrategy {
   estimateFee(): bigint { return 1500n; }
 }
+
+/** Custom fee strategy with configurable amount */
+export class CustomFeeStrategy implements FeeStrategy {
+  constructor(private readonly fee: bigint) {}
+  estimateFee(): bigint { return this.fee; }
+}
