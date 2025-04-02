@@ -22,3 +22,5 @@ export interface SkillCategory {
 export interface SkillMetadata {
   /** Skill identifier */
   skillId: number;
+  /** Skill name */
+  name: string;
