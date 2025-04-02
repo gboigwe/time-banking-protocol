@@ -32,3 +32,4 @@ export class TransactionsClient {
   async getTxEvents(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/tx/getTxEvents`, { headers: {} });
   }
+}
