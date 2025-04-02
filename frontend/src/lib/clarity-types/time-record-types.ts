@@ -15,3 +15,5 @@ export enum ServiceStatus {
   Completed = 2,
   Cancelled = 3,
   Disputed = 4,
+  Expired = 5,
+}
