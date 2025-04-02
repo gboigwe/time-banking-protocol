@@ -25,3 +25,13 @@ export interface TimeRange {
 export function isInBlockRange(block: number, range: BlockRange): boolean {
   return block >= range.startBlock && block < range.endBlock;
 }
+
+/**
+ * Check if two BlockRanges overlap
+ * @param a - first range
+ * @param b - second range
+ * @returns true if ranges overlap
+ */
+export function blockRangesOverlap(a: BlockRange, b: BlockRange): boolean {
+  return a.startBlock < b.endBlock && b.startBlock < a.endBlock;
+}
