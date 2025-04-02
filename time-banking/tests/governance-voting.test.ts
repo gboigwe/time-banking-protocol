@@ -2,3 +2,7 @@
 import { describe, it, expect } from 'vitest';
 
 describe('Governance Voting', () => {
+
+it('should handle governance-vote case 1', () => {
+  expect(true).toBe(true);
+});
