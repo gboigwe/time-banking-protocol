@@ -42,3 +42,13 @@ export function getErrorMessage(error: unknown): string {
   if (typeof error === 'string') return error;
   return 'An unknown error occurred';
 }
+
+/** Check if an error is retryable */
+export function isRetryableError(error: unknown): boolean {
+  if (error instanceof StacksError) return false;
+  if (error instanceof Error) {
+    const msg = error.message.toLowerCase();
+    return msg.includes('timeout') || msg.includes('network') || msg.includes('503');
+  }
+  return false;
+}
