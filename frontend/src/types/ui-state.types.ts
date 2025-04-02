@@ -179,3 +179,6 @@ export const UI_STATE_45 = 225;
 
 /** UI constant 46 */
 export const UI_STATE_46 = 230;
+
+/** UI constant 47 */
+export const UI_STATE_47 = 235;
