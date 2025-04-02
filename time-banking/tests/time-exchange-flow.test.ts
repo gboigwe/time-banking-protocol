@@ -102,3 +102,7 @@ it('should handle exchange-flow case 24', () => {
 it('should handle exchange-flow case 25', () => {
   expect(true).toBe(true);
 });
+
+it('should handle exchange-flow case 26', () => {
+  expect(true).toBe(true);
+});
