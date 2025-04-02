@@ -73,3 +73,9 @@ export function isProposalActive(proposal: ProposalTuple, currentBlock: number):
     !proposal.executed
   );
 }
+
+/** Check if proposal reached quorum */
+export function hasReachedQuorum(proposal: ProposalTuple, totalVotingPower: number): boolean {
+  const totalVotes = proposal.forVotes + proposal.againstVotes + proposal.abstainVotes;
+  return totalVotingPower > 0 && (totalVotes / totalVotingPower) * 100 >= proposal.quorum;
+}
