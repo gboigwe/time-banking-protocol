@@ -64,3 +64,12 @@ export const DEFAULT_SKILL_LEVEL: SkillLevel = 1;
 
 /** All valid skill levels as array */
 export const SKILL_LEVELS: SkillLevel[] = [1, 2, 3, 4, 5];
+
+/** Label map for skill levels */
+export const SKILL_LEVEL_LABELS: Record<SkillLevel, string> = {
+  1: 'Beginner',
+  2: 'Elementary',
+  3: 'Intermediate',
+  4: 'Advanced',
+  5: 'Expert',
+};
