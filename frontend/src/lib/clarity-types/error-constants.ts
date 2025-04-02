@@ -35,3 +35,4 @@ export const ERR_INVALID_SKILL_LEVEL = 304;
 // ---- escrow-manager errors ----
 export const ERR_ESCROW_NOT_FOUND = 400;
 export const ERR_ESCROW_ALREADY_RELEASED = 401;
+export const ERR_ESCROW_NOT_MATURED = 402;
