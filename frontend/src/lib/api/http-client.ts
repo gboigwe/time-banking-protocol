@@ -92,3 +92,6 @@ export const HTTP_STATUS_11 = 121;
 
 /** HTTP_STATUS_12 */
 export const HTTP_STATUS_12 = 132;
+
+/** HTTP_STATUS_13 */
+export const HTTP_STATUS_13 = 143;
