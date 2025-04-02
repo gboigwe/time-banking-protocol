@@ -164,3 +164,11 @@ export interface ListCV extends ClarityValue {
   type: 'list';
   list: ClarityValue[];
 }
+
+/**
+ * Create a list ClarityValue
+ * @param values - array of ClarityValues
+ */
+export function listCV(values: ClarityValue[]): ListCV {
+  return { type: 'list', list: values };
+}
