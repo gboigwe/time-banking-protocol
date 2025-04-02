@@ -59,3 +59,8 @@ export const CLARITY_TYPE_TS_MAP: Record<ClarityType, string> = {
 export function isPrincipalType(type: ClarityType): boolean {
   return type === ClarityType.StandardPrincipal || type === ClarityType.ContractPrincipal;
 }
+
+/** Check if ClarityType is a numeric type */
+export function isNumericType(type: ClarityType): boolean {
+  return type === ClarityType.Int || type === ClarityType.UInt;
+}
