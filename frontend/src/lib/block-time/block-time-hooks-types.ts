@@ -32,3 +32,6 @@ export interface BlockCountdownConfig {
   targetBlock: number;
   /** Start block for progress calculation */
   startBlock?: number;
+  /** Polling interval in milliseconds */
+  pollIntervalMs?: number;
+}
