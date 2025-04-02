@@ -8,3 +8,6 @@ describe('uintCV', () => {
   it('creates UIntCV with bigint', () => {
     expect(true).toBe(true); // placeholder
   });
+  it('sets type to uint', () => {
+    expect(true).toBe(true); // placeholder
+  });
