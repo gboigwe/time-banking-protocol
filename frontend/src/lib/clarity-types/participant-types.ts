@@ -27,3 +27,5 @@ export interface TimeBalance {
 export interface ParticipantProfile {
   /** Stacks address of participant */
   address: string;
+  /** Display name */
+  displayName: string;
