@@ -16,3 +16,5 @@ export interface BlockTimeState {
 export interface BlockCountdownState {
   /** Remaining blocks until target */
   remainingBlocks: number;
+  /** Human-readable time remaining */
+  timeRemaining: string;
