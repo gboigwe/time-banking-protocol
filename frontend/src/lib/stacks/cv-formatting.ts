@@ -57,3 +57,11 @@ export function truncateCVPrincipal(
   if (principal.length <= maxLen * 2 + 3) return principal;
   return `${principal.slice(0, maxLen)}...${principal.slice(-maxLen)}`;
 }
+
+/**
+ * Format a ClarityValue for human-readable display with type label
+ * @param cv - ClarityValue
+ */
+export function formatCVForUser(cv: ClarityValue): string {
+  return `[${cv.type}] ${cvToString(cv)}`;
+}
