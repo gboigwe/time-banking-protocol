@@ -278,3 +278,6 @@ export const HTTP_STATUS_73 = 803;
 
 /** HTTP_STATUS_74 */
 export const HTTP_STATUS_74 = 814;
+
+/** HTTP_STATUS_75 */
+export const HTTP_STATUS_75 = 825;
