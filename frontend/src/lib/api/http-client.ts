@@ -80,3 +80,6 @@ export const HTTP_STATUS_7 = 77;
 
 /** HTTP_STATUS_8 */
 export const HTTP_STATUS_8 = 88;
+
+/** HTTP_STATUS_9 */
+export const HTTP_STATUS_9 = 99;
