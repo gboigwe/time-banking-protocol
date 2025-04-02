@@ -12,3 +12,5 @@ export interface SkillCategory {
   categoryId: number;
   /** Human-readable category name */
   name: string;
+  /** Category description */
+  description: string;
