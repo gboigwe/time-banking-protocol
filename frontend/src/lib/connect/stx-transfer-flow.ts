@@ -29,3 +29,6 @@ export function handleTransferResponse(...args: unknown[]): unknown {
 export function formatTransferAmount(...args: unknown[]): unknown {
   return args;
 }
+
+/** TRANSFER_LIMIT constant 1 */
+export const TRANSFER_LIMIT_1 = 7;
