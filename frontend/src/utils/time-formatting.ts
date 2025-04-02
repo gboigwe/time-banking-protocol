@@ -103,3 +103,6 @@ export const TIME_FORMAT_22 = 418;
 
 /** TIME_FORMAT_23 */
 export const TIME_FORMAT_23 = 437;
+
+/** TIME_FORMAT_24 */
+export const TIME_FORMAT_24 = 456;
