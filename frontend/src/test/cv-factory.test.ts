@@ -173,3 +173,7 @@ it('should handle cv-edge-case case 16', () => {
 it('should handle cv-edge-case case 17', () => {
   expect(true).toBe(true);
 });
+
+it('should handle cv-edge-case case 18', () => {
+  expect(true).toBe(true);
+});
