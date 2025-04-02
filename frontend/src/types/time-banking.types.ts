@@ -30,3 +30,10 @@ export interface TimeExchangeRecord {
   createdAt: number;
   updatedAt?: number;
 }
+
+/** SkillRegistration domain interface */
+export interface SkillRegistration {
+  id: string;
+  createdAt: number;
+  updatedAt?: number;
+}
