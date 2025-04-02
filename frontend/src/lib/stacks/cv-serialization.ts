@@ -19,3 +19,13 @@ export function serializeCV(cv: ClarityValue): Record<string, unknown> {
   if ('contractName' in cvAny) result['contractName'] = cvAny['contractName'];
   return result;
 }
+
+/**
+ * Convert a ClarityValue to hex representation
+ * @param cv - ClarityValue to convert
+ * @returns hex string
+ */
+export function cvToHex(cv: ClarityValue): string {
+  const json = JSON.stringify(serializeCV(cv));
+  return Buffer.from(json).toString('hex');
+}
