@@ -62,3 +62,12 @@ export function blocksToDays(blocks: number): number {
 export function weeksToBlocks(weeks: number): number {
   return Math.ceil(weeks * BLOCKS_PER_WEEK);
 }
+
+/**
+ * Convert blocks to approximate weeks
+ * @param blocks - number of Stacks blocks
+ * @returns approximate weeks
+ */
+export function blocksToWeeks(blocks: number): number {
+  return blocks / BLOCKS_PER_WEEK;
+}
