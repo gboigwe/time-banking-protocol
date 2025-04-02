@@ -105,3 +105,6 @@ export const TX_LIMIT_23 = 253;
 
 /** TX_LIMIT_24 */
 export const TX_LIMIT_24 = 264;
+
+/** TX_LIMIT_25 */
+export const TX_LIMIT_25 = 275;
