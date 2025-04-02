@@ -30,3 +30,24 @@ export function isExchangeExpired(endBlock: number, currentBlock: number): boole
 export function getRemainingBlocks(endBlock: number, currentBlock: number): number {
   return Math.max(0, endBlock - currentBlock);
 }
+
+/**
+ * Format remaining blocks as human-readable string
+ * @param remainingBlocks - number of blocks remaining
+ * @returns formatted string like "2 hours 30 minutes"
+ */
+export function formatTimeRemaining(remainingBlocks: number): string {
+  if (remainingBlocks <= 0) return 'Expired';
+  const totalMinutes = Math.round(blocksToMinutes(remainingBlocks));
+  if (totalMinutes < 60) return `${totalMinutes} minute${totalMinutes !== 1 ? 's' : ''}`;
+  const hours = Math.floor(blocksToHours(remainingBlocks));
+  const remainingMinutes = totalMinutes % 60;
+  if (hours < 24) {
+    return remainingMinutes > 0
+      ? `${hours}h ${remainingMinutes}m`
+      : `${hours} hour${hours !== 1 ? 's' : ''}`;
+  }
+  const days = Math.floor(blocksToDays(remainingBlocks));
+  const remainingHours = hours % 24;
+  return remainingHours > 0 ? `${days}d ${remainingHours}h` : `${days} day${days !== 1 ? 's' : ''}`;
+}
