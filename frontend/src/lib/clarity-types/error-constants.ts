@@ -106,3 +106,43 @@ export const ERR_EMERGENCY_COOLDOWN = 1602;
 // ---- skill-matching-engine errors ----
 export const ERR_NO_MATCH_FOUND = 1700;
 export const ERR_MATCH_LIMIT_REACHED = 1701;
+
+/** Map of error code to readable message */
+export const ERROR_MESSAGES: Record<number, string> = {
+  [ERR_NOT_REGISTERED]: 'Participant not registered',
+  [ERR_ALREADY_REGISTERED]: 'Participant already registered',
+  [ERR_INSUFFICIENT_HOURS]: 'Insufficient time hours for this operation',
+  [ERR_INVALID_HOURS]: 'Invalid hours value provided',
+  [ERR_TRANSFER_FAILED]: 'Hours transfer failed',
+  [ERR_UNAUTHORIZED]: 'Unauthorized operation',
+  [ERR_CONTRACT_PAUSED]: 'Contract is currently paused',
+  [ERR_EXCHANGE_NOT_FOUND]: 'Exchange record not found',
+  [ERR_EXCHANGE_NOT_PENDING]: 'Exchange is not in pending state',
+  [ERR_EXCHANGE_EXPIRED]: 'Exchange has expired',
+  [ERR_EXCHANGE_NOT_ACTIVE]: 'Exchange is not active',
+  [ERR_SELF_EXCHANGE]: 'Cannot create exchange with yourself',
+  [ERR_EXCHANGE_LIMIT_REACHED]: 'Exchange limit has been reached',
+  [ERR_SKILL_NOT_FOUND]: 'Skill not found in registry',
+  [ERR_SKILL_ALREADY_EXISTS]: 'Skill already exists',
+  [ERR_SKILL_NOT_OFFERED]: 'Skill not offered by participant',
+  [ERR_SKILL_INACTIVE]: 'Skill is inactive',
+  [ERR_INVALID_SKILL_LEVEL]: 'Invalid skill level',
+  [ERR_ESCROW_NOT_FOUND]: 'Escrow not found',
+  [ERR_ESCROW_ALREADY_RELEASED]: 'Escrow already released',
+  [ERR_ESCROW_NOT_MATURED]: 'Escrow period not yet matured',
+  [ERR_INVALID_GUARDIAN]: 'Invalid guardian address',
+  [ERR_PROPOSAL_NOT_FOUND]: 'Governance proposal not found',
+  [ERR_ALREADY_VOTED]: 'Already voted on this proposal',
+  [ERR_VOTING_CLOSED]: 'Voting period has closed',
+  [ERR_QUORUM_NOT_REACHED]: 'Quorum not reached for proposal',
+  [ERR_PROPOSAL_NOT_PASSED]: 'Proposal did not pass',
+  [ERR_PROPOSAL_ALREADY_EXECUTED]: 'Proposal already executed',
+  [ERR_CANNOT_RATE_SELF]: 'Cannot rate yourself',
+  [ERR_RATING_ALREADY_SUBMITTED]: 'Rating already submitted for this exchange',
+  [ERR_INVALID_RATING]: 'Invalid rating value',
+  [ERR_EXCHANGE_NOT_COMPLETED]: 'Exchange not completed yet',
+  [ERR_DISPUTE_NOT_FOUND]: 'Dispute not found',
+  [ERR_DISPUTE_ALREADY_RESOLVED]: 'Dispute already resolved',
+  [ERR_NOT_ARBITRATOR]: 'Not authorized as arbitrator',
+  [ERR_DISPUTE_PERIOD_EXPIRED]: 'Dispute period has expired',
+};
