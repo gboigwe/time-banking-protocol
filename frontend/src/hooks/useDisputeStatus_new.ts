@@ -8,3 +8,4 @@ export interface useDisputeStatusState {
   error: unknown;
   votingStatus: unknown;
   evidenceCount: unknown;
+  resolution: unknown;
