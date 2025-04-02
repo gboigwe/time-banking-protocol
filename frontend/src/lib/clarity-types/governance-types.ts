@@ -43,3 +43,5 @@ export interface VoteRecord {
 export interface ProposalTuple {
   /** Proposal identifier */
   proposalId: number;
+  /** Proposal title */
+  title: string;
