@@ -20,3 +20,8 @@ export function getNextHalvingBlock(currentBlock: number): number {
   const period = 210000;
   return (Math.floor(currentBlock / period) + 1) * period;
 }
+
+/** Estimate blocks until next halving */
+export function blocksUntilNextHalving(currentBlock: number): number {
+  return getNextHalvingBlock(currentBlock) - currentBlock;
+}
