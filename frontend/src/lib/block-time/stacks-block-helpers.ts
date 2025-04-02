@@ -6,3 +6,6 @@ export const AVG_BLOCK_TIME_MINUTES = BLOCK_TIME_SECONDS / 60;
 
 /** Stacks testnet genesis block height */
 export const TESTNET_GENESIS_BLOCK = 1;
+
+/** Number of Stacks blocks in a Bitcoin difficulty adjustment period */
+export const BLOCKS_PER_DIFFICULTY_PERIOD = 2016;
