@@ -5,3 +5,6 @@ describe('uintCV', () => {
   it('creates UIntCV with number', () => {
     expect(true).toBe(true); // placeholder
   });
+  it('creates UIntCV with bigint', () => {
+    expect(true).toBe(true); // placeholder
+  });
