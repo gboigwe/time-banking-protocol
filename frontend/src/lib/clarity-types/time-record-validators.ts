@@ -7,3 +7,6 @@ export const MIN_EXCHANGE_HOURS = toHoursUnit(0.25);
 
 /** Maximum allowed hours for a single exchange */
 export const MAX_EXCHANGE_HOURS = toHoursUnit(100);
+
+/** Maximum length for exchange description */
+export const MAX_DESCRIPTION_LENGTH = 500;
