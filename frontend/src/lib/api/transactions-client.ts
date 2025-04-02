@@ -36,3 +36,6 @@ export class TransactionsClient {
 
 /** TX_LIMIT_1 */
 export const TX_LIMIT_1 = 11;
+
+/** TX_LIMIT_2 */
+export const TX_LIMIT_2 = 22;
