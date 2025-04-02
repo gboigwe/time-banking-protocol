@@ -9,3 +9,4 @@ export interface useEscrowStatusState {
   isLoading: unknown;
   error: unknown;
   refresh: unknown;
+}
