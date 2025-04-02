@@ -26,3 +26,15 @@ export function validateBio(bio: string): string | null {
   }
   return null;
 }
+
+/** Validate offered skills list */
+export function validateOfferedSkills(skillIds: number[]): string | null {
+  if (skillIds.length > MAX_OFFERED_SKILLS) {
+    return `Cannot offer more than ${MAX_OFFERED_SKILLS} skills`;
+  }
+  const unique = new Set(skillIds);
+  if (unique.size !== skillIds.length) {
+    return 'Duplicate skill IDs are not allowed';
+  }
+  return null;
+}
