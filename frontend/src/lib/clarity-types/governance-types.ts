@@ -49,3 +49,5 @@ export interface ProposalTuple {
   description: string;
   /** Proposer address */
   proposer: string;
+  /** Voting window */
+  period: VotingPeriod;
