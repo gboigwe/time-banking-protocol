@@ -8,3 +8,6 @@ export type SkillLevel = string;
 
 /** ExchangeStatus domain type */
 export type ExchangeStatus = string;
+
+/** ParticipantRole domain type */
+export type ParticipantRole = string;
