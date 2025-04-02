@@ -98,3 +98,6 @@ export const CONV_CONST_20 = 380;
 
 /** CONV_CONST_21 */
 export const CONV_CONST_21 = 399;
+
+/** CONV_CONST_22 */
+export const CONV_CONST_22 = 418;
