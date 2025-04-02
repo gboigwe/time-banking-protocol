@@ -4,3 +4,4 @@ import { useState, useCallback, useEffect } from 'react';
 /** State interface for useGovernanceProposals */
 export interface useGovernanceProposalsState {
   proposals: unknown;
+  votingPower: unknown;
