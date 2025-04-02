@@ -25,3 +25,6 @@ export function useDisputeStatus() {
 
   return { ...state, refresh };
 }
+
+/** USEDISPUTESTATUS_CONST_1 */
+export const USEDISPUTESTATUS_CONST_1 = 17;
