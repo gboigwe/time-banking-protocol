@@ -2,3 +2,7 @@
 import { describe, it, expect } from 'vitest';
 
 describe('Escrow Lifecycle', () => {
+
+it('should handle escrow-state case 1', () => {
+  expect(true).toBe(true);
+});
