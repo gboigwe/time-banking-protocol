@@ -22,3 +22,6 @@ export interface TimeBalance {
   /** Hours currently in escrow */
   escrowed: number;
 }
+
+/** ParticipantProfile tuple from time-bank-core contract */
+export interface ParticipantProfile {
