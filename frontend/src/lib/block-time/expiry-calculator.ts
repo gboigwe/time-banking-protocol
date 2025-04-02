@@ -167,3 +167,6 @@ export const EXPIRY_DURATION_8 = 1152;
 
 /** Standard expiry duration 9: 1296 blocks */
 export const EXPIRY_DURATION_9 = 1296;
+
+/** Standard expiry duration 10: 1440 blocks */
+export const EXPIRY_DURATION_10 = 1440;
