@@ -25,3 +25,8 @@ export function STXtoMicroSTX(stx: number): bigint {
 export function microSTXtoSTX(microSTX: bigint): number {
   return Number(microSTX) / 1_000_000;
 }
+
+/** Convert block time to hours (using 10 min avg block time) */
+export function blockTimeToHours(blocks: number): number {
+  return (blocks * 10) / 60;
+}
