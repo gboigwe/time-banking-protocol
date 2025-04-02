@@ -15,3 +15,8 @@ export function microTokensToHours(microTokens: bigint): number {
 
 /** Micro-STX per STX */
 export const MICRO_STX_PER_STX = 1_000_000n;
+
+/** Convert STX to micro-STX */
+export function STXtoMicroSTX(stx: number): bigint {
+  return BigInt(Math.round(stx * 1_000_000));
+}
