@@ -45,3 +45,6 @@ export const ADDR_CONST_1 = 19;
 
 /** ADDR_CONST_2 */
 export const ADDR_CONST_2 = 38;
+
+/** ADDR_CONST_3 */
+export const ADDR_CONST_3 = 57;
