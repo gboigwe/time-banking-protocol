@@ -14,3 +14,9 @@ export const BLOCKS_PER_DIFFICULTY_PERIOD = 2016;
 export function isHalvingBlock(blockHeight: number): boolean {
   return blockHeight > 0 && blockHeight % 210000 === 0;
 }
+
+/** Get the next halving block height from current block */
+export function getNextHalvingBlock(currentBlock: number): number {
+  const period = 210000;
+  return (Math.floor(currentBlock / period) + 1) * period;
+}
