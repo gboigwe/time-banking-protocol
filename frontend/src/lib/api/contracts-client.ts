@@ -31,3 +31,4 @@ export class ContractsClient {
   async getByTrait(address: string, name: string): Promise<unknown> {
     return this.http.get(`/extended/v1/contract/${address}.${name}/getByTrait`);
   }
+}
