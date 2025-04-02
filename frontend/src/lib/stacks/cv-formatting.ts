@@ -44,3 +44,16 @@ export function cvToString(cv: ClarityValue): string {
 export function cvToDisplayString(cv: ClarityValue): string {
   return cvToString(cv);
 }
+
+/**
+ * Truncate a principal string for compact display
+ * @param principal - full principal string
+ * @param maxLen - max characters to show before truncation
+ */
+export function truncateCVPrincipal(
+  principal: string,
+  maxLen = MAX_PRINCIPAL_DISPLAY_LENGTH
+): string {
+  if (principal.length <= maxLen * 2 + 3) return principal;
+  return `${principal.slice(0, maxLen)}...${principal.slice(-maxLen)}`;
+}
