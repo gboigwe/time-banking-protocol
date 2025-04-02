@@ -40,3 +40,8 @@ export function getCachedBlockTime(blockHeight: number): number | null {
 export function clearBlockTimeCache(): void {
   blockTimeCache.clear();
 }
+
+/** Get count of entries in cache */
+export function getBlockTimeCacheSize(): number {
+  return blockTimeCache.size;
+}
