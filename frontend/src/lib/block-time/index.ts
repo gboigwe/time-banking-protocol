@@ -3,3 +3,4 @@ export * from './duration-helpers';
 export * from './block-time-converter';
 export * from './expiry-calculator';
 export * from './time-range';
+export * from './block-time-validator';
