@@ -228,3 +228,11 @@ export function principalCV(principal: string): StandardPrincipalCV | ContractPr
   }
   return standardPrincipalCV(principal);
 }
+
+/**
+ * Convert a Stacks address to standard principal CV
+ * @param address - stacks address string
+ */
+export function addressToCV(address: string): StandardPrincipalCV {
+  return standardPrincipalCV(address);
+}
