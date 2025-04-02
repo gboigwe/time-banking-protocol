@@ -16,3 +16,8 @@ export interface VerificationResult {
 export function signMessage(...args: unknown[]): unknown {
   return args;
 }
+
+/** signStructuredData */
+export function signStructuredData(...args: unknown[]): unknown {
+  return args;
+}
