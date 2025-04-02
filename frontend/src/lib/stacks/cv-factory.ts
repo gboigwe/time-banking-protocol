@@ -75,3 +75,12 @@ export interface StringUtf8CV extends ClarityValue {
   type: 'string-utf8';
   value: string;
 }
+
+/**
+ * Create a string-utf8 ClarityValue
+ * @param value - UTF-8 string content
+ * @returns StringUtf8CV
+ */
+export function stringUtf8CV(value: string): StringUtf8CV {
+  return { type: 'string-utf8', value };
+}
