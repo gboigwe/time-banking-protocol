@@ -172,3 +172,9 @@ export interface ListCV extends ClarityValue {
 export function listCV(values: ClarityValue[]): ListCV {
   return { type: 'list', list: values };
 }
+
+/** Tuple ClarityValue */
+export interface TupleCV extends ClarityValue {
+  type: 'tuple';
+  data: Record<string, ClarityValue>;
+}
