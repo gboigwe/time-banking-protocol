@@ -24,3 +24,10 @@ export interface STXTransferTxParams {
   nonce?: number;
   anchorMode?: AnchorMode;
 }
+
+/** Transaction options shared by all tx types */
+export interface TxOptions {
+  sponsored?: boolean;
+  sponsorNonce?: number;
+  senderKey?: string;
+}
