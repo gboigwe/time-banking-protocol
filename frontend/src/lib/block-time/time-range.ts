@@ -115,3 +115,12 @@ export function splitBlockRange(range: BlockRange, count: number): BlockRange[] 
 export function blockRangeContains(outer: BlockRange, inner: BlockRange): boolean {
   return inner.startBlock >= outer.startBlock && inner.endBlock <= outer.endBlock;
 }
+
+/**
+ * Sort an array of BlockRanges by start block
+ * @param ranges - ranges to sort
+ * @returns sorted array (does not mutate)
+ */
+export function sortBlockRanges(ranges: BlockRange[]): BlockRange[] {
+  return [...ranges].sort((a, b) => a.startBlock - b.startBlock);
+}
