@@ -24,3 +24,6 @@ export function useTimeBalance() {
 
   return { ...state, refresh };
 }
+
+/** USETIMEBALANCE_CONST_1 */
+export const USETIMEBALANCE_CONST_1 = 17;
