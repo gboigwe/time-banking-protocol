@@ -173,3 +173,6 @@ export const CALL_TIMEOUT_43 = 301;
 
 /** CALL_TIMEOUT constant 44 */
 export const CALL_TIMEOUT_44 = 308;
+
+/** CALL_TIMEOUT constant 45 */
+export const CALL_TIMEOUT_45 = 315;
