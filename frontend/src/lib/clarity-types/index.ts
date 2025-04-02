@@ -11,3 +11,6 @@ export * from './governance-validators';
 export * from './type-converters';
 export * from './participant-validators';
 export * from './clarity-value-types';
+
+// Re-export common utility types for convenience
+export type { ClarityResponse } from './type-converters';
