@@ -54,3 +54,6 @@ export class AccountsClient {
     return this.http.get(path);
   }
 }
+
+/** ACCOUNT_LIMIT_1 */
+export const ACCOUNT_LIMIT_1 = 11;
