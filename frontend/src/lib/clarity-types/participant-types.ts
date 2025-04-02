@@ -37,3 +37,5 @@ export interface ParticipantProfile {
   balance: TimeBalance;
   /** Reputation score (null if not yet rated) */
   reputation: ReputationScore;
+  /** Block height when registered */
+  registeredAt: number;
