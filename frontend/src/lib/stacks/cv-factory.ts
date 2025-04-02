@@ -481,3 +481,6 @@ export const CV_BUFFER_SIZE_77 = 770;
 
 /** CV buffer size constant 78 */
 export const CV_BUFFER_SIZE_78 = 780;
+
+/** CV buffer size constant 79 */
+export const CV_BUFFER_SIZE_79 = 790;
