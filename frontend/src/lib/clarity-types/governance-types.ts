@@ -64,3 +64,12 @@ export interface ProposalTuple {
   /** Whether proposal passed */
   passed: boolean;
 }
+
+/** Check if a proposal is currently active */
+export function isProposalActive(proposal: ProposalTuple, currentBlock: number): boolean {
+  return (
+    currentBlock >= proposal.period.startBlock &&
+    currentBlock <= proposal.period.endBlock &&
+    !proposal.executed
+  );
+}
