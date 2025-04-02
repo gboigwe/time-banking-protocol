@@ -25,3 +25,5 @@ export type ExchangeDirection = 'offer' | 'request';
 export interface TimeRecord {
   /** Unique exchange identifier */
   exchangeId: number;
+  /** Address of the service provider */
+  provider: string;
