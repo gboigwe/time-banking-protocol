@@ -15,3 +15,8 @@ export class ContractCallBuilder {
     this.params.functionName = name;
     return this;
   }
+
+  withArgs(args: unknown[]): this {
+    this.params.functionArgs = args;
+    return this;
+  }
