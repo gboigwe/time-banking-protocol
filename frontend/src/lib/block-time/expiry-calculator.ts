@@ -124,3 +124,19 @@ export function blockCountdown(remainingBlocks: number): {
   const minutes = totalMinutes % 60;
   return { days, hours, minutes, isExpired: false };
 }
+
+/**
+ * Check if something expires within a given number of blocks
+ * @param expiryBlock - block when thing expires
+ * @param currentBlock - current chain tip
+ * @param withinBlocks - threshold to check
+ * @returns true if expiry is within threshold
+ */
+export function expiresWithin(
+  expiryBlock: number,
+  currentBlock: number,
+  withinBlocks: number
+): boolean {
+  const remaining = getRemainingBlocks(expiryBlock, currentBlock);
+  return remaining > 0 && remaining <= withinBlocks;
+}
