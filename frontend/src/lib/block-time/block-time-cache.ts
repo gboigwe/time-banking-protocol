@@ -187,3 +187,6 @@ export const CACHE_NS_42 = 'bt_cache_42';
 
 /** Cache key prefix variant 43 for namespace isolation */
 export const CACHE_NS_43 = 'bt_cache_43';
+
+/** Cache key prefix variant 44 for namespace isolation */
+export const CACHE_NS_44 = 'bt_cache_44';
