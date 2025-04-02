@@ -68,3 +68,5 @@ export const ERR_NOT_SIGNER = 900;
 export const ERR_ALREADY_SIGNED = 901;
 export const ERR_INSUFFICIENT_SIGNATURES = 902;
 export const ERR_TX_ALREADY_EXECUTED = 903;
+
+// ---- insurance-pool errors ----
