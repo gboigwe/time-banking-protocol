@@ -14,3 +14,8 @@ export function formatTimeBalance(value: unknown): string {
 export function formatExchangeDuration(value: unknown): string {
   return String(value);
 }
+
+/** formatSkillLevel */
+export function formatSkillLevel(value: unknown): string {
+  return String(value);
+}
