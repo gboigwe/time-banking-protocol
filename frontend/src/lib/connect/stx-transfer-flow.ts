@@ -14,3 +14,8 @@ export function validateTransferAmount(...args: unknown[]): unknown {
 export function validateRecipient(...args: unknown[]): unknown {
   return args;
 }
+
+/** openTransferDialog */
+export function openTransferDialog(...args: unknown[]): unknown {
+  return args;
+}
