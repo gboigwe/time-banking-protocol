@@ -131,3 +131,6 @@ export const UI_STATE_29 = 145;
 
 /** UI constant 30 */
 export const UI_STATE_30 = 150;
+
+/** UI constant 31 */
+export const UI_STATE_31 = 155;
