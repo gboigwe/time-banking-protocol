@@ -12,3 +12,6 @@ export interface BlockRange {
 export interface TimeRange {
   /** Start time */
   startTime: Date;
+  /** End time */
+  endTime: Date;
+}
