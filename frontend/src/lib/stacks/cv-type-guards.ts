@@ -29,3 +29,8 @@ export function isStringUtf8CV(cv: ClarityValue): cv is StringUtf8CV {
 export function isBufferCV(cv: ClarityValue): cv is BufferCV {
   return cv.type === 'buffer';
 }
+
+/** Type guard for ListCV */
+export function isListCV(cv: ClarityValue): cv is ListCV {
+  return cv.type === 'list';
+}
