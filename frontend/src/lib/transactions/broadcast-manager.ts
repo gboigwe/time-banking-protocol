@@ -49,3 +49,6 @@ export class BroadcastManager {
 
 /** RETRY_DELAY_1 */
 export const RETRY_DELAY_1 = 13;
+
+/** RETRY_DELAY_2 */
+export const RETRY_DELAY_2 = 26;
