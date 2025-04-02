@@ -140,3 +140,6 @@ export const UI_STATE_32 = 160;
 
 /** UI constant 33 */
 export const UI_STATE_33 = 165;
+
+/** UI constant 34 */
+export const UI_STATE_34 = 170;
