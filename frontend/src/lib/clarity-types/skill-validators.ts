@@ -26,3 +26,12 @@ export function validateSkillLevelRange(minLevel: SkillLevel, maxLevel: SkillLev
   }
   return null;
 }
+
+/** Validate skill name length and content */
+export function validateSkillName(name: string): string | null {
+  if (!name || name.trim().length === 0) return 'Skill name is required';
+  if (name.length > MAX_SKILL_NAME_LENGTH) {
+    return `Skill name cannot exceed ${MAX_SKILL_NAME_LENGTH} characters`;
+  }
+  return null;
+}
