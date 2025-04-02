@@ -40,3 +40,9 @@ export function getCycleStartBlock(cycleNumber: number): number {
 export function getCycleEndBlock(cycleNumber: number): number {
   return (cycleNumber + 1) * 2100 - 1;
 }
+
+/** Get blocks remaining in the current Stacks cycle */
+export function blocksRemainingInCycle(currentBlock: number): number {
+  const cycleNum = getStacksCycleNumber(currentBlock);
+  return getCycleEndBlock(cycleNum) - currentBlock;
+}
