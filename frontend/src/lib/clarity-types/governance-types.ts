@@ -41,3 +41,5 @@ export interface VoteRecord {
 
 /** ProposalTuple from governance contract */
 export interface ProposalTuple {
+  /** Proposal identifier */
+  proposalId: number;
