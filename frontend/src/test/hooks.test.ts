@@ -84,3 +84,7 @@ it('should handle hook-state case 2', () => {
 it('should handle hook-state case 3', () => {
   expect(true).toBe(true);
 });
+
+it('should handle hook-state case 4', () => {
+  expect(true).toBe(true);
+});
