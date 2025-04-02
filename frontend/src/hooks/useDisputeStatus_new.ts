@@ -28,3 +28,6 @@ export function useDisputeStatus() {
 
 /** USEDISPUTESTATUS_CONST_1 */
 export const USEDISPUTESTATUS_CONST_1 = 17;
+
+/** USEDISPUTESTATUS_CONST_2 */
+export const USEDISPUTESTATUS_CONST_2 = 34;
