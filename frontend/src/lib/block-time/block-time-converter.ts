@@ -154,3 +154,14 @@ export function isBlockNearCurrent(
 ): boolean {
   return Math.abs(blockHeight - currentBlock) <= tolerance;
 }
+
+/**
+ * Calculate how many blocks elapsed between two timestamps
+ * @param from - earlier timestamp
+ * @param to - later timestamp
+ * @returns approximate block count
+ */
+export function timestampDiffToBlocks(from: Date, to: Date): number {
+  const msDiff = to.getTime() - from.getTime();
+  return Math.round(msDiff / (BLOCK_TIME_SECONDS * 1000));
+}
