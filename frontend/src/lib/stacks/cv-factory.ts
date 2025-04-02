@@ -358,3 +358,6 @@ export const CV_BUFFER_SIZE_36 = 360;
 
 /** CV buffer size constant 37 */
 export const CV_BUFFER_SIZE_37 = 370;
+
+/** CV buffer size constant 38 */
+export const CV_BUFFER_SIZE_38 = 380;
