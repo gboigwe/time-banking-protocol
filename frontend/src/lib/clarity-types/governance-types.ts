@@ -59,3 +59,5 @@ export interface ProposalTuple {
   abstainVotes: number;
   /** Quorum required for this proposal */
   quorum: QuorumThreshold;
+  /** Whether proposal has been executed */
+  executed: boolean;
