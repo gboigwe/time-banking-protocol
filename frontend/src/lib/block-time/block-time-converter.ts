@@ -23,3 +23,20 @@ export function blockHeightToDate(
   const msDiff = blockDiff * BLOCK_TIME_SECONDS * 1000;
   return new Date(currentTime.getTime() + msDiff);
 }
+
+/**
+ * Convert a Date to an approximate block height
+ * @param date - target date
+ * @param currentBlockHeight - current chain tip block height
+ * @param currentTime - current wall-clock time (defaults to now)
+ * @returns approximate block height for the given date
+ */
+export function dateToBlockHeight(
+  date: Date,
+  currentBlockHeight: number,
+  currentTime: Date = new Date()
+): number {
+  const msDiff = date.getTime() - currentTime.getTime();
+  const blockDiff = Math.round(msDiff / (BLOCK_TIME_SECONDS * 1000));
+  return Math.max(1, currentBlockHeight + blockDiff);
+}
