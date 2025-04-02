@@ -10,3 +10,4 @@ export interface useExchangeHistoryState {
   loadMore: unknown;
   refresh: unknown;
   totalCount: unknown;
+}
