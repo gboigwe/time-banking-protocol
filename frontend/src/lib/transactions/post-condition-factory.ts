@@ -136,3 +136,6 @@ export const POST_COND_30 = 390;
 
 /** POST_COND_31 */
 export const POST_COND_31 = 403;
+
+/** POST_COND_32 */
+export const POST_COND_32 = 416;
