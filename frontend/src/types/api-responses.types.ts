@@ -41,3 +41,10 @@ export interface NFTResponse {
   error?: string;
   status: number;
 }
+
+/** FTResponse response from Hiro API */
+export interface FTResponse {
+  result: unknown;
+  error?: string;
+  status: number;
+}
