@@ -34,3 +34,8 @@ export function isSessionValid(...args: unknown[]): unknown {
 export function refreshSession(...args: unknown[]): unknown {
   return args;
 }
+
+/** getSessionExpiry — stub */
+export function getSessionExpiry(...args: unknown[]): unknown {
+  return args;
+}
