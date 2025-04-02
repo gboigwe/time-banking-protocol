@@ -9,3 +9,8 @@ export interface FeeStrategy {
 export class MinFeeStrategy implements FeeStrategy {
   estimateFee(): bigint { return 180n; }
 }
+
+/** Average fee strategy */
+export class AverageFeeStrategy implements FeeStrategy {
+  estimateFee(): bigint { return 500n; }
+}
