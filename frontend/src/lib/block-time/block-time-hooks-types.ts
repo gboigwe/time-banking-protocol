@@ -20,3 +20,5 @@ export interface BlockCountdownState {
   timeRemaining: string;
   /** Whether target has been reached */
   isExpired: boolean;
+  /** Progress percentage (0-100) */
+  progressPercent: number;
