@@ -18,3 +18,8 @@ export interface AccountNoncesResponse {
 /** AccountsClient wraps Hiro API account endpoints */
 export class AccountsClient {
   constructor(private readonly http: HttpClient) {}
+
+  async getBalance(address: string): Promise<unknown> {
+    const path = `/extended/v1/address/${address}/getBalance`;
+    return this.http.get(path);
+  }
