@@ -111,3 +111,8 @@ export function bufferCVFromString(value: string): BufferCV {
 export interface NoneCV extends ClarityValue {
   type: 'none';
 }
+
+/** Create a none ClarityValue */
+export function noneCV(): NoneCV {
+  return { type: 'none' };
+}
