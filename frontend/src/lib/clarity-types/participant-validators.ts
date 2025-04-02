@@ -18,3 +18,11 @@ export function validateDisplayName(name: string): string | null {
   }
   return null;
 }
+
+/** Validate bio */
+export function validateBio(bio: string): string | null {
+  if (bio.length > MAX_BIO_LENGTH) {
+    return `Bio cannot exceed ${MAX_BIO_LENGTH} characters`;
+  }
+  return null;
+}
