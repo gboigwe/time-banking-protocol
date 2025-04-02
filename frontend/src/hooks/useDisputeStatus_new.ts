@@ -10,3 +10,18 @@ export interface useDisputeStatusState {
   evidenceCount: unknown;
   resolution: unknown;
 }
+
+/** useDisputeStatus hook implementation */
+export function useDisputeStatus() {
+  const [state, setState] = useState<Partial<useDisputeStatusState>>({});
+  
+  const refresh = useCallback(async () => {
+    setState(prev => ({ ...prev }));
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { ...state, refresh };
+}
