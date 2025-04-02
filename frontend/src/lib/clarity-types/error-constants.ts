@@ -57,3 +57,5 @@ export const ERR_DISPUTE_NOT_FOUND = 700;
 export const ERR_DISPUTE_ALREADY_RESOLVED = 701;
 export const ERR_NOT_ARBITRATOR = 702;
 export const ERR_DISPUTE_PERIOD_EXPIRED = 703;
+
+// ---- time-token-ft errors ----
