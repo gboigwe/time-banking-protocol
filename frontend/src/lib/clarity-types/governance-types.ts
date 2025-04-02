@@ -47,3 +47,5 @@ export interface ProposalTuple {
   title: string;
   /** Full description of the proposal */
   description: string;
+  /** Proposer address */
+  proposer: string;
