@@ -100,3 +100,26 @@ export function isBlockInFuture(blockHeight: number, currentBlockHeight: number)
 export function isExpiredAtBlock(expiryBlock: number, currentBlockHeight: number): boolean {
   return currentBlockHeight >= expiryBlock;
 }
+
+/**
+ * Format block height with optional format string
+ * @param blockHeight - block height to format
+ * @param currentBlockHeight - current chain tip
+ * @param format - 'iso' | 'relative' | 'date' (default: 'relative')
+ * @returns formatted string
+ */
+export function formatBlockHeight(
+  blockHeight: number,
+  currentBlockHeight: number,
+  format: 'iso' | 'relative' | 'date' = 'relative'
+): string {
+  switch (format) {
+    case 'iso':
+      return blockHeightToISO(blockHeight, currentBlockHeight);
+    case 'date':
+      return blockHeightToDate(blockHeight, currentBlockHeight).toLocaleDateString();
+    case 'relative':
+    default:
+      return getBlockHeightAge(blockHeight, currentBlockHeight);
+  }
+}
