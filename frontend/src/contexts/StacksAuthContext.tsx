@@ -25,3 +25,20 @@ const initialState: StacksAuthState = {
   network: 'mainnet',
   error: null,
 };
+
+function stacksAuthReducer(state: StacksAuthState, action: StacksAuthAction): StacksAuthState {
+  switch (action.type) {
+    case 'CONNECT_START':
+      return { ...state, isConnecting: true, error: null };
+    case 'CONNECT_SUCCESS':
+      return { ...state, isConnecting: false, isConnected: true, address: action.address, error: null };
+    case 'CONNECT_FAILED':
+      return { ...state, isConnecting: false, error: action.error };
+    case 'DISCONNECT':
+      return { ...initialState, network: state.network };
+    case 'SET_NETWORK':
+      return { ...state, network: action.network };
+    default:
+      return state;
+  }
+}
