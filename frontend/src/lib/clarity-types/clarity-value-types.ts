@@ -5,3 +5,4 @@ export enum ClarityType {
   UInt = 'uint',
   Buffer = 'buffer',
   BoolTrue = 'true',
+  BoolFalse = 'false',
