@@ -37,3 +37,5 @@ export const ERR_ESCROW_NOT_FOUND = 400;
 export const ERR_ESCROW_ALREADY_RELEASED = 401;
 export const ERR_ESCROW_NOT_MATURED = 402;
 export const ERR_INVALID_GUARDIAN = 403;
+
+// ---- governance errors ----
