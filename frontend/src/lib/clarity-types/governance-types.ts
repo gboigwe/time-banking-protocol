@@ -10,3 +10,6 @@ export interface VotingPeriod {
   /** End block height */
   endBlock: number;
 }
+
+/** CouncilMember from governance contract */
+export interface CouncilMember {
