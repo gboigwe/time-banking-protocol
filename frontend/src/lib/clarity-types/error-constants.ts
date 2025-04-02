@@ -87,3 +87,5 @@ export const ERR_REWARD_POOL_EMPTY = 1202;
 export const ERR_NFT_NOT_FOUND = 1300;
 export const ERR_NFT_NOT_TRANSFERABLE = 1301;
 export const ERR_CERT_ALREADY_ISSUED = 1302;
+
+// ---- referral-program errors ----
