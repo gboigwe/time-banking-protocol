@@ -17,3 +17,9 @@ export enum ClarityType {
   StringASCII = 'string-ascii',
   StringUTF8 = 'string-utf8',
 }
+
+/** Minimal ClarityValue shape used in read-only call results */
+export interface ClarityValueShape {
+  type: ClarityType;
+  value?: unknown;
+}
