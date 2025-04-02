@@ -44,3 +44,8 @@ export function isTupleCV(cv: ClarityValue): cv is TupleCV {
 export function isNoneCV(cv: ClarityValue): cv is NoneCV {
   return cv.type === 'none';
 }
+
+/** Type guard for SomeCV */
+export function isSomeCV(cv: ClarityValue): cv is SomeCV {
+  return cv.type === 'some';
+}
