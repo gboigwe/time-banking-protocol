@@ -13,3 +13,4 @@ export enum ClarityType {
   OptionalNone = 'none',
   OptionalSome = 'some',
   List = 'list',
+  Tuple = 'tuple',
