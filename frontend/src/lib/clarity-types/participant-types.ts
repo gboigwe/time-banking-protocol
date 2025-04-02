@@ -44,3 +44,14 @@ export interface ParticipantProfile {
   /** List of skill IDs this participant offers */
   offeredSkills: number[];
 }
+
+/** Type guard for ParticipantProfile */
+export function isParticipantProfile(value: unknown): value is ParticipantProfile {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'address' in value &&
+    'status' in value &&
+    'balance' in value
+  );
+}
