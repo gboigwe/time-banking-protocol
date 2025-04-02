@@ -7,3 +7,6 @@ export interface BlockRange {
   /** Ending block height (exclusive) */
   endBlock: number;
 }
+
+/** A range defined by start and end wall-clock times */
+export interface TimeRange {
