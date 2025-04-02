@@ -2,3 +2,4 @@
 /** ClarityType enum maps to Stacks.js clarity type identifiers */
 export enum ClarityType {
   Int = 'int',
+  UInt = 'uint',
