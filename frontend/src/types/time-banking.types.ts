@@ -5,3 +5,6 @@ export type TimeHours = string;
 
 /** SkillLevel domain type */
 export type SkillLevel = string;
+
+/** ExchangeStatus domain type */
+export type ExchangeStatus = string;
