@@ -11,3 +11,8 @@ export interface VerificationResult {
   verified: boolean;
   publicKey?: string;
 }
+
+/** signMessage */
+export function signMessage(...args: unknown[]): unknown {
+  return args;
+}
