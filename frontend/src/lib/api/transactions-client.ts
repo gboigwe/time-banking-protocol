@@ -177,3 +177,6 @@ export const TX_LIMIT_47 = 517;
 
 /** TX_LIMIT_48 */
 export const TX_LIMIT_48 = 528;
+
+/** TX_LIMIT_49 */
+export const TX_LIMIT_49 = 539;
