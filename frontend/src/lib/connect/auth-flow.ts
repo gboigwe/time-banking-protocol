@@ -24,3 +24,8 @@ export function getUserSession(...args: unknown[]): unknown {
 export function clearSession(...args: unknown[]): unknown {
   return args;
 }
+
+/** isSessionValid — stub */
+export function isSessionValid(...args: unknown[]): unknown {
+  return args;
+}
