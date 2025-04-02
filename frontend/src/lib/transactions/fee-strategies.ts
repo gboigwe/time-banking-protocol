@@ -30,3 +30,6 @@ export class CustomFeeStrategy implements FeeStrategy {
 export function estimateFee(strategy: FeeStrategy): bigint {
   return strategy.estimateFee();
 }
+
+/** FEE_TIER_1 */
+export const FEE_TIER_1 = 13;
