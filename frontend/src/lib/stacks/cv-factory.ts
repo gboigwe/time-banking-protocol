@@ -236,3 +236,14 @@ export function principalCV(principal: string): StandardPrincipalCV | ContractPr
 export function addressToCV(address: string): StandardPrincipalCV {
   return standardPrincipalCV(address);
 }
+
+/**
+ * Extract address string from a principal CV
+ * @param cv - StandardPrincipalCV or ContractPrincipalCV
+ */
+export function cvToAddress(cv: StandardPrincipalCV | ContractPrincipalCV): string {
+  if (cv.type === 'contract_address') {
+    return `${cv.address}.${cv.contractName}`;
+  }
+  return cv.value;
+}
