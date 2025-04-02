@@ -20,3 +20,7 @@ export class TransactionsClient {
   async getMempoolTxs(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/tx/getMempoolTxs`, { headers: {} });
   }
+
+  async getDroppedTxs(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/tx/getDroppedTxs`, { headers: {} });
+  }
