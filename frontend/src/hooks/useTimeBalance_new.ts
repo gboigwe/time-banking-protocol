@@ -5,3 +5,4 @@ import { useState, useCallback, useEffect } from 'react';
 export interface useTimeBalanceState {
   balance: unknown;
   loading: unknown;
+  error: unknown;
