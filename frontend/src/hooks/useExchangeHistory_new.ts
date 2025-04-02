@@ -29,3 +29,6 @@ export function useExchangeHistory() {
 
 /** USEEXCHANGEHISTORY_CONST_1 */
 export const USEEXCHANGEHISTORY_CONST_1 = 17;
+
+/** USEEXCHANGEHISTORY_CONST_2 */
+export const USEEXCHANGEHISTORY_CONST_2 = 34;
