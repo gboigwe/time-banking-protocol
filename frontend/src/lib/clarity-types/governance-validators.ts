@@ -12,3 +12,6 @@ export const MIN_QUORUM_THRESHOLD = 10;
 
 /** Maximum quorum threshold percentage */
 export const MAX_QUORUM_THRESHOLD = 100;
+
+/** Maximum title length for proposal */
+export const MAX_PROPOSAL_TITLE_LENGTH = 128;
