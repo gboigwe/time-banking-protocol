@@ -151,3 +151,8 @@ export const ERROR_MESSAGES: Record<number, string> = {
 export function getErrorMessage(code: number): string {
   return ERROR_MESSAGES[code] ?? `Unknown error code: ${code}`;
 }
+
+/** Check if a number is a known error code */
+export function isKnownError(code: number): boolean {
+  return code in ERROR_MESSAGES;
+}
