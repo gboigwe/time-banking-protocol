@@ -29,3 +29,9 @@ export interface SortState {
   active: boolean;
   data?: unknown;
 }
+
+/** ModalState UI type */
+export interface ModalState {
+  active: boolean;
+  data?: unknown;
+}
