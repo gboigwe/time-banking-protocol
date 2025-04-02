@@ -6,3 +6,4 @@ export interface useTimeBalanceState {
   balance: unknown;
   loading: unknown;
   error: unknown;
+  refetch: unknown;
