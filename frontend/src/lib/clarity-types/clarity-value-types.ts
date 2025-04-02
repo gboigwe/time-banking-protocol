@@ -69,3 +69,8 @@ export function isNumericType(type: ClarityType): boolean {
 export function isStringType(type: ClarityType): boolean {
   return type === ClarityType.StringASCII || type === ClarityType.StringUTF8;
 }
+
+/** Check if ClarityType is a boolean type */
+export function isBoolType(type: ClarityType): boolean {
+  return type === ClarityType.BoolTrue || type === ClarityType.BoolFalse;
+}
