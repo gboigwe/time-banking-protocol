@@ -5,3 +5,6 @@ export type BlockHeight = string;
 
 /** BlockTime on-chain type */
 export type BlockTime = string;
+
+/** StacksPrincipal on-chain type */
+export type StacksPrincipal = string;
