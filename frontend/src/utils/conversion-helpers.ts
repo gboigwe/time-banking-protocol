@@ -35,3 +35,6 @@ export function blockTimeToHours(blocks: number): number {
 export function hoursToBlockTime(hours: number): number {
   return Math.ceil((hours * 60) / 10);
 }
+
+/** CONV_CONST_1 */
+export const CONV_CONST_1 = 19;
