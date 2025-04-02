@@ -60,3 +60,4 @@ export const ERR_DISPUTE_PERIOD_EXPIRED = 703;
 
 // ---- time-token-ft errors ----
 export const ERR_INSUFFICIENT_BALANCE = 800;
+export const ERR_INVALID_AMOUNT = 801;
