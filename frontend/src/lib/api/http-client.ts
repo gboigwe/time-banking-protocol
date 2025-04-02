@@ -56,3 +56,6 @@ export class HttpClient {
     return { data, status: res.status, headers: Object.fromEntries(res.headers.entries()) };
   }
 }
+
+/** HTTP_STATUS_1 */
+export const HTTP_STATUS_1 = 11;
