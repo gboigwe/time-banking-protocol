@@ -190,3 +190,6 @@ export const POST_COND_48 = 624;
 
 /** POST_COND_49 */
 export const POST_COND_49 = 637;
+
+/** POST_COND_50 */
+export const POST_COND_50 = 650;
