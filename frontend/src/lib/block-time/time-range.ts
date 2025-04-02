@@ -105,3 +105,13 @@ export function splitBlockRange(range: BlockRange, count: number): BlockRange[] 
   }
   return result;
 }
+
+/**
+ * Check if a BlockRange contains another BlockRange
+ * @param outer - the containing range
+ * @param inner - the range to check
+ * @returns true if outer fully contains inner
+ */
+export function blockRangeContains(outer: BlockRange, inner: BlockRange): boolean {
+  return inner.startBlock >= outer.startBlock && inner.endBlock <= outer.endBlock;
+}
