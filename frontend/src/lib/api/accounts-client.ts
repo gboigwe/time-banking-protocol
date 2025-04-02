@@ -14,3 +14,7 @@ export interface AccountNoncesResponse {
   last_mempool_tx_nonce: number;
   possible_next_nonce: number;
 }
+
+/** AccountsClient wraps Hiro API account endpoints */
+export class AccountsClient {
+  constructor(private readonly http: HttpClient) {}
