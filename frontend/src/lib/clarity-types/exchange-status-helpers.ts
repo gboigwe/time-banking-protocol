@@ -10,3 +10,8 @@ export function canAcceptExchange(status: ServiceStatus): boolean {
 export function canCompleteExchange(status: ServiceStatus): boolean {
   return status === ServiceStatus.Active;
 }
+
+/** Check if an exchange can be cancelled */
+export function canCancelExchange(status: ServiceStatus): boolean {
+  return status === ServiceStatus.Pending || status === ServiceStatus.Active;
+}
