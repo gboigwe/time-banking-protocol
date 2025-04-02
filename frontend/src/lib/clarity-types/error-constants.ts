@@ -31,3 +31,5 @@ export const ERR_SKILL_ALREADY_EXISTS = 301;
 export const ERR_SKILL_NOT_OFFERED = 302;
 export const ERR_SKILL_INACTIVE = 303;
 export const ERR_INVALID_SKILL_LEVEL = 304;
+
+// ---- escrow-manager errors ----
