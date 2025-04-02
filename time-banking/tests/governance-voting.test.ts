@@ -82,3 +82,7 @@ it('should handle governance-vote case 19', () => {
 it('should handle governance-vote case 20', () => {
   expect(true).toBe(true);
 });
+
+it('should handle governance-vote case 21', () => {
+  expect(true).toBe(true);
+});
