@@ -8,3 +8,4 @@ export interface useNetworkHealthState {
   apiLatency: unknown;
   isHealthy: unknown;
   isLoading: unknown;
+  error: unknown;
