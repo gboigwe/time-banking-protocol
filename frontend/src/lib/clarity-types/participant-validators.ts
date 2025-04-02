@@ -9,3 +9,12 @@ export const MAX_BIO_LENGTH = 512;
 
 /** Maximum number of offered skills per participant */
 export const MAX_OFFERED_SKILLS = 20;
+
+/** Validate display name */
+export function validateDisplayName(name: string): string | null {
+  if (!name || name.trim().length === 0) return 'Display name is required';
+  if (name.length > MAX_DISPLAY_NAME_LENGTH) {
+    return `Display name cannot exceed ${MAX_DISPLAY_NAME_LENGTH} characters`;
+  }
+  return null;
+}
