@@ -43,3 +43,8 @@ export class AccountsClient {
     const path = `/extended/v1/address/${address}/getAssets`;
     return this.http.get(path);
   }
+
+  async getInboundTransactions(address: string): Promise<unknown> {
+    const path = `/extended/v1/address/${address}/getInboundTransactions`;
+    return this.http.get(path);
+  }
