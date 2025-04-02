@@ -74,3 +74,8 @@ export function isContractPrincipalCV(cv: ClarityValue): cv is ContractPrincipal
 export function isTrueCV(cv: ClarityValue): cv is BoolCV {
   return cv.type === 'true';
 }
+
+/** Type guard for BoolCV false */
+export function isFalseCV(cv: ClarityValue): cv is BoolCV {
+  return cv.type === 'false';
+}
