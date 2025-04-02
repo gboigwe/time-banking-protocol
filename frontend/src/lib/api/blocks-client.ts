@@ -23,3 +23,7 @@ export class BlocksClient {
   async getBurnBlock(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/extended/v1/block/getBurnBlock`);
   }
+
+  async getBlockList(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/extended/v1/block/getBlockList`);
+  }
