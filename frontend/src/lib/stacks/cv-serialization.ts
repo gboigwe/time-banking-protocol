@@ -48,3 +48,12 @@ export function hexToCV(hex: string): ClarityValue {
 export function cvToJSON(cv: ClarityValue): string {
   return JSON.stringify(serializeCV(cv));
 }
+
+/**
+ * Parse JSON string to ClarityValue
+ * @param json - JSON string
+ * @returns ClarityValue
+ */
+export function jsonToCV(json: string): ClarityValue {
+  return JSON.parse(json) as ClarityValue;
+}
