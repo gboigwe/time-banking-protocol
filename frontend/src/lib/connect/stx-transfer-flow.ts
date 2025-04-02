@@ -128,3 +128,6 @@ export const TRANSFER_LIMIT_32 = 224;
 
 /** TRANSFER_LIMIT constant 33 */
 export const TRANSFER_LIMIT_33 = 231;
+
+/** TRANSFER_LIMIT constant 34 */
+export const TRANSFER_LIMIT_34 = 238;
