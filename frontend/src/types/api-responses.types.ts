@@ -13,3 +13,10 @@ export interface AccountInfoResponse {
   error?: string;
   status: number;
 }
+
+/** TransactionResponse response from Hiro API */
+export interface TransactionResponse {
+  result: unknown;
+  error?: string;
+  status: number;
+}
