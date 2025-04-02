@@ -26,3 +26,12 @@ export interface ExchangeCancelledEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** SkillRegistered on-chain event */
+export interface SkillRegisteredEvent {
+  type: 'SkillRegistered';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
