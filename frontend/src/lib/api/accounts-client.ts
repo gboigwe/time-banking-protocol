@@ -84,3 +84,6 @@ export const ACCOUNT_LIMIT_9 = 99;
 
 /** ACCOUNT_LIMIT_10 */
 export const ACCOUNT_LIMIT_10 = 110;
+
+/** ACCOUNT_LIMIT_11 */
+export const ACCOUNT_LIMIT_11 = 121;
