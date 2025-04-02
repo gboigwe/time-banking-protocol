@@ -12,3 +12,4 @@ export interface ContractErrorCode {
 export const ERR_NOT_REGISTERED = 100;
 export const ERR_ALREADY_REGISTERED = 101;
 export const ERR_INSUFFICIENT_HOURS = 102;
+export const ERR_INVALID_HOURS = 103;
