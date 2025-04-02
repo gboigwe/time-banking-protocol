@@ -23,3 +23,10 @@ export type ExchangeDirection = string;
 
 /** DisputeResolution domain type */
 export type DisputeResolution = string;
+
+/** TimeExchangeRecord domain interface */
+export interface TimeExchangeRecord {
+  id: string;
+  createdAt: number;
+  updatedAt?: number;
+}
