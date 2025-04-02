@@ -186,3 +186,9 @@ export interface TupleCV extends ClarityValue {
 export function tupleCV(data: Record<string, ClarityValue>): TupleCV {
   return { type: 'tuple', data };
 }
+
+/** Standard principal ClarityValue */
+export interface StandardPrincipalCV extends ClarityValue {
+  type: 'address';
+  value: string;
+}
