@@ -32,3 +32,6 @@ export interface SkillMetadata {
   maxLevel: SkillLevel;
   /** Whether skill requires certification */
   requiresCertification: boolean;
+  /** Tags associated with this skill */
+  tags: string[];
+}
