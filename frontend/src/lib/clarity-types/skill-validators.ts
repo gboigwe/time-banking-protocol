@@ -7,3 +7,6 @@ export const MAX_SKILL_NAME_LENGTH = 64;
 
 /** Maximum description length for a skill */
 export const MAX_SKILL_DESCRIPTION_LENGTH = 256;
+
+/** Maximum number of tags per skill */
+export const MAX_SKILL_TAGS = 10;
