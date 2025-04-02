@@ -30,3 +30,8 @@ export function microSTXtoSTX(microSTX: bigint): number {
 export function blockTimeToHours(blocks: number): number {
   return (blocks * 10) / 60;
 }
+
+/** Convert hours to approximate block count */
+export function hoursToBlockTime(hours: number): number {
+  return Math.ceil((hours * 60) / 10);
+}
