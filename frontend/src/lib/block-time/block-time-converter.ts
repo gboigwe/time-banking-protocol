@@ -40,3 +40,13 @@ export function dateToBlockHeight(
   const blockDiff = Math.round(msDiff / (BLOCK_TIME_SECONDS * 1000));
   return Math.max(1, currentBlockHeight + blockDiff);
 }
+
+/**
+ * Convert a block height to ISO 8601 string
+ * @param blockHeight - Stacks block height
+ * @param currentBlockHeight - current chain tip
+ * @returns ISO date string
+ */
+export function blockHeightToISO(blockHeight: number, currentBlockHeight: number): string {
+  return blockHeightToDate(blockHeight, currentBlockHeight).toISOString();
+}
