@@ -122,3 +122,11 @@ export interface SomeCV extends ClarityValue {
   type: 'some';
   value: ClarityValue;
 }
+
+/**
+ * Create a some ClarityValue wrapping another value
+ * @param value - the inner ClarityValue
+ */
+export function someCV(value: ClarityValue): SomeCV {
+  return { type: 'some', value };
+}
