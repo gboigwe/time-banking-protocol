@@ -44,3 +44,6 @@ export function isCallSuccess(...args: unknown[]): unknown {
 
 /** CALL_TIMEOUT constant 1 */
 export const CALL_TIMEOUT_1 = 7;
+
+/** CALL_TIMEOUT constant 2 */
+export const CALL_TIMEOUT_2 = 14;
