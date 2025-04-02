@@ -7,3 +7,7 @@ export class ContractsClient {
   async getInfo(address: string, name: string): Promise<unknown> {
     return this.http.get(`/extended/v1/contract/${address}.${name}/getInfo`);
   }
+
+  async getInterface(address: string, name: string): Promise<unknown> {
+    return this.http.get(`/extended/v1/contract/${address}.${name}/getInterface`);
+  }
