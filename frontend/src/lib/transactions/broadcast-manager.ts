@@ -124,3 +124,6 @@ export const RETRY_DELAY_25 = 325;
 
 /** RETRY_DELAY_26 */
 export const RETRY_DELAY_26 = 338;
+
+/** RETRY_DELAY_27 */
+export const RETRY_DELAY_27 = 351;
