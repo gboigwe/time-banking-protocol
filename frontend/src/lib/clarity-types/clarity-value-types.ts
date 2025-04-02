@@ -23,3 +23,8 @@ export interface ClarityValueShape {
   type: ClarityType;
   value?: unknown;
 }
+
+/** Check if a value is a ClarityValueShape */
+export function isClarityValue(v: unknown): v is ClarityValueShape {
+  return typeof v === 'object' && v !== null && 'type' in v;
+}
