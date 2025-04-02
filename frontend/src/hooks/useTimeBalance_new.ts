@@ -9,3 +9,18 @@ export interface useTimeBalanceState {
   refetch: unknown;
   setAddress: unknown;
 }
+
+/** useTimeBalance hook implementation */
+export function useTimeBalance() {
+  const [state, setState] = useState<Partial<useTimeBalanceState>>({});
+  
+  const refresh = useCallback(async () => {
+    setState(prev => ({ ...prev }));
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { ...state, refresh };
+}
