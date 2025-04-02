@@ -7,3 +7,4 @@ export interface useNetworkHealthState {
   blockHeight: unknown;
   apiLatency: unknown;
   isHealthy: unknown;
+  isLoading: unknown;
