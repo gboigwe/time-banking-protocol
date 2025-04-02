@@ -272,3 +272,6 @@ export const HTTP_STATUS_71 = 781;
 
 /** HTTP_STATUS_72 */
 export const HTTP_STATUS_72 = 792;
+
+/** HTTP_STATUS_73 */
+export const HTTP_STATUS_73 = 803;
