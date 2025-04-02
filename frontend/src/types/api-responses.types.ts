@@ -20,3 +20,10 @@ export interface TransactionResponse {
   error?: string;
   status: number;
 }
+
+/** ContractResponse response from Hiro API */
+export interface ContractResponse {
+  result: unknown;
+  error?: string;
+  status: number;
+}
