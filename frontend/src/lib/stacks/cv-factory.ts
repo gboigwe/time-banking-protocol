@@ -247,3 +247,6 @@ export function cvToAddress(cv: StandardPrincipalCV | ContractPrincipalCV): stri
   }
   return cv.value;
 }
+
+/** CV buffer size constant 1 */
+export const CV_BUFFER_SIZE_1 = 10;
