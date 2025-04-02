@@ -23,3 +23,8 @@ export class AccountsClient {
     const path = `/extended/v1/address/${address}/getBalance`;
     return this.http.get(path);
   }
+
+  async getSTXBalance(address: string): Promise<unknown> {
+    const path = `/extended/v1/address/${address}/getSTXBalance`;
+    return this.http.get(path);
+  }
