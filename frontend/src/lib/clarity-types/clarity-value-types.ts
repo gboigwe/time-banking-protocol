@@ -28,3 +28,10 @@ export interface ClarityValueShape {
 export function isClarityValue(v: unknown): v is ClarityValueShape {
   return typeof v === 'object' && v !== null && 'type' in v;
 }
+
+/** Extract inner value from a Clarity optional/some */
+export function unwrapSome(v: ClarityValueShape): unknown | null {
+  if (v.type === ClarityType.OptionalNone) return null;
+  if (v.type === ClarityType.OptionalSome) return v.value;
+  return v.value ?? null;
+}
