@@ -59,3 +59,4 @@ export const ERR_NOT_ARBITRATOR = 702;
 export const ERR_DISPUTE_PERIOD_EXPIRED = 703;
 
 // ---- time-token-ft errors ----
+export const ERR_INSUFFICIENT_BALANCE = 800;
