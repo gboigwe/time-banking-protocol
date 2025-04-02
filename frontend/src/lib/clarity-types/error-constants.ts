@@ -75,3 +75,4 @@ export const ERR_CLAIM_NOT_FOUND = 1001;
 export const ERR_CLAIM_ALREADY_PROCESSED = 1002;
 
 // ---- analytics-tracker errors ----
+export const ERR_TRACKER_NOT_AUTHORIZED = 1100;
