@@ -45,3 +45,6 @@ export const AUTH_TIMEOUT_1 = 7;
 
 /** AUTH_TIMEOUT constant 2 */
 export const AUTH_TIMEOUT_2 = 14;
+
+/** AUTH_TIMEOUT constant 3 */
+export const AUTH_TIMEOUT_3 = 21;
