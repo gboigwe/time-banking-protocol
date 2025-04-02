@@ -34,3 +34,11 @@ export interface TxOptions {
 
 /** Transaction result status */
 export type TxStatus = 'success' | 'abort_by_response' | 'abort_by_post_condition' | 'pending';
+
+/** Transaction result */
+export interface TxResult {
+  txId: string;
+  status: TxStatus;
+  blockHeight?: number;
+  fee: bigint;
+}
