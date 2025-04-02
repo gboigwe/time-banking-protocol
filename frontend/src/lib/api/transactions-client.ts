@@ -33,3 +33,6 @@ export class TransactionsClient {
     return this.http.get(`/tx/getTxEvents`, { headers: {} });
   }
 }
+
+/** TX_LIMIT_1 */
+export const TX_LIMIT_1 = 11;
