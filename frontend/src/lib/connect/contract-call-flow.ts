@@ -7,3 +7,4 @@ export enum CallStatus {
   Success = 'success',
   Failed = 'failed',
 }
+export const CALL_STATUS_IDLE: CallStatus = CallStatus.Idle;
