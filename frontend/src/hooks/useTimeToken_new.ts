@@ -9,3 +9,4 @@ export interface useTimeTokenState {
   error: unknown;
   transfer: unknown;
   approve: unknown;
+}
