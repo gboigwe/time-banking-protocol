@@ -84,3 +84,16 @@ export function clarityTupleToTimeRecord(tuple: Record<string, unknown>): TimeRe
     description: tuple['description'] ? String(tuple['description']) : undefined,
   };
 }
+
+/** Default TimeRecord value for initializing state */
+export const DEFAULT_TIME_RECORD: TimeRecord = {
+  exchangeId: 0,
+  provider: '',
+  requester: '',
+  hours: toHoursUnit(0),
+  skillId: 0,
+  status: ServiceStatus.Pending,
+  createdAt: 0,
+  expiresAt: 0,
+  direction: 'offer',
+};
