@@ -119,3 +119,6 @@ export const UI_STATE_25 = 125;
 
 /** UI constant 26 */
 export const UI_STATE_26 = 130;
+
+/** UI constant 27 */
+export const UI_STATE_27 = 135;
