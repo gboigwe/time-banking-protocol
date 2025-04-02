@@ -5,3 +5,6 @@ export type SkillLevel = 1 | 2 | 3 | 4 | 5;
 
 /** CertificationStatus mirrors optional in Clarity contract */
 export type CertificationStatus = 'none' | 'pending' | 'verified' | 'revoked';
+
+/** SkillCategory tuple from skill-registry contract */
+export interface SkillCategory {
