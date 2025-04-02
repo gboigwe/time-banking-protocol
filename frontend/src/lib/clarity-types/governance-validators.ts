@@ -6,3 +6,6 @@ export const MIN_VOTING_PERIOD_BLOCKS = 144;
 
 /** Maximum voting period in blocks (~30 days) */
 export const MAX_VOTING_PERIOD_BLOCKS = 4320;
+
+/** Minimum quorum threshold percentage */
+export const MIN_QUORUM_THRESHOLD = 10;
