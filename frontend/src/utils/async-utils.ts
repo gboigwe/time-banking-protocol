@@ -135,3 +135,6 @@ export const ASYNC_CONST_16 = 304;
 
 /** ASYNC_CONST_17 */
 export const ASYNC_CONST_17 = 323;
+
+/** ASYNC_CONST_18 */
+export const ASYNC_CONST_18 = 342;
