@@ -11,3 +11,18 @@ export interface useNetworkHealthState {
   error: unknown;
   refresh: unknown;
 }
+
+/** useNetworkHealth hook implementation */
+export function useNetworkHealth() {
+  const [state, setState] = useState<Partial<useNetworkHealthState>>({});
+  
+  const refresh = useCallback(async () => {
+    setState(prev => ({ ...prev }));
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { ...state, refresh };
+}
