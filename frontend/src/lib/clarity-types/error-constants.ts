@@ -79,3 +79,4 @@ export const ERR_TRACKER_NOT_AUTHORIZED = 1100;
 export const ERR_METRIC_NOT_FOUND = 1101;
 
 // ---- rewards-distributor errors ----
+export const ERR_REWARD_ALREADY_CLAIMED = 1200;
