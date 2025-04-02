@@ -37,3 +37,18 @@ export function validateDescription(description?: string): string | null {
   }
   return null;
 }
+
+/** Validate a complete TimeRecord for submission */
+export function validateTimeRecord(record: Partial<TimeRecord>): string[] {
+  const errors: string[] = [];
+  if (!record.provider) errors.push('Provider address is required');
+  if (!record.requester) errors.push('Requester address is required');
+  const hoursError = record.hours != null ? validateHours(record.hours) : 'Hours is required';
+  if (hoursError) errors.push(hoursError);
+  const selfError = record.provider && record.requester
+    ? validateNotSelfExchange(record.provider, record.requester) : null;
+  if (selfError) errors.push(selfError);
+  const descError = validateDescription(record.description);
+  if (descError) errors.push(descError);
+  return errors;
+}
