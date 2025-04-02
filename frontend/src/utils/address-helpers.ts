@@ -42,3 +42,6 @@ export function getAddressVersion(address: string): 'mainnet' | 'testnet' | 'unk
 
 /** ADDR_CONST_1 */
 export const ADDR_CONST_1 = 19;
+
+/** ADDR_CONST_2 */
+export const ADDR_CONST_2 = 38;
