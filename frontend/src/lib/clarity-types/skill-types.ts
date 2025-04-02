@@ -8,3 +8,5 @@ export type CertificationStatus = 'none' | 'pending' | 'verified' | 'revoked';
 
 /** SkillCategory tuple from skill-registry contract */
 export interface SkillCategory {
+  /** Unique category identifier */
+  categoryId: number;
