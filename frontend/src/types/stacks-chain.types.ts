@@ -8,3 +8,6 @@ export type BlockTime = string;
 
 /** StacksPrincipal on-chain type */
 export type StacksPrincipal = string;
+
+/** TxId on-chain type */
+export type TxId = string;
