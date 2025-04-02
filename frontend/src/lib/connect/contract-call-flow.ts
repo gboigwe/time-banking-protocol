@@ -26,3 +26,8 @@ export function validateContractArgs(...args: unknown[]): unknown {
 export function openContractCallDialog(...args: unknown[]): unknown {
   return args;
 }
+
+/** handleCallResponse */
+export function handleCallResponse(...args: unknown[]): unknown {
+  return args;
+}
