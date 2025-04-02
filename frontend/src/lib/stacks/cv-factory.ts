@@ -130,3 +130,9 @@ export interface SomeCV extends ClarityValue {
 export function someCV(value: ClarityValue): SomeCV {
   return { type: 'some', value };
 }
+
+/** Ok response ClarityValue */
+export interface OkCV extends ClarityValue {
+  type: 'ok';
+  value: ClarityValue;
+}
