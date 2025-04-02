@@ -19,3 +19,7 @@ export class BlocksClient {
   async getBlockTransactions(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/extended/v1/block/getBlockTransactions`);
   }
+
+  async getBurnBlock(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/extended/v1/block/getBurnBlock`);
+  }
