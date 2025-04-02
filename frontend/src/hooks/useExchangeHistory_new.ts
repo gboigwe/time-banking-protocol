@@ -5,3 +5,4 @@ import { useState, useCallback, useEffect } from 'react';
 export interface useExchangeHistoryState {
   exchanges: unknown;
   page: unknown;
+  isLoading: unknown;
