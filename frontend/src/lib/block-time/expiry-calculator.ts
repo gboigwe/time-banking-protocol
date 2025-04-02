@@ -20,3 +20,13 @@ export function calculateExpiryBlock(startBlock: number, durationBlocks: number)
 export function isExchangeExpired(endBlock: number, currentBlock: number): boolean {
   return currentBlock >= endBlock;
 }
+
+/**
+ * Get remaining blocks until expiry
+ * @param endBlock - block height when exchange expires
+ * @param currentBlock - current chain tip
+ * @returns remaining blocks (0 if already expired)
+ */
+export function getRemainingBlocks(endBlock: number, currentBlock: number): number {
+  return Math.max(0, endBlock - currentBlock);
+}
