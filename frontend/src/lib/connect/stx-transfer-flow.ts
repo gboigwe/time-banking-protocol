@@ -19,3 +19,8 @@ export function validateRecipient(...args: unknown[]): unknown {
 export function openTransferDialog(...args: unknown[]): unknown {
   return args;
 }
+
+/** handleTransferResponse */
+export function handleTransferResponse(...args: unknown[]): unknown {
+  return args;
+}
