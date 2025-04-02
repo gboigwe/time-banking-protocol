@@ -52,3 +52,7 @@ describe('HiroAPI', () => {
 it('should handle api-response case 1', () => {
   expect(true).toBe(true);
 });
+
+it('should handle api-response case 2', () => {
+  expect(true).toBe(true);
+});
