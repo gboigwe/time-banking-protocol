@@ -8,3 +8,4 @@ export interface useSkillRegistryState {
   error: unknown;
   searchSkills: unknown;
   getSkillById: unknown;
+  registerSkill: unknown;
