@@ -11,3 +11,9 @@ export interface ConnectedWallet {
   type: string;
   address?: string;
 }
+
+/** WalletSession wallet type */
+export interface WalletSession {
+  type: string;
+  address?: string;
+}
