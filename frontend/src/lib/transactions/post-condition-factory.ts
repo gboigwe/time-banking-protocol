@@ -14,3 +14,12 @@ export enum NonFungibleConditionCode {
   Sends = 0x10,
   DoesNotSend = 0x11,
 }
+
+/** STX post-condition builder */
+export function makeSTXPostCondition(
+  address: string,
+  code: FungibleConditionCode,
+  amount: bigint
+): Record<string, unknown> {
+  return { type: 'stx', address, code, amount: amount.toString() };
+}
