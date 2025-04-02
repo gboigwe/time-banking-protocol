@@ -271,3 +271,6 @@ export const TIME_FORMAT_78 = 1482;
 
 /** TIME_FORMAT_79 */
 export const TIME_FORMAT_79 = 1501;
+
+/** TIME_FORMAT_80 */
+export const TIME_FORMAT_80 = 1520;
