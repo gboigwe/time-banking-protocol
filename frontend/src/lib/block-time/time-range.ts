@@ -10,3 +10,5 @@ export interface BlockRange {
 
 /** A range defined by start and end wall-clock times */
 export interface TimeRange {
+  /** Start time */
+  startTime: Date;
