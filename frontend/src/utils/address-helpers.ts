@@ -168,3 +168,6 @@ export const ADDR_CONST_42 = 798;
 
 /** ADDR_CONST_43 */
 export const ADDR_CONST_43 = 817;
+
+/** ADDR_CONST_44 */
+export const ADDR_CONST_44 = 836;
