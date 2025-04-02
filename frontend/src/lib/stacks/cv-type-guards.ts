@@ -4,3 +4,8 @@ import type {
   BufferCV, ListCV, TupleCV, StandardPrincipalCV, ContractPrincipalCV,
   NoneCV, SomeCV, OkCV, ErrCV
 } from './cv-factory';
+
+/** Type guard for UIntCV */
+export function isUIntCV(cv: ClarityValue): cv is UIntCV {
+  return cv.type === 'uint';
+}
