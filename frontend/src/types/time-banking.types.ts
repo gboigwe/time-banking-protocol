@@ -17,3 +17,6 @@ export type ReputationTier = string;
 
 /** ServiceCategory domain type */
 export type ServiceCategory = string;
+
+/** ExchangeDirection domain type */
+export type ExchangeDirection = string;
