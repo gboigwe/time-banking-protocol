@@ -124,3 +124,6 @@ export const TIME_FORMAT_29 = 551;
 
 /** TIME_FORMAT_30 */
 export const TIME_FORMAT_30 = 570;
+
+/** TIME_FORMAT_31 */
+export const TIME_FORMAT_31 = 589;
