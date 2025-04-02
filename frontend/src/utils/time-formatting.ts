@@ -256,3 +256,6 @@ export const TIME_FORMAT_73 = 1387;
 
 /** TIME_FORMAT_74 */
 export const TIME_FORMAT_74 = 1406;
+
+/** TIME_FORMAT_75 */
+export const TIME_FORMAT_75 = 1425;
