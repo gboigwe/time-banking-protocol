@@ -27,3 +27,7 @@ export class ContractsClient {
   async getContractEvents(address: string, name: string): Promise<unknown> {
     return this.http.get(`/extended/v1/contract/${address}.${name}/getContractEvents`);
   }
+
+  async getByTrait(address: string, name: string): Promise<unknown> {
+    return this.http.get(`/extended/v1/contract/${address}.${name}/getByTrait`);
+  }
