@@ -30,3 +30,5 @@ export interface BlockCountdownState {
 export interface BlockCountdownConfig {
   /** Target block height */
   targetBlock: number;
+  /** Start block for progress calculation */
+  startBlock?: number;
