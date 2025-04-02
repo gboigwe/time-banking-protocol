@@ -23,3 +23,7 @@ export class ContractsClient {
   async callReadOnly(address: string, name: string): Promise<unknown> {
     return this.http.get(`/extended/v1/contract/${address}.${name}/callReadOnly`);
   }
+
+  async getContractEvents(address: string, name: string): Promise<unknown> {
+    return this.http.get(`/extended/v1/contract/${address}.${name}/getContractEvents`);
+  }
