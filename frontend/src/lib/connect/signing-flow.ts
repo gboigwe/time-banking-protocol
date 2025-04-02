@@ -26,3 +26,8 @@ export function signStructuredData(...args: unknown[]): unknown {
 export function verifySignature(...args: unknown[]): unknown {
   return args;
 }
+
+/** buildSIP018Payload */
+export function buildSIP018Payload(...args: unknown[]): unknown {
+  return args;
+}
