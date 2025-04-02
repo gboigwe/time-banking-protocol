@@ -17,3 +17,6 @@ export interface SkillCategory {
   /** Whether this category is active */
   isActive: boolean;
 }
+
+/** SkillMetadata tuple from skill-registry contract */
+export interface SkillMetadata {
