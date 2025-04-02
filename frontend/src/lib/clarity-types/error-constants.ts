@@ -7,3 +7,5 @@ export interface ContractErrorCode {
   contract: string;
   description: string;
 }
+
+// ---- time-bank-core errors ----
