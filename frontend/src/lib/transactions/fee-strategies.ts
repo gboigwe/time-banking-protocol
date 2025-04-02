@@ -33,3 +33,6 @@ export function estimateFee(strategy: FeeStrategy): bigint {
 
 /** FEE_TIER_1 */
 export const FEE_TIER_1 = 13;
+
+/** FEE_TIER_2 */
+export const FEE_TIER_2 = 26;
