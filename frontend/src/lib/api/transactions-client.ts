@@ -28,3 +28,7 @@ export class TransactionsClient {
   async estimateFees(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/tx/estimateFees`, { headers: {} });
   }
+
+  async getTxEvents(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/tx/getTxEvents`, { headers: {} });
+  }
