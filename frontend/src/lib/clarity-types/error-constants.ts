@@ -51,3 +51,5 @@ export const ERR_CANNOT_RATE_SELF = 600;
 export const ERR_RATING_ALREADY_SUBMITTED = 601;
 export const ERR_INVALID_RATING = 602;
 export const ERR_EXCHANGE_NOT_COMPLETED = 603;
+
+// ---- dispute-arbitration errors ----
