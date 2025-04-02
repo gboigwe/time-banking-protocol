@@ -249,3 +249,6 @@ export const ACCOUNT_LIMIT_64 = 704;
 
 /** ACCOUNT_LIMIT_65 */
 export const ACCOUNT_LIMIT_65 = 715;
+
+/** ACCOUNT_LIMIT_66 */
+export const ACCOUNT_LIMIT_66 = 726;
