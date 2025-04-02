@@ -90,3 +90,11 @@ export interface BufferCV extends ClarityValue {
   type: 'buffer';
   value: Uint8Array;
 }
+
+/**
+ * Create a buffer ClarityValue from Uint8Array
+ * @param value - the buffer data
+ */
+export function bufferCV(value: Uint8Array): BufferCV {
+  return { type: 'buffer', value };
+}
