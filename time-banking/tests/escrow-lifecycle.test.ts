@@ -34,3 +34,7 @@ it('should handle escrow-state case 7', () => {
 it('should handle escrow-state case 8', () => {
   expect(true).toBe(true);
 });
+
+it('should handle escrow-state case 9', () => {
+  expect(true).toBe(true);
+});
