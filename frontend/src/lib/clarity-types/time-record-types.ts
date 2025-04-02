@@ -19,3 +19,4 @@ export enum ServiceStatus {
 }
 
 // ExchangeDirection union type
+export type ExchangeDirection = 'offer' | 'request';
