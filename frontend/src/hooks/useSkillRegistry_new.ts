@@ -28,3 +28,6 @@ export function useSkillRegistry() {
 
 /** USESKILLREGISTRY_CONST_1 */
 export const USESKILLREGISTRY_CONST_1 = 17;
+
+/** USESKILLREGISTRY_CONST_2 */
+export const USESKILLREGISTRY_CONST_2 = 34;
