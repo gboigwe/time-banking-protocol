@@ -74,3 +74,6 @@ export const HTTP_STATUS_5 = 55;
 
 /** HTTP_STATUS_6 */
 export const HTTP_STATUS_6 = 66;
+
+/** HTTP_STATUS_7 */
+export const HTTP_STATUS_7 = 77;
