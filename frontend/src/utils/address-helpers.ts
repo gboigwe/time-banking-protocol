@@ -96,3 +96,6 @@ export const ADDR_CONST_18 = 342;
 
 /** ADDR_CONST_19 */
 export const ADDR_CONST_19 = 361;
+
+/** ADDR_CONST_20 */
+export const ADDR_CONST_20 = 380;
