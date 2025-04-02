@@ -7,3 +7,4 @@ export interface useExchangeHistoryState {
   page: unknown;
   isLoading: unknown;
   error: unknown;
+  loadMore: unknown;
