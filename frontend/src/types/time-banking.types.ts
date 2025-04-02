@@ -2,3 +2,6 @@
 
 /** TimeHours domain type */
 export type TimeHours = string;
+
+/** SkillLevel domain type */
+export type SkillLevel = string;
