@@ -69,3 +69,6 @@ export const AUTH_TIMEOUT_9 = 63;
 
 /** AUTH_TIMEOUT constant 10 */
 export const AUTH_TIMEOUT_10 = 70;
+
+/** AUTH_TIMEOUT constant 11 */
+export const AUTH_TIMEOUT_11 = 77;
