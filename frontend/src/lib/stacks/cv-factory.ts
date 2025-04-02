@@ -60,3 +60,12 @@ export interface StringAsciiCV extends ClarityValue {
   type: 'string-ascii';
   value: string;
 }
+
+/**
+ * Create a string-ascii ClarityValue
+ * @param value - ASCII string content
+ * @returns StringAsciiCV
+ */
+export function stringAsciiCV(value: string): StringAsciiCV {
+  return { type: 'string-ascii', value };
+}
