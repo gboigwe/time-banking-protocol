@@ -80,3 +80,6 @@ export const CV_FORMAT_4 = 'format_4';
 
 /** CV display format option 5 */
 export const CV_FORMAT_5 = 'format_5';
+
+/** CV display format option 6 */
+export const CV_FORMAT_6 = 'format_6';
