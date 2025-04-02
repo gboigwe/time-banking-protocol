@@ -112,3 +112,6 @@ export const CACHE_NS_17 = 'bt_cache_17';
 
 /** Cache key prefix variant 18 for namespace isolation */
 export const CACHE_NS_18 = 'bt_cache_18';
+
+/** Cache key prefix variant 19 for namespace isolation */
+export const CACHE_NS_19 = 'bt_cache_19';
