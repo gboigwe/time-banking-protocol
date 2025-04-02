@@ -71,3 +71,21 @@ export function validateFutureBlock(
   }
   return null;
 }
+
+/**
+ * Validate that a block height is not too far in the future
+ * @param blockHeight - target block
+ * @param currentBlock - current tip
+ * @param maxBlocksAhead - maximum blocks ahead allowed
+ * @returns error string or null
+ */
+export function validateNotTooFarFuture(
+  blockHeight: number,
+  currentBlock: number,
+  maxBlocksAhead = 52560 // ~1 year
+): string | null {
+  if (blockHeight > currentBlock + maxBlocksAhead) {
+    return `Block height is too far in the future (max ${maxBlocksAhead} blocks ahead)`;
+  }
+  return null;
+}
