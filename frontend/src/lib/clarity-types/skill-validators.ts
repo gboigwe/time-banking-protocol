@@ -10,3 +10,11 @@ export const MAX_SKILL_DESCRIPTION_LENGTH = 256;
 
 /** Maximum number of tags per skill */
 export const MAX_SKILL_TAGS = 10;
+
+/** Validate that a skill level is valid */
+export function validateSkillLevel(level: number): string | null {
+  if (!SKILL_LEVELS.includes(level as SkillLevel)) {
+    return `Skill level must be one of: ${SKILL_LEVELS.join(', ')}`;
+  }
+  return null;
+}
