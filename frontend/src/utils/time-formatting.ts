@@ -91,3 +91,6 @@ export const TIME_FORMAT_18 = 342;
 
 /** TIME_FORMAT_19 */
 export const TIME_FORMAT_19 = 361;
+
+/** TIME_FORMAT_20 */
+export const TIME_FORMAT_20 = 380;
