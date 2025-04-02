@@ -49,3 +49,8 @@ export function trueCV(): BoolCV {
 export function falseCV(): BoolCV {
   return { type: 'false' };
 }
+
+/** Create a bool ClarityValue from a JS boolean */
+export function boolCV(value: boolean): BoolCV {
+  return value ? trueCV() : falseCV();
+}
