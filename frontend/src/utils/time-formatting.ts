@@ -178,3 +178,6 @@ export const TIME_FORMAT_47 = 893;
 
 /** TIME_FORMAT_48 */
 export const TIME_FORMAT_48 = 912;
+
+/** TIME_FORMAT_49 */
+export const TIME_FORMAT_49 = 931;
