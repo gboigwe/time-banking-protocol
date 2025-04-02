@@ -67,3 +67,13 @@ export function blockRangeSize(range: BlockRange): number {
 export function isInTimeRange(date: Date, range: TimeRange): boolean {
   return date >= range.startTime && date < range.endTime;
 }
+
+/**
+ * Create a BlockRange from start block and duration
+ * @param startBlock - starting block height
+ * @param durationBlocks - duration in blocks
+ * @returns BlockRange
+ */
+export function createBlockRange(startBlock: number, durationBlocks: number): BlockRange {
+  return { startBlock, endBlock: startBlock + durationBlocks };
+}
