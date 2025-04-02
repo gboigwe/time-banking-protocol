@@ -146,3 +146,6 @@ export const CALL_TIMEOUT_34 = 238;
 
 /** CALL_TIMEOUT constant 35 */
 export const CALL_TIMEOUT_35 = 245;
+
+/** CALL_TIMEOUT constant 36 */
+export const CALL_TIMEOUT_36 = 252;
