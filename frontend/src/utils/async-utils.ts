@@ -84,3 +84,6 @@ export function createCancelToken(): CancelToken {
   };
   return token;
 }
+
+/** ASYNC_CONST_1 */
+export const ASYNC_CONST_1 = 19;
