@@ -47,3 +47,16 @@ export function getStatusLabel(status: ServiceStatus): string {
   };
   return labels[status] ?? 'Unknown';
 }
+
+/** Color coding for UI display */
+export function getStatusColor(status: ServiceStatus): string {
+  const colors: Record<ServiceStatus, string> = {
+    [ServiceStatus.Pending]: 'yellow',
+    [ServiceStatus.Active]: 'blue',
+    [ServiceStatus.Completed]: 'green',
+    [ServiceStatus.Cancelled]: 'gray',
+    [ServiceStatus.Disputed]: 'red',
+    [ServiceStatus.Expired]: 'orange',
+  };
+  return colors[status] ?? 'gray';
+}
