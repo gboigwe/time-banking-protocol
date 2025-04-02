@@ -41,3 +41,26 @@ export function clarityToSkillMetadata(tuple: Record<string, unknown>): SkillMet
     tags: Array.isArray(tuple['tags']) ? tuple['tags'].map(String) : [],
   };
 }
+
+/** Convert Clarity tuple to typed ParticipantProfile */
+export function clarityToParticipantProfile(tuple: Record<string, unknown>): ParticipantProfile {
+  const balance = (tuple['balance'] as Record<string, unknown>) ?? {};
+  return {
+    address: String(tuple['address'] ?? ''),
+    displayName: String(tuple['display-name'] ?? ''),
+    bio: String(tuple['bio'] ?? ''),
+    status: Number(tuple['status'] ?? 0) as 0 | 1 | 2 | 3,
+    balance: {
+      earned: Number(balance['earned'] ?? 0),
+      spent: Number(balance['spent'] ?? 0),
+      net: Number(balance['net'] ?? 0),
+      escrowed: Number(balance['escrowed'] ?? 0),
+    },
+    reputation: tuple['reputation'] != null ? Number(tuple['reputation']) : null,
+    registeredAt: Number(tuple['registered-at'] ?? 0),
+    completedExchanges: Number(tuple['completed-exchanges'] ?? 0),
+    offeredSkills: Array.isArray(tuple['offered-skills'])
+      ? tuple['offered-skills'].map(Number)
+      : [],
+  };
+}
