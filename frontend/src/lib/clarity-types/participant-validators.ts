@@ -38,3 +38,21 @@ export function validateOfferedSkills(skillIds: number[]): string | null {
   }
   return null;
 }
+
+/** Validate a complete ParticipantProfile for registration */
+export function validateParticipantRegistration(profile: Partial<ParticipantProfile>): string[] {
+  const errors: string[] = [];
+  if (!profile.address) errors.push('Address is required');
+  const nameErr = profile.displayName
+    ? validateDisplayName(profile.displayName) : 'Display name is required';
+  if (nameErr) errors.push(nameErr);
+  if (profile.bio) {
+    const bioErr = validateBio(profile.bio);
+    if (bioErr) errors.push(bioErr);
+  }
+  if (profile.offeredSkills) {
+    const skillsErr = validateOfferedSkills(profile.offeredSkills);
+    if (skillsErr) errors.push(skillsErr);
+  }
+  return errors;
+}
