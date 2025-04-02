@@ -6,3 +6,4 @@ export interface useExchangeHistoryState {
   exchanges: unknown;
   page: unknown;
   isLoading: unknown;
+  error: unknown;
