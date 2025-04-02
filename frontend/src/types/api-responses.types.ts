@@ -27,3 +27,10 @@ export interface ContractResponse {
   error?: string;
   status: number;
 }
+
+/** BlockResponse response from Hiro API */
+export interface BlockResponse {
+  result: unknown;
+  error?: string;
+  status: number;
+}
