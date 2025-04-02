@@ -3,3 +3,4 @@ export * from './time-record-types';
 export * from './skill-types';
 export * from './participant-types';
 export * from './governance-types';
+export * from './error-constants';
