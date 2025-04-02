@@ -48,3 +48,5 @@ interface StacksAuthContextType {
   state: StacksAuthState;
   dispatch: React.Dispatch<StacksAuthAction>;
 }
+
+const StacksAuthContext = createContext<StacksAuthContextType | null>(null);
