@@ -41,3 +41,6 @@ export function isCallPending(...args: unknown[]): unknown {
 export function isCallSuccess(...args: unknown[]): unknown {
   return args;
 }
+
+/** CALL_TIMEOUT constant 1 */
+export const CALL_TIMEOUT_1 = 7;
