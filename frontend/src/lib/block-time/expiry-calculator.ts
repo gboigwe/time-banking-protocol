@@ -80,3 +80,26 @@ export function getExpiryUrgency(remainingBlocks: number): 'critical' | 'warning
   if (remainingBlocks <= 144) return 'warning';  // < 1 day
   return 'normal';
 }
+
+/**
+ * Calculate multiple possible expiry options
+ * @param startBlock - start block
+ * @returns array of {label, durationBlocks, expiryBlock} options
+ */
+export function getExpiryOptions(startBlock: number): Array<{
+  label: string;
+  durationBlocks: number;
+  expiryBlock: number;
+}> {
+  const options = [
+    { label: '1 day', durationBlocks: 144 },
+    { label: '3 days', durationBlocks: 432 },
+    { label: '1 week', durationBlocks: 1008 },
+    { label: '2 weeks', durationBlocks: 2016 },
+    { label: '1 month', durationBlocks: 4320 },
+  ];
+  return options.map(opt => ({
+    ...opt,
+    expiryBlock: calculateExpiryBlock(startBlock, opt.durationBlocks),
+  }));
+}
