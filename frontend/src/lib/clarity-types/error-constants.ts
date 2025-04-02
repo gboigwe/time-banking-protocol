@@ -73,3 +73,5 @@ export const ERR_TX_ALREADY_EXECUTED = 903;
 export const ERR_POOL_INSUFFICIENT_FUNDS = 1000;
 export const ERR_CLAIM_NOT_FOUND = 1001;
 export const ERR_CLAIM_ALREADY_PROCESSED = 1002;
+
+// ---- analytics-tracker errors ----
