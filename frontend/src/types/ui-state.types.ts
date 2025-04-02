@@ -23,3 +23,9 @@ export interface FilterState {
   active: boolean;
   data?: unknown;
 }
+
+/** SortState UI type */
+export interface SortState {
+  active: boolean;
+  data?: unknown;
+}
