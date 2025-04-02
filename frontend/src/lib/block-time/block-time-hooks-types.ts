@@ -62,3 +62,6 @@ export const POLL_INTERVAL_8 = 40000;
 
 /** Poll interval option 9: 45000 ms */
 export const POLL_INTERVAL_9 = 45000;
+
+/** Poll interval option 10: 50000 ms */
+export const POLL_INTERVAL_10 = 50000;
