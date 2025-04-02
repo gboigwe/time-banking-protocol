@@ -3,3 +3,4 @@ import { useState, useCallback, useEffect } from 'react';
 
 /** State interface for useReputationScore */
 export interface useReputationScoreState {
+  score: unknown;
