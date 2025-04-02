@@ -11,3 +11,18 @@ export interface useExchangeHistoryState {
   refresh: unknown;
   totalCount: unknown;
 }
+
+/** useExchangeHistory hook implementation */
+export function useExchangeHistory() {
+  const [state, setState] = useState<Partial<useExchangeHistoryState>>({});
+  
+  const refresh = useCallback(async () => {
+    setState(prev => ({ ...prev }));
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { ...state, refresh };
+}
