@@ -17,3 +17,5 @@ export interface TimeBalance {
   earned: number;
   /** Hours spent on receiving services */
   spent: number;
+  /** Net balance: earned minus spent */
+  net: number;
