@@ -17,3 +17,9 @@ export function unwrapOk<T>(response: ClarityResponse<T>): T {
   }
   return response.value as T;
 }
+
+/** Extract value from ok response or return null */
+export function unwrapOkOrNull<T>(response: ClarityResponse<T>): T | null {
+  if (response.type === 'err') return null;
+  return response.value as T;
+}
