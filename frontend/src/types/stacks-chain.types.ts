@@ -14,3 +14,6 @@ export type TxId = string;
 
 /** ContractId on-chain type */
 export type ContractId = string;
+
+/** ClarityVersion on-chain type */
+export type ClarityVersion = string;
