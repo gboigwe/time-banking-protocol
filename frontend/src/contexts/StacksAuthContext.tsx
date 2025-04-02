@@ -50,3 +50,13 @@ interface StacksAuthContextType {
 }
 
 const StacksAuthContext = createContext<StacksAuthContextType | null>(null);
+
+/** Provider component */
+export function StacksAuthProvider({ children }: { children: ReactNode }) {
+  const [state, dispatch] = useReducer(stacksAuthReducer, initialState);
+  return (
+    <StacksAuthContext.Provider value={{ state, dispatch }}>
+      {children}
+    </StacksAuthContext.Provider>
+  );
+}
