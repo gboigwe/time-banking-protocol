@@ -37,3 +37,6 @@ export function formatDisputeStatus(value: unknown): string {
 
 /** TIME_FORMAT_1 */
 export const TIME_FORMAT_1 = 19;
+
+/** TIME_FORMAT_2 */
+export const TIME_FORMAT_2 = 38;
