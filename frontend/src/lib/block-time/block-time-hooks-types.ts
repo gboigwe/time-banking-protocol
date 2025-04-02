@@ -28,3 +28,5 @@ export interface BlockCountdownState {
 
 /** Config for useBlockCountdown hook */
 export interface BlockCountdownConfig {
+  /** Target block height */
+  targetBlock: number;
