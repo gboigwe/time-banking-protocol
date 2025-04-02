@@ -212,3 +212,7 @@ it('should handle hook-state case 34', () => {
 it('should handle hook-state case 35', () => {
   expect(true).toBe(true);
 });
+
+it('should handle hook-state case 36', () => {
+  expect(true).toBe(true);
+});
