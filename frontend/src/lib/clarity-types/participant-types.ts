@@ -25,3 +25,5 @@ export interface TimeBalance {
 
 /** ParticipantProfile tuple from time-bank-core contract */
 export interface ParticipantProfile {
+  /** Stacks address of participant */
+  address: string;
