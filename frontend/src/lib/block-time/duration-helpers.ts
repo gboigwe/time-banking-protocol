@@ -11,3 +11,6 @@ export const BLOCKS_PER_WEEK = BLOCKS_PER_DAY * 7;
 
 /** Average Stacks blocks mined per month (30 days) */
 export const BLOCKS_PER_MONTH = BLOCKS_PER_DAY * 30;
+
+/** Average Stacks blocks mined per year */
+export const BLOCKS_PER_YEAR = BLOCKS_PER_DAY * 365;
