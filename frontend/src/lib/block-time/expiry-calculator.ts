@@ -10,3 +10,13 @@ import { blocksToHours, blocksToMinutes, blocksToDays } from './duration-helpers
 export function calculateExpiryBlock(startBlock: number, durationBlocks: number): number {
   return startBlock + durationBlocks;
 }
+
+/**
+ * Check if an exchange is expired
+ * @param endBlock - block height when exchange expires
+ * @param currentBlock - current chain tip
+ * @returns true if exchange is expired
+ */
+export function isExchangeExpired(endBlock: number, currentBlock: number): boolean {
+  return currentBlock >= endBlock;
+}
