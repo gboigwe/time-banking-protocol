@@ -35,3 +35,5 @@ export interface ParticipantProfile {
   status: ParticipantStatus;
   /** Time balance */
   balance: TimeBalance;
+  /** Reputation score (null if not yet rated) */
+  reputation: ReputationScore;
