@@ -7,3 +7,4 @@ export interface useReputationScoreState {
   tier: unknown;
   badges: unknown;
   history: unknown;
+  isLoading: unknown;
