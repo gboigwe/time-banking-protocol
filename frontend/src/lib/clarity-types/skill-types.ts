@@ -58,3 +58,6 @@ export function isSkillMetadata(value: unknown): value is SkillMetadata {
     'categoryId' in value
   );
 }
+
+/** Default SkillLevel value */
+export const DEFAULT_SKILL_LEVEL: SkillLevel = 1;
