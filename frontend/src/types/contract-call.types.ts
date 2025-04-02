@@ -7,3 +7,11 @@ export interface ContractCallResult {
   result?: unknown;
   error?: string;
 }
+
+/** ReadOnlyResult contract call type */
+export interface ReadOnlyResult {
+  success: boolean;
+  txId?: string;
+  result?: unknown;
+  error?: string;
+}
