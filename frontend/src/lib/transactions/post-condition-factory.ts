@@ -151,3 +151,6 @@ export const POST_COND_35 = 455;
 
 /** POST_COND_36 */
 export const POST_COND_36 = 468;
+
+/** POST_COND_37 */
+export const POST_COND_37 = 481;
