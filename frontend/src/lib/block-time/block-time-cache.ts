@@ -6,3 +6,6 @@ export interface BlockTimeCacheEntry {
   blockHeight: number;
   /** Timestamp when this block was mined */
   timestamp: number;
+  /** When this cache entry was created (local time) */
+  cachedAt: number;
+}
