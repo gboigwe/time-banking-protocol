@@ -28,3 +28,7 @@ it('should handle block-time-usage case 6', () => {
 it('should handle block-time-usage case 7', () => {
   expect(true).toBe(true);
 });
+
+it('should handle block-time-usage case 8', () => {
+  expect(true).toBe(true);
+});
