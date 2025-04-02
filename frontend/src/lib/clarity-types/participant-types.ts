@@ -60,3 +60,8 @@ export function isParticipantProfile(value: unknown): value is ParticipantProfil
 export function computeNetBalance(balance: TimeBalance): number {
   return balance.earned - balance.spent - balance.escrowed;
 }
+
+/** Check if a participant is active */
+export function isActiveParticipant(profile: ParticipantProfile): boolean {
+  return profile.status === ParticipantStatus.Active;
+}
