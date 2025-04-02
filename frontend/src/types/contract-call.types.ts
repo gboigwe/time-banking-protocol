@@ -23,3 +23,11 @@ export interface WriteResult {
   result?: unknown;
   error?: string;
 }
+
+/** TxStatus contract call type */
+export interface TxStatus {
+  success: boolean;
+  txId?: string;
+  result?: unknown;
+  error?: string;
+}
