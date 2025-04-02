@@ -43,3 +43,19 @@ export function validateSkillTags(tags: string[]): string | null {
   }
   return null;
 }
+
+/** Validate a complete SkillMetadata object */
+export function validateSkillMetadata(skill: Partial<SkillMetadata>): string[] {
+  const errors: string[] = [];
+  const nameErr = skill.name ? validateSkillName(skill.name) : 'Name is required';
+  if (nameErr) errors.push(nameErr);
+  if (skill.minLevel && skill.maxLevel) {
+    const rangeErr = validateSkillLevelRange(skill.minLevel, skill.maxLevel);
+    if (rangeErr) errors.push(rangeErr);
+  }
+  if (skill.tags) {
+    const tagsErr = validateSkillTags(skill.tags);
+    if (tagsErr) errors.push(tagsErr);
+  }
+  return errors;
+}
