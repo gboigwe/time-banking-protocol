@@ -15,3 +15,5 @@ export interface VotingPeriod {
 export interface CouncilMember {
   /** Member address */
   address: string;
+  /** Voting power weight */
+  weight: number;
