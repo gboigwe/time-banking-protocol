@@ -22,3 +22,6 @@ export interface BlockCountdownState {
   isExpired: boolean;
   /** Progress percentage (0-100) */
   progressPercent: number;
+  /** Urgency level based on remaining time */
+  urgency: 'critical' | 'warning' | 'normal';
+}
