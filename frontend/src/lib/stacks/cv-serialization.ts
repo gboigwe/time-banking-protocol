@@ -39,3 +39,12 @@ export function hexToCV(hex: string): ClarityValue {
   const json = Buffer.from(hex, 'hex').toString('utf8');
   return JSON.parse(json) as ClarityValue;
 }
+
+/**
+ * Convert ClarityValue to JSON string
+ * @param cv - ClarityValue
+ * @returns JSON string
+ */
+export function cvToJSON(cv: ClarityValue): string {
+  return JSON.stringify(serializeCV(cv));
+}
