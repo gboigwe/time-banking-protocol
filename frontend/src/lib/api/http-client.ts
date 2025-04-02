@@ -227,3 +227,6 @@ export const HTTP_STATUS_56 = 616;
 
 /** HTTP_STATUS_57 */
 export const HTTP_STATUS_57 = 627;
+
+/** HTTP_STATUS_58 */
+export const HTTP_STATUS_58 = 638;
