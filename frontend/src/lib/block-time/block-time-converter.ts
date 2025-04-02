@@ -50,3 +50,23 @@ export function dateToBlockHeight(
 export function blockHeightToISO(blockHeight: number, currentBlockHeight: number): string {
   return blockHeightToDate(blockHeight, currentBlockHeight).toISOString();
 }
+
+/**
+ * Format block height as a human-readable age string
+ * @param blockHeight - block height to describe
+ * @param currentBlockHeight - current chain tip
+ * @returns string like "2 days ago" or "in 3 hours"
+ */
+export function getBlockHeightAge(blockHeight: number, currentBlockHeight: number): string {
+  const blockDiff = currentBlockHeight - blockHeight;
+  if (blockDiff === 0) return 'just now';
+  const absDiff = Math.abs(blockDiff);
+  const minutes = Math.round((absDiff * BLOCK_TIME_SECONDS) / 60);
+  const prefix = blockDiff > 0 ? '' : 'in ';
+  const suffix = blockDiff > 0 ? ' ago' : '';
+  if (minutes < 60) return `${prefix}${minutes} minute${minutes !== 1 ? 's' : ''}${suffix}`;
+  const hours = Math.round(minutes / 60);
+  if (hours < 24) return `${prefix}${hours} hour${hours !== 1 ? 's' : ''}${suffix}`;
+  const days = Math.round(hours / 24);
+  return `${prefix}${days} day${days !== 1 ? 's' : ''}${suffix}`;
+}
