@@ -22,3 +22,4 @@ export enum ServiceStatus {
 export type ExchangeDirection = 'offer' | 'request';
 
 // TimeRecord tuple shape representing Clarity tuple from exchange-manager
+export interface TimeRecord {
