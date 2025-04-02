@@ -113,3 +113,6 @@ export const HTTP_STATUS_18 = 198;
 
 /** HTTP_STATUS_19 */
 export const HTTP_STATUS_19 = 209;
+
+/** HTTP_STATUS_20 */
+export const HTTP_STATUS_20 = 220;
