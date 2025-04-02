@@ -4,3 +4,4 @@ import { useState, useCallback, useEffect } from 'react';
 /** State interface for useSkillRegistry */
 export interface useSkillRegistryState {
   skills: unknown;
+  isLoading: unknown;
