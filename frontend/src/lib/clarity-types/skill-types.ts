@@ -42,3 +42,5 @@ export interface VerifiedSkill {
   skill: SkillMetadata;
   /** Certification status */
   certification: CertificationStatus;
+  /** Address that certified this skill */
+  certifiedBy?: string;
