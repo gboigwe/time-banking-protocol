@@ -17,3 +17,5 @@ export interface CouncilMember {
   address: string;
   /** Voting power weight */
   weight: number;
+  /** Block when membership starts */
+  startBlock: number;
