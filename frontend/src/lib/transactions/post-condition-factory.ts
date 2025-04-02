@@ -163,3 +163,6 @@ export const POST_COND_39 = 507;
 
 /** POST_COND_40 */
 export const POST_COND_40 = 520;
+
+/** POST_COND_41 */
+export const POST_COND_41 = 533;
