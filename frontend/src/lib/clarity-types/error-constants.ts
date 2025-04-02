@@ -84,3 +84,4 @@ export const ERR_REWARD_NOT_AVAILABLE = 1201;
 export const ERR_REWARD_POOL_EMPTY = 1202;
 
 // ---- skill-certification-nft errors ----
+export const ERR_NFT_NOT_FOUND = 1300;
