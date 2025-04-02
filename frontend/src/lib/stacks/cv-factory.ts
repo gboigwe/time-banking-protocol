@@ -25,3 +25,12 @@ export interface IntCV extends ClarityValue {
   type: 'int';
   value: bigint;
 }
+
+/**
+ * Create an int ClarityValue
+ * @param value - the int value
+ * @returns IntCV
+ */
+export function intCV(value: number | bigint): IntCV {
+  return { type: 'int', value: BigInt(value) };
+}
