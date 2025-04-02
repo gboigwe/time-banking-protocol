@@ -13,3 +13,5 @@ export interface VotingPeriod {
 
 /** CouncilMember from governance contract */
 export interface CouncilMember {
+  /** Member address */
+  address: string;
