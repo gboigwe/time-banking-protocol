@@ -136,3 +136,11 @@ export interface OkCV extends ClarityValue {
   type: 'ok';
   value: ClarityValue;
 }
+
+/**
+ * Create an ok response ClarityValue
+ * @param value - the success value
+ */
+export function okCV(value: ClarityValue): OkCV {
+  return { type: 'ok', value };
+}
