@@ -69,3 +69,9 @@ export interface StringAsciiCV extends ClarityValue {
 export function stringAsciiCV(value: string): StringAsciiCV {
   return { type: 'string-ascii', value };
 }
+
+/** StringUtf8 ClarityValue */
+export interface StringUtf8CV extends ClarityValue {
+  type: 'string-utf8';
+  value: string;
+}
