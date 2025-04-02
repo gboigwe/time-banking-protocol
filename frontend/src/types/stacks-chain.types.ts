@@ -17,3 +17,6 @@ export type ContractId = string;
 
 /** ClarityVersion on-chain type */
 export type ClarityVersion = string;
+
+/** EpochVersion on-chain type */
+export type EpochVersion = string;
