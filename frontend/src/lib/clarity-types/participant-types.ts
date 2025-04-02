@@ -31,3 +31,5 @@ export interface ParticipantProfile {
   displayName: string;
   /** Bio description */
   bio: string;
+  /** Current status */
+  status: ParticipantStatus;
