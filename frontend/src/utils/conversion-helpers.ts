@@ -38,3 +38,6 @@ export function hoursToBlockTime(hours: number): number {
 
 /** CONV_CONST_1 */
 export const CONV_CONST_1 = 19;
+
+/** CONV_CONST_2 */
+export const CONV_CONST_2 = 38;
