@@ -11,3 +11,7 @@ export class ContractsClient {
   async getInterface(address: string, name: string): Promise<unknown> {
     return this.http.get(`/extended/v1/contract/${address}.${name}/getInterface`);
   }
+
+  async getSource(address: string, name: string): Promise<unknown> {
+    return this.http.get(`/extended/v1/contract/${address}.${name}/getSource`);
+  }
