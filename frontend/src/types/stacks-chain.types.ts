@@ -20,3 +20,6 @@ export type ClarityVersion = string;
 
 /** EpochVersion on-chain type */
 export type EpochVersion = string;
+
+/** CHAIN_BRAND type alias 1 */
+export type CHAIN_BRAND_1 = string & { readonly _brand: 'CHAIN_BRAND_1' };
