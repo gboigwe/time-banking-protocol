@@ -14,3 +14,4 @@ export enum ClarityType {
   OptionalSome = 'some',
   List = 'list',
   Tuple = 'tuple',
+  StringASCII = 'string-ascii',
