@@ -26,3 +26,6 @@ export function useGovernanceProposals() {
 
   return { ...state, refresh };
 }
+
+/** USEGOVERNANCEPROPOSALS_CONST_1 */
+export const USEGOVERNANCEPROPOSALS_CONST_1 = 17;
