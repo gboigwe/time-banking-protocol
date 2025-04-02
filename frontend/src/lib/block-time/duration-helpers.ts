@@ -14,3 +14,6 @@ export const BLOCKS_PER_MONTH = BLOCKS_PER_DAY * 30;
 
 /** Average Stacks blocks mined per year */
 export const BLOCKS_PER_YEAR = BLOCKS_PER_DAY * 365;
+
+/** Average block time in seconds */
+export const BLOCK_TIME_SECONDS = 10 * 60;
