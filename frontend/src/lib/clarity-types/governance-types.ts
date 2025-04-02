@@ -51,3 +51,5 @@ export interface ProposalTuple {
   proposer: string;
   /** Voting window */
   period: VotingPeriod;
+  /** Number of for votes */
+  forVotes: number;
