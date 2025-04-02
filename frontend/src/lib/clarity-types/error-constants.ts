@@ -22,3 +22,4 @@ export const ERR_EXCHANGE_NOT_FOUND = 200;
 export const ERR_EXCHANGE_NOT_PENDING = 201;
 export const ERR_EXCHANGE_EXPIRED = 202;
 export const ERR_EXCHANGE_NOT_ACTIVE = 203;
+export const ERR_SELF_EXCHANGE = 204;
