@@ -27,3 +27,11 @@ export function validateProposalTitle(title: string): string | null {
   }
   return null;
 }
+
+/** Validate quorum threshold is in valid range */
+export function validateQuorumThreshold(quorum: number): string | null {
+  if (quorum < MIN_QUORUM_THRESHOLD || quorum > MAX_QUORUM_THRESHOLD) {
+    return `Quorum must be between ${MIN_QUORUM_THRESHOLD} and ${MAX_QUORUM_THRESHOLD}`;
+  }
+  return null;
+}
