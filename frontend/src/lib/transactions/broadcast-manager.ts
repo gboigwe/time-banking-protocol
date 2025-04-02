@@ -29,3 +29,8 @@ export class BroadcastManager {
     this.successCallbacks.push(cb);
     return this;
   }
+
+  onFailure(cb: (error: BroadcastError) => void): this {
+    this.failureCallbacks.push(cb);
+    return this;
+  }
