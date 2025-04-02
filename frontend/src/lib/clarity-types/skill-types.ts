@@ -20,3 +20,5 @@ export interface SkillCategory {
 
 /** SkillMetadata tuple from skill-registry contract */
 export interface SkillMetadata {
+  /** Skill identifier */
+  skillId: number;
