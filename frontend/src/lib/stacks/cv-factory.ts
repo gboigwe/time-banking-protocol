@@ -98,3 +98,11 @@ export interface BufferCV extends ClarityValue {
 export function bufferCV(value: Uint8Array): BufferCV {
   return { type: 'buffer', value };
 }
+
+/**
+ * Create a buffer ClarityValue from a string
+ * @param value - string to encode as UTF-8 buffer
+ */
+export function bufferCVFromString(value: string): BufferCV {
+  return bufferCV(new TextEncoder().encode(value));
+}
