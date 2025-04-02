@@ -30,3 +30,15 @@ export async function withTimeout<T>(
   );
   return Promise.race([promise, timeoutPromise]);
 }
+
+/** Debounce a function call */
+export function debounce<T extends (...args: unknown[]) => unknown>(
+  fn: T,
+  waitMs: number
+): (...args: Parameters<T>) => void {
+  let timer: ReturnType<typeof setTimeout>;
+  return (...args: Parameters<T>) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), waitMs);
+  };
+}
