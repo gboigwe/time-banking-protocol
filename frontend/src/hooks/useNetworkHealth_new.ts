@@ -29,3 +29,6 @@ export function useNetworkHealth() {
 
 /** USENETWORKHEALTH_CONST_1 */
 export const USENETWORKHEALTH_CONST_1 = 17;
+
+/** USENETWORKHEALTH_CONST_2 */
+export const USENETWORKHEALTH_CONST_2 = 34;
