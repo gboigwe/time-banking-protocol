@@ -95,3 +95,6 @@ export type CHAIN_BRAND_24 = string & { readonly _brand: 'CHAIN_BRAND_24' };
 
 /** CHAIN_BRAND type alias 25 */
 export type CHAIN_BRAND_25 = string & { readonly _brand: 'CHAIN_BRAND_25' };
+
+/** CHAIN_BRAND type alias 26 */
+export type CHAIN_BRAND_26 = string & { readonly _brand: 'CHAIN_BRAND_26' };
