@@ -35,3 +35,16 @@ export function isInBlockRange(block: number, range: BlockRange): boolean {
 export function blockRangesOverlap(a: BlockRange, b: BlockRange): boolean {
   return a.startBlock < b.endBlock && b.startBlock < a.endBlock;
 }
+
+/**
+ * Merge two overlapping BlockRanges
+ * @param a - first range
+ * @param b - second range
+ * @returns merged range spanning both
+ */
+export function mergeBlockRanges(a: BlockRange, b: BlockRange): BlockRange {
+  return {
+    startBlock: Math.min(a.startBlock, b.startBlock),
+    endBlock: Math.max(a.endBlock, b.endBlock),
+  };
+}
