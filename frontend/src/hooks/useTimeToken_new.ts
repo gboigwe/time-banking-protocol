@@ -25,3 +25,6 @@ export function useTimeToken() {
 
   return { ...state, refresh };
 }
+
+/** USETIMETOKEN_CONST_1 */
+export const USETIMETOKEN_CONST_1 = 17;
