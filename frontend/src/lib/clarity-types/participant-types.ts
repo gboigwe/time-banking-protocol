@@ -41,3 +41,6 @@ export interface ParticipantProfile {
   registeredAt: number;
   /** Total completed exchanges */
   completedExchanges: number;
+  /** List of skill IDs this participant offers */
+  offeredSkills: number[];
+}
