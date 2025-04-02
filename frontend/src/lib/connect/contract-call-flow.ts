@@ -104,3 +104,6 @@ export const CALL_TIMEOUT_20 = 140;
 
 /** CALL_TIMEOUT constant 21 */
 export const CALL_TIMEOUT_21 = 147;
+
+/** CALL_TIMEOUT constant 22 */
+export const CALL_TIMEOUT_22 = 154;
