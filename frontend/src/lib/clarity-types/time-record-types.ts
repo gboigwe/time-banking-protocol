@@ -57,3 +57,14 @@ export interface SkillExchangeResponse {
   /** Error code if failed */
   error?: number;
 }
+
+/** Type guard for TimeRecord */
+export function isTimeRecord(value: unknown): value is TimeRecord {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'exchangeId' in value &&
+    'provider' in value &&
+    'requester' in value
+  );
+}
