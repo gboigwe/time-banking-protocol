@@ -14,3 +14,8 @@ export class MinFeeStrategy implements FeeStrategy {
 export class AverageFeeStrategy implements FeeStrategy {
   estimateFee(): bigint { return 500n; }
 }
+
+/** High priority fee strategy */
+export class HighPriorityFeeStrategy implements FeeStrategy {
+  estimateFee(): bigint { return 1500n; }
+}
