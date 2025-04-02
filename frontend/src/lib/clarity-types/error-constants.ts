@@ -15,3 +15,4 @@ export const ERR_INSUFFICIENT_HOURS = 102;
 export const ERR_INVALID_HOURS = 103;
 export const ERR_TRANSFER_FAILED = 104;
 export const ERR_UNAUTHORIZED = 105;
+export const ERR_CONTRACT_PAUSED = 106;
