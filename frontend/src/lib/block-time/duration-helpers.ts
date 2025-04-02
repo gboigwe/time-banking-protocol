@@ -107,3 +107,25 @@ export function blocksToMinutes(blocks: number): number {
 export function blocksToSeconds(blocks: number): number {
   return blocks * BLOCK_TIME_SECONDS;
 }
+
+/**
+ * Format a block duration as human-readable string
+ * @param blocks - number of blocks
+ * @returns string like "2 hours" or "3 days"
+ */
+export function formatBlockDuration(blocks: number): string {
+  if (blocks < BLOCKS_PER_HOUR) {
+    const minutes = Math.round(blocksToMinutes(blocks));
+    return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+  }
+  if (blocks < BLOCKS_PER_DAY) {
+    const hours = Math.round(blocksToHours(blocks));
+    return `${hours} hour${hours !== 1 ? 's' : ''}`;
+  }
+  if (blocks < BLOCKS_PER_WEEK) {
+    const days = Math.round(blocksToDays(blocks));
+    return `${days} day${days !== 1 ? 's' : ''}`;
+  }
+  const weeks = Math.round(blocksToWeeks(blocks));
+  return `${weeks} week${weeks !== 1 ? 's' : ''}`;
+}
