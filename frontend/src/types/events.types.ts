@@ -53,3 +53,12 @@ export interface ParticipantRegisteredEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** DisputeOpened on-chain event */
+export interface DisputeOpenedEvent {
+  type: 'DisputeOpened';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
