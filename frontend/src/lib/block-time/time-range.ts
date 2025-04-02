@@ -124,3 +124,25 @@ export function blockRangeContains(outer: BlockRange, inner: BlockRange): boolea
 export function sortBlockRanges(ranges: BlockRange[]): BlockRange[] {
   return [...ranges].sort((a, b) => a.startBlock - b.startBlock);
 }
+
+/**
+ * Create an array of sequential non-overlapping BlockRanges
+ * @param startBlock - first range start
+ * @param blockSize - size of each range
+ * @param count - number of ranges to create
+ * @returns array of sequential BlockRanges
+ */
+export function createSequentialRanges(
+  startBlock: number,
+  blockSize: number,
+  count: number
+): BlockRange[] {
+  const ranges: BlockRange[] = [];
+  for (let i = 0; i < count; i++) {
+    ranges.push({
+      startBlock: startBlock + i * blockSize,
+      endBlock: startBlock + (i + 1) * blockSize,
+    });
+  }
+  return ranges;
+}
