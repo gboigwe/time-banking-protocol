@@ -38,3 +38,6 @@ export interface VoteRecord {
   /** Block height when vote was cast */
   castedAt: number;
 }
+
+/** ProposalTuple from governance contract */
+export interface ProposalTuple {
