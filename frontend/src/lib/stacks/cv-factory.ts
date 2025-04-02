@@ -192,3 +192,11 @@ export interface StandardPrincipalCV extends ClarityValue {
   type: 'address';
   value: string;
 }
+
+/**
+ * Create a standard principal ClarityValue
+ * @param address - Stacks address string
+ */
+export function standardPrincipalCV(address: string): StandardPrincipalCV {
+  return { type: 'address', value: address };
+}
