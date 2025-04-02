@@ -20,3 +20,6 @@ export type ServiceCategory = string;
 
 /** ExchangeDirection domain type */
 export type ExchangeDirection = string;
+
+/** DisputeResolution domain type */
+export type DisputeResolution = string;
