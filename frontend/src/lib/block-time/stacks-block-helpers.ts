@@ -9,3 +9,8 @@ export const TESTNET_GENESIS_BLOCK = 1;
 
 /** Number of Stacks blocks in a Bitcoin difficulty adjustment period */
 export const BLOCKS_PER_DIFFICULTY_PERIOD = 2016;
+
+/** Check if a block height is a halving block (every 210,000 BTC blocks ~ proportional) */
+export function isHalvingBlock(blockHeight: number): boolean {
+  return blockHeight > 0 && blockHeight % 210000 === 0;
+}
