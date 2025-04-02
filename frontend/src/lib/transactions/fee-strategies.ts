@@ -309,3 +309,6 @@ export const FEE_TIER_92 = 1196;
 
 /** FEE_TIER_93 */
 export const FEE_TIER_93 = 1209;
+
+/** FEE_TIER_94 */
+export const FEE_TIER_94 = 1222;
