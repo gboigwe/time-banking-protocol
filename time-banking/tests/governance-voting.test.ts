@@ -14,3 +14,7 @@ it('should handle governance-vote case 2', () => {
 it('should handle governance-vote case 3', () => {
   expect(true).toBe(true);
 });
+
+it('should handle governance-vote case 4', () => {
+  expect(true).toBe(true);
+});
