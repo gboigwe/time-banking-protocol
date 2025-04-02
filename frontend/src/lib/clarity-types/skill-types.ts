@@ -40,3 +40,5 @@ export interface SkillMetadata {
 export interface VerifiedSkill {
   /** The skill metadata */
   skill: SkillMetadata;
+  /** Certification status */
+  certification: CertificationStatus;
