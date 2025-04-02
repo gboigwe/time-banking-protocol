@@ -10,3 +10,18 @@ export interface useSkillRegistryState {
   getSkillById: unknown;
   registerSkill: unknown;
 }
+
+/** useSkillRegistry hook implementation */
+export function useSkillRegistry() {
+  const [state, setState] = useState<Partial<useSkillRegistryState>>({});
+  
+  const refresh = useCallback(async () => {
+    setState(prev => ({ ...prev }));
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { ...state, refresh };
+}
