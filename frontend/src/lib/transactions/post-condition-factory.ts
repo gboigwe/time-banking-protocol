@@ -33,3 +33,13 @@ export function makeFTPostCondition(
 ): Record<string, unknown> {
   return { type: 'ft', address, assetInfo, code, amount: amount.toString() };
 }
+
+/** NFT post-condition builder */
+export function makeNFTPostCondition(
+  address: string,
+  assetInfo: string,
+  code: NonFungibleConditionCode,
+  tokenId: unknown
+): Record<string, unknown> {
+  return { type: 'nft', address, assetInfo, code, tokenId };
+}
