@@ -8,3 +8,4 @@ export interface useExchangeHistoryState {
   isLoading: unknown;
   error: unknown;
   loadMore: unknown;
+  refresh: unknown;
