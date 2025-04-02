@@ -6,3 +6,4 @@ export interface useNetworkHealthState {
   isConnected: unknown;
   blockHeight: unknown;
   apiLatency: unknown;
+  isHealthy: unknown;
