@@ -109,3 +109,14 @@ export function validateBlockDuration(
   if (duration > maxDuration) return `Duration cannot exceed ${maxDuration} blocks`;
   return null;
 }
+
+/**
+ * Validate that a block height represents a reasonable past event
+ * @param blockHeight - block to validate
+ * @param currentBlock - current chain tip
+ * @returns error string or null
+ */
+export function validatePastBlock(blockHeight: number, currentBlock: number): string | null {
+  if (blockHeight >= currentBlock) return 'Block height must be in the past';
+  return validateBlockHeight(blockHeight);
+}
