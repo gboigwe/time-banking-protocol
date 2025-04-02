@@ -5,3 +5,8 @@ import { ServiceStatus } from './time-record-types';
 export function canAcceptExchange(status: ServiceStatus): boolean {
   return status === ServiceStatus.Pending;
 }
+
+/** Check if an exchange can be completed */
+export function canCompleteExchange(status: ServiceStatus): boolean {
+  return status === ServiceStatus.Active;
+}
