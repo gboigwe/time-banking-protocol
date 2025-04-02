@@ -4,3 +4,6 @@ import { toHoursUnit } from './time-record-types';
 
 /** Minimum allowed hours for an exchange */
 export const MIN_EXCHANGE_HOURS = toHoursUnit(0.25);
+
+/** Maximum allowed hours for a single exchange */
+export const MAX_EXCHANGE_HOURS = toHoursUnit(100);
