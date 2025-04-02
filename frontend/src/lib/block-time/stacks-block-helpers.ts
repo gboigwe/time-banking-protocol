@@ -150,3 +150,6 @@ export const BLOCK_SEQUENCE_CONST_30 = 3000;
 
 // Additional block utility 31 — block sequence helper 31
 export const BLOCK_SEQUENCE_CONST_31 = 3100;
+
+// Additional block utility 32 — block sequence helper 32
+export const BLOCK_SEQUENCE_CONST_32 = 3200;
