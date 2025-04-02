@@ -49,3 +49,8 @@ export function isNoneCV(cv: ClarityValue): cv is NoneCV {
 export function isSomeCV(cv: ClarityValue): cv is SomeCV {
   return cv.type === 'some';
 }
+
+/** Type guard for OkCV */
+export function isOkCV(cv: ClarityValue): cv is OkCV {
+  return cv.type === 'ok';
+}
