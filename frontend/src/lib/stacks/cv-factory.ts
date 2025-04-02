@@ -4,3 +4,9 @@
 export interface ClarityValue {
   type: string;
 }
+
+/** UInt ClarityValue */
+export interface UIntCV extends ClarityValue {
+  type: 'uint';
+  value: bigint;
+}
