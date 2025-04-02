@@ -55,3 +55,5 @@ export interface ProposalTuple {
   forVotes: number;
   /** Number of against votes */
   againstVotes: number;
+  /** Number of abstain votes */
+  abstainVotes: number;
