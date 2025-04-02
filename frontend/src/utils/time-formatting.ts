@@ -211,3 +211,6 @@ export const TIME_FORMAT_58 = 1102;
 
 /** TIME_FORMAT_59 */
 export const TIME_FORMAT_59 = 1121;
+
+/** TIME_FORMAT_60 */
+export const TIME_FORMAT_60 = 1140;
