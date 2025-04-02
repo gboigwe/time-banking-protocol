@@ -11,3 +11,6 @@ export type ExchangeStatus = string;
 
 /** ParticipantRole domain type */
 export type ParticipantRole = string;
+
+/** ReputationTier domain type */
+export type ReputationTier = string;
