@@ -7,3 +7,4 @@ export interface useSkillRegistryState {
   isLoading: unknown;
   error: unknown;
   searchSkills: unknown;
+  getSkillById: unknown;
