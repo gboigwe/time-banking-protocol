@@ -29,3 +29,18 @@ export function validateBlockHeight(blockHeight: number): string | null {
 export function isReasonableBlockHeight(blockHeight: number): boolean {
   return validateBlockHeight(blockHeight) === null;
 }
+
+/**
+ * Validate that start block comes before end block
+ * @param startBlock - start of range
+ * @param endBlock - end of range
+ * @returns error string or null if valid
+ */
+export function validateBlockRange(startBlock: number, endBlock: number): string | null {
+  const startErr = validateBlockHeight(startBlock);
+  if (startErr) return `Start block: ${startErr}`;
+  const endErr = validateBlockHeight(endBlock);
+  if (endErr) return `End block: ${endErr}`;
+  if (endBlock <= startBlock) return 'End block must be greater than start block';
+  return null;
+}
