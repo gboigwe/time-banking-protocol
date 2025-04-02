@@ -173,3 +173,6 @@ export const HTTP_STATUS_38 = 418;
 
 /** HTTP_STATUS_39 */
 export const HTTP_STATUS_39 = 429;
+
+/** HTTP_STATUS_40 */
+export const HTTP_STATUS_40 = 440;
