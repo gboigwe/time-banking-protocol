@@ -58,3 +58,6 @@ export function pruneBlockTimeCache(): number {
   }
   return pruned;
 }
+
+/** Cache key prefix variant 1 for namespace isolation */
+export const CACHE_NS_1 = 'bt_cache_1';
