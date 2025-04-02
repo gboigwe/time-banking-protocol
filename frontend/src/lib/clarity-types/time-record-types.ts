@@ -50,3 +50,5 @@ export interface TimeRecord {
  * Maps directly to Clarity response<tuple, uint> pattern
  */
 export interface SkillExchangeResponse {
+  /** Whether the response is ok or err */
+  type: 'ok' | 'err';
