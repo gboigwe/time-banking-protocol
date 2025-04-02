@@ -19,3 +19,4 @@ export const ERR_CONTRACT_PAUSED = 106;
 
 // ---- exchange-manager errors ----
 export const ERR_EXCHANGE_NOT_FOUND = 200;
+export const ERR_EXCHANGE_NOT_PENDING = 201;
