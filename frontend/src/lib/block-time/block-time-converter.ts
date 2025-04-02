@@ -90,3 +90,13 @@ export function isBlockInPast(blockHeight: number, currentBlockHeight: number): 
 export function isBlockInFuture(blockHeight: number, currentBlockHeight: number): boolean {
   return blockHeight > currentBlockHeight;
 }
+
+/**
+ * Check if block-based expiry has passed
+ * @param expiryBlock - block height when something expires
+ * @param currentBlockHeight - current chain tip
+ * @returns true if expired
+ */
+export function isExpiredAtBlock(expiryBlock: number, currentBlockHeight: number): boolean {
+  return currentBlockHeight >= expiryBlock;
+}
