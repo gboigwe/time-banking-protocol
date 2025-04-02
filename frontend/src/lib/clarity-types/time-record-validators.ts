@@ -52,3 +52,8 @@ export function validateTimeRecord(record: Partial<TimeRecord>): string[] {
   if (descError) errors.push(descError);
   return errors;
 }
+
+/** Check if a TimeRecord is valid for submission */
+export function isValidTimeRecord(record: Partial<TimeRecord>): boolean {
+  return validateTimeRecord(record).length === 0;
+}
