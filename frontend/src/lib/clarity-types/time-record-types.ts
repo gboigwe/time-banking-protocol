@@ -12,3 +12,4 @@ export function toHoursUnit(value: number): HoursUnit {
 export enum ServiceStatus {
   Pending = 0,
   Active = 1,
+  Completed = 2,
