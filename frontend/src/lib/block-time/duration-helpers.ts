@@ -71,3 +71,12 @@ export function weeksToBlocks(weeks: number): number {
 export function blocksToWeeks(blocks: number): number {
   return blocks / BLOCKS_PER_WEEK;
 }
+
+/**
+ * Convert months to approximate block count
+ * @param months - number of months (30 days each)
+ * @returns approximate block count
+ */
+export function monthsToBlocks(months: number): number {
+  return Math.ceil(months * BLOCKS_PER_MONTH);
+}
