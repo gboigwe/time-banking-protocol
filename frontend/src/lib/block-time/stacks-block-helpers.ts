@@ -3,3 +3,6 @@ import { BLOCK_TIME_SECONDS, BLOCKS_PER_DAY } from './duration-helpers';
 
 /** Stacks average block time in minutes */
 export const AVG_BLOCK_TIME_MINUTES = BLOCK_TIME_SECONDS / 60;
+
+/** Stacks testnet genesis block height */
+export const TESTNET_GENESIS_BLOCK = 1;
