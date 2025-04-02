@@ -3,3 +3,4 @@ import { useState, useCallback, useEffect } from 'react';
 
 /** State interface for useTimeToken */
 export interface useTimeTokenState {
+  balance: unknown;
