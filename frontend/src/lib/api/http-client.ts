@@ -19,3 +19,10 @@ export const DEFAULT_TIMEOUT_MS = 30000;
 
 /** Default retry count */
 export const DEFAULT_RETRIES = 3;
+
+/** HttpClient class for API requests */
+export class HttpClient {
+  constructor(
+    private readonly baseUrl: string,
+    private readonly defaultConfig: RequestConfig = {}
+  ) {}
