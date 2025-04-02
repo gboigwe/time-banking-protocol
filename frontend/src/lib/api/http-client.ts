@@ -152,3 +152,6 @@ export const HTTP_STATUS_31 = 341;
 
 /** HTTP_STATUS_32 */
 export const HTTP_STATUS_32 = 352;
+
+/** HTTP_STATUS_33 */
+export const HTTP_STATUS_33 = 363;
