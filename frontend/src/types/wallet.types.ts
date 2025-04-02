@@ -5,3 +5,9 @@ export interface WalletProvider {
   type: string;
   address?: string;
 }
+
+/** ConnectedWallet wallet type */
+export interface ConnectedWallet {
+  type: string;
+  address?: string;
+}
