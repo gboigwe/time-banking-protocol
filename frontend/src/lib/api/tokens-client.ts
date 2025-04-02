@@ -11,3 +11,7 @@ export class TokensClient {
   async getNFTInfo(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/metadata/v1/tokens/getNFTInfo`);
   }
+
+  async getNFTEvents(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/metadata/v1/tokens/getNFTEvents`);
+  }
