@@ -11,3 +11,18 @@ export interface useReputationScoreState {
   error: unknown;
   refresh: unknown;
 }
+
+/** useReputationScore hook implementation */
+export function useReputationScore() {
+  const [state, setState] = useState<Partial<useReputationScoreState>>({});
+  
+  const refresh = useCallback(async () => {
+    setState(prev => ({ ...prev }));
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { ...state, refresh };
+}
