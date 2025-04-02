@@ -44,3 +44,8 @@ export interface BoolCV extends ClarityValue {
 export function trueCV(): BoolCV {
   return { type: 'true' };
 }
+
+/** Create a false ClarityValue */
+export function falseCV(): BoolCV {
+  return { type: 'false' };
+}
