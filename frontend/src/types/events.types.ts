@@ -116,3 +116,12 @@ export interface EscrowReleasedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** TokenTransferred on-chain event */
+export interface TokenTransferredEvent {
+  type: 'TokenTransferred';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
