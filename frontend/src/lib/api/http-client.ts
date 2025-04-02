@@ -338,3 +338,6 @@ export const HTTP_STATUS_93 = 1023;
 
 /** HTTP_STATUS_94 */
 export const HTTP_STATUS_94 = 1034;
+
+/** HTTP_STATUS_95 */
+export const HTTP_STATUS_95 = 1045;
