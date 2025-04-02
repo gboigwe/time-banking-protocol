@@ -28,3 +28,5 @@ export interface SkillMetadata {
   categoryId: number;
   /** Minimum level required */
   minLevel: SkillLevel;
+  /** Maximum level attainable */
+  maxLevel: SkillLevel;
