@@ -77,3 +77,11 @@ export function isInTimeRange(date: Date, range: TimeRange): boolean {
 export function createBlockRange(startBlock: number, durationBlocks: number): BlockRange {
   return { startBlock, endBlock: startBlock + durationBlocks };
 }
+
+/** Get intersection of two block ranges, or null if no overlap */
+export function blockRangeIntersection(a: BlockRange, b: BlockRange): BlockRange | null {
+  const start = Math.max(a.startBlock, b.startBlock);
+  const end = Math.min(a.endBlock, b.endBlock);
+  if (start >= end) return null;
+  return { startBlock: start, endBlock: end };
+}
