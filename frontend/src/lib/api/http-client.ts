@@ -44,3 +44,15 @@ export class HttpClient {
       clearTimeout(timeoutId);
     }
   }
+
+  async post<T>(path: string, body: unknown, config?: RequestConfig): Promise<ResponseConfig<T>> {
+    const url = `${this.baseUrl}${path}`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...this.defaultConfig.headers, ...config?.headers },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json() as T;
+    return { data, status: res.status, headers: Object.fromEntries(res.headers.entries()) };
+  }
+}
