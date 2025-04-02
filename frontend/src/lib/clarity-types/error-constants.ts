@@ -99,3 +99,4 @@ export const ERR_JOB_NOT_DUE = 1501;
 export const ERR_JOB_ALREADY_RUNNING = 1502;
 
 // ---- emergency-controls errors ----
+export const ERR_ALREADY_PAUSED = 1600;
