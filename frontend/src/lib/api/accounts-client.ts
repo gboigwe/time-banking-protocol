@@ -53,3 +53,4 @@ export class AccountsClient {
     const path = `/extended/v1/address/${address}/getAccountInfo`;
     return this.http.get(path);
   }
+}
