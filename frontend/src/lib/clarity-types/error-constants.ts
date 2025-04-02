@@ -47,3 +47,4 @@ export const ERR_PROPOSAL_NOT_PASSED = 504;
 export const ERR_PROPOSAL_ALREADY_EXECUTED = 505;
 
 // ---- reputation-system errors ----
+export const ERR_CANNOT_RATE_SELF = 600;
