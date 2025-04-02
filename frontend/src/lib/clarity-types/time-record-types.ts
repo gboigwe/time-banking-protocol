@@ -54,3 +54,6 @@ export interface SkillExchangeResponse {
   type: 'ok' | 'err';
   /** The exchange record if successful */
   value?: TimeRecord;
+  /** Error code if failed */
+  error?: number;
+}
