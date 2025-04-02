@@ -9,3 +9,4 @@ export interface ContractErrorCode {
 }
 
 // ---- time-bank-core errors ----
+export const ERR_NOT_REGISTERED = 100;
