@@ -158,3 +158,9 @@ export interface ErrCV extends ClarityValue {
 export function errCV(value: ClarityValue): ErrCV {
   return { type: 'err', value };
 }
+
+/** List ClarityValue */
+export interface ListCV extends ClarityValue {
+  type: 'list';
+  list: ClarityValue[];
+}
