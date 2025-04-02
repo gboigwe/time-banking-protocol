@@ -10,3 +10,18 @@ export interface useTimeTokenState {
   transfer: unknown;
   approve: unknown;
 }
+
+/** useTimeToken hook implementation */
+export function useTimeToken() {
+  const [state, setState] = useState<Partial<useTimeTokenState>>({});
+  
+  const refresh = useCallback(async () => {
+    setState(prev => ({ ...prev }));
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  return { ...state, refresh };
+}
