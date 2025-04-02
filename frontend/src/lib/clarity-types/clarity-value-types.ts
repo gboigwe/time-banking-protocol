@@ -64,3 +64,8 @@ export function isPrincipalType(type: ClarityType): boolean {
 export function isNumericType(type: ClarityType): boolean {
   return type === ClarityType.Int || type === ClarityType.UInt;
 }
+
+/** Check if ClarityType is a string type */
+export function isStringType(type: ClarityType): boolean {
+  return type === ClarityType.StringASCII || type === ClarityType.StringUTF8;
+}
