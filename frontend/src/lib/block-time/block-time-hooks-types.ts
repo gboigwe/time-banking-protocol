@@ -2,3 +2,5 @@
 
 /** State shape for useBlockTime hook */
 export interface BlockTimeState {
+  /** Current chain tip block height */
+  currentBlock: number | null;
