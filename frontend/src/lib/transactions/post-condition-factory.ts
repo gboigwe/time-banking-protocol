@@ -64,3 +64,6 @@ export const POST_COND_6 = 78;
 
 /** POST_COND_7 */
 export const POST_COND_7 = 91;
+
+/** POST_COND_8 */
+export const POST_COND_8 = 104;
