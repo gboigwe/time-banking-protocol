@@ -23,3 +23,9 @@ export interface AuthProfile {
   type: string;
   address?: string;
 }
+
+/** SignatureResult wallet type */
+export interface SignatureResult {
+  type: string;
+  address?: string;
+}
