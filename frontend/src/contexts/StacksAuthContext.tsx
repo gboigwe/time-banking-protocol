@@ -6,3 +6,4 @@ export interface StacksAuthState {
   address: string | null;
   isConnected: boolean;
   isConnecting: boolean;
+  network: 'mainnet' | 'testnet';
