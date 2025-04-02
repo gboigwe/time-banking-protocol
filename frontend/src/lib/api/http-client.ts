@@ -26,3 +26,21 @@ export class HttpClient {
     private readonly baseUrl: string,
     private readonly defaultConfig: RequestConfig = {}
   ) {}
+
+  async get<T>(path: string, config?: RequestConfig): Promise<ResponseConfig<T>> {
+    const url = `${this.baseUrl}${path}`;
+    const timeout = config?.timeout ?? this.defaultConfig.timeout ?? DEFAULT_TIMEOUT_MS;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: { ...this.defaultConfig.headers, ...config?.headers },
+        signal: controller.signal,
+      });
+      const data = await res.json() as T;
+      return { data, status: res.status, headers: Object.fromEntries(res.headers.entries()) };
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
