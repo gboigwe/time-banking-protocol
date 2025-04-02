@@ -25,3 +25,8 @@ export class CustomFeeStrategy implements FeeStrategy {
   constructor(private readonly fee: bigint) {}
   estimateFee(): bigint { return this.fee; }
 }
+
+/** Estimate fee using a given strategy */
+export function estimateFee(strategy: FeeStrategy): bigint {
+  return strategy.estimateFee();
+}
