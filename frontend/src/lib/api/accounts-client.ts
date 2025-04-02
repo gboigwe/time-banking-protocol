@@ -57,3 +57,6 @@ export class AccountsClient {
 
 /** ACCOUNT_LIMIT_1 */
 export const ACCOUNT_LIMIT_1 = 11;
+
+/** ACCOUNT_LIMIT_2 */
+export const ACCOUNT_LIMIT_2 = 22;
