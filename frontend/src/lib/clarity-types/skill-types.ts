@@ -44,3 +44,6 @@ export interface VerifiedSkill {
   certification: CertificationStatus;
   /** Address that certified this skill */
   certifiedBy?: string;
+  /** Block height when certified */
+  certifiedAt?: number;
+}
