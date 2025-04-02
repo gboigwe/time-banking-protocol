@@ -84,3 +84,9 @@ export interface StringUtf8CV extends ClarityValue {
 export function stringUtf8CV(value: string): StringUtf8CV {
   return { type: 'string-utf8', value };
 }
+
+/** Buffer ClarityValue */
+export interface BufferCV extends ClarityValue {
+  type: 'buffer';
+  value: Uint8Array;
+}
