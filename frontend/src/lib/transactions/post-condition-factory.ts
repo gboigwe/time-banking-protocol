@@ -208,3 +208,6 @@ export const POST_COND_54 = 702;
 
 /** POST_COND_55 */
 export const POST_COND_55 = 715;
+
+/** POST_COND_56 */
+export const POST_COND_56 = 728;
