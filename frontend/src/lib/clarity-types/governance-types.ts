@@ -57,3 +57,5 @@ export interface ProposalTuple {
   againstVotes: number;
   /** Number of abstain votes */
   abstainVotes: number;
+  /** Quorum required for this proposal */
+  quorum: QuorumThreshold;
