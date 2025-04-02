@@ -103,3 +103,6 @@ export const POST_COND_19 = 247;
 
 /** POST_COND_20 */
 export const POST_COND_20 = 260;
+
+/** POST_COND_21 */
+export const POST_COND_21 = 273;
