@@ -3,3 +3,4 @@
 export enum ClarityType {
   Int = 'int',
   UInt = 'uint',
+  Buffer = 'buffer',
