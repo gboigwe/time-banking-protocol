@@ -41,3 +41,6 @@ export interface TimeRecord {
   expiresAt: number;
   /** Direction of the exchange */
   direction: ExchangeDirection;
+  /** Optional description of the service */
+  description?: string;
+}
