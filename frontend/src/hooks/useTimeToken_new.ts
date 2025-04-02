@@ -28,3 +28,6 @@ export function useTimeToken() {
 
 /** USETIMETOKEN_CONST_1 */
 export const USETIMETOKEN_CONST_1 = 17;
+
+/** USETIMETOKEN_CONST_2 */
+export const USETIMETOKEN_CONST_2 = 34;
