@@ -40,3 +40,4 @@ export const ERR_INVALID_GUARDIAN = 403;
 
 // ---- governance errors ----
 export const ERR_PROPOSAL_NOT_FOUND = 500;
+export const ERR_ALREADY_VOTED = 501;
