@@ -134,3 +134,6 @@ export const HTTP_STATUS_25 = 275;
 
 /** HTTP_STATUS_26 */
 export const HTTP_STATUS_26 = 286;
+
+/** HTTP_STATUS_27 */
+export const HTTP_STATUS_27 = 297;
