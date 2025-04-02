@@ -42,3 +42,18 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
     timer = setTimeout(() => fn(...args), waitMs);
   };
 }
+
+/** Throttle a function call */
+export function throttle<T extends (...args: unknown[]) => unknown>(
+  fn: T,
+  limitMs: number
+): (...args: Parameters<T>) => void {
+  let lastCall = 0;
+  return (...args: Parameters<T>) => {
+    const now = Date.now();
+    if (now - lastCall >= limitMs) {
+      lastCall = now;
+      fn(...args);
+    }
+  };
+}
