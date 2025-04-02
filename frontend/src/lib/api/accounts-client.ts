@@ -7,3 +7,10 @@ export interface AccountBalanceResponse {
   fungible_tokens: Record<string, { balance: string }>;
   non_fungible_tokens: Record<string, { count: string }>;
 }
+
+/** Account nonce response */
+export interface AccountNoncesResponse {
+  last_executed_tx_nonce: number;
+  last_mempool_tx_nonce: number;
+  possible_next_nonce: number;
+}
