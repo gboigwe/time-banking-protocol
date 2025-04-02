@@ -123,3 +123,19 @@ export function formatBlockHeight(
       return getBlockHeightAge(blockHeight, currentBlockHeight);
   }
 }
+
+/**
+ * Get approximate timestamp for a block relative to a known anchor
+ * @param blockHeight - target block height
+ * @param anchorBlock - block height with known timestamp
+ * @param anchorTime - timestamp for anchor block
+ * @returns Date for target block
+ */
+export function blockToTimestamp(
+  blockHeight: number,
+  anchorBlock: number,
+  anchorTime: Date
+): Date {
+  const diff = blockHeight - anchorBlock;
+  return new Date(anchorTime.getTime() + diff * BLOCK_TIME_SECONDS * 1000);
+}
