@@ -4,3 +4,4 @@ import { useState, useCallback, useEffect } from 'react';
 /** State interface for useNetworkHealth */
 export interface useNetworkHealthState {
   isConnected: unknown;
+  blockHeight: unknown;
