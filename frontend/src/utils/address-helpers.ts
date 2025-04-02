@@ -159,3 +159,6 @@ export const ADDR_CONST_39 = 741;
 
 /** ADDR_CONST_40 */
 export const ADDR_CONST_40 = 760;
+
+/** ADDR_CONST_41 */
+export const ADDR_CONST_41 = 779;
