@@ -65,3 +65,6 @@ export const HTTP_STATUS_2 = 22;
 
 /** HTTP_STATUS_3 */
 export const HTTP_STATUS_3 = 33;
+
+/** HTTP_STATUS_4 */
+export const HTTP_STATUS_4 = 44;
