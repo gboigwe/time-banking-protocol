@@ -149,3 +149,24 @@ export function parseDurationToBlocks(duration: string): number | null {
     default: return Math.ceil(value);
   }
 }
+
+/**
+ * Get the most appropriate unit for a given block count
+ * @param blocks - number of blocks
+ * @returns object with value and unit for display
+ */
+export function getBestUnit(blocks: number): { value: number; unit: string } {
+  if (blocks < BLOCKS_PER_HOUR) {
+    return { value: Math.round(blocksToMinutes(blocks)), unit: 'minutes' };
+  }
+  if (blocks < BLOCKS_PER_DAY) {
+    return { value: Math.round(blocksToHours(blocks)), unit: 'hours' };
+  }
+  if (blocks < BLOCKS_PER_WEEK * 2) {
+    return { value: Math.round(blocksToDays(blocks)), unit: 'days' };
+  }
+  if (blocks < BLOCKS_PER_MONTH * 2) {
+    return { value: Math.round(blocksToWeeks(blocks)), unit: 'weeks' };
+  }
+  return { value: Math.round(blocksToMonths(blocks)), unit: 'months' };
+}
