@@ -55,3 +55,6 @@ export const TIME_FORMAT_6 = 114;
 
 /** TIME_FORMAT_7 */
 export const TIME_FORMAT_7 = 133;
+
+/** TIME_FORMAT_8 */
+export const TIME_FORMAT_8 = 152;
