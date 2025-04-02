@@ -23,3 +23,13 @@ export function makeSTXPostCondition(
 ): Record<string, unknown> {
   return { type: 'stx', address, code, amount: amount.toString() };
 }
+
+/** FT post-condition builder */
+export function makeFTPostCondition(
+  address: string,
+  assetInfo: string,
+  code: FungibleConditionCode,
+  amount: bigint
+): Record<string, unknown> {
+  return { type: 'ft', address, assetInfo, code, amount: amount.toString() };
+}
