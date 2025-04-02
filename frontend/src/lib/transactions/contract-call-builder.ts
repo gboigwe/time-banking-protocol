@@ -40,3 +40,20 @@ export class ContractCallBuilder {
     this.params.anchorMode = mode;
     return this;
   }
+
+  build(): ContractCallTxParams {
+    if (!this.params.contractAddress) throw new Error('contractAddress is required');
+    if (!this.params.contractName) throw new Error('contractName is required');
+    if (!this.params.functionName) throw new Error('functionName is required');
+    return {
+      contractAddress: this.params.contractAddress,
+      contractName: this.params.contractName,
+      functionName: this.params.functionName,
+      functionArgs: this.params.functionArgs ?? [],
+      fee: this.params.fee,
+      nonce: this.params.nonce,
+      anchorMode: this.params.anchorMode ?? 'any',
+      postConditions: this.params.postConditions ?? [],
+    };
+  }
+}
