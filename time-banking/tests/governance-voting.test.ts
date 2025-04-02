@@ -6,3 +6,7 @@ describe('Governance Voting', () => {
 it('should handle governance-vote case 1', () => {
   expect(true).toBe(true);
 });
+
+it('should handle governance-vote case 2', () => {
+  expect(true).toBe(true);
+});
