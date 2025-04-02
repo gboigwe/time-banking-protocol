@@ -33,3 +33,5 @@ export interface TimeRecord {
   hours: HoursUnit;
   /** Skill category identifier */
   skillId: number;
+  /** Current status of the service */
+  status: ServiceStatus;
