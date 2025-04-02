@@ -7,3 +7,4 @@ export interface useTimeBalanceState {
   loading: unknown;
   error: unknown;
   refetch: unknown;
+  setAddress: unknown;
