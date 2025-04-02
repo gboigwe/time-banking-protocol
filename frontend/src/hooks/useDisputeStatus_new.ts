@@ -9,3 +9,4 @@ export interface useDisputeStatusState {
   votingStatus: unknown;
   evidenceCount: unknown;
   resolution: unknown;
+}
