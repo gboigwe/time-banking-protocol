@@ -24,3 +24,6 @@ export interface CouncilMember {
   /** Whether member is currently active */
   isActive: boolean;
 }
+
+/** VoteRecord from governance contract */
+export interface VoteRecord {
