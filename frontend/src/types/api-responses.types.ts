@@ -6,3 +6,10 @@ export interface STXBalanceResponse {
   error?: string;
   status: number;
 }
+
+/** AccountInfoResponse response from Hiro API */
+export interface AccountInfoResponse {
+  result: unknown;
+  error?: string;
+  status: number;
+}
