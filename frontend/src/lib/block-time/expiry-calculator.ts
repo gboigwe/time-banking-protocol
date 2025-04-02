@@ -103,3 +103,24 @@ export function getExpiryOptions(startBlock: number): Array<{
     expiryBlock: calculateExpiryBlock(startBlock, opt.durationBlocks),
   }));
 }
+
+/**
+ * Create a countdown ticker value from remaining blocks
+ * @param remainingBlocks - blocks until expiry
+ * @returns object with days, hours, minutes components
+ */
+export function blockCountdown(remainingBlocks: number): {
+  days: number;
+  hours: number;
+  minutes: number;
+  isExpired: boolean;
+} {
+  if (remainingBlocks <= 0) {
+    return { days: 0, hours: 0, minutes: 0, isExpired: true };
+  }
+  const totalMinutes = Math.floor((remainingBlocks * 10 * 60) / 60);
+  const days = Math.floor(totalMinutes / (24 * 60));
+  const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
+  const minutes = totalMinutes % 60;
+  return { days, hours, minutes, isExpired: false };
+}
