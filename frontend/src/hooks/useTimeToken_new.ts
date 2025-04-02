@@ -7,3 +7,4 @@ export interface useTimeTokenState {
   allowance: unknown;
   isLoading: unknown;
   error: unknown;
+  transfer: unknown;
