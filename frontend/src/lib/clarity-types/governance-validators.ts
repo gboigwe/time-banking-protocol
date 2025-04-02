@@ -15,3 +15,6 @@ export const MAX_QUORUM_THRESHOLD = 100;
 
 /** Maximum title length for proposal */
 export const MAX_PROPOSAL_TITLE_LENGTH = 128;
+
+/** Maximum description length for proposal */
+export const MAX_PROPOSAL_DESCRIPTION_LENGTH = 2048;
