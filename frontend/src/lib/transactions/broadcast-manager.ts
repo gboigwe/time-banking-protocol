@@ -46,3 +46,6 @@ export class BroadcastManager {
     return result;
   }
 }
+
+/** RETRY_DELAY_1 */
+export const RETRY_DELAY_1 = 13;
