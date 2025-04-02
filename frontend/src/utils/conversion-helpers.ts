@@ -20,3 +20,8 @@ export const MICRO_STX_PER_STX = 1_000_000n;
 export function STXtoMicroSTX(stx: number): bigint {
   return BigInt(Math.round(stx * 1_000_000));
 }
+
+/** Convert micro-STX to STX */
+export function microSTXtoSTX(microSTX: bigint): number {
+  return Number(microSTX) / 1_000_000;
+}
