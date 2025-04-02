@@ -34,3 +34,13 @@ export function getWalletDownloadUrl(wallet: WalletType): string {
   };
   return urls[wallet];
 }
+
+/** Get wallet display name */
+export function getWalletName(wallet: WalletType): string {
+  const names: Record<WalletType, string> = {
+    [WalletType.Leather]: 'Leather',
+    [WalletType.Xverse]: 'Xverse',
+    [WalletType.Unknown]: 'Unknown Wallet',
+  };
+  return names[wallet];
+}
