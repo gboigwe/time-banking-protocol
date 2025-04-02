@@ -83,3 +83,6 @@ export const CV_FORMAT_5 = 'format_5';
 
 /** CV display format option 6 */
 export const CV_FORMAT_6 = 'format_6';
+
+/** CV display format option 7 */
+export const CV_FORMAT_7 = 'format_7';
