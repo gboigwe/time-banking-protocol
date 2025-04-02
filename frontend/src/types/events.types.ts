@@ -107,3 +107,12 @@ export interface EscrowCreatedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** EscrowReleased on-chain event */
+export interface EscrowReleasedEvent {
+  type: 'EscrowReleased';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
