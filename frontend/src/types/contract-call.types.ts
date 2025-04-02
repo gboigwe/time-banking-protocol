@@ -31,3 +31,11 @@ export interface TxStatus {
   result?: unknown;
   error?: string;
 }
+
+/** TxConfirmation contract call type */
+export interface TxConfirmation {
+  success: boolean;
+  txId?: string;
+  result?: unknown;
+  error?: string;
+}
