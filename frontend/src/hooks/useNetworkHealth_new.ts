@@ -5,3 +5,4 @@ import { useState, useCallback, useEffect } from 'react';
 export interface useNetworkHealthState {
   isConnected: unknown;
   blockHeight: unknown;
+  apiLatency: unknown;
