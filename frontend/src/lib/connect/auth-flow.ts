@@ -14,3 +14,8 @@ export function buildAuthRequest(...args: unknown[]): unknown {
 export function handleAuthResponse(...args: unknown[]): unknown {
   return args;
 }
+
+/** getUserSession — stub */
+export function getUserSession(...args: unknown[]): unknown {
+  return args;
+}
