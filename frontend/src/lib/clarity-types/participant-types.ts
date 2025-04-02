@@ -13,3 +13,5 @@ export type ReputationScore = number | null;
 
 /** TimeBalance represents a participant's time balance map value */
 export interface TimeBalance {
+  /** Hours earned from providing services */
+  earned: number;
