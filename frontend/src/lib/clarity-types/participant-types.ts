@@ -33,3 +33,5 @@ export interface ParticipantProfile {
   bio: string;
   /** Current status */
   status: ParticipantStatus;
+  /** Time balance */
+  balance: TimeBalance;
