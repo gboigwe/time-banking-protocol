@@ -35,3 +35,11 @@ export function validateSkillName(name: string): string | null {
   }
   return null;
 }
+
+/** Validate skill tags count */
+export function validateSkillTags(tags: string[]): string | null {
+  if (tags.length > MAX_SKILL_TAGS) {
+    return `Cannot have more than ${MAX_SKILL_TAGS} tags per skill`;
+  }
+  return null;
+}
