@@ -146,3 +146,8 @@ export const ERROR_MESSAGES: Record<number, string> = {
   [ERR_NOT_ARBITRATOR]: 'Not authorized as arbitrator',
   [ERR_DISPUTE_PERIOD_EXPIRED]: 'Dispute period has expired',
 };
+
+/** Get human-readable error message from code */
+export function getErrorMessage(code: number): string {
+  return ERROR_MESSAGES[code] ?? `Unknown error code: ${code}`;
+}
