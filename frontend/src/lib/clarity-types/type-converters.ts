@@ -64,3 +64,6 @@ export function clarityToParticipantProfile(tuple: Record<string, unknown>): Par
       : [],
   };
 }
+
+/** Re-export clarityTupleToTimeRecord for convenience */
+export { clarityTupleToTimeRecord };
