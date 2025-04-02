@@ -35,3 +35,8 @@ export function getCachedBlockTime(blockHeight: number): number | null {
   }
   return entry.timestamp;
 }
+
+/** Clear all cached block timestamps */
+export function clearBlockTimeCache(): void {
+  blockTimeCache.clear();
+}
