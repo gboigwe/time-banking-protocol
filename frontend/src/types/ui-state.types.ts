@@ -47,3 +47,6 @@ export const UI_STATE_1 = 5;
 
 /** UI constant 2 */
 export const UI_STATE_2 = 10;
+
+/** UI constant 3 */
+export const UI_STATE_3 = 15;
