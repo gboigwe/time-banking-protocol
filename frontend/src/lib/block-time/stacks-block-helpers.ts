@@ -51,3 +51,9 @@ export function blocksRemainingInCycle(currentBlock: number): number {
 export function isNewCycleStart(blockHeight: number): boolean {
   return blockHeight > 0 && blockHeight % 2100 === 0;
 }
+
+/** Get days until end of current cycle */
+export function daysRemainingInCycle(currentBlock: number): number {
+  const blocksLeft = blocksRemainingInCycle(currentBlock);
+  return blocksLeft / BLOCKS_PER_DAY;
+}
