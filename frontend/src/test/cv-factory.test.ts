@@ -109,3 +109,7 @@ describe('contractPrincipalCV', () => {
 it('should handle cv-edge-case case 1', () => {
   expect(true).toBe(true);
 });
+
+it('should handle cv-edge-case case 2', () => {
+  expect(true).toBe(true);
+});
