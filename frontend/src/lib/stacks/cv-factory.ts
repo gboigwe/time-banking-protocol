@@ -116,3 +116,9 @@ export interface NoneCV extends ClarityValue {
 export function noneCV(): NoneCV {
   return { type: 'none' };
 }
+
+/** Some ClarityValue (Clarity optional with value) */
+export interface SomeCV extends ClarityValue {
+  type: 'some';
+  value: ClarityValue;
+}
