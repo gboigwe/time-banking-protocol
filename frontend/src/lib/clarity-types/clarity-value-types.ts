@@ -11,3 +11,4 @@ export enum ClarityType {
   ResponseOk = 'ok',
   ResponseErr = 'err',
   OptionalNone = 'none',
+  OptionalSome = 'some',
