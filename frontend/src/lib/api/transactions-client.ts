@@ -16,3 +16,7 @@ export class TransactionsClient {
   async getTransactionList(...args: unknown[]): Promise<unknown> {
     return this.http.get(`/tx/getTransactionList`, { headers: {} });
   }
+
+  async getMempoolTxs(...args: unknown[]): Promise<unknown> {
+    return this.http.get(`/tx/getMempoolTxs`, { headers: {} });
+  }
