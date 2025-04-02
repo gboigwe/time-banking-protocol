@@ -35,3 +35,8 @@ export function getStacksCycleNumber(blockHeight: number): number {
 export function getCycleStartBlock(cycleNumber: number): number {
   return cycleNumber * 2100;
 }
+
+/** Get end block of a Stacks reward cycle */
+export function getCycleEndBlock(cycleNumber: number): number {
+  return (cycleNumber + 1) * 2100 - 1;
+}
