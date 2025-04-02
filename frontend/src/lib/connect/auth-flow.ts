@@ -19,3 +19,8 @@ export function handleAuthResponse(...args: unknown[]): unknown {
 export function getUserSession(...args: unknown[]): unknown {
   return args;
 }
+
+/** clearSession — stub */
+export function clearSession(...args: unknown[]): unknown {
+  return args;
+}
