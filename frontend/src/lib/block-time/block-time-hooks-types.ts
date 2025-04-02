@@ -8,3 +8,6 @@ export interface BlockTimeState {
   isLoading: boolean;
   /** Error message if fetch failed */
   error: string | null;
+  /** Last time block height was fetched */
+  lastUpdated: Date | null;
+}
