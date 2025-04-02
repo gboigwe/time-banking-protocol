@@ -44,3 +44,12 @@ export function validateBlockRange(startBlock: number, endBlock: number): string
   if (endBlock <= startBlock) return 'End block must be greater than start block';
   return null;
 }
+
+/**
+ * Clamp a block height to the valid range
+ * @param blockHeight - value to clamp
+ * @returns clamped block height
+ */
+export function clampBlockHeight(blockHeight: number): number {
+  return Math.max(MIN_BLOCK_HEIGHT, Math.min(MAX_BLOCK_HEIGHT, Math.round(blockHeight)));
+}
