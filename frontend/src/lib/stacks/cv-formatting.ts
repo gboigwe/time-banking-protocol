@@ -110,3 +110,6 @@ export const CV_FORMAT_14 = 'format_14';
 
 /** CV display format option 15 */
 export const CV_FORMAT_15 = 'format_15';
+
+/** CV display format option 16 */
+export const CV_FORMAT_16 = 'format_16';
