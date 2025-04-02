@@ -9,3 +9,11 @@ export interface StacksAuthState {
   network: 'mainnet' | 'testnet';
   error: string | null;
 }
+
+/** Auth action types */
+export type StacksAuthAction =
+  | { type: 'CONNECT_START' }
+  | { type: 'CONNECT_SUCCESS'; address: string }
+  | { type: 'CONNECT_FAILED'; error: string }
+  | { type: 'DISCONNECT' }
+  | { type: 'SET_NETWORK'; network: 'mainnet' | 'testnet' };
