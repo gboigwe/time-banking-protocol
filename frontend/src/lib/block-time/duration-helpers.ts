@@ -26,3 +26,12 @@ export const BLOCK_TIME_SECONDS = 10 * 60;
 export function blocksToHours(blocks: number): number {
   return blocks / BLOCKS_PER_HOUR;
 }
+
+/**
+ * Convert hours to approximate block count
+ * @param hours - number of hours
+ * @returns approximate block count
+ */
+export function hoursToBlocks(hours: number): number {
+  return Math.ceil(hours * BLOCKS_PER_HOUR);
+}
