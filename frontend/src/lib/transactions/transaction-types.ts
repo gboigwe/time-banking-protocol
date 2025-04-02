@@ -7,3 +7,4 @@ export type AnchorMode = 'onChainOnly' | 'offChainOnly' | 'any';
 export interface ContractCallTxParams {
   contractAddress: string;
   contractName: string;
+  functionName: string;
