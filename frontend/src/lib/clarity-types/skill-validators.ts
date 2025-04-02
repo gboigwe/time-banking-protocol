@@ -18,3 +18,11 @@ export function validateSkillLevel(level: number): string | null {
   }
   return null;
 }
+
+/** Validate that min level <= max level */
+export function validateSkillLevelRange(minLevel: SkillLevel, maxLevel: SkillLevel): string | null {
+  if (minLevel > maxLevel) {
+    return 'Minimum level cannot exceed maximum level';
+  }
+  return null;
+}
