@@ -4,3 +4,5 @@
 export interface BlockTimeCacheEntry {
   /** Block height */
   blockHeight: number;
+  /** Timestamp when this block was mined */
+  timestamp: number;
