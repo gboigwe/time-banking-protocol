@@ -18,3 +18,9 @@ export class BroadcastError extends Error {
     this.name = 'BroadcastError';
   }
 }
+
+/** BroadcastManager handles tx broadcast with retry */
+export class BroadcastManager {
+  private successCallbacks: Array<(result: BroadcastResult) => void> = [];
+  private failureCallbacks: Array<(error: BroadcastError) => void> = [];
+  private pendingCallbacks: Array<(txId: string) => void> = [];
