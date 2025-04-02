@@ -74,3 +74,8 @@ export function isStringType(type: ClarityType): boolean {
 export function isBoolType(type: ClarityType): boolean {
   return type === ClarityType.BoolTrue || type === ClarityType.BoolFalse;
 }
+
+/** Check if ClarityType is a response type */
+export function isResponseType(type: ClarityType): boolean {
+  return type === ClarityType.ResponseOk || type === ClarityType.ResponseErr;
+}
