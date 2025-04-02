@@ -210,3 +210,6 @@ export const TX_LIMIT_58 = 638;
 
 /** TX_LIMIT_59 */
 export const TX_LIMIT_59 = 649;
+
+/** TX_LIMIT_60 */
+export const TX_LIMIT_60 = 660;
