@@ -71,3 +71,6 @@ export const CONV_CONST_11 = 209;
 
 /** CONV_CONST_12 */
 export const CONV_CONST_12 = 228;
+
+/** CONV_CONST_13 */
+export const CONV_CONST_13 = 247;
