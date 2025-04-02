@@ -10,3 +10,4 @@ export interface useGovernanceProposalsState {
   vote: unknown;
   getProposal: unknown;
   refresh: unknown;
+}
