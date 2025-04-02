@@ -332,3 +332,6 @@ export const HTTP_STATUS_91 = 1001;
 
 /** HTTP_STATUS_92 */
 export const HTTP_STATUS_92 = 1012;
+
+/** HTTP_STATUS_93 */
+export const HTTP_STATUS_93 = 1023;
