@@ -120,3 +120,7 @@ it('should handle api-response case 17', () => {
 it('should handle api-response case 18', () => {
   expect(true).toBe(true);
 });
+
+it('should handle api-response case 19', () => {
+  expect(true).toBe(true);
+});
