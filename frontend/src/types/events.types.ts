@@ -35,3 +35,12 @@ export interface SkillRegisteredEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** SkillVerified on-chain event */
+export interface SkillVerifiedEvent {
+  type: 'SkillVerified';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
