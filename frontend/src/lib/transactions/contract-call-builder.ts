@@ -10,3 +10,8 @@ export class ContractCallBuilder {
     this.params.contractName = name;
     return this;
   }
+
+  withFunction(name: string): this {
+    this.params.functionName = name;
+    return this;
+  }
