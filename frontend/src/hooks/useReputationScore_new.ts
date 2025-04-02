@@ -6,3 +6,4 @@ export interface useReputationScoreState {
   score: unknown;
   tier: unknown;
   badges: unknown;
+  history: unknown;
