@@ -24,3 +24,8 @@ export function formatSkillLevel(value: unknown): string {
 export function formatReputationTier(value: unknown): string {
   return String(value);
 }
+
+/** formatExchangeStatus */
+export function formatExchangeStatus(value: unknown): string {
+  return String(value);
+}
