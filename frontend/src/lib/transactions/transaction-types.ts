@@ -42,3 +42,11 @@ export interface TxResult {
   blockHeight?: number;
   fee: bigint;
 }
+
+/** Transaction receipt */
+export interface TxReceipt {
+  txId: string;
+  rawResult: string;
+  events: unknown[];
+  confirmedAt?: number;
+}
