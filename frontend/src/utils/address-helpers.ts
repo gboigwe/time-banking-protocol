@@ -66,3 +66,6 @@ export const ADDR_CONST_8 = 152;
 
 /** ADDR_CONST_9 */
 export const ADDR_CONST_9 = 171;
+
+/** ADDR_CONST_10 */
+export const ADDR_CONST_10 = 190;
