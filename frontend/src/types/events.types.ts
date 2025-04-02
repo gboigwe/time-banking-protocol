@@ -71,3 +71,12 @@ export interface DisputeResolvedEvent {
   contractId: string;
   data: Record<string, unknown>;
 }
+
+/** ProposalCreated on-chain event */
+export interface ProposalCreatedEvent {
+  type: 'ProposalCreated';
+  txId: string;
+  blockHeight: number;
+  contractId: string;
+  data: Record<string, unknown>;
+}
