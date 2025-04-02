@@ -99,3 +99,6 @@ export const BLOCK_SEQUENCE_CONST_13 = 1300;
 
 // Additional block utility 14 — block sequence helper 14
 export const BLOCK_SEQUENCE_CONST_14 = 1400;
+
+// Additional block utility 15 — block sequence helper 15
+export const BLOCK_SEQUENCE_CONST_15 = 1500;
