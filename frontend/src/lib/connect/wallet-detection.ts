@@ -44,3 +44,13 @@ export function getWalletName(wallet: WalletType): string {
   };
   return names[wallet];
 }
+
+/** Get wallet icon URL */
+export function getWalletIcon(wallet: WalletType): string {
+  const icons: Record<WalletType, string> = {
+    [WalletType.Leather]: '/icons/leather.svg',
+    [WalletType.Xverse]: '/icons/xverse.svg',
+    [WalletType.Unknown]: '/icons/wallet.svg',
+  };
+  return icons[wallet];
+}
