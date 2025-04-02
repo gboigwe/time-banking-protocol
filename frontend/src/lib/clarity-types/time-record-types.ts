@@ -27,3 +27,5 @@ export interface TimeRecord {
   exchangeId: number;
   /** Address of the service provider */
   provider: string;
+  /** Address of the service requester */
+  requester: string;
