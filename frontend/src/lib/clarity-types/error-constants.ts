@@ -91,3 +91,4 @@ export const ERR_CERT_ALREADY_ISSUED = 1302;
 // ---- referral-program errors ----
 export const ERR_REFERRAL_NOT_FOUND = 1400;
 export const ERR_REFERRAL_ALREADY_USED = 1401;
+export const ERR_SELF_REFERRAL = 1402;
