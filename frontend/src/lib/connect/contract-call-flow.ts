@@ -36,3 +36,8 @@ export function handleCallResponse(...args: unknown[]): unknown {
 export function isCallPending(...args: unknown[]): unknown {
   return args;
 }
+
+/** isCallSuccess */
+export function isCallSuccess(...args: unknown[]): unknown {
+  return args;
+}
