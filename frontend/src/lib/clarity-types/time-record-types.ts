@@ -9,3 +9,5 @@ export function toHoursUnit(value: number): HoursUnit {
 }
 
 // ServiceStatus enum mapping Clarity uint values
+export enum ServiceStatus {
+  Pending = 0,
