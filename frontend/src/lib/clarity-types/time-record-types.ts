@@ -7,3 +7,5 @@ export type HoursUnit = number & { readonly __brand: 'HoursUnit' };
 export function toHoursUnit(value: number): HoursUnit {
   return value as HoursUnit;
 }
+
+// ServiceStatus enum mapping Clarity uint values
