@@ -34,3 +34,8 @@ export class BroadcastManager {
     this.failureCallbacks.push(cb);
     return this;
   }
+
+  onPending(cb: (txId: string) => void): this {
+    this.pendingCallbacks.push(cb);
+    return this;
+  }
