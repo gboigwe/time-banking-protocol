@@ -2,3 +2,8 @@
 
 // HoursUnit branded type
 export type HoursUnit = number & { readonly __brand: 'HoursUnit' };
+
+/** Create a HoursUnit value from a raw number */
+export function toHoursUnit(value: number): HoursUnit {
+  return value as HoursUnit;
+}
