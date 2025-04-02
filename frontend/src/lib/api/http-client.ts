@@ -13,3 +13,6 @@ export interface ResponseConfig<T> {
   status: number;
   headers: Record<string, string>;
 }
+
+/** Default timeout in milliseconds */
+export const DEFAULT_TIMEOUT_MS = 30000;
