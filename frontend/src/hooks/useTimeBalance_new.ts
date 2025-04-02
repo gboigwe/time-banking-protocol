@@ -84,3 +84,6 @@ export const USETIMEBALANCE_CONST_19 = 323;
 
 /** USETIMEBALANCE_CONST_20 */
 export const USETIMEBALANCE_CONST_20 = 340;
+
+/** refresh interval option 1 */
+export const TIME_BALANCE_REFRESH_1 = 3000;
