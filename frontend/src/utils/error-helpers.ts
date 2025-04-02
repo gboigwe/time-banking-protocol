@@ -35,3 +35,10 @@ export function parseContractError(errorCode: number): string {
   };
   return messages[errorCode] ?? `Contract error: ${errorCode}`;
 }
+
+/** Extract human-readable message from any error */
+export function getErrorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === 'string') return error;
+  return 'An unknown error occurred';
+}
