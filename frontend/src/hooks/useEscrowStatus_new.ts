@@ -6,3 +6,4 @@ export interface useEscrowStatusState {
   escrow: unknown;
   releaseStatus: unknown;
   guardianAddress: unknown;
+  isLoading: unknown;
