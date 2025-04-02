@@ -8,3 +8,4 @@ export interface useReputationScoreState {
   badges: unknown;
   history: unknown;
   isLoading: unknown;
+  error: unknown;
