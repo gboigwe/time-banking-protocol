@@ -29,3 +29,11 @@ export function validateNotSelfExchange(provider: string, requester: string): st
   }
   return null;
 }
+
+/** Validate exchange description length */
+export function validateDescription(description?: string): string | null {
+  if (description && description.length > MAX_DESCRIPTION_LENGTH) {
+    return `Description cannot exceed ${MAX_DESCRIPTION_LENGTH} characters`;
+  }
+  return null;
+}
