@@ -4,3 +4,4 @@ import { useState, useCallback, useEffect } from 'react';
 /** State interface for useEscrowStatus */
 export interface useEscrowStatusState {
   escrow: unknown;
+  releaseStatus: unknown;
