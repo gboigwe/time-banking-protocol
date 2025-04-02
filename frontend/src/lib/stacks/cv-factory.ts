@@ -10,3 +10,12 @@ export interface UIntCV extends ClarityValue {
   type: 'uint';
   value: bigint;
 }
+
+/**
+ * Create a uint ClarityValue
+ * @param value - the uint value
+ * @returns UIntCV
+ */
+export function uintCV(value: number | bigint): UIntCV {
+  return { type: 'uint', value: BigInt(value) };
+}
