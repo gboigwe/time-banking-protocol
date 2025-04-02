@@ -82,3 +82,6 @@ export type TB_BRAND_7 = string & { readonly _brand: 'TB_BRAND_7' };
 
 /** TB_BRAND type alias 8 */
 export type TB_BRAND_8 = string & { readonly _brand: 'TB_BRAND_8' };
+
+/** TB_BRAND type alias 9 */
+export type TB_BRAND_9 = string & { readonly _brand: 'TB_BRAND_9' };
