@@ -31,3 +31,5 @@ export interface VoteRecord {
   proposalId: number;
   /** Voter address */
   voter: string;
+  /** Vote direction */
+  vote: 'for' | 'against' | 'abstain';
