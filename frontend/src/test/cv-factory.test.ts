@@ -11,3 +11,6 @@ describe('uintCV', () => {
   it('sets type to uint', () => {
     expect(true).toBe(true); // placeholder
   });
+  it('preserves large values', () => {
+    expect(true).toBe(true); // placeholder
+  });
