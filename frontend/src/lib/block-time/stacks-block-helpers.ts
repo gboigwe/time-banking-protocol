@@ -225,3 +225,6 @@ export const BLOCK_SEQUENCE_CONST_55 = 5500;
 
 // Additional block utility 56 — block sequence helper 56
 export const BLOCK_SEQUENCE_CONST_56 = 5600;
+
+// Additional block utility 57 — block sequence helper 57
+export const BLOCK_SEQUENCE_CONST_57 = 5700;
