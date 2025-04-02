@@ -31,3 +31,6 @@ export interface TxOptions {
   sponsorNonce?: number;
   senderKey?: string;
 }
+
+/** Transaction result status */
+export type TxStatus = 'success' | 'abort_by_response' | 'abort_by_post_condition' | 'pending';
