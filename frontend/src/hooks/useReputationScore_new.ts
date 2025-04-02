@@ -5,3 +5,4 @@ import { useState, useCallback, useEffect } from 'react';
 export interface useReputationScoreState {
   score: unknown;
   tier: unknown;
+  badges: unknown;
