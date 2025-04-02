@@ -29,3 +29,5 @@ export interface CouncilMember {
 export interface VoteRecord {
   /** Proposal being voted on */
   proposalId: number;
+  /** Voter address */
+  voter: string;
