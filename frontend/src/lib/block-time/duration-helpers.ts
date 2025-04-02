@@ -35,3 +35,12 @@ export function blocksToHours(blocks: number): number {
 export function hoursToBlocks(hours: number): number {
   return Math.ceil(hours * BLOCKS_PER_HOUR);
 }
+
+/**
+ * Convert days to approximate block count
+ * @param days - number of days
+ * @returns approximate block count
+ */
+export function daysToBlocks(days: number): number {
+  return Math.ceil(days * BLOCKS_PER_DAY);
+}
