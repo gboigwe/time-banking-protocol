@@ -93,3 +93,6 @@ export const TX_LIMIT_19 = 209;
 
 /** TX_LIMIT_20 */
 export const TX_LIMIT_20 = 220;
+
+/** TX_LIMIT_21 */
+export const TX_LIMIT_21 = 231;
