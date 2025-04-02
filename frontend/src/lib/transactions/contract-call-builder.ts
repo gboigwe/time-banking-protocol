@@ -25,3 +25,8 @@ export class ContractCallBuilder {
     this.params.fee = fee;
     return this;
   }
+
+  withNonce(nonce: number): this {
+    this.params.nonce = nonce;
+    return this;
+  }
