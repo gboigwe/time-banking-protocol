@@ -157,3 +157,6 @@ export const TIME_FORMAT_40 = 760;
 
 /** TIME_FORMAT_41 */
 export const TIME_FORMAT_41 = 779;
+
+/** TIME_FORMAT_42 */
+export const TIME_FORMAT_42 = 798;
