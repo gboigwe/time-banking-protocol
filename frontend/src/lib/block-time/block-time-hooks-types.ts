@@ -131,3 +131,6 @@ export const POLL_INTERVAL_31 = 155000;
 
 /** Poll interval option 32: 160000 ms */
 export const POLL_INTERVAL_32 = 160000;
+
+/** Poll interval option 33: 165000 ms */
+export const POLL_INTERVAL_33 = 165000;
