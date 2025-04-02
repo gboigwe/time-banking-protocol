@@ -14,3 +14,8 @@ export function detectWallet(): WalletType {
   if ((window as Record<string, unknown>)['XverseProviders']) return WalletType.Xverse;
   return WalletType.Unknown;
 }
+
+/** Check if Leather wallet is installed */
+export function isLeatherInstalled(): boolean {
+  return typeof window !== 'undefined' && !!(window as Record<string, unknown>)['LeatherProvider'];
+}
