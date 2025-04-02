@@ -125,3 +125,6 @@ export const HTTP_STATUS_22 = 242;
 
 /** HTTP_STATUS_23 */
 export const HTTP_STATUS_23 = 253;
+
+/** HTTP_STATUS_24 */
+export const HTTP_STATUS_24 = 264;
