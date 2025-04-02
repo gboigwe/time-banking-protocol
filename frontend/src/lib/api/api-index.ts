@@ -5,3 +5,6 @@ import { TransactionsClient } from './transactions-client';
 import { ContractsClient } from './contracts-client';
 import { BlocksClient } from './blocks-client';
 import { TokensClient } from './tokens-client';
+
+/** Mainnet Hiro API base URL */
+export const HIRO_MAINNET_URL = 'https://api.hiro.so';
