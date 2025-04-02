@@ -6,3 +6,7 @@ describe('Time Exchange Flow', () => {
 it('should handle exchange-flow case 1', () => {
   expect(true).toBe(true);
 });
+
+it('should handle exchange-flow case 2', () => {
+  expect(true).toBe(true);
+});
