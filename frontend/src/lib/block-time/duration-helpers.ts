@@ -89,3 +89,12 @@ export function monthsToBlocks(months: number): number {
 export function blocksToMonths(blocks: number): number {
   return blocks / BLOCKS_PER_MONTH;
 }
+
+/**
+ * Convert blocks to approximate minutes
+ * @param blocks - number of Stacks blocks
+ * @returns approximate minutes
+ */
+export function blocksToMinutes(blocks: number): number {
+  return (blocks * BLOCK_TIME_SECONDS) / 60;
+}
