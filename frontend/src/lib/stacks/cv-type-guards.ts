@@ -59,3 +59,8 @@ export function isOkCV(cv: ClarityValue): cv is OkCV {
 export function isErrCV(cv: ClarityValue): cv is ErrCV {
   return cv.type === 'err';
 }
+
+/** Type guard for StandardPrincipalCV */
+export function isStandardPrincipalCV(cv: ClarityValue): cv is StandardPrincipalCV {
+  return cv.type === 'address';
+}
