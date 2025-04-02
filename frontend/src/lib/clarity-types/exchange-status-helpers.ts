@@ -20,3 +20,17 @@ export function canCancelExchange(status: ServiceStatus): boolean {
 export function canDisputeExchange(status: ServiceStatus): boolean {
   return status === ServiceStatus.Active;
 }
+
+/** Get allowed next states for an exchange */
+export function getAllowedTransitions(status: ServiceStatus): ServiceStatus[] {
+  switch (status) {
+    case ServiceStatus.Pending:
+      return [ServiceStatus.Active, ServiceStatus.Cancelled, ServiceStatus.Expired];
+    case ServiceStatus.Active:
+      return [ServiceStatus.Completed, ServiceStatus.Disputed, ServiceStatus.Cancelled];
+    case ServiceStatus.Disputed:
+      return [ServiceStatus.Completed, ServiceStatus.Cancelled];
+    default:
+      return [];
+  }
+}
