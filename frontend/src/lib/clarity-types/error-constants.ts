@@ -18,3 +18,4 @@ export const ERR_UNAUTHORIZED = 105;
 export const ERR_CONTRACT_PAUSED = 106;
 
 // ---- exchange-manager errors ----
+export const ERR_EXCHANGE_NOT_FOUND = 200;
