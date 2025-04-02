@@ -34,3 +34,8 @@ export function isBufferCV(cv: ClarityValue): cv is BufferCV {
 export function isListCV(cv: ClarityValue): cv is ListCV {
   return cv.type === 'list';
 }
+
+/** Type guard for TupleCV */
+export function isTupleCV(cv: ClarityValue): cv is TupleCV {
+  return cv.type === 'tuple';
+}
