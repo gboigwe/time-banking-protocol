@@ -228,3 +228,6 @@ export const ACCOUNT_LIMIT_57 = 627;
 
 /** ACCOUNT_LIMIT_58 */
 export const ACCOUNT_LIMIT_58 = 638;
+
+/** ACCOUNT_LIMIT_59 */
+export const ACCOUNT_LIMIT_59 = 649;
