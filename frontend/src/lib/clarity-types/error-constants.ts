@@ -29,3 +29,4 @@ export const ERR_EXCHANGE_LIMIT_REACHED = 205;
 export const ERR_SKILL_NOT_FOUND = 300;
 export const ERR_SKILL_ALREADY_EXISTS = 301;
 export const ERR_SKILL_NOT_OFFERED = 302;
+export const ERR_SKILL_INACTIVE = 303;
