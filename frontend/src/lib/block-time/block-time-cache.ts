@@ -24,3 +24,14 @@ export function cacheBlockTime(blockHeight: number, timestamp: number): void {
     cachedAt: Date.now(),
   });
 }
+
+/** Retrieve a cached block timestamp */
+export function getCachedBlockTime(blockHeight: number): number | null {
+  const entry = blockTimeCache.get(blockHeight);
+  if (!entry) return null;
+  if (Date.now() - entry.cachedAt > CACHE_TTL_MS) {
+    blockTimeCache.delete(blockHeight);
+    return null;
+  }
+  return entry.timestamp;
+}
