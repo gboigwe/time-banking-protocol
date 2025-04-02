@@ -51,3 +51,21 @@ export function formatTimeRemaining(remainingBlocks: number): string {
   const remainingHours = hours % 24;
   return remainingHours > 0 ? `${days}d ${remainingHours}h` : `${days} day${days !== 1 ? 's' : ''}`;
 }
+
+/**
+ * Get percentage of time elapsed in a block range
+ * @param startBlock - start of range
+ * @param endBlock - end of range
+ * @param currentBlock - current position
+ * @returns percentage elapsed (0-100)
+ */
+export function getProgressPercent(
+  startBlock: number,
+  endBlock: number,
+  currentBlock: number
+): number {
+  if (endBlock <= startBlock) return 100;
+  const total = endBlock - startBlock;
+  const elapsed = Math.min(currentBlock - startBlock, total);
+  return Math.max(0, Math.round((elapsed / total) * 100));
+}
