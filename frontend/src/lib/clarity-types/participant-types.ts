@@ -39,3 +39,5 @@ export interface ParticipantProfile {
   reputation: ReputationScore;
   /** Block height when registered */
   registeredAt: number;
+  /** Total completed exchanges */
+  completedExchanges: number;
