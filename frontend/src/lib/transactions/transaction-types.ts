@@ -8,3 +8,4 @@ export interface ContractCallTxParams {
   contractAddress: string;
   contractName: string;
   functionName: string;
+  functionArgs: unknown[];
