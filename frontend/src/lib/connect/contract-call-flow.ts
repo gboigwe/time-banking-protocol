@@ -31,3 +31,8 @@ export function openContractCallDialog(...args: unknown[]): unknown {
 export function handleCallResponse(...args: unknown[]): unknown {
   return args;
 }
+
+/** isCallPending */
+export function isCallPending(...args: unknown[]): unknown {
+  return args;
+}
