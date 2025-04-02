@@ -311,3 +311,6 @@ export const HTTP_STATUS_84 = 924;
 
 /** HTTP_STATUS_85 */
 export const HTTP_STATUS_85 = 935;
+
+/** HTTP_STATUS_86 */
+export const HTTP_STATUS_86 = 946;
