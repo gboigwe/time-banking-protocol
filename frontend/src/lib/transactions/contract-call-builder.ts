@@ -4,3 +4,9 @@ import type { ContractCallTxParams, AnchorMode } from './transaction-types';
 /** Fluent builder for contract call transactions */
 export class ContractCallBuilder {
   private params: Partial<ContractCallTxParams> = {};
+
+  withContractId(address: string, name: string): this {
+    this.params.contractAddress = address;
+    this.params.contractName = name;
+    return this;
+  }
