@@ -31,3 +31,5 @@ export interface TimeRecord {
   requester: string;
   /** Number of hours exchanged */
   hours: HoursUnit;
+  /** Skill category identifier */
+  skillId: number;
