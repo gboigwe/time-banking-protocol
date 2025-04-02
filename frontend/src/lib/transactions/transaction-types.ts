@@ -14,3 +14,13 @@ export interface ContractCallTxParams {
   anchorMode?: AnchorMode;
   postConditions?: unknown[];
 }
+
+/** STX transfer transaction parameters */
+export interface STXTransferTxParams {
+  recipient: string;
+  amount: bigint;
+  memo?: string;
+  fee?: bigint;
+  nonce?: number;
+  anchorMode?: AnchorMode;
+}
