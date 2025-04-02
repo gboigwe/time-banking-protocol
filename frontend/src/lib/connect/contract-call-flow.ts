@@ -80,3 +80,6 @@ export const CALL_TIMEOUT_12 = 84;
 
 /** CALL_TIMEOUT constant 13 */
 export const CALL_TIMEOUT_13 = 91;
+
+/** CALL_TIMEOUT constant 14 */
+export const CALL_TIMEOUT_14 = 98;
