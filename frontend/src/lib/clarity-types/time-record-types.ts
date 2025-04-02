@@ -17,3 +17,5 @@ export enum ServiceStatus {
   Disputed = 4,
   Expired = 5,
 }
+
+// ExchangeDirection union type
