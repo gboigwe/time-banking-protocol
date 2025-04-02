@@ -24,3 +24,8 @@ export class BroadcastManager {
   private successCallbacks: Array<(result: BroadcastResult) => void> = [];
   private failureCallbacks: Array<(error: BroadcastError) => void> = [];
   private pendingCallbacks: Array<(txId: string) => void> = [];
+
+  onSuccess(cb: (result: BroadcastResult) => void): this {
+    this.successCallbacks.push(cb);
+    return this;
+  }
