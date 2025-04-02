@@ -4,3 +4,4 @@ import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 /** Auth state shape */
 export interface StacksAuthState {
   address: string | null;
+  isConnected: boolean;
