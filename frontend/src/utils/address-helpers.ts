@@ -27,3 +27,8 @@ export function parseContractId(contractId: string): { address: string; name: st
   if (parts.length !== 2) return null;
   return { address: parts[0], name: parts[1] };
 }
+
+/** Convert address to buffer representation */
+export function addressToBuffer(address: string): Uint8Array {
+  return new TextEncoder().encode(address);
+}
