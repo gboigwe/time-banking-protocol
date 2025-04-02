@@ -129,3 +129,23 @@ export function formatBlockDuration(blocks: number): string {
   const weeks = Math.round(blocksToWeeks(blocks));
   return `${weeks} week${weeks !== 1 ? 's' : ''}`;
 }
+
+/**
+ * Parse a human-readable duration string to block count
+ * @param duration - string like "2h", "3d", "1w"
+ * @returns block count or null if unparseable
+ */
+export function parseDurationToBlocks(duration: string): number | null {
+  const match = duration.match(/^(\d+(?:\.\d+)?)\s*([mhdwMy]?)$/i);
+  if (!match) return null;
+  const value = parseFloat(match[1]);
+  const unit = match[2].toLowerCase();
+  switch (unit) {
+    case 'm': return Math.ceil(value / 10);
+    case 'h': return hoursToBlocks(value);
+    case 'd': return daysToBlocks(value);
+    case 'w': return weeksToBlocks(value);
+    case 'M': return monthsToBlocks(value);
+    default: return Math.ceil(value);
+  }
+}
