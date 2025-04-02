@@ -15,3 +15,11 @@ export class ContractError extends StacksError {
     this.name = 'ContractError';
   }
 }
+
+/** Wallet-specific error class */
+export class WalletError extends StacksError {
+  constructor(message: string, public readonly wallet?: string) {
+    super(message);
+    this.name = 'WalletError';
+  }
+}
