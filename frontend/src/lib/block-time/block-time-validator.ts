@@ -20,3 +20,12 @@ export function validateBlockHeight(blockHeight: number): string | null {
   if (blockHeight > MAX_BLOCK_HEIGHT) return `Block height cannot exceed ${MAX_BLOCK_HEIGHT}`;
   return null;
 }
+
+/**
+ * Check if a block height is a reasonable on-chain value
+ * @param blockHeight - value to check
+ * @returns true if block height appears reasonable
+ */
+export function isReasonableBlockHeight(blockHeight: number): boolean {
+  return validateBlockHeight(blockHeight) === null;
+}
