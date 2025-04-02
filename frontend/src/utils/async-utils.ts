@@ -96,3 +96,6 @@ export const ASYNC_CONST_3 = 57;
 
 /** ASYNC_CONST_4 */
 export const ASYNC_CONST_4 = 76;
+
+/** ASYNC_CONST_5 */
+export const ASYNC_CONST_5 = 95;
