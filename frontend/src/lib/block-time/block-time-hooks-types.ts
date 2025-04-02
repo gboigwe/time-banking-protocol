@@ -6,3 +6,5 @@ export interface BlockTimeState {
   currentBlock: number | null;
   /** Whether block height is loading */
   isLoading: boolean;
+  /** Error message if fetch failed */
+  error: string | null;
