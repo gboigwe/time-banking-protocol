@@ -41,3 +41,6 @@ export interface ToastState {
   active: boolean;
   data?: unknown;
 }
+
+/** UI constant 1 */
+export const UI_STATE_1 = 5;
