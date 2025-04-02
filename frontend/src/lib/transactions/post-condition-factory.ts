@@ -46,3 +46,6 @@ export function makeNFTPostCondition(
 
 /** POST_COND_1 */
 export const POST_COND_1 = 13;
+
+/** POST_COND_2 */
+export const POST_COND_2 = 26;
