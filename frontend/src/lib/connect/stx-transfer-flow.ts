@@ -230,3 +230,6 @@ export const TRANSFER_LIMIT_66 = 462;
 
 /** TRANSFER_LIMIT constant 67 */
 export const TRANSFER_LIMIT_67 = 469;
+
+/** TRANSFER_LIMIT constant 68 */
+export const TRANSFER_LIMIT_68 = 476;
