@@ -1,5 +1,5 @@
 ;; Time Banking Protocol - Core Contract
-;; Controls the main functionality of the time banking system
+;; Controls the main functionality of the time banking system with time credit economy
 
 ;; Constants and Error Codes
 (define-constant CONTRACT_OWNER tx-sender)
@@ -12,6 +12,10 @@
 (define-constant ERR_NOT_FOUND (err u1007))
 (define-constant ERR_ALREADY_COMPLETED (err u1008))
 (define-constant ERR_SELF_EXCHANGE (err u1009))
+(define-constant ERR_INSUFFICIENT_CREDITS (err u1010))
+
+;; Configuration Constants
+(define-constant INITIAL_CREDITS u10) ;; New users get 10 hours of credits to start
 
 ;; Data Structures
 (define-map users
@@ -23,6 +27,11 @@
         reputation-score: uint,
         is-active: bool
     })
+
+;; Time Credit Balances - Core of the time banking economy
+(define-map time-balances
+    principal
+    uint) ;; Available time credits in hours
 
 (define-map skills
     (string-ascii 64)
@@ -69,7 +78,7 @@
 
 (define-data-var event-nonce uint u0)
 
-;; Event Logging - Fixed to be persistent and type-safe
+;; Event Logging
 (define-private (log-event (event-type (string-ascii 32)) (data (string-ascii 256)))
     (let ((event-id (+ (var-get event-nonce) u1)))
         (var-set event-nonce event-id)
@@ -78,6 +87,27 @@
             data: data,
             block: block-height
         })))
+
+;; Credit Management Functions
+(define-private (get-balance (user principal))
+    (default-to u0 (map-get? time-balances user)))
+
+(define-private (add-credits (user principal) (amount uint))
+    (let ((current-balance (get-balance user)))
+        (map-set time-balances user (+ current-balance amount))))
+
+(define-private (deduct-credits (user principal) (amount uint))
+    (let ((current-balance (get-balance user)))
+        (asserts! (>= current-balance amount) ERR_INSUFFICIENT_CREDITS)
+        (map-set time-balances user (- current-balance amount))
+        (ok true)))
+
+(define-private (transfer-credits (from principal) (to principal) (amount uint))
+    (begin
+        (try! (deduct-credits from amount))
+        (add-credits to amount)
+        (log-event "credit-transfer" "credits-transferred")
+        (ok true)))
 
 ;; Administrative Functions
 (define-public (set-min-exchange-duration (hours uint))
@@ -96,6 +126,15 @@
         (log-event "config-update" "max-exchange-duration-updated")
         (ok true)))
 
+;; Emergency credit functions (admin only)
+(define-public (mint-credits (user principal) (amount uint))
+    (begin
+        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
+        (asserts! (is-some (map-get? users user)) ERR_NOT_FOUND)
+        (add-credits user amount)
+        (log-event "admin-action" "credits-minted")
+        (ok true)))
+
 ;; User Management
 (define-public (register-user)
     (begin
@@ -107,27 +146,16 @@
             reputation-score: u0,
             is-active: true
         })
-        (log-event "user-action" "user-registered")
+        ;; Give new users initial credits to participate in the economy
+        (map-set time-balances tx-sender INITIAL_CREDITS)
+        (log-event "user-action" "user-registered-with-credits")
         (ok true)))
-
-;; String Validation Functions
-(define-private (is-valid-string (input (string-ascii 64)))
-    (and
-        (>= (len input) u1)
-        (<= (len input) u64)))
-
-(define-private (is-valid-category (input (string-ascii 32)))
-    (and
-        (>= (len input) u1)
-        (<= (len input) u32)))
 
 ;; Skill Management
 (define-public (register-skill (skill-name (string-ascii 64)) (category (string-ascii 32)))
     (begin
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
         (asserts! (is-none (map-get? skills skill-name)) ERR_ALREADY_VERIFIED)
-        (asserts! (is-valid-string skill-name) ERR_INVALID_PARAMS)
-        (asserts! (is-valid-category category) ERR_INVALID_PARAMS)
         (map-set skills skill-name {
             category: category,
             min-reputation: u0,
@@ -151,10 +179,9 @@
         (log-event "skill-action" "skill-verified")
         (ok true)))
 
-;; Exchange Functions
+;; Exchange Functions with Credit System
 (define-public (create-exchange (skill (string-ascii 64)) (hours uint) (receiver principal))
     (begin
-        (asserts! (is-valid-string skill) ERR_INVALID_PARAMS)
         (let ((exchange-id (+ (var-get exchange-nonce) u1)))
         (asserts! (is-some (map-get? users tx-sender)) ERR_UNAUTHORIZED)
         (asserts! (is-some (map-get? users receiver)) ERR_NOT_FOUND)
@@ -164,6 +191,10 @@
                  ERR_INVALID_PARAMS)
         (asserts! (is-some (map-get? user-skills 
             {user: tx-sender, skill: skill})) ERR_SKILL_NOT_VERIFIED)
+        
+        ;; Check if receiver has sufficient credits to pay for the service
+        (asserts! (>= (get-balance receiver) hours) ERR_INSUFFICIENT_CREDITS)
+        
         (map-set time-exchanges exchange-id {
             provider: tx-sender,
             receiver: receiver,
@@ -181,6 +212,10 @@
     (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
         (asserts! (is-eq (get receiver exchange) tx-sender) ERR_UNAUTHORIZED)
         (asserts! (is-eq (get status exchange) "pending") ERR_ALREADY_COMPLETED)
+        
+        ;; Double-check receiver still has sufficient credits when accepting
+        (asserts! (>= (get-balance tx-sender) (get hours exchange)) ERR_INSUFFICIENT_CREDITS)
+        
         (map-set time-exchanges exchange-id 
             (merge exchange {status: "active"}))
         (log-event "exchange-action" "exchange-accepted")
@@ -190,10 +225,16 @@
     (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
         (asserts! (is-eq (get receiver exchange) tx-sender) ERR_UNAUTHORIZED)
         (asserts! (is-eq (get status exchange) "active") ERR_ALREADY_COMPLETED)
+        
+        ;; Transfer credits from receiver to provider
+        (try! (transfer-credits tx-sender (get provider exchange) (get hours exchange)))
+        
+        ;; Update user statistics
         (try! (update-user-stats 
             (get provider exchange) 
             (get receiver exchange) 
             (get hours exchange)))
+        
         (map-set time-exchanges exchange-id 
             (merge exchange {
                 status: "completed",
@@ -236,6 +277,9 @@
 (define-read-only (get-user-info (user principal))
     (map-get? users user))
 
+(define-read-only (get-user-balance (user principal))
+    (ok (get-balance user)))
+
 (define-read-only (get-skill-info (skill-name (string-ascii 64)))
     (map-get? skills skill-name))
 
@@ -247,3 +291,15 @@
 
 (define-read-only (get-event (event-id uint))
     (map-get? event-log event-id))
+
+;; Check if user can afford a service
+(define-read-only (can-afford-service (user principal) (hours uint))
+    (ok (>= (get-balance user) hours)))
+
+;; Get system configuration
+(define-read-only (get-exchange-limits)
+    (ok {
+        min-hours: (var-get min-exchange-duration),
+        max-hours: (var-get max-exchange-duration),
+        initial-credits: INITIAL_CREDITS
+    }))
