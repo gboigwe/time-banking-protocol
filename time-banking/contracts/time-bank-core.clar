@@ -16,6 +16,7 @@
 
 ;; Configuration Constants
 (define-constant INITIAL_CREDITS u10) ;; New users get 10 hours of credits to start
+(define-constant MAX_MINT_AMOUNT u1000) ;; Maximum credits that can be minted at once
 
 ;; Data Structures
 (define-map users
@@ -78,7 +79,7 @@
 
 (define-data-var event-nonce uint u0)
 
-;; Event Logging
+;; Event Logging - Fixed to be persistent and type-safe
 (define-private (log-event (event-type (string-ascii 32)) (data (string-ascii 256)))
     (let ((event-id (+ (var-get event-nonce) u1)))
         (var-set event-nonce event-id)
@@ -131,6 +132,7 @@
     (begin
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
         (asserts! (is-some (map-get? users user)) ERR_NOT_FOUND)
+        (asserts! (and (> amount u0) (<= amount MAX_MINT_AMOUNT)) ERR_INVALID_PARAMS)
         (add-credits user amount)
         (log-event "admin-action" "credits-minted")
         (ok true)))
@@ -151,11 +153,24 @@
         (log-event "user-action" "user-registered-with-credits")
         (ok true)))
 
+;; String Validation Functions
+(define-private (is-valid-string (input (string-ascii 64)))
+    (and
+        (>= (len input) u1)
+        (<= (len input) u64)))
+
+(define-private (is-valid-category (input (string-ascii 32)))
+    (and
+        (>= (len input) u1)
+        (<= (len input) u32)))
+
 ;; Skill Management
 (define-public (register-skill (skill-name (string-ascii 64)) (category (string-ascii 32)))
     (begin
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
         (asserts! (is-none (map-get? skills skill-name)) ERR_ALREADY_VERIFIED)
+        (asserts! (is-valid-string skill-name) ERR_INVALID_PARAMS)
+        (asserts! (is-valid-category category) ERR_INVALID_PARAMS)
         (map-set skills skill-name {
             category: category,
             min-reputation: u0,
@@ -182,6 +197,7 @@
 ;; Exchange Functions with Credit System
 (define-public (create-exchange (skill (string-ascii 64)) (hours uint) (receiver principal))
     (begin
+        (asserts! (is-valid-string skill) ERR_INVALID_PARAMS)
         (let ((exchange-id (+ (var-get exchange-nonce) u1)))
         (asserts! (is-some (map-get? users tx-sender)) ERR_UNAUTHORIZED)
         (asserts! (is-some (map-get? users receiver)) ERR_NOT_FOUND)
@@ -291,6 +307,9 @@
 
 (define-read-only (get-event (event-id uint))
     (map-get? event-log event-id))
+
+(define-read-only (get-user-skill-verification (user principal) (skill (string-ascii 64)))
+    (map-get? user-skills {user: user, skill: skill}))
 
 ;; Check if user can afford a service
 (define-read-only (can-afford-service (user principal) (hours uint))
