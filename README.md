@@ -64,28 +64,6 @@ git clone https://github.com/gboigwe/time-banking-protocol.git
 cd time-banking-protocol
 ```
 
-2. Install Clarinet (if not already installed)
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://install.clarinet.sh | sh
-```
-
-3. Initialize the project
-```bash
-clarinet integrate
-```
-
-### Development Setup
-
-1. Start local Clarinet chain
-```bash
-clarinet chain
-```
-
-2. Deploy contracts (local development)
-```bash
-clarinet deploy
-```
-
 ## Smart Contract Functions
 
 ### Public Functions
@@ -126,8 +104,6 @@ clarinet test
 - [ ] Core smart contract development
 - [ ] Frontend interface development
 - [ ] Skill marketplace implementation
-- [ ] Mobile application development
-- [ ] Cross-chain integration capabilities
 
 ## Contact
 
