@@ -9,6 +9,8 @@ package-lock.json
 out/
 build/
 dist/
+/next-env.d.ts
+/next.config.js
 
 # Environment variables
 .env
