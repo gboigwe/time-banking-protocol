@@ -1,0 +1,40 @@
+{
+  "name": "time-banking-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "14.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "@stacks/connect": "^7.7.0",
+    "@stacks/transactions": "^6.5.4",
+    "@stacks/network": "^6.5.4",
+    "@stacks/auth": "^6.5.4",
+    "@stacks/storage": "^6.5.4",
+    "@heroicons/react": "^2.0.18",
+    "@headlessui/react": "^1.7.17",
+    "clsx": "^2.0.0",
+    "react-hot-toast": "^2.4.1",
+    "framer-motion": "^10.16.4",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "@types/node": "^20.8.6",
+    "@types/react": "^18.2.28",
+    "@types/react-dom": "^18.2.13",
+    "eslint": "^8.51.0",
+    "eslint-config-next": "14.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4"
+  }
+}

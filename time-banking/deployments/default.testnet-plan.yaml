@@ -1,0 +1,18 @@
+---
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: "https://api.testnet.hiro.so"
+bitcoin-node: "https://blockstream.info/testnet/api"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: time-bank-core
+            expected-sender: ST3A5HQKQM3T3BV1MCZ45S6Q729V8355BQ0W0NP2V
+            cost: 121120
+            path: contracts/time-bank-core.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "2.5"
