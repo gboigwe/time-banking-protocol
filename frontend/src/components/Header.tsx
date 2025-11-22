@@ -16,10 +16,11 @@ import { formatPrincipal } from '@/lib/stacks';
 
 const Header: React.FC = () => {
   const router = useRouter();
-  const { isConnected, address, connect, disconnect } = useWallet();
+  const { isConnected, address, connect, disconnect, connectWithWalletConnect, connectionType } = useWallet();
   const { state } = useApp();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [showWalletModal, setShowWalletModal] = useState(false);
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', current: router.pathname === '/dashboard' },
@@ -29,7 +30,21 @@ const Header: React.FC = () => {
   ];
 
   const handleConnect = () => {
+    setShowWalletModal(true);
+  };
+
+  const handleTraditionalWallet = () => {
+    setShowWalletModal(false);
     connect();
+  };
+
+  const handleWalletConnect = async () => {
+    setShowWalletModal(false);
+    try {
+      await connectWithWalletConnect();
+    } catch (error) {
+      console.error('WalletConnect failed:', error);
+    }
   };
 
   const handleDisconnect = () => {
@@ -108,9 +123,16 @@ const Header: React.FC = () => {
                     <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
                       <UserIcon className="w-4 h-4 text-white" />
                     </div>
-                    <span className="hidden sm:block text-sm font-medium">
-                      {formatPrincipal(address || '')}
-                    </span>
+                    <div className="hidden sm:block">
+                      <p className="text-sm font-medium">
+                        {formatPrincipal(address || '')}
+                      </p>
+                      {connectionType && (
+                        <p className="text-xs text-neutral-500">
+                          {connectionType === 'walletconnect' ? 'WalletConnect' : 'Browser Wallet'}
+                        </p>
+                      )}
+                    </div>
                     <ChevronDownIcon className="w-4 h-4" />
                   </button>
 
@@ -210,6 +232,86 @@ const Header: React.FC = () => {
                 </div>
               )}
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Wallet Selection Modal */}
+      <AnimatePresence>
+        {showWalletModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            onClick={() => setShowWalletModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-neutral-900">Connect Wallet</h2>
+                <button
+                  onClick={() => setShowWalletModal(false)}
+                  className="p-2 text-neutral-400 hover:text-neutral-600 transition-colors"
+                >
+                  <XMarkIcon className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="space-y-3">
+                {/* Browser Wallet Option */}
+                <button
+                  onClick={handleTraditionalWallet}
+                  className="w-full p-4 border-2 border-neutral-200 rounded-xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 group"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center">
+                      <UserIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1 text-left">
+                      <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-primary-600">
+                        Browser Wallet
+                      </h3>
+                      <p className="text-sm text-neutral-600">
+                        Hiro, Xverse, or Leather
+                      </p>
+                    </div>
+                  </div>
+                </button>
+
+                {/* WalletConnect Option */}
+                <button
+                  onClick={handleWalletConnect}
+                  className="w-full p-4 border-2 border-neutral-200 rounded-xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 group"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-accent-500 to-primary-500 rounded-xl flex items-center justify-center">
+                      <svg className="w-6 h-6 text-white" viewBox="0 0 300 185" fill="currentColor">
+                        <path d="M61.439 36.256c48.91-47.888 128.212-47.888 177.123 0l5.886 5.764a6.041 6.041 0 0 1 0 8.67l-20.136 19.716a3.179 3.179 0 0 1-4.428 0l-8.101-7.931c-34.122-33.408-89.444-33.408-123.566 0l-8.675 8.494a3.179 3.179 0 0 1-4.428 0L54.978 51.253a6.041 6.041 0 0 1 0-8.67l6.461-6.327ZM280.206 77.03l17.922 17.547a6.041 6.041 0 0 1 0 8.67l-80.81 79.122c-2.446 2.394-6.41 2.394-8.856 0l-57.354-56.155a1.59 1.59 0 0 0-2.214 0L91.54 182.37c-2.446 2.394-6.411 2.394-8.857 0L1.872 103.247a6.041 6.041 0 0 1 0-8.671l17.922-17.547c2.445-2.394 6.41-2.394 8.856 0l57.355 56.155a1.59 1.59 0 0 0 2.214 0L145.57 77.03c2.446-2.394 6.41-2.395 8.856 0l57.355 56.155a1.59 1.59 0 0 0 2.214 0L271.35 77.03c2.446-2.394 6.41-2.394 8.856 0Z"/>
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-left">
+                      <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-primary-600">
+                        WalletConnect
+                      </h3>
+                      <p className="text-sm text-neutral-600">
+                        Scan with mobile wallet
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              </div>
+
+              <p className="mt-6 text-xs text-center text-neutral-500">
+                By connecting, you agree to our Terms of Service and Privacy Policy
+              </p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

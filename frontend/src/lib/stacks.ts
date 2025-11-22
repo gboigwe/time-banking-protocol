@@ -20,11 +20,24 @@ import {
 import { AppConfig, UserSession, showConnect } from '@stacks/connect';
 import { Storage } from '@stacks/storage';
 import { ContractCallOptions, User, TimeExchange, UserSkill, Skill } from '@/types';
+import Client from '@walletconnect/sign-client';
+import QRCodeModal from '@walletconnect/qrcode-modal';
+
+// BigInt JSON serialization support
+if (typeof BigInt.prototype.toJSON === 'undefined') {
+  (BigInt.prototype as any).toJSON = function () {
+    return this.toString();
+  };
+}
 
 // Configuration
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
 export const storage = new Storage({ userSession });
+
+// WalletConnect Configuration
+export let walletConnectClient: Client | null = null;
+export let walletConnectSession: any = null;
 
 // Network configuration
 export const getNetwork = (): StacksNetwork => {
@@ -36,7 +49,123 @@ export const getNetwork = (): StacksNetwork => {
 export const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!;
 export const CONTRACT_NAME = process.env.NEXT_PUBLIC_CONTRACT_NAME!;
 
-// Wallet Connection
+// Initialize WalletConnect Client
+export const initializeWalletConnect = async (): Promise<Client> => {
+  if (walletConnectClient) {
+    return walletConnectClient;
+  }
+
+  const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
+
+  if (!projectId) {
+    console.warn('WalletConnect Project ID not configured');
+    throw new Error('WalletConnect Project ID is required');
+  }
+
+  try {
+    const client = await Client.init({
+      logger: 'debug',
+      relayUrl: 'wss://relay.walletconnect.com',
+      projectId,
+      metadata: {
+        name: 'TimeBank',
+        description: 'Decentralized Time Banking Protocol on Stacks',
+        url: typeof window !== 'undefined' ? window.location.origin : 'https://timebank.app',
+        icons: ['/icon.svg'],
+      },
+    });
+
+    walletConnectClient = client;
+    return client;
+  } catch (error) {
+    console.error('Failed to initialize WalletConnect:', error);
+    throw error;
+  }
+};
+
+// Connect via WalletConnect
+export const connectViaWalletConnect = async (): Promise<any> => {
+  try {
+    const client = await initializeWalletConnect();
+    const network = getNetwork();
+    const chain = network.isMainnet() ? 'stacks:1' : 'stacks:2147483648';
+
+    const { uri, approval } = await client.connect({
+      pairingTopic: undefined,
+      requiredNamespaces: {
+        stacks: {
+          methods: [
+            'stacks_signMessage',
+            'stacks_stxTransfer',
+            'stacks_contractCall',
+            'stacks_contractDeploy',
+          ],
+          chains: [chain],
+          events: [],
+        },
+      },
+    });
+
+    if (uri) {
+      QRCodeModal.open(uri, () => {
+        console.log('QR Code Modal closed');
+      });
+    }
+
+    const session = await approval();
+    walletConnectSession = session;
+    QRCodeModal.close();
+
+    return session;
+  } catch (error) {
+    console.error('WalletConnect connection failed:', error);
+    QRCodeModal.close();
+    throw error;
+  }
+};
+
+// Get WalletConnect address
+export const getWalletConnectAddress = (): string | null => {
+  if (!walletConnectSession) return null;
+
+  try {
+    const accounts = walletConnectSession.namespaces.stacks.accounts;
+    if (accounts && accounts.length > 0) {
+      // Format: "stacks:<network>:<address>"
+      return accounts[0].split(':')[2];
+    }
+  } catch (error) {
+    console.error('Error getting WalletConnect address:', error);
+  }
+
+  return null;
+};
+
+// Disconnect WalletConnect
+export const disconnectWalletConnect = async () => {
+  if (walletConnectClient && walletConnectSession) {
+    try {
+      await walletConnectClient.disconnect({
+        topic: walletConnectSession.topic,
+        reason: {
+          code: 6000,
+          message: 'User disconnected',
+        },
+      });
+    } catch (error) {
+      console.error('Error disconnecting WalletConnect:', error);
+    }
+  }
+
+  walletConnectSession = null;
+};
+
+// Check if WalletConnect is connected
+export const isWalletConnectConnected = (): boolean => {
+  return walletConnectSession !== null;
+};
+
+// Traditional Wallet Connection (Hiro/Xverse via Stacks Connect)
 export const connectWallet = () => {
   showConnect({
     appDetails: {
@@ -54,18 +183,36 @@ export const connectWallet = () => {
   });
 };
 
-export const disconnectWallet = () => {
-  userSession.signUserOut();
+export const disconnectWallet = async () => {
+  // Disconnect WalletConnect if active
+  if (isWalletConnectConnected()) {
+    await disconnectWalletConnect();
+  }
+
+  // Disconnect traditional wallet if active
+  if (userSession.isUserSignedIn()) {
+    userSession.signUserOut();
+  }
+
   window.location.reload();
 };
 
 export const isWalletConnected = (): boolean => {
-  return userSession.isUserSignedIn();
+  return userSession.isUserSignedIn() || isWalletConnectConnected();
 };
 
 export const getUserAddress = (): string | null => {
+  // Check WalletConnect first
+  const wcAddress = getWalletConnectAddress();
+  if (wcAddress) return wcAddress;
+
+  // Fallback to traditional wallet
   if (!userSession.isUserSignedIn()) return null;
-  return userSession.loadUserData().profile.stxAddress.testnet;
+  const network = getNetwork();
+  const userData = userSession.loadUserData();
+  return network.isMainnet()
+    ? userData.profile.stxAddress.mainnet
+    : userData.profile.stxAddress.testnet;
 };
 
 // Contract Call Helper
