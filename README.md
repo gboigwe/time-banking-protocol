@@ -36,9 +36,10 @@ Time Banking Protocol revolutionizes how people exchange skills and services by:
 
 ## Technical Stack
 
-- **Blockchain**: Stacks
+- **Blockchain**: Stacks (Bitcoin L2)
 - **Smart Contracts**: Clarity
-- **Frontend** (Coming Soon): React.js
+- **Frontend**: Next.js + React + TypeScript
+- **Wallet Integration**: Reown (WalletConnect) + Stacks Connect
 - **Testing**: Clarinet
 
 ## Smart Contract Architecture
@@ -62,6 +63,29 @@ The protocol consists of several key components:
 ```bash
 git clone https://github.com/gboigwe/time-banking-protocol.git
 cd time-banking-protocol
+```
+
+2. Install frontend dependencies
+```bash
+cd frontend
+npm install
+```
+
+3. Configure environment variables
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` and add your Reown Project ID:
+```env
+NEXT_PUBLIC_REOWN_PROJECT_ID=your_project_id_here
+```
+
+Get your Project ID from [Reown Dashboard](https://dashboard.reown.com/)
+
+4. Run the development server
+```bash
+npm run dev
 ```
 
 ## Smart Contract Functions
@@ -99,11 +123,48 @@ clarinet test
 - Time commitments are immutably recorded on the Stacks blockchain
 - Skill verifications require multi-party attestation
 
+## Wallet Integration
+
+This project integrates with Stacks wallets using **Reown (formerly WalletConnect)**, providing seamless wallet connectivity across mobile and desktop.
+
+### Supported Wallets
+
+- **Hiro Wallet** (Browser Extension)
+- **Xverse Wallet** (Browser Extension, iOS, Android)
+- **Any WalletConnect-compatible Stacks wallet** via Reown
+
+### Features
+
+- ✅ Traditional wallet connection (browser extensions)
+- ✅ Reown (WalletConnect) integration for mobile wallets
+- ✅ QR code scanning for mobile wallet connection
+- ✅ Automatic session management
+- ✅ Support for 600+ wallets via WalletConnect Network
+
+### Reown Integration Details
+
+The project uses `@stacks/connect v8.2.2` with built-in Reown support:
+
+```typescript
+// Connect with any Stacks wallet
+import { connectWallet } from '@/lib/stacks';
+connectWallet();
+
+// Connect specifically via Reown (WalletConnect)
+import { connectViaReown } from '@/lib/stacks';
+connectViaReown();
+```
+
+The integration follows the **SIP-030 standard** and **WBIPs (Wallet Bitcoin Improvement Proposals)** for optimal compatibility.
+
 ## Roadmap
 
-- [ ] Core smart contract development
-- [ ] Frontend interface development
+- [x] Core smart contract development
+- [x] Frontend interface development
+- [x] Reown (WalletConnect) integration
 - [ ] Skill marketplace implementation
+- [ ] Mobile-optimized UI
+- [ ] Stacking (yield) integration
 
 ## Contact
 

@@ -16,7 +16,7 @@ import { formatPrincipal } from '@/lib/stacks';
 
 const Header: React.FC = () => {
   const router = useRouter();
-  const { isConnected, address, connect, disconnect, connectWithWalletConnect, connectionType } = useWallet();
+  const { isConnected, address, connect, disconnect, connectWithReown } = useWallet();
   const { state } = useApp();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -38,12 +38,12 @@ const Header: React.FC = () => {
     connect();
   };
 
-  const handleWalletConnect = async () => {
+  const handleReownConnect = () => {
     setShowWalletModal(false);
     try {
-      await connectWithWalletConnect();
+      connectWithReown();
     } catch (error) {
-      console.error('WalletConnect failed:', error);
+      console.error('Reown connection failed:', error);
     }
   };
 
@@ -127,11 +127,9 @@ const Header: React.FC = () => {
                       <p className="text-sm font-medium">
                         {formatPrincipal(address || '')}
                       </p>
-                      {connectionType && (
-                        <p className="text-xs text-neutral-500">
-                          {connectionType === 'walletconnect' ? 'WalletConnect' : 'Browser Wallet'}
-                        </p>
-                      )}
+                      <p className="text-xs text-neutral-500">
+                        Connected
+                      </p>
                     </div>
                     <ChevronDownIcon className="w-4 h-4" />
                   </button>
@@ -285,9 +283,9 @@ const Header: React.FC = () => {
                   </div>
                 </button>
 
-                {/* WalletConnect Option */}
+                {/* Reown (WalletConnect) Option */}
                 <button
-                  onClick={handleWalletConnect}
+                  onClick={handleReownConnect}
                   className="w-full p-4 border-2 border-neutral-200 rounded-xl hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 group"
                 >
                   <div className="flex items-center space-x-4">
