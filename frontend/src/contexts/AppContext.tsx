@@ -210,6 +210,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         type: 'error',
         title: 'Error',
         message: 'Failed to load user profile',
+        read: false,
       });
     } finally {
       setLoading(false);

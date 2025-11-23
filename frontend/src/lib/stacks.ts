@@ -1,27 +1,21 @@
 import {
-  StacksNetwork,
-  StacksTestnet,
-  StacksMainnet,
-} from '@stacks/network';
-import {
   AnchorMode,
   PostConditionMode,
   standardPrincipalCV,
   uintCV,
   stringAsciiCV,
   contractPrincipalCV,
-  callReadOnlyFunction,
+  fetchCallReadOnlyFunction,
   broadcastTransaction,
   makeContractCall,
   ClarityValue,
   cvToValue,
   hexToCV,
 } from '@stacks/transactions';
-import { AppConfig, UserSession, showConnect } from '@stacks/connect';
+import { showConnect } from '@stacks/connect';
+import { AppConfig, UserSession } from '@stacks/auth';
 import { Storage } from '@stacks/storage';
 import { ContractCallOptions, User, TimeExchange, UserSkill, Skill } from '@/types';
-import Client from '@walletconnect/sign-client';
-import QRCodeModal from '@walletconnect/qrcode-modal';
 
 // BigInt JSON serialization support
 if (typeof BigInt.prototype.toJSON === 'undefined') {
@@ -35,139 +29,29 @@ const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
 export const storage = new Storage({ userSession });
 
-// WalletConnect Configuration
-export let walletConnectClient: Client | null = null;
-export let walletConnectSession: any = null;
-
 // Network configuration
-export const getNetwork = (): StacksNetwork => {
+export const getNetwork = (): 'mainnet' | 'testnet' => {
   const networkType = process.env.NEXT_PUBLIC_STACKS_NETWORK;
-  return networkType === 'mainnet' ? new StacksMainnet() : new StacksTestnet();
+  return networkType === 'mainnet' ? 'mainnet' : 'testnet';
 };
 
 // Contract configuration
 export const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!;
 export const CONTRACT_NAME = process.env.NEXT_PUBLIC_CONTRACT_NAME!;
 
-// Initialize WalletConnect Client
-export const initializeWalletConnect = async (): Promise<Client> => {
-  if (walletConnectClient) {
-    return walletConnectClient;
-  }
+// Reown (WalletConnect) configuration
+export const REOWN_PROJECT_ID = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID;
 
-  const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
-
-  if (!projectId) {
-    console.warn('WalletConnect Project ID not configured');
-    throw new Error('WalletConnect Project ID is required');
-  }
-
-  try {
-    const client = await Client.init({
-      logger: 'debug',
-      relayUrl: 'wss://relay.walletconnect.com',
-      projectId,
-      metadata: {
-        name: 'TimeBank',
-        description: 'Decentralized Time Banking Protocol on Stacks',
-        url: typeof window !== 'undefined' ? window.location.origin : 'https://timebank.app',
-        icons: ['/icon.svg'],
-      },
-    });
-
-    walletConnectClient = client;
-    return client;
-  } catch (error) {
-    console.error('Failed to initialize WalletConnect:', error);
-    throw error;
-  }
-};
-
-// Connect via WalletConnect
-export const connectViaWalletConnect = async (): Promise<any> => {
-  try {
-    const client = await initializeWalletConnect();
-    const network = getNetwork();
-    const chain = network.isMainnet() ? 'stacks:1' : 'stacks:2147483648';
-
-    const { uri, approval } = await client.connect({
-      pairingTopic: undefined,
-      requiredNamespaces: {
-        stacks: {
-          methods: [
-            'stacks_signMessage',
-            'stacks_stxTransfer',
-            'stacks_contractCall',
-            'stacks_contractDeploy',
-          ],
-          chains: [chain],
-          events: [],
-        },
-      },
-    });
-
-    if (uri) {
-      QRCodeModal.open(uri, () => {
-        console.log('QR Code Modal closed');
-      });
-    }
-
-    const session = await approval();
-    walletConnectSession = session;
-    QRCodeModal.close();
-
-    return session;
-  } catch (error) {
-    console.error('WalletConnect connection failed:', error);
-    QRCodeModal.close();
-    throw error;
-  }
-};
-
-// Get WalletConnect address
-export const getWalletConnectAddress = (): string | null => {
-  if (!walletConnectSession) return null;
-
-  try {
-    const accounts = walletConnectSession.namespaces.stacks.accounts;
-    if (accounts && accounts.length > 0) {
-      // Format: "stacks:<network>:<address>"
-      return accounts[0].split(':')[2];
-    }
-  } catch (error) {
-    console.error('Error getting WalletConnect address:', error);
-  }
-
-  return null;
-};
-
-// Disconnect WalletConnect
-export const disconnectWalletConnect = async () => {
-  if (walletConnectClient && walletConnectSession) {
-    try {
-      await walletConnectClient.disconnect({
-        topic: walletConnectSession.topic,
-        reason: {
-          code: 6000,
-          message: 'User disconnected',
-        },
-      });
-    } catch (error) {
-      console.error('Error disconnecting WalletConnect:', error);
-    }
-  }
-
-  walletConnectSession = null;
-};
-
-// Check if WalletConnect is connected
-export const isWalletConnectConnected = (): boolean => {
-  return walletConnectSession !== null;
-};
+// Wallet Connection Options
+interface ConnectOptions {
+  walletConnectProjectId?: string;
+  forceWalletSelect?: boolean;
+  persistWalletSelect?: boolean;
+}
 
 // Traditional Wallet Connection (Hiro/Xverse via Stacks Connect)
-export const connectWallet = () => {
-  showConnect({
+export const connectWallet = (options?: ConnectOptions) => {
+  const connectOptions: any = {
     appDetails: {
       name: 'TimeBank',
       icon: '/icon.svg',
@@ -180,37 +64,52 @@ export const connectWallet = () => {
       console.log('User cancelled wallet connection');
     },
     userSession,
+  };
+
+  // Add Reown (WalletConnect) support if Project ID is configured
+  if (REOWN_PROJECT_ID || options?.walletConnectProjectId) {
+    connectOptions.walletConnectProjectId = options?.walletConnectProjectId || REOWN_PROJECT_ID;
+  }
+
+  // Add additional options
+  if (options?.forceWalletSelect !== undefined) {
+    connectOptions.forceWalletSelect = options.forceWalletSelect;
+  }
+  if (options?.persistWalletSelect !== undefined) {
+    connectOptions.persistWalletSelect = options.persistWalletSelect;
+  }
+
+  showConnect(connectOptions);
+};
+
+// Connect with WalletConnect (Reown) explicitly
+export const connectViaReown = () => {
+  if (!REOWN_PROJECT_ID) {
+    throw new Error('Reown Project ID is not configured. Please add NEXT_PUBLIC_REOWN_PROJECT_ID to your environment variables.');
+  }
+
+  connectWallet({
+    walletConnectProjectId: REOWN_PROJECT_ID,
+    forceWalletSelect: true,
   });
 };
 
 export const disconnectWallet = async () => {
-  // Disconnect WalletConnect if active
-  if (isWalletConnectConnected()) {
-    await disconnectWalletConnect();
-  }
-
-  // Disconnect traditional wallet if active
   if (userSession.isUserSignedIn()) {
     userSession.signUserOut();
   }
-
   window.location.reload();
 };
 
 export const isWalletConnected = (): boolean => {
-  return userSession.isUserSignedIn() || isWalletConnectConnected();
+  return userSession.isUserSignedIn();
 };
 
 export const getUserAddress = (): string | null => {
-  // Check WalletConnect first
-  const wcAddress = getWalletConnectAddress();
-  if (wcAddress) return wcAddress;
-
-  // Fallback to traditional wallet
   if (!userSession.isUserSignedIn()) return null;
   const network = getNetwork();
   const userData = userSession.loadUserData();
-  return network.isMainnet()
+  return network === 'mainnet'
     ? userData.profile.stxAddress.mainnet
     : userData.profile.stxAddress.testnet;
 };
@@ -223,9 +122,14 @@ export const makeContractCallWithOptions = async (
 ) => {
   const network = getNetwork();
   const senderAddress = getUserAddress();
-  
+
   if (!senderAddress) {
     throw new Error('Wallet not connected');
+  }
+
+  const userData = userSession.loadUserData();
+  if (!userData.appPrivateKey) {
+    throw new Error('Private key not available');
   }
 
   const txOptions = {
@@ -233,7 +137,7 @@ export const makeContractCallWithOptions = async (
     contractName: CONTRACT_NAME,
     functionName,
     functionArgs,
-    senderKey: userSession.loadUserData().appPrivateKey,
+    senderKey: userData.appPrivateKey,
     network,
     anchorMode: AnchorMode.Any,
     postConditionMode: PostConditionMode.Allow,
@@ -241,7 +145,7 @@ export const makeContractCallWithOptions = async (
   };
 
   const transaction = await makeContractCall(txOptions);
-  return broadcastTransaction(transaction, network);
+  return broadcastTransaction({ transaction, network });
 };
 
 // Read-only function calls
@@ -253,7 +157,7 @@ export const callReadOnlyContract = async (
   const senderAddress = getUserAddress() || CONTRACT_ADDRESS;
 
   try {
-    const result = await callReadOnlyFunction({
+    const result = await fetchCallReadOnlyFunction({
       contractAddress: CONTRACT_ADDRESS,
       contractName: CONTRACT_NAME,
       functionName,
@@ -460,7 +364,7 @@ export const getExchangeLimits = async () => {
 // Transaction Status Helper
 export const waitForTransaction = async (txId: string): Promise<boolean> => {
   const network = getNetwork();
-  const apiUrl = network.isMainnet()
+  const apiUrl = network === 'mainnet'
     ? 'https://api.mainnet.hiro.so'
     : 'https://api.testnet.hiro.so';
 

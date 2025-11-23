@@ -4,18 +4,15 @@ import {
   getUserAddress,
   connectWallet,
   disconnectWallet,
-  connectViaWalletConnect,
-  isWalletConnectConnected,
-  walletConnectSession,
+  connectViaReown,
 } from '@/lib/stacks';
 import { WalletState } from '@/types';
 
 interface WalletContextType extends WalletState {
   connect: () => void;
-  connectWithWalletConnect: () => Promise<void>;
+  connectWithReown: () => void;
   disconnect: () => void;
   refreshConnection: () => void;
-  connectionType: 'traditional' | 'walletconnect' | null;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
@@ -36,28 +33,14 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     userData: undefined,
     error: undefined,
   });
-  const [connectionType, setConnectionType] = useState<'traditional' | 'walletconnect' | null>(null);
 
   const refreshConnection = () => {
     setWalletState(prev => ({ ...prev, isLoading: true }));
 
     try {
-      // Check WalletConnect first
-      const wcConnected = isWalletConnectConnected();
-      const traditionalConnected = userSession.isUserSignedIn();
-      const isConnected = wcConnected || traditionalConnected;
-
+      const isConnected = userSession.isUserSignedIn();
       const address = getUserAddress();
-      const userData = traditionalConnected ? userSession.loadUserData() : undefined;
-
-      // Determine connection type
-      let type: 'traditional' | 'walletconnect' | null = null;
-      if (wcConnected) {
-        type = 'walletconnect';
-      } else if (traditionalConnected) {
-        type = 'traditional';
-      }
-      setConnectionType(type);
+      const userData = isConnected ? userSession.loadUserData() : undefined;
 
       setWalletState({
         isConnected,
@@ -75,7 +58,6 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         isLoading: false,
         error: error instanceof Error ? error.message : 'Unknown error',
       });
-      setConnectionType(null);
     }
   };
 
@@ -97,18 +79,16 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   };
 
-  const connectWithWalletConnect = async () => {
+  const connectWithReown = () => {
     setWalletState(prev => ({ ...prev, isLoading: true, error: undefined }));
     try {
-      await connectViaWalletConnect();
-      // Session is established, now refresh
-      refreshConnection();
+      connectViaReown();
     } catch (error) {
-      console.error('Error connecting via WalletConnect:', error);
+      console.error('Error connecting via Reown:', error);
       setWalletState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Failed to connect via WalletConnect',
+        error: error instanceof Error ? error.message : 'Failed to connect via Reown (WalletConnect)',
       }));
     }
   };
@@ -117,7 +97,6 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setWalletState(prev => ({ ...prev, isLoading: true }));
     try {
       await disconnectWallet();
-      setConnectionType(null);
       setWalletState({
         isConnected: false,
         address: undefined,
@@ -142,10 +121,9 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const value: WalletContextType = {
     ...walletState,
     connect,
-    connectWithWalletConnect,
+    connectWithReown,
     disconnect,
     refreshConnection,
-    connectionType,
   };
 
   return (
