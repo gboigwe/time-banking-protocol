@@ -69,6 +69,11 @@ plan:
             path: contracts/exchange-manager.clar
             clarity-version: 4
         - emulated-contract-publish:
+            contract-name: reputation-system
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/reputation-system.clar
+            clarity-version: 4
+        - emulated-contract-publish:
             contract-name: skill-registry
             emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             path: contracts/skill-registry.clar

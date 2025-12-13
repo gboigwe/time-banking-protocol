@@ -10,6 +10,11 @@ path = 'contracts/exchange-manager.clar'
 clarity_version = 4
 epoch = 'latest'
 
+[contracts.reputation-system]
+path = 'contracts/reputation-system.clar'
+clarity_version = 4
+epoch = 'latest'
+
 [contracts.skill-registry]
 path = 'contracts/skill-registry.clar'
 clarity_version = 4
