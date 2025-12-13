@@ -15,8 +15,18 @@ path = 'contracts/exchange-manager.clar'
 clarity_version = 4
 epoch = 'latest'
 
+[contracts.governance]
+path = 'contracts/governance.clar'
+clarity_version = 4
+epoch = 'latest'
+
 [contracts.reputation-system]
 path = 'contracts/reputation-system.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.rewards-distributor]
+path = 'contracts/rewards-distributor.clar'
 clarity_version = 4
 epoch = 'latest'
 

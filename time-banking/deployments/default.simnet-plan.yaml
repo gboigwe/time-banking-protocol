@@ -74,9 +74,19 @@ plan:
             path: contracts/exchange-manager.clar
             clarity-version: 4
         - emulated-contract-publish:
+            contract-name: governance
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/governance.clar
+            clarity-version: 4
+        - emulated-contract-publish:
             contract-name: reputation-system
             emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
             path: contracts/reputation-system.clar
+            clarity-version: 4
+        - emulated-contract-publish:
+            contract-name: rewards-distributor
+            emulated-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/rewards-distributor.clar
             clarity-version: 4
         - emulated-contract-publish:
             contract-name: skill-registry
