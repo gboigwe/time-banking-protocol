@@ -5,6 +5,11 @@ authors = []
 telemetry = true
 cache_dir = './.cache'
 requirements = []
+[contracts.skill-registry]
+path = 'contracts/skill-registry.clar'
+clarity_version = 4
+epoch = 'latest'
+
 [contracts.time-bank-core]
 path = 'contracts/time-bank-core.clar'
 clarity_version = 4
@@ -12,8 +17,14 @@ epoch = 'latest'
 [repl.analysis]
 passes = ['check_checker']
 
+[repl.analysis.lints]
+
 [repl.analysis.check_checker]
 strict = false
 trusted_sender = false
 trusted_caller = false
 callee_filter = false
+
+[repl.remote_data]
+enabled = false
+api_url = 'https://api.hiro.so'
