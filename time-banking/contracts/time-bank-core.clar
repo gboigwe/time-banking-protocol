@@ -1,32 +1,34 @@
-;; Time Banking Protocol - Core Contract
-;; Controls the main functionality of the time banking system with time credit economy
+;; Time Banking Protocol - Core Contract (Clarity 4)
+;; Manages user registration, time credit balances, and core banking functionality
+;; Refactored to use Clarity 4 features: stacks-block-time, improved type safety
 
 ;; Constants and Error Codes
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u1001))
 (define-constant ERR_INVALID_TIME (err u1002))
 (define-constant ERR_INSUFFICIENT_BALANCE (err u1003))
-(define-constant ERR_SKILL_NOT_VERIFIED (err u1004))
 (define-constant ERR_INVALID_PARAMS (err u1005))
-(define-constant ERR_ALREADY_VERIFIED (err u1006))
+(define-constant ERR_ALREADY_REGISTERED (err u1006))
 (define-constant ERR_NOT_FOUND (err u1007))
-(define-constant ERR_ALREADY_COMPLETED (err u1008))
-(define-constant ERR_SELF_EXCHANGE (err u1009))
 (define-constant ERR_INSUFFICIENT_CREDITS (err u1010))
+(define-constant ERR_SELF_TRANSFER (err u1011))
+(define-constant ERR_USER_INACTIVE (err u1012))
 
 ;; Configuration Constants
 (define-constant INITIAL_CREDITS u10) ;; New users get 10 hours of credits to start
 (define-constant MAX_MINT_AMOUNT u1000) ;; Maximum credits that can be minted at once
+(define-constant MIN_CREDIT_AMOUNT u1) ;; Minimum credit transfer amount
 
-;; Data Structures
+;; Data Structures using Clarity 4 best practices
 (define-map users
     principal
     {
-        joined-at: uint,
+        joined-at: uint,              ;; Uses stacks-block-time
         total-hours-given: uint,
         total-hours-received: uint,
         reputation-score: uint,
-        is-active: bool
+        is-active: bool,
+        last-activity: uint           ;; Track last activity time
     })
 
 ;; Time Credit Balances - Core of the time banking economy
@@ -34,260 +36,206 @@
     principal
     uint) ;; Available time credits in hours
 
-(define-map skills
-    (string-ascii 64)
-    {
-        category: (string-ascii 32),
-        min-reputation: uint,
-        verification-required: bool
-    })
-
-(define-map user-skills
-    {user: principal, skill: (string-ascii 64)}
-    {
-        verified: bool,
-        verified-by: (optional principal),
-        verified-at: (optional uint),
-        rating: uint
-    })
-
-(define-map time-exchanges
-    uint
-    {
-        provider: principal,
-        receiver: principal,
-        skill: (string-ascii 64),
-        hours: uint,
-        status: (string-ascii 16),  ;; "pending", "active", "completed", "cancelled"
-        created-at: uint,
-        completed-at: (optional uint)
-    })
-
 ;; Variables
-(define-data-var exchange-nonce uint u0)
-(define-data-var min-exchange-duration uint u1) ;; Minimum 1 hour
-(define-data-var max-exchange-duration uint u8) ;; Maximum 8 hours
+(define-data-var total-users uint u0)
+(define-data-var total-credits-circulating uint u0)
+(define-data-var min-transfer-amount uint u1)
+(define-data-var protocol-paused bool false)
 
-;; Event Map for persistent logging
-(define-map event-log 
-    uint 
-    {
-        event-type: (string-ascii 32),
-        data: (string-ascii 256),
-        block: uint
-    })
+;; Events using native print for Clarity 4
+(define-private (emit-user-registered (user principal) (credits uint))
+    (print {
+        event: "user-registered",
+        user: user,
+        initial-credits: credits,
+        timestamp: stacks-block-time
+    }))
 
-(define-data-var event-nonce uint u0)
+(define-private (emit-credits-transferred (from principal) (to principal) (amount uint))
+    (print {
+        event: "credits-transferred",
+        from: from,
+        to: to,
+        amount: amount,
+        timestamp: stacks-block-time
+    }))
 
-;; Event Logging - Fixed to be persistent and type-safe
-(define-private (log-event (event-type (string-ascii 32)) (data (string-ascii 256)))
-    (let ((event-id (+ (var-get event-nonce) u1)))
-        (var-set event-nonce event-id)
-        (map-set event-log event-id {
-            event-type: event-type,
-            data: data,
-            block: block-height
-        })))
+(define-private (emit-credits-minted (recipient principal) (amount uint))
+    (print {
+        event: "credits-minted",
+        recipient: recipient,
+        amount: amount,
+        timestamp: stacks-block-time
+    }))
+
+(define-private (emit-user-deactivated (user principal))
+    (print {
+        event: "user-deactivated",
+        user: user,
+        timestamp: stacks-block-time
+    }))
 
 ;; Credit Management Functions
-(define-private (get-balance (user principal))
+(define-read-only (get-balance (user principal))
     (default-to u0 (map-get? time-balances user)))
 
-(define-private (add-credits (user principal) (amount uint))
+(define-private (add-credits-internal (user principal) (amount uint))
     (let ((current-balance (get-balance user)))
-        (map-set time-balances user (+ current-balance amount))))
+        (map-set time-balances user (+ current-balance amount))
+        (var-set total-credits-circulating (+ (var-get total-credits-circulating) amount))
+        true))
 
-(define-private (deduct-credits (user principal) (amount uint))
+(define-private (deduct-credits-internal (user principal) (amount uint))
     (let ((current-balance (get-balance user)))
         (asserts! (>= current-balance amount) ERR_INSUFFICIENT_CREDITS)
         (map-set time-balances user (- current-balance amount))
+        (var-set total-credits-circulating (- (var-get total-credits-circulating) amount))
         (ok true)))
 
-(define-private (transfer-credits (from principal) (to principal) (amount uint))
+;; Public function to transfer credits between users
+(define-public (transfer-credits (to principal) (amount uint))
     (begin
-        (try! (deduct-credits from amount))
-        (add-credits to amount)
-        (log-event "credit-transfer" "credits-transferred")
+        (asserts! (not (var-get protocol-paused)) ERR_UNAUTHORIZED)
+        (asserts! (not (is-eq tx-sender to)) ERR_SELF_TRANSFER)
+        (asserts! (>= amount (var-get min-transfer-amount)) ERR_INVALID_PARAMS)
+        (asserts! (is-some (map-get? users tx-sender)) ERR_NOT_FOUND)
+        (asserts! (is-some (map-get? users to)) ERR_NOT_FOUND)
+
+        ;; Check both users are active
+        (asserts! (get is-active (unwrap! (map-get? users tx-sender) ERR_NOT_FOUND)) ERR_USER_INACTIVE)
+        (asserts! (get is-active (unwrap! (map-get? users to) ERR_NOT_FOUND)) ERR_USER_INACTIVE)
+
+        ;; Perform the transfer
+        (try! (deduct-credits-internal tx-sender amount))
+        (add-credits-internal to amount)
+
+        ;; Update activity timestamps
+        (try! (update-last-activity tx-sender))
+        (try! (update-last-activity to))
+
+        (emit-credits-transferred tx-sender to amount)
+        (ok true)))
+
+;; Update user's last activity timestamp
+(define-private (update-last-activity (user principal))
+    (let ((user-data (unwrap! (map-get? users user) ERR_NOT_FOUND)))
+        (map-set users user (merge user-data {
+            last-activity: stacks-block-time
+        }))
         (ok true)))
 
 ;; Administrative Functions
-(define-public (set-min-exchange-duration (hours uint))
+(define-public (set-min-transfer-amount (amount uint))
     (begin
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
-        (asserts! (>= hours u1) ERR_INVALID_PARAMS)
-        (var-set min-exchange-duration hours)
-        (log-event "config-update" "min-exchange-duration-updated")
+        (asserts! (>= amount MIN_CREDIT_AMOUNT) ERR_INVALID_PARAMS)
+        (var-set min-transfer-amount amount)
+        (print {event: "config-updated", parameter: "min-transfer-amount", value: amount})
         (ok true)))
 
-(define-public (set-max-exchange-duration (hours uint))
+(define-public (toggle-protocol-pause)
     (begin
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
-        (asserts! (>= hours (var-get min-exchange-duration)) ERR_INVALID_PARAMS)
-        (var-set max-exchange-duration hours)
-        (log-event "config-update" "max-exchange-duration-updated")
+        (var-set protocol-paused (not (var-get protocol-paused)))
+        (print {event: "protocol-pause-toggled", paused: (var-get protocol-paused)})
         (ok true)))
 
 ;; Emergency credit functions (admin only)
 (define-public (mint-credits (user principal) (amount uint))
     (begin
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
+        (asserts! (not (var-get protocol-paused)) ERR_UNAUTHORIZED)
         (asserts! (is-some (map-get? users user)) ERR_NOT_FOUND)
         (asserts! (and (> amount u0) (<= amount MAX_MINT_AMOUNT)) ERR_INVALID_PARAMS)
-        (add-credits user amount)
-        (log-event "admin-action" "credits-minted")
+
+        (add-credits-internal user amount)
+        (emit-credits-minted user amount)
+        (ok true)))
+
+(define-public (burn-credits (user principal) (amount uint))
+    (begin
+        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
+        (asserts! (is-some (map-get? users user)) ERR_NOT_FOUND)
+        (asserts! (> amount u0) ERR_INVALID_PARAMS)
+
+        (try! (deduct-credits-internal user amount))
+        (print {event: "credits-burned", user: user, amount: amount})
         (ok true)))
 
 ;; User Management
 (define-public (register-user)
     (begin
-        (asserts! (is-none (map-get? users tx-sender)) ERR_ALREADY_VERIFIED)
+        (asserts! (not (var-get protocol-paused)) ERR_UNAUTHORIZED)
+        (asserts! (is-none (map-get? users tx-sender)) ERR_ALREADY_REGISTERED)
+
+        ;; Create user profile with stacks-block-time
         (map-set users tx-sender {
-            joined-at: block-height,
+            joined-at: stacks-block-time,
             total-hours-given: u0,
             total-hours-received: u0,
             reputation-score: u0,
-            is-active: true
+            is-active: true,
+            last-activity: stacks-block-time
         })
+
         ;; Give new users initial credits to participate in the economy
-        (map-set time-balances tx-sender INITIAL_CREDITS)
-        (log-event "user-action" "user-registered-with-credits")
+        (add-credits-internal tx-sender INITIAL_CREDITS)
+
+        ;; Increment total users
+        (var-set total-users (+ (var-get total-users) u1))
+
+        (emit-user-registered tx-sender INITIAL_CREDITS)
         (ok true)))
 
-;; String Validation Functions
-(define-private (is-valid-string (input (string-ascii 64)))
-    (and
-        (>= (len input) u1)
-        (<= (len input) u64)))
+(define-public (deactivate-user)
+    (let ((user-data (unwrap! (map-get? users tx-sender) ERR_NOT_FOUND)))
+        (asserts! (get is-active user-data) ERR_USER_INACTIVE)
 
-(define-private (is-valid-category (input (string-ascii 32)))
-    (and
-        (>= (len input) u1)
-        (<= (len input) u32)))
+        (map-set users tx-sender (merge user-data {
+            is-active: false,
+            last-activity: stacks-block-time
+        }))
 
-;; Skill Management
-(define-public (register-skill (skill-name (string-ascii 64)) (category (string-ascii 32)))
-    (begin
-        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
-        (asserts! (is-none (map-get? skills skill-name)) ERR_ALREADY_VERIFIED)
-        (asserts! (is-valid-string skill-name) ERR_INVALID_PARAMS)
-        (asserts! (is-valid-category category) ERR_INVALID_PARAMS)
-        (map-set skills skill-name {
-            category: category,
-            min-reputation: u0,
-            verification-required: true
-        })
-        (log-event "skill-action" "skill-registered")
+        (emit-user-deactivated tx-sender)
         (ok true)))
 
-(define-public (verify-user-skill (user principal) (skill-name (string-ascii 64)))
-    (begin
-        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
-        (asserts! (is-some (map-get? skills skill-name)) ERR_NOT_FOUND)
-        (asserts! (is-some (map-get? users user)) ERR_NOT_FOUND)
-        (map-set user-skills {user: user, skill: skill-name} 
-            {
-                verified: true,
-                verified-by: (some tx-sender),
-                verified-at: (some block-height),
-                rating: u0
-            })
-        (log-event "skill-action" "skill-verified")
+(define-public (reactivate-user)
+    (let ((user-data (unwrap! (map-get? users tx-sender) ERR_NOT_FOUND)))
+        (asserts! (not (get is-active user-data)) ERR_ALREADY_REGISTERED)
+
+        (map-set users tx-sender (merge user-data {
+            is-active: true,
+            last-activity: stacks-block-time
+        }))
+
+        (print {event: "user-reactivated", user: tx-sender, timestamp: stacks-block-time})
         (ok true)))
 
-;; Exchange Functions with Credit System
-(define-public (create-exchange (skill (string-ascii 64)) (hours uint) (receiver principal))
-    (begin
-        (asserts! (is-valid-string skill) ERR_INVALID_PARAMS)
-        (let ((exchange-id (+ (var-get exchange-nonce) u1)))
-        (asserts! (is-some (map-get? users tx-sender)) ERR_UNAUTHORIZED)
-        (asserts! (is-some (map-get? users receiver)) ERR_NOT_FOUND)
-        (asserts! (not (is-eq tx-sender receiver)) ERR_SELF_EXCHANGE)
-        (asserts! (and (>= hours (var-get min-exchange-duration)) 
-                      (<= hours (var-get max-exchange-duration))) 
-                 ERR_INVALID_PARAMS)
-        (asserts! (is-some (map-get? user-skills 
-            {user: tx-sender, skill: skill})) ERR_SKILL_NOT_VERIFIED)
-        
-        ;; Check if receiver has sufficient credits to pay for the service
-        (asserts! (>= (get-balance receiver) hours) ERR_INSUFFICIENT_CREDITS)
-        
-        (map-set time-exchanges exchange-id {
-            provider: tx-sender,
-            receiver: receiver,
-            skill: skill,
-            hours: hours,
-            status: "pending",
-            created-at: block-height,
-            completed-at: none
-        })
-        (var-set exchange-nonce exchange-id)
-        (log-event "exchange-action" "exchange-created")
-        (ok exchange-id))))
-
-(define-public (accept-exchange (exchange-id uint))
-    (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
-        (asserts! (is-eq (get receiver exchange) tx-sender) ERR_UNAUTHORIZED)
-        (asserts! (is-eq (get status exchange) "pending") ERR_ALREADY_COMPLETED)
-        
-        ;; Double-check receiver still has sufficient credits when accepting
-        (asserts! (>= (get-balance tx-sender) (get hours exchange)) ERR_INSUFFICIENT_CREDITS)
-        
-        (map-set time-exchanges exchange-id 
-            (merge exchange {status: "active"}))
-        (log-event "exchange-action" "exchange-accepted")
+;; Update user statistics (called by exchange contracts)
+(define-public (update-user-stats (provider principal) (receiver principal) (hours uint))
+    (let (
+        (provider-data (unwrap! (map-get? users provider) ERR_NOT_FOUND))
+        (receiver-data (unwrap! (map-get? users receiver) ERR_NOT_FOUND))
+    )
+        (map-set users provider (merge provider-data {
+            total-hours-given: (+ (get total-hours-given provider-data) hours),
+            last-activity: stacks-block-time
+        }))
+        (map-set users receiver (merge receiver-data {
+            total-hours-received: (+ (get total-hours-received receiver-data) hours),
+            last-activity: stacks-block-time
+        }))
         (ok true)))
 
-(define-public (complete-exchange (exchange-id uint))
-    (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
-        (asserts! (is-eq (get receiver exchange) tx-sender) ERR_UNAUTHORIZED)
-        (asserts! (is-eq (get status exchange) "active") ERR_ALREADY_COMPLETED)
-        
-        ;; Transfer credits from receiver to provider
-        (try! (transfer-credits tx-sender (get provider exchange) (get hours exchange)))
-        
-        ;; Update user statistics
-        (try! (update-user-stats 
-            (get provider exchange) 
-            (get receiver exchange) 
-            (get hours exchange)))
-        
-        (map-set time-exchanges exchange-id 
-            (merge exchange {
-                status: "completed",
-                completed-at: (some block-height)
+(define-public (update-reputation (user principal) (score-delta int))
+    (let ((user-data (unwrap! (map-get? users user) ERR_NOT_FOUND)))
+        (let ((current-score (to-int (get reputation-score user-data)))
+              (new-score-int (+ current-score score-delta)))
+            (asserts! (>= new-score-int 0) ERR_INVALID_PARAMS)
+            (map-set users user (merge user-data {
+                reputation-score: (to-uint new-score-int)
             }))
-        (log-event "exchange-action" "exchange-completed")
-        (ok true)))
-
-(define-public (cancel-exchange (exchange-id uint))
-    (let ((exchange (unwrap! (map-get? time-exchanges exchange-id) ERR_NOT_FOUND)))
-        (asserts! (or (is-eq (get provider exchange) tx-sender)
-                     (is-eq (get receiver exchange) tx-sender)) 
-                 ERR_UNAUTHORIZED)
-        (asserts! (or (is-eq (get status exchange) "pending")
-                     (is-eq (get status exchange) "active"))
-                 ERR_ALREADY_COMPLETED)
-        (map-set time-exchanges exchange-id 
-            (merge exchange {
-                status: "cancelled",
-                completed-at: (some block-height)
-            }))
-        (log-event "exchange-action" "exchange-cancelled")
-        (ok true)))
-
-;; Helper Functions
-(define-private (update-user-stats (provider principal) (receiver principal) (hours uint))
-    (let ((provider-data (unwrap! (map-get? users provider) ERR_NOT_FOUND))
-          (receiver-data (unwrap! (map-get? users receiver) ERR_NOT_FOUND)))
-        (map-set users provider 
-            (merge provider-data {
-                total-hours-given: (+ (get total-hours-given provider-data) hours)
-            }))
-        (map-set users receiver 
-            (merge receiver-data {
-                total-hours-received: (+ (get total-hours-received receiver-data) hours)
-            }))
-        (ok true)))
+            (ok true))))
 
 ;; Read-Only Functions
 (define-read-only (get-user-info (user principal))
@@ -296,29 +244,32 @@
 (define-read-only (get-user-balance (user principal))
     (ok (get-balance user)))
 
-(define-read-only (get-skill-info (skill-name (string-ascii 64)))
-    (map-get? skills skill-name))
-
-(define-read-only (get-exchange (exchange-id uint))
-    (map-get? time-exchanges exchange-id))
-
 (define-read-only (get-contract-owner)
     (ok CONTRACT_OWNER))
 
-(define-read-only (get-event (event-id uint))
-    (map-get? event-log event-id))
+(define-read-only (is-user-active (user principal))
+    (match (map-get? users user)
+        user-data (ok (get is-active user-data))
+        (ok false)))
 
-(define-read-only (get-user-skill-verification (user principal) (skill (string-ascii 64)))
-    (map-get? user-skills {user: user, skill: skill}))
-
-;; Check if user can afford a service
 (define-read-only (can-afford-service (user principal) (hours uint))
     (ok (>= (get-balance user) hours)))
 
-;; Get system configuration
-(define-read-only (get-exchange-limits)
+(define-read-only (get-protocol-stats)
     (ok {
-        min-hours: (var-get min-exchange-duration),
-        max-hours: (var-get max-exchange-duration),
-        initial-credits: INITIAL_CREDITS
+        total-users: (var-get total-users),
+        total-credits-circulating: (var-get total-credits-circulating),
+        initial-credits-per-user: INITIAL_CREDITS,
+        min-transfer-amount: (var-get min-transfer-amount),
+        protocol-paused: (var-get protocol-paused)
     }))
+
+(define-read-only (get-user-activity-info (user principal))
+    (match (map-get? users user)
+        user-data (ok {
+            last-activity: (get last-activity user-data),
+            is-active: (get is-active user-data),
+            hours-given: (get total-hours-given user-data),
+            hours-received: (get total-hours-received user-data)
+        })
+        ERR_NOT_FOUND))

@@ -42,13 +42,54 @@ Time Banking Protocol revolutionizes how people exchange skills and services by:
 - **Wallet Integration**: Reown (WalletConnect) + Stacks Connect
 - **Testing**: Clarinet
 
-## Smart Contract Architecture
+## Smart Contract Architecture (Clarity 4)
 
-The protocol consists of several key components:
-1. Skill Registration and Verification
-2. Time Commitment Management
-3. Exchange Completion Verification
-4. Balance Tracking System
+The protocol leverages **Clarity 4** features for enhanced security and functionality:
+
+### Core Contracts (7 Total)
+
+1. **time-bank-core.clar** - Core banking functionality
+   - Uses `stacks-block-time` for precise timestamp tracking
+   - User registration with initial credit allocation
+   - Credit transfer and balance management
+
+2. **skill-registry.clar** - Skill verification system
+   - Implements `contract-hash?` for verified skill templates
+   - Decentralized skill verification with reputation requirements
+   - Badge and tier system for skill providers
+
+3. **exchange-manager.clar** - Exchange lifecycle management
+   - `stacks-block-time` for scheduling and deadlines
+   - Dual-confirmation system for service completion
+   - Integrated review and rating mechanism
+
+4. **reputation-system.clar** - Advanced reputation tracking
+   - Time-weighted reputation scoring with `stacks-block-time`
+   - Endorsement system with category-based attestations
+   - Automatic reputation decay for inactive users
+
+5. **escrow-manager.clar** - Secure credit escrow
+   - Time-locked escrow with expiration using `stacks-block-time`
+   - Dispute resolution with mediator system
+   - Automatic refund for expired escrows
+
+6. **governance.clar** - Protocol governance
+   - Proposal creation with timelock using `stacks-block-time`
+   - Weighted voting based on reputation
+   - Quorum-based decision making
+
+7. **rewards-distributor.clar** - Reward distribution
+   - Periodic reward cycles using `stacks-block-time`
+   - Tier-based reward calculations
+   - Pool contribution and claim tracking
+
+### Clarity 4 Features Implemented
+
+- **stacks-block-time**: Unix timestamp for all time-based operations
+- **contract-hash?**: On-chain contract verification for skill templates
+- **Native event emissions**: Using `print` for comprehensive logging
+- **Enhanced type safety**: Strict optional and response handling
+- **Modern patterns**: Follows SIP-033 best practices
 
 ## Getting Started
 

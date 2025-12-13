@@ -1,19 +1,55 @@
 [project]
 name = 'time-banking'
-description = ''
-authors = []
+description = 'Decentralized time-skill trading platform with Clarity 4 smart contracts featuring stacks-block-time, contract-hash?, and advanced time-based operations'
+authors = ['Time Banking Protocol Contributors']
 telemetry = true
 cache_dir = './.cache'
 requirements = []
+[contracts.escrow-manager]
+path = 'contracts/escrow-manager.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.exchange-manager]
+path = 'contracts/exchange-manager.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.governance]
+path = 'contracts/governance.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.reputation-system]
+path = 'contracts/reputation-system.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.rewards-distributor]
+path = 'contracts/rewards-distributor.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.skill-registry]
+path = 'contracts/skill-registry.clar'
+clarity_version = 4
+epoch = 'latest'
+
 [contracts.time-bank-core]
 path = 'contracts/time-bank-core.clar'
-clarity_version = 2
-epoch = 2.5
+clarity_version = 4
+epoch = 'latest'
 [repl.analysis]
 passes = ['check_checker']
+
+[repl.analysis.lints]
 
 [repl.analysis.check_checker]
 strict = false
 trusted_sender = false
 trusted_caller = false
 callee_filter = false
+
+[repl.remote_data]
+enabled = false
+api_url = 'https://api.hiro.so'
