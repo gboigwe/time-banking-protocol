@@ -5,6 +5,11 @@ authors = []
 telemetry = true
 cache_dir = './.cache'
 requirements = []
+[contracts.escrow-manager]
+path = 'contracts/escrow-manager.clar'
+clarity_version = 4
+epoch = 'latest'
+
 [contracts.exchange-manager]
 path = 'contracts/exchange-manager.clar'
 clarity_version = 4
