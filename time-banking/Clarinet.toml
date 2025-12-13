@@ -5,6 +5,11 @@ authors = []
 telemetry = true
 cache_dir = './.cache'
 requirements = []
+[contracts.exchange-manager]
+path = 'contracts/exchange-manager.clar'
+clarity_version = 4
+epoch = 'latest'
+
 [contracts.skill-registry]
 path = 'contracts/skill-registry.clar'
 clarity_version = 4
