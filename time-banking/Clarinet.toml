@@ -1,7 +1,7 @@
 [project]
 name = 'time-banking'
-description = ''
-authors = []
+description = 'Decentralized time-skill trading platform with Clarity 4 smart contracts featuring stacks-block-time, contract-hash?, and advanced time-based operations'
+authors = ['Time Banking Protocol Contributors']
 telemetry = true
 cache_dir = './.cache'
 requirements = []
