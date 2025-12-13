@@ -7,8 +7,8 @@ cache_dir = './.cache'
 requirements = []
 [contracts.time-bank-core]
 path = 'contracts/time-bank-core.clar'
-clarity_version = 2
-epoch = 2.5
+clarity_version = 4
+epoch = 'latest'
 [repl.analysis]
 passes = ['check_checker']
 
