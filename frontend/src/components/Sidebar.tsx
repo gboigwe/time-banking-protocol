@@ -11,6 +11,10 @@ import {
   ChartBarIcon,
   CogIcon,
   QuestionMarkCircleIcon,
+  TrophyIcon,
+  LockClosedIcon,
+  GiftIcon,
+  ScaleIcon,
 } from '@heroicons/react/24/outline';
 import { useApp } from '@/contexts/AppContext';
 
@@ -23,8 +27,10 @@ const Sidebar: React.FC = () => {
     { name: 'Marketplace', href: '/marketplace', icon: ShoppingBagIcon },
     { name: 'My Exchanges', href: '/exchanges', icon: ClockIcon },
     { name: 'Skills', href: '/skills', icon: AcademicCapIcon },
-    { name: 'Profile', href: '/profile', icon: UserIcon },
-    { name: 'Analytics', href: '/analytics', icon: ChartBarIcon },
+    { name: 'Reputation', href: '/reputation', icon: TrophyIcon },
+    { name: 'Escrow', href: '/escrow', icon: LockClosedIcon },
+    { name: 'Rewards', href: '/rewards', icon: GiftIcon },
+    { name: 'Governance', href: '/governance', icon: ScaleIcon },
   ];
 
   const bottomNavigation = [
