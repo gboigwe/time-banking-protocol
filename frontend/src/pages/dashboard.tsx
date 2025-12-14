@@ -16,45 +16,41 @@ import {
 } from '@heroicons/react/24/outline';
 import { useApp } from '@/contexts/AppContext';
 import { useWallet } from '@/contexts/WalletContext';
+import { useTimeBankCore } from '@/hooks/useTimeBankCore';
+import { useExchangeManager } from '@/hooks/useExchangeManager';
 import { TimeExchange } from '@/types';
+import { TimeBankUser, TimeBankStats, ExchangeStats } from '@/types/contracts';
 import Link from 'next/link';
 
 const Dashboard: React.FC = () => {
   const { state } = useApp();
-  const { isConnected } = useWallet();
+  const { isConnected, address } = useWallet();
+  const { user: timeBankUser, stats, loadUserInfo, loadStats } = useTimeBankCore();
+  const { loadExchangeStats } = useExchangeManager();
   const [recentExchanges, setRecentExchanges] = useState<TimeExchange[]>([]);
+  const [timeBankStats, setTimeBankStats] = useState<TimeBankStats | null>(null);
+  const [exchangeStats, setExchangeStats] = useState<ExchangeStats | null>(null);
 
   useEffect(() => {
-    if (isConnected) {
-      // Load recent exchanges - for now using mock data
-      setRecentExchanges([
-        {
-          id: 1,
-          provider: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
-          receiver: 'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG',
-          skill: 'Web Development',
-          hours: 2,
-          status: 'completed',
-          createdAt: Date.now() - 86400000,
-          completedAt: Date.now() - 3600000,
-        },
-        {
-          id: 2,
-          provider: 'ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG',
-          receiver: state.user?.principal || '',
-          skill: 'Graphic Design',
-          hours: 3,
-          status: 'active',
-          createdAt: Date.now() - 43200000,
-        },
-      ]);
+    if (isConnected && address) {
+      loadUserInfo();
+      loadContractStats();
     }
-  }, [isConnected, state.user]);
+  }, [isConnected, address]);
+
+  const loadContractStats = async () => {
+    const [tbStats, exStats] = await Promise.all([
+      loadStats(),
+      loadExchangeStats(),
+    ]);
+    setTimeBankStats(tbStats);
+    setExchangeStats(exStats);
+  };
 
   const quickStats = [
     {
       label: 'Time Balance',
-      value: `${state.user?.user.timeBalance || 0} hrs`,
+      value: `${timeBankUser?.timeBalance || 0} hrs`,
       icon: ClockIcon,
       color: 'from-primary-500 to-primary-600',
       bgColor: 'bg-primary-50',
@@ -62,7 +58,7 @@ const Dashboard: React.FC = () => {
     },
     {
       label: 'Hours Given',
-      value: state.user?.user.totalHoursGiven || 0,
+      value: timeBankUser?.totalHoursGiven || 0,
       icon: ArrowTrendingUpIcon,
       color: 'from-accent-500 to-accent-600',
       bgColor: 'bg-accent-50',
@@ -70,7 +66,7 @@ const Dashboard: React.FC = () => {
     },
     {
       label: 'Hours Received',
-      value: state.user?.user.totalHoursReceived || 0,
+      value: timeBankUser?.totalHoursReceived || 0,
       icon: CurrencyDollarIcon,
       color: 'from-secondary-500 to-secondary-600',
       bgColor: 'bg-secondary-50',
@@ -78,7 +74,7 @@ const Dashboard: React.FC = () => {
     },
     {
       label: 'Reputation',
-      value: state.user?.user.reputationScore || 0,
+      value: timeBankUser?.reputationScore || 0,
       icon: TrophyIcon,
       color: 'from-warning-500 to-warning-600',
       bgColor: 'bg-warning-50',
@@ -185,10 +181,37 @@ const Dashboard: React.FC = () => {
         <div className="flex items-center space-x-2">
           <div className="flex items-center space-x-1 text-sm text-neutral-500">
             <UserGroupIcon className="w-4 h-4" />
-            <span>2.5K+ active users</span>
+            <span>{timeBankStats?.totalUsers || 0} total users • {timeBankStats?.activeUsers || 0} active</span>
           </div>
         </div>
       </motion.div>
+
+      {/* Registration Prompt if Not Registered */}
+      {isConnected && !timeBankUser && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="card bg-gradient-to-r from-primary-500 to-secondary-500 text-white"
+        >
+          <div className="card-body text-center">
+            <SparklesIcon className="w-12 h-12 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-2">Welcome to TimeBank!</h2>
+            <p className="mb-6 opacity-90">
+              You need to register to start using the Time Banking Protocol
+            </p>
+            <button
+              onClick={() => {
+                // Register user through hook
+                // Will be implemented in the next section
+              }}
+              className="btn bg-white text-primary-600 hover:bg-neutral-100 mx-auto"
+            >
+              Register Now
+            </button>
+          </div>
+        </motion.div>
+      )}
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
