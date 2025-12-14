@@ -1,17 +1,30 @@
-# TimeBank Frontend
+# TimeBank Frontend - Clarity 4 MVP
 
-A sophisticated React/Next.js frontend for the TimeBank decentralized time banking protocol built on Stacks blockchain.
+A complete React/Next.js MVP for the TimeBank decentralized time banking protocol built on Stacks blockchain with Clarity 4 smart contracts.
 
-## Features
+## Clarity 4 Features
 
-- 🔐 **Wallet Integration**: Connect with Stacks wallets (Hiro, Xverse)
-- 💼 **Skill Marketplace**: Browse and discover skilled professionals
-- ⏰ **Time Exchange**: Create, manage, and complete time-based service exchanges
-- 🎯 **Reputation System**: Track and display user reputation and ratings
-- 📊 **Dashboard**: Comprehensive overview of user activity and stats
-- 🔍 **Advanced Search**: Filter and search providers by skills, ratings, and more
-- 📱 **Responsive Design**: Optimized for desktop, tablet, and mobile
-- 🎨 **Modern UI**: Clean, accessible design with smooth animations
+All 7 contracts leverage the latest **Clarity 4** features (SIP-033):
+
+- ⏰ **stacks-block-time**: Unix timestamp-based time tracking for exchanges, escrow, governance
+- 🔐 **contract-hash?**: On-chain contract verification in skill-registry
+- 📝 **Native print**: Enhanced debugging and event logging across all contracts
+- 🔒 **Timelock mechanisms**: Governance proposals and escrow releases with time locks
+- 📉 **Time-weighted decay**: Reputation system with automatic decay over time
+- 🎁 **Periodic cycles**: Rewards distribution with defined reward periods
+
+## MVP Features
+
+- 🔐 **Wallet Integration**: Hiro, Xverse, Leather + WalletConnect (Reown)
+- 💼 **Skill Marketplace**: Browse providers with contract-hash? verified skills
+- ⏰ **Time Exchange**: stacks-block-time scheduled exchanges (1-24 hour duration)
+- 🎯 **Reputation System**: Time-weighted decay reputation scoring
+- 🔒 **Escrow Management**: Time-locked escrows for secure exchanges
+- 🎁 **Rewards System**: Periodic reward cycles with tier-based distribution
+- 🗳️ **Governance**: Proposals with timelock and voting periods
+- 📊 **Dashboard**: Real-time contract data across all 7 contracts
+- 📱 **Responsive Design**: Desktop, tablet, mobile optimized
+- 🎨 **Modern UI**: Framer Motion animations with Tailwind CSS
 
 ## Tech Stack
 
@@ -103,22 +116,67 @@ npm run build
 npm start
 ```
 
-## Contract Integration
+## Deployed Contracts (Testnet)
 
-The frontend integrates with the TimeBank smart contract deployed on Stacks testnet:
+### Primary Address: `SP3BXJENEWVNCFYGJF75DFS478H1BZJXNZPT84EAD`
+- **time-bank-core**: User registration, time balance tracking
+- **skill-registry**: Skill registration with contract-hash? verification
+- **rewards-distributor**: Periodic reward cycles and distribution
 
-- **Contract Address**: `ST3A5HQKQM3T3BV1MCZ45S6Q729V8355BQ0W0NP2V`
-- **Contract Name**: `time-bank-core`
-- **Transaction ID**: `0xe03888b09de7bc3c5f14c882ab4981d287b36ed24bad1047f8d565eb47848aa9`
+### Secondary Address: `SPD5ETF2HZ921C8RJG2MHPAN7SSP9AYEYD5GSP84`
+- **escrow-manager**: Time-locked escrow for exchanges
+- **exchange-manager**: stacks-block-time scheduled exchanges
+- **governance**: Proposals with timelock and voting
+- **reputation-system**: Time-weighted decay reputation
 
-### Key Contract Functions
+## MVP Pages
 
-- `register-user`: Register a new user account
-- `create-exchange`: Create a new time exchange request
-- `accept-exchange`: Accept an exchange request
-- `complete-exchange`: Mark exchange as completed
-- `register-skill`: Register a new skill
-- `verify-user-skill`: Verify a user's skill
+### 1. Dashboard (`/dashboard`)
+- User time balance, hours given/received, reputation score
+- Platform statistics with live contract data
+- Register new users on-chain
+- Activity feed
+
+### 2. Skills (`/skills`)
+- Register skills with category, description, hourly rate
+- Verify other users' skills with endorsements
+- contract-hash? template verification
+- View skill statistics
+
+### 3. Exchanges (`/exchanges`)
+- Create exchanges with stacks-block-time scheduling
+- Accept, confirm, or cancel exchanges
+- Validates time ranges (1-24 hours, future times)
+- Exchange statistics
+
+### 4. Reputation (`/reputation`)
+- View reputation score with time-weighted decay
+- Endorse users in specific categories
+- Track endorsements, ratings, flags
+- Platform reputation statistics
+
+### 5. Escrow (`/escrow`)
+- Create time-locked escrows
+- Release escrow after time lock expires
+- Raise disputes
+- Track active, released, refunded escrows
+
+### 6. Rewards (`/rewards`)
+- View current reward period info
+- Claim rewards for completed periods
+- Contribute to reward pool
+- See reward tiers and amounts
+
+### 7. Governance (`/governance`)
+- Create proposals with timelock
+- Cast votes on proposals
+- Execute passed proposals after timelock
+- View governance statistics
+
+### 8. Marketplace (`/marketplace`)
+- Browse service providers
+- Filter by skill, rating, hours
+- Request services
 
 ## Features Overview
 

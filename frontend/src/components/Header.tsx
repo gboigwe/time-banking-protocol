@@ -25,8 +25,9 @@ const Header: React.FC = () => {
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', current: router.pathname === '/dashboard' },
     { name: 'Marketplace', href: '/marketplace', current: router.pathname === '/marketplace' },
-    { name: 'My Exchanges', href: '/exchanges', current: router.pathname === '/exchanges' },
+    { name: 'Exchanges', href: '/exchanges', current: router.pathname === '/exchanges' },
     { name: 'Skills', href: '/skills', current: router.pathname === '/skills' },
+    { name: 'Governance', href: '/governance', current: router.pathname === '/governance' },
   ];
 
   const handleConnect = () => {
