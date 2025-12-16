@@ -1,0 +1,20 @@
+{
+  "name": "Governance Events",
+  "version": 1,
+  "chain": "stacks",
+  "networks": {
+    "testnet": {
+      "if_this": {
+        "scope": "contract_call",
+        "contract_identifier": "SPD5ETF2HZ921C8RJG2MHPAN7SSP9AYEYD5GSP84.governance"
+      },
+      "then_that": {
+        "http_post": {
+          "url": "http://localhost:3000/api/webhooks/chainhook",
+          "authorization_header": "Bearer tbp_webhook_secret_2025_secure_random_key_xyz789"
+        }
+      },
+      "start_block": 0
+    }
+  }
+}
