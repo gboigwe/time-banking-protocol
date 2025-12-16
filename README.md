@@ -198,6 +198,57 @@ connectViaReown();
 
 The integration follows the **SIP-030 standard** and **WBIPs (Wallet Bitcoin Improvement Proposals)** for optimal compatibility.
 
+## Real-Time Event System (Chainhooks)
+
+This project integrates **Hiro Chainhooks** for real-time blockchain event notifications, eliminating the need for constant polling and enabling instant user updates.
+
+### What are Chainhooks?
+
+Chainhooks are reorg-aware webhook services that monitor blockchain activity and send HTTP POST requests when specific events occur.
+
+**Benefits:**
+- ✅ Real-time event delivery (no polling)
+- ✅ Automatic blockchain reorganization handling
+- ✅ Reduced API calls and rate limiting
+- ✅ Event-driven architecture
+- ✅ Lightweight data indexing
+
+### Monitored Events
+
+The system monitors all 7 smart contracts:
+
+1. **time-bank-core**: User registration, credit transfers
+2. **skill-registry**: Skill registration and verification
+3. **exchange-manager**: Exchange lifecycle events
+4. **reputation-system**: Reputation changes, endorsements
+5. **escrow-manager**: Escrow creation and releases
+6. **governance**: Proposals and voting
+7. **rewards-distributor**: Reward claims
+
+### Architecture
+
+```
+Blockchain Event → Chainhook → Webhook → Next.js API → Frontend (Real-time)
+```
+
+### Setup
+
+1. Add Hiro API key to `.env.local`:
+```env
+HIRO_API_KEY=your_api_key_here
+CHAINHOOK_WEBHOOK_SECRET=your_secret_here
+```
+
+2. Register Chainhooks:
+```bash
+cd frontend
+npx ts-node scripts/register-chainhooks.ts
+```
+
+3. View live events in your dashboard using the `RealtimeActivityFeed` component
+
+For detailed documentation, see `frontend/CHAINHOOKS_README.md`
+
 ## Roadmap
 
 - [x] Core smart contract development
