@@ -12,7 +12,7 @@ import {
   cvToValue,
   hexToCV,
 } from '@stacks/transactions';
-import { showConnect } from '@stacks/connect';
+import { showConnect, connect as stacksConnect, disconnect as stacksDisconnect } from '@stacks/connect';
 import { AppConfig, UserSession } from '@stacks/auth';
 import { Storage } from '@stacks/storage';
 import { ContractCallOptions, User, TimeExchange, UserSkill, Skill } from '@/types';
@@ -47,21 +47,39 @@ interface ConnectOptions {
   walletConnectProjectId?: string;
   forceWalletSelect?: boolean;
   persistWalletSelect?: boolean;
+  onFinish?: () => void;
+  onCancel?: () => void;
 }
 
-// Traditional Wallet Connection (Hiro/Xverse via Stacks Connect)
+// App configuration for wallet connection
+const getAppDetails = () => ({
+  name: process.env.NEXT_PUBLIC_APP_NAME || 'TimeBank',
+  icon: typeof window !== 'undefined' ? `${window.location.origin}/icon.svg` : '/icon.svg',
+});
+
+/**
+ * Connect wallet using @stacks/connect
+ * Supports both browser extension wallets (Hiro, Xverse, Leather) and WalletConnect
+ *
+ * @param options - Optional configuration for wallet connection
+ */
 export const connectWallet = (options?: ConnectOptions) => {
   const connectOptions: any = {
-    appDetails: {
-      name: 'TimeBank',
-      icon: '/icon.svg',
-    },
+    appDetails: getAppDetails(),
     redirectTo: '/',
     onFinish: () => {
-      window.location.reload();
+      console.log('✅ Wallet connected successfully');
+      if (options?.onFinish) {
+        options.onFinish();
+      } else {
+        window.location.reload();
+      }
     },
     onCancel: () => {
-      console.log('User cancelled wallet connection');
+      console.log('❌ User cancelled wallet connection');
+      if (options?.onCancel) {
+        options.onCancel();
+      }
     },
     userSession,
   };
@@ -69,6 +87,7 @@ export const connectWallet = (options?: ConnectOptions) => {
   // Add Reown (WalletConnect) support if Project ID is configured
   if (REOWN_PROJECT_ID || options?.walletConnectProjectId) {
     connectOptions.walletConnectProjectId = options?.walletConnectProjectId || REOWN_PROJECT_ID;
+    console.log('🔗 WalletConnect enabled with Project ID:', connectOptions.walletConnectProjectId.substring(0, 8) + '...');
   }
 
   // Add additional options
@@ -79,18 +98,39 @@ export const connectWallet = (options?: ConnectOptions) => {
     connectOptions.persistWalletSelect = options.persistWalletSelect;
   }
 
-  showConnect(connectOptions);
+  try {
+    // Using showConnect for backwards compatibility (still recommended by @stacks/connect v8.x)
+    showConnect(connectOptions);
+  } catch (error) {
+    console.error('Failed to show wallet connect modal:', error);
+    throw new Error('Failed to initialize wallet connection. Please ensure you have a Stacks wallet installed.');
+  }
 };
 
-// Connect with WalletConnect (Reown) explicitly
-export const connectViaReown = () => {
+/**
+ * Connect with WalletConnect (Reown) explicitly
+ * This shows the WalletConnect QR code for mobile wallets
+ *
+ * Supported wallets:
+ * - Xverse Mobile
+ * - Leather Mobile
+ * - Any WalletConnect-compatible Stacks wallet
+ */
+export const connectViaReown = (options?: Omit<ConnectOptions, 'walletConnectProjectId'>) => {
   if (!REOWN_PROJECT_ID) {
-    throw new Error('Reown Project ID is not configured. Please add NEXT_PUBLIC_REOWN_PROJECT_ID to your environment variables.');
+    throw new Error(
+      'Reown Project ID is not configured.\n' +
+      'Please add NEXT_PUBLIC_REOWN_PROJECT_ID to your .env file.\n' +
+      'Get your Project ID from: https://cloud.reown.com/'
+    );
   }
 
+  console.log('🔗 Connecting via Reown (WalletConnect)...');
+
   connectWallet({
+    ...options,
     walletConnectProjectId: REOWN_PROJECT_ID,
-    forceWalletSelect: true,
+    forceWalletSelect: true, // Always show wallet selection for WalletConnect
   });
 };
 
