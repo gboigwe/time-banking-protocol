@@ -64,11 +64,19 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const connect = () => {
     setWalletState(prev => ({ ...prev, isLoading: true, error: undefined }));
     try {
-      // Check if Stacks wallet is available
-      if (typeof window !== 'undefined' && !window.StacksProvider) {
-        throw new Error('No Stacks wallet detected. Please install Hiro Wallet or Xverse.');
-      }
-      connectWallet();
+      connectWallet({
+        onFinish: () => {
+          // Connection successful, state will be updated by refresh
+          refreshConnection();
+        },
+        onCancel: () => {
+          setWalletState(prev => ({
+            ...prev,
+            isLoading: false,
+            error: undefined,
+          }));
+        },
+      });
     } catch (error) {
       console.error('Error connecting wallet:', error);
       setWalletState(prev => ({
@@ -82,7 +90,21 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const connectWithReown = () => {
     setWalletState(prev => ({ ...prev, isLoading: true, error: undefined }));
     try {
-      connectViaReown();
+      connectViaReown({
+        onFinish: () => {
+          // Connection successful via WalletConnect
+          console.log('✅ WalletConnect connection established');
+          refreshConnection();
+        },
+        onCancel: () => {
+          console.log('❌ WalletConnect cancelled by user');
+          setWalletState(prev => ({
+            ...prev,
+            isLoading: false,
+            error: undefined,
+          }));
+        },
+      });
     } catch (error) {
       console.error('Error connecting via Reown:', error);
       setWalletState(prev => ({
