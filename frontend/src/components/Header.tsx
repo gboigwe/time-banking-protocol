@@ -275,12 +275,15 @@ const Header: React.FC = () => {
                     </div>
                     <div className="flex-1 text-left">
                       <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-primary-600">
-                        Browser Wallet
+                        Browser Extension
                       </h3>
                       <p className="text-sm text-neutral-600">
                         Hiro, Xverse, or Leather
                       </p>
                     </div>
+                    <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">
+                      Desktop
+                    </span>
                   </div>
                 </button>
 
@@ -300,11 +303,25 @@ const Header: React.FC = () => {
                         WalletConnect
                       </h3>
                       <p className="text-sm text-neutral-600">
-                        Scan with mobile wallet
+                        Scan QR with mobile wallet
                       </p>
                     </div>
+                    <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded">
+                      Mobile
+                    </span>
                   </div>
                 </button>
+              </div>
+
+              <div className="mt-4 p-3 bg-neutral-50 rounded-lg border border-neutral-200">
+                <p className="text-xs text-neutral-600 mb-2">
+                  <strong>Recommended wallets:</strong>
+                </p>
+                <ul className="text-xs text-neutral-500 space-y-1 ml-4">
+                  <li>• <strong>Xverse</strong>: Mobile & Browser (WalletConnect supported)</li>
+                  <li>• <strong>Leather</strong>: Browser extension</li>
+                  <li>• <strong>Hiro</strong>: Browser extension</li>
+                </ul>
               </div>
 
               <p className="mt-6 text-xs text-center text-neutral-500">

@@ -166,37 +166,67 @@ clarinet test
 
 ## Wallet Integration
 
-This project integrates with Stacks wallets using **Reown (formerly WalletConnect)**, providing seamless wallet connectivity across mobile and desktop.
+This project integrates with Stacks wallets using **Reown (formerly WalletConnect)**, providing seamless wallet connectivity across mobile and desktop platforms.
 
 ### Supported Wallets
 
-- **Hiro Wallet** (Browser Extension)
-- **Xverse Wallet** (Browser Extension, iOS, Android)
-- **Any WalletConnect-compatible Stacks wallet** via Reown
+| Wallet | Platform | WalletConnect | Status |
+|--------|----------|---------------|--------|
+| **Xverse** | Browser, Mobile | ✅ Yes | Recommended |
+| **Leather** | Browser, Mobile | ✅ Yes | Supported |
+| **Hiro Wallet** | Browser | ❌ No | Supported |
+
+### Connection Methods
+
+The application provides two wallet connection options:
+
+1. **Browser Extension** - For desktop users with Hiro, Xverse, or Leather extensions
+2. **WalletConnect (Reown)** - For mobile wallet users via QR code scanning
 
 ### Features
 
-- ✅ Traditional wallet connection (browser extensions)
-- ✅ Reown (WalletConnect) integration for mobile wallets
-- ✅ QR code scanning for mobile wallet connection
-- ✅ Automatic session management
-- ✅ Support for 600+ wallets via WalletConnect Network
+- ✅ Dual connection method (Browser Extension + WalletConnect)
+- ✅ Mobile wallet support via QR code scanning
+- ✅ Automatic session persistence
+- ✅ Enhanced error handling and user feedback
+- ✅ Support for Stacks mainnet and testnet
+- ✅ Built on @stacks/connect v8.2.2 with native Reown support
 
-### Reown Integration Details
+### Quick Setup
 
-The project uses `@stacks/connect v8.2.2` with built-in Reown support:
+1. Get your Reown Project ID from [cloud.reown.com](https://cloud.reown.com/)
+2. Add to `.env.local`:
+   ```env
+   NEXT_PUBLIC_REOWN_PROJECT_ID=your_project_id_here
+   ```
+3. Connect wallet in the app - choose Browser Extension or WalletConnect
+
+### Usage Example
 
 ```typescript
-// Connect with any Stacks wallet
-import { connectWallet } from '@/lib/stacks';
-connectWallet();
+import { useWallet } from '@/contexts/WalletContext';
 
-// Connect specifically via Reown (WalletConnect)
-import { connectViaReown } from '@/lib/stacks';
-connectViaReown();
+function MyComponent() {
+  const { connect, connectWithReown, isConnected, address } = useWallet();
+
+  return (
+    <div>
+      {!isConnected ? (
+        <>
+          <button onClick={connect}>Browser Extension</button>
+          <button onClick={connectWithReown}>Mobile Wallet</button>
+        </>
+      ) : (
+        <p>Connected: {address}</p>
+      )}
+    </div>
+  );
+}
 ```
 
-The integration follows the **SIP-030 standard** and **WBIPs (Wallet Bitcoin Improvement Proposals)** for optimal compatibility.
+For detailed wallet integration documentation, see `frontend/WALLET_INTEGRATION.md`.
+
+The integration follows **SIP-030** and **WBIP** standards for optimal compatibility with the Stacks ecosystem.
 
 ## Real-Time Event System (Chainhooks)
 
