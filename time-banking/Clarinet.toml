@@ -5,13 +5,13 @@ authors = ['Time Banking Protocol Contributors']
 telemetry = true
 cache_dir = './.cache'
 requirements = []
-[contracts.escrow-guardian]
-path = 'contracts/escrow-manager.clar'
+[contracts.analytics-tracker]
+path = 'contracts/analytics-tracker.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.service-coordinator]
-path = 'contracts/exchange-manager.clar'
+[contracts.automation-scheduler]
+path = 'contracts/automation-scheduler.clar'
 clarity_version = 4
 epoch = 'latest'
 
@@ -20,13 +20,18 @@ path = 'contracts/governance.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.trust-registry]
-path = 'contracts/reputation-system.clar'
+[contracts.dispute-arbitration]
+path = 'contracts/dispute-arbitration.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.incentive-allocator]
-path = 'contracts/rewards-distributor.clar'
+[contracts.emergency-controls]
+path = 'contracts/emergency-controls.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.escrow-guardian]
+path = 'contracts/escrow-manager.clar'
 clarity_version = 4
 epoch = 'latest'
 
@@ -35,8 +40,53 @@ path = 'contracts/skill-registry.clar'
 clarity_version = 4
 epoch = 'latest'
 
+[contracts.incentive-allocator]
+path = 'contracts/rewards-distributor.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.insurance-pool]
+path = 'contracts/insurance-pool.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.multi-sig-wallet]
+path = 'contracts/multi-sig-wallet.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.referral-program]
+path = 'contracts/referral-program.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.service-coordinator]
+path = 'contracts/exchange-manager.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.skill-certification-nft]
+path = 'contracts/skill-certification-nft.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.skill-matching-engine]
+path = 'contracts/skill-matching-engine.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.time-token-ft]
+path = 'contracts/time-token-ft.clar'
+clarity_version = 4
+epoch = 'latest'
+
 [contracts.timebank-foundation]
 path = 'contracts/time-bank-core.clar'
+clarity_version = 4
+epoch = 'latest'
+
+[contracts.trust-registry]
+path = 'contracts/reputation-system.clar'
 clarity_version = 4
 epoch = 'latest'
 [repl.analysis]
