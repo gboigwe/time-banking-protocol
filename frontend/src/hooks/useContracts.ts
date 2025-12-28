@@ -1,7 +1,9 @@
 // Centralized Hook for All Clarity 4 Contracts
-// Time Banking Protocol - Complete Integration
+// Time Banking Protocol - Complete Integration with Stacks.js v8+
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useOptimisticTransaction } from './useOptimisticTransaction';
+import { ErrorParser, ErrorHandler, StacksError } from '@/lib/error-handling';
 import {
   getUserReputation,
   endorseUser,
@@ -42,15 +44,17 @@ import {
 
 export const useReputation = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<StacksError | null>(null);
+  const [userFriendlyError, setUserFriendlyError] = useState<string | null>(null);
 
-  const handleEndorseUser = async (
+  const handleEndorseUser = useCallback(async (
     endorsedUser: string,
     category: string,
     message: string
   ) => {
     setIsLoading(true);
     setError(null);
+    setUserFriendlyError(null);
 
     try {
       const result = await endorseUser(endorsedUser, category, message);
@@ -58,53 +62,63 @@ export const useReputation = () => {
       if (result.success) {
         return { success: true, txId: result.txId };
       } else {
-        setError(result.error || 'Failed to endorse user');
+        const parsedError = ErrorParser.parseError(new Error(result.error || 'Failed to endorse user'));
+        setError(parsedError);
+        setUserFriendlyError(ErrorHandler.getUserMessage(parsedError));
         return { success: false, error: result.error };
       }
-    } catch (err: any) {
-      const errorMsg = err.message || 'Failed to endorse user';
-      setError(errorMsg);
-      return { success: false, error: errorMsg };
+    } catch (err) {
+      const parsedError = ErrorParser.parseError(err);
+      setError(parsedError);
+      setUserFriendlyError(ErrorHandler.getUserMessage(parsedError));
+      return { success: false, error: parsedError.message };
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const loadUserReputation = async (
+  const loadUserReputation = useCallback(async (
     userAddress: string
   ): Promise<UserReputation | null> => {
     setIsLoading(true);
     setError(null);
+    setUserFriendlyError(null);
 
     try {
       const reputation = await getUserReputation(userAddress);
       return reputation;
-    } catch (err: any) {
-      setError(err.message || 'Failed to load reputation');
+    } catch (err) {
+      const parsedError = ErrorParser.parseError(err);
+      setError(parsedError);
+      setUserFriendlyError(ErrorHandler.getUserMessage(parsedError));
       return null;
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const loadReputationStats = async (): Promise<ReputationStats | null> => {
+  const loadReputationStats = useCallback(async (): Promise<ReputationStats | null> => {
     setIsLoading(true);
     setError(null);
+    setUserFriendlyError(null);
 
     try {
       const stats = await getReputationStats();
       return stats;
-    } catch (err: any) {
-      setError(err.message || 'Failed to load reputation stats');
+    } catch (err) {
+      const parsedError = ErrorParser.parseError(err);
+      setError(parsedError);
+      setUserFriendlyError(ErrorHandler.getUserMessage(parsedError));
       return null;
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   return {
     isLoading,
     error,
+    userFriendlyError,
     endorseUser: handleEndorseUser,
     loadUserReputation,
     loadReputationStats,
@@ -113,9 +127,10 @@ export const useReputation = () => {
 
 export const useEscrow = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<StacksError | null>(null);
+  const [userFriendlyError, setUserFriendlyError] = useState<string | null>(null);
 
-  const handleCreateEscrow = async (
+  const handleCreateEscrow = useCallback(async (
     beneficiary: string,
     amount: number,
     duration: number,
@@ -123,6 +138,7 @@ export const useEscrow = () => {
   ) => {
     setIsLoading(true);
     setError(null);
+    setUserFriendlyError(null);
 
     try {
       const result = await createEscrow(beneficiary, amount, duration, exchangeId);
@@ -130,17 +146,20 @@ export const useEscrow = () => {
       if (result.success) {
         return { success: true, txId: result.txId };
       } else {
-        setError(result.error || 'Failed to create escrow');
+        const parsedError = ErrorParser.parseError(new Error(result.error || 'Failed to create escrow'));
+        setError(parsedError);
+        setUserFriendlyError(ErrorHandler.getUserMessage(parsedError));
         return { success: false, error: result.error };
       }
-    } catch (err: any) {
-      const errorMsg = err.message || 'Failed to create escrow';
-      setError(errorMsg);
-      return { success: false, error: errorMsg };
+    } catch (err) {
+      const parsedError = ErrorParser.parseError(err);
+      setError(parsedError);
+      setUserFriendlyError(ErrorHandler.getUserMessage(parsedError));
+      return { success: false, error: parsedError.message };
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   const handleReleaseEscrow = async (escrowId: number) => {
     setIsLoading(true);

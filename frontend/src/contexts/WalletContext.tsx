@@ -1,14 +1,24 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { StacksNetwork } from '@stacks/network';
 import {
   userSession,
   getUserAddress,
   connectWallet,
   disconnectWallet,
   connectViaReown,
+  getNetwork,
+  getNetworkType,
 } from '@/lib/stacks';
 import { WalletState } from '@/types';
+import { ErrorParser, StacksError } from '@/lib/error-handling';
 
-interface WalletContextType extends WalletState {
+interface ExtendedWalletState extends WalletState {
+  network?: StacksNetwork;
+  networkType?: 'mainnet' | 'testnet';
+  typedError?: StacksError;
+}
+
+interface WalletContextType extends ExtendedWalletState {
   connect: () => void;
   connectWithReown: () => void;
   disconnect: () => void;
@@ -26,43 +36,55 @@ export const useWallet = () => {
 };
 
 export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [walletState, setWalletState] = useState<WalletState>({
+  const [walletState, setWalletState] = useState<ExtendedWalletState>({
     isConnected: false,
     isLoading: true,
     address: undefined,
     userData: undefined,
     error: undefined,
+    network: undefined,
+    networkType: undefined,
+    typedError: undefined,
   });
 
-  const refreshConnection = () => {
+  const refreshConnection = useCallback(() => {
     setWalletState(prev => ({ ...prev, isLoading: true }));
 
     try {
       const isConnected = userSession.isUserSignedIn();
       const address = getUserAddress();
       const userData = isConnected ? userSession.loadUserData() : undefined;
+      const network = getNetwork();
+      const networkType = getNetworkType();
 
       setWalletState({
         isConnected,
         address: address || undefined,
         userData,
+        network,
+        networkType,
         isLoading: false,
         error: undefined,
+        typedError: undefined,
       });
     } catch (error) {
       console.error('Error checking wallet connection:', error);
+      const parsedError = ErrorParser.parseError(error);
       setWalletState({
         isConnected: false,
         address: undefined,
         userData: undefined,
+        network: undefined,
+        networkType: undefined,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: parsedError.message,
+        typedError: parsedError,
       });
     }
-  };
+  }, []);
 
-  const connect = () => {
-    setWalletState(prev => ({ ...prev, isLoading: true, error: undefined }));
+  const connect = useCallback(() => {
+    setWalletState(prev => ({ ...prev, isLoading: true, error: undefined, typedError: undefined }));
     try {
       connectWallet({
         onFinish: () => {
@@ -74,21 +96,24 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
             ...prev,
             isLoading: false,
             error: undefined,
+            typedError: undefined,
           }));
         },
       });
     } catch (error) {
       console.error('Error connecting wallet:', error);
+      const parsedError = ErrorParser.parseError(error);
       setWalletState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Failed to connect Stacks wallet',
+        error: parsedError.message,
+        typedError: parsedError,
       }));
     }
-  };
+  }, [refreshConnection]);
 
-  const connectWithReown = () => {
-    setWalletState(prev => ({ ...prev, isLoading: true, error: undefined }));
+  const connectWithReown = useCallback(() => {
+    setWalletState(prev => ({ ...prev, isLoading: true, error: undefined, typedError: undefined }));
     try {
       connectViaReown({
         onFinish: () => {
@@ -102,20 +127,23 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
             ...prev,
             isLoading: false,
             error: undefined,
+            typedError: undefined,
           }));
         },
       });
     } catch (error) {
       console.error('Error connecting via Reown:', error);
+      const parsedError = ErrorParser.parseError(error);
       setWalletState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Failed to connect via Reown (WalletConnect)',
+        error: parsedError.message,
+        typedError: parsedError,
       }));
     }
-  };
+  }, [refreshConnection]);
 
-  const disconnect = async () => {
+  const disconnect = useCallback(async () => {
     setWalletState(prev => ({ ...prev, isLoading: true }));
     try {
       await disconnectWallet();
@@ -123,18 +151,23 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         isConnected: false,
         address: undefined,
         userData: undefined,
+        network: undefined,
+        networkType: undefined,
         isLoading: false,
         error: undefined,
+        typedError: undefined,
       });
     } catch (error) {
       console.error('Error disconnecting wallet:', error);
+      const parsedError = ErrorParser.parseError(error);
       setWalletState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Failed to disconnect wallet',
+        error: parsedError.message,
+        typedError: parsedError,
       }));
     }
-  };
+  }, []);
 
   useEffect(() => {
     refreshConnection();

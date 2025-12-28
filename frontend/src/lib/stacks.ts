@@ -12,10 +12,13 @@ import {
   cvToValue,
   hexToCV,
 } from '@stacks/transactions';
+import { StacksMainnet, StacksTestnet, StacksNetwork } from '@stacks/network';
 import { showConnect, connect as stacksConnect, disconnect as stacksDisconnect } from '@stacks/connect';
 import { AppConfig, UserSession } from '@stacks/auth';
 import { Storage } from '@stacks/storage';
 import { ContractCallOptions, User, TimeExchange, UserSkill, Skill } from '@/types';
+import { createTransactionBuilder } from './transaction-builder';
+import { ErrorParser, withRetry } from './error-handling';
 
 // BigInt JSON serialization support
 if (typeof BigInt.prototype.toJSON === 'undefined') {
@@ -29,8 +32,13 @@ const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
 export const storage = new Storage({ userSession });
 
-// Network configuration
-export const getNetwork = (): 'mainnet' | 'testnet' => {
+// Network configuration (v8 API)
+export const getNetwork = (): StacksNetwork => {
+  const networkType = process.env.NEXT_PUBLIC_STACKS_NETWORK;
+  return networkType === 'mainnet' ? new StacksMainnet() : new StacksTestnet();
+};
+
+export const getNetworkType = (): 'mainnet' | 'testnet' => {
   const networkType = process.env.NEXT_PUBLIC_STACKS_NETWORK;
   return networkType === 'mainnet' ? 'mainnet' : 'testnet';
 };
@@ -147,14 +155,14 @@ export const isWalletConnected = (): boolean => {
 
 export const getUserAddress = (): string | null => {
   if (!userSession.isUserSignedIn()) return null;
-  const network = getNetwork();
+  const networkType = getNetworkType();
   const userData = userSession.loadUserData();
-  return network === 'mainnet'
+  return networkType === 'mainnet'
     ? userData.profile.stxAddress.mainnet
     : userData.profile.stxAddress.testnet;
 };
 
-// Contract Call Helper
+// Contract Call Helper (v8 API with TransactionBuilder)
 export const makeContractCallWithOptions = async (
   functionName: string,
   functionArgs: ClarityValue[],
@@ -172,20 +180,29 @@ export const makeContractCallWithOptions = async (
     throw new Error('Private key not available');
   }
 
-  const txOptions = {
-    contractAddress: CONTRACT_ADDRESS,
-    contractName: CONTRACT_NAME,
-    functionName,
-    functionArgs,
-    senderKey: userData.appPrivateKey,
-    network,
-    anchorMode: AnchorMode.Any,
-    postConditionMode: PostConditionMode.Allow,
-    postConditions,
-  };
+  // Use TransactionBuilder for modern v8 API
+  const builder = createTransactionBuilder();
+  builder.setNetwork(network);
+  builder.setAnchorMode(AnchorMode.Any);
 
-  const transaction = await makeContractCall(txOptions);
-  return broadcastTransaction({ transaction, network });
+  if (postConditions.length > 0) {
+    builder.setPostConditions(postConditions);
+  }
+
+  try {
+    return await withRetry(async () => {
+      return builder.executeContractCall({
+        contractAddress: CONTRACT_ADDRESS,
+        contractName: CONTRACT_NAME,
+        functionName,
+        functionArgs,
+        senderKey: userData.appPrivateKey,
+      });
+    });
+  } catch (error) {
+    const parsedError = ErrorParser.parseError(error);
+    throw parsedError;
+  }
 };
 
 // Read-only function calls
@@ -401,12 +418,10 @@ export const getExchangeLimits = async () => {
   }
 };
 
-// Transaction Status Helper
+// Transaction Status Helper (v8 API)
 export const waitForTransaction = async (txId: string): Promise<boolean> => {
   const network = getNetwork();
-  const apiUrl = network === 'mainnet'
-    ? 'https://api.mainnet.hiro.so'
-    : 'https://api.testnet.hiro.so';
+  const apiUrl = network.coreApiUrl.replace('/v2', '');
 
   let attempts = 0;
   const maxAttempts = 20;
