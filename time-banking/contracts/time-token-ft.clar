@@ -85,7 +85,7 @@
         (let ((current-stake (default-to
             { amount: u0, staked-at: u0, last-reward-claim: u0, total-rewards: u0 }
             (map-get? stakes tx-sender))))
-            (try! (ft-transfer? time-token amount tx-sender (as-contract tx-sender)))
+            (try! (ft-burn? time-token amount tx-sender))
             (map-set stakes tx-sender {
                 amount: (+ (get amount current-stake) amount),
                 staked-at: stacks-block-time,
@@ -97,7 +97,7 @@
 (define-public (unstake (amount uint))
     (let ((stake-data (unwrap! (map-get? stakes tx-sender) ERR_UNAUTHORIZED)))
         (asserts! (>= (get amount stake-data) amount) ERR_INSUFFICIENT_BALANCE)
-        (try! (as-contract (ft-transfer? time-token amount tx-sender tx-sender)))
+        (try! (ft-mint? time-token amount tx-sender))
         (if (is-eq (get amount stake-data) amount)
             (map-delete stakes tx-sender)
             (map-set stakes tx-sender (merge stake-data {
