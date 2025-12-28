@@ -5,37 +5,37 @@ authors = ['Time Banking Protocol Contributors']
 telemetry = true
 cache_dir = './.cache'
 requirements = []
-[contracts.escrow-manager]
+[contracts.escrow-guardian]
 path = 'contracts/escrow-manager.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.exchange-manager]
+[contracts.service-coordinator]
 path = 'contracts/exchange-manager.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.governance]
+[contracts.community-council]
 path = 'contracts/governance.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.reputation-system]
+[contracts.trust-registry]
 path = 'contracts/reputation-system.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.rewards-distributor]
+[contracts.incentive-allocator]
 path = 'contracts/rewards-distributor.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.skill-registry]
+[contracts.expertise-catalog]
 path = 'contracts/skill-registry.clar'
 clarity_version = 4
 epoch = 'latest'
 
-[contracts.time-bank-core]
+[contracts.timebank-foundation]
 path = 'contracts/time-bank-core.clar'
 clarity_version = 4
 epoch = 'latest'
