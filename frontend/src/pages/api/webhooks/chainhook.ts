@@ -1,4 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getChainhookSocket } from '@/lib/realtime/chainhook-socket';
+import { getEventStore } from '@/lib/realtime/event-store';
+import { getSocketServer } from '@/lib/realtime/socket-server';
 
 // Chainhook webhook payload types
 interface ChainhookPayload {
@@ -92,6 +95,11 @@ export default async function handler(
     console.log('Chainhook UUID:', payload.chainhook.uuid);
     console.log('Timestamp:', new Date().toISOString());
 
+    // Get realtime services
+    const chainhookSocket = getChainhookSocket();
+    const eventStore = getEventStore();
+    const processedEvents: any[] = [];
+
     // Process apply events (new blocks/transactions)
     if (payload.apply && payload.apply.length > 0) {
       console.log(`\n📥 APPLY: ${payload.apply.length} block(s)`);
@@ -149,17 +157,24 @@ export default async function handler(
                 console.log(`        Asset: ${eventData.asset}`);
               }
 
-              // Store event in memory
-              recentEvents.unshift({
-                ...eventData,
-                receivedAt: Date.now(),
-              });
-
-              // Keep only recent events
-              if (recentEvents.length > MAX_EVENTS) {
-                recentEvents.pop();
-              }
+              // Store event using realtime services
+              processedEvents.push(eventData);
             }
+          }
+        }
+      }
+
+      // Process all events through realtime system
+      if (chainhookSocket && processedEvents.length > 0) {
+        const events = chainhookSocket.processWebhookPayload(payload);
+
+        // Save to database if event store is available
+        if (eventStore) {
+          try {
+            const saved = await eventStore.saveEvents(events);
+            console.log(`📁 Saved ${saved} events to database`);
+          } catch (error) {
+            console.error('Failed to save events to database:', error);
           }
         }
       }
@@ -173,20 +188,16 @@ export default async function handler(
         console.log(`\nRolling back Block #${block.block_identifier.index}`);
         console.log(`  Hash: ${block.block_identifier.hash.substring(0, 16)}...`);
 
-        // Remove rolled-back events from memory
+        // Handle reorg in event store
         const blockHeight = block.block_identifier.index;
-        const beforeCount = recentEvents.length;
 
-        // Filter out events from rolled-back blocks
-        const filteredEvents = recentEvents.filter(
-          event => event.blockHeight !== blockHeight
-        );
-
-        const removedCount = beforeCount - filteredEvents.length;
-        if (removedCount > 0) {
-          console.log(`  🗑️  Removed ${removedCount} event(s) from rolled-back block`);
-          recentEvents.length = 0;
-          recentEvents.push(...filteredEvents);
+        if (eventStore) {
+          try {
+            const removed = await eventStore.handleReorg([blockHeight]);
+            console.log(`  🗑️  Removed ${removed} event(s) from rolled-back block`);
+          } catch (error) {
+            console.error('Failed to handle reorg in database:', error);
+          }
         }
       }
     }
