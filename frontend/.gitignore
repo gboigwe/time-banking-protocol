@@ -50,3 +50,16 @@ temp/
 
 # Cache directories
 .cache/
+
+# Test coverage
+coverage/
+*.lcov
+
+# Test artifacts
+playwright-report/
+test-results/
+test-results.json
+.playwright/
+
+# Vitest
+.vitest/
