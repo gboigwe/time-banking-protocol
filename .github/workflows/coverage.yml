@@ -1,0 +1,98 @@
+name: Code Coverage
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  coverage:
+    name: Generate Coverage Report
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Generate coverage badge
+        uses: cicirello/jacoco-badge-generator@v2
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        with:
+          badges-directory: frontend/coverage/badges
+          generate-coverage-badge: true
+          coverage-badge-filename: coverage.svg
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          directory: frontend/coverage
+          flags: frontend
+          name: frontend-coverage
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Comment coverage on PR
+        if: github.event_name == 'pull_request'
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        with:
+          lcov-file: frontend/coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          delete-old-comments: true
+
+      - name: Coverage summary
+        run: |
+          echo "## Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Extract coverage percentages from coverage-summary.json
+          if [ -f "coverage/coverage-summary.json" ]; then
+            LINES=$(jq '.total.lines.pct' coverage/coverage-summary.json)
+            STATEMENTS=$(jq '.total.statements.pct' coverage/coverage-summary.json)
+            FUNCTIONS=$(jq '.total.functions.pct' coverage/coverage-summary.json)
+            BRANCHES=$(jq '.total.branches.pct' coverage/coverage-summary.json)
+
+            echo "- **Lines:** ${LINES}%" >> $GITHUB_STEP_SUMMARY
+            echo "- **Statements:** ${STATEMENTS}%" >> $GITHUB_STEP_SUMMARY
+            echo "- **Functions:** ${FUNCTIONS}%" >> $GITHUB_STEP_SUMMARY
+            echo "- **Branches:** ${BRANCHES}%" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Check coverage thresholds
+        run: |
+          # Extract coverage from summary
+          LINES=$(jq '.total.lines.pct' coverage/coverage-summary.json)
+
+          # Check if coverage meets threshold (70%)
+          if (( $(echo "$LINES < 70" | bc -l) )); then
+            echo "❌ Coverage ($LINES%) is below threshold (70%)"
+            exit 1
+          else
+            echo "✅ Coverage ($LINES%) meets threshold (70%)"
+          fi
+
+      - name: Archive coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: frontend/coverage
+          retention-days: 30
