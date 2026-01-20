@@ -116,6 +116,125 @@
         (emit-credits-transferred tx-sender to amount)
         (ok true)))
 
+;; Bulk Operations
+
+;; Bulk transfer credits to multiple recipients (up to 10 transfers per transaction)
+(define-private (transfer-single (recipient-data {to: principal, amount: uint}))
+    (let (
+        (to (get to recipient-data))
+        (amount (get amount recipient-data))
+    )
+        ;; Validate recipient exists and is active
+        (asserts! (is-some (map-get? users to)) ERR_NOT_FOUND)
+        (asserts! (get is-active (unwrap! (map-get? users to) ERR_NOT_FOUND)) ERR_USER_INACTIVE)
+        (asserts! (not (is-eq tx-sender to)) ERR_SELF_TRANSFER)
+        (asserts! (>= amount (var-get min-transfer-amount)) ERR_INVALID_PARAMS)
+
+        ;; Perform the transfer
+        (try! (deduct-credits-internal tx-sender amount))
+        (add-credits-internal to amount)
+
+        ;; Update activity timestamps
+        (try! (update-last-activity to))
+
+        ;; Return transfer details
+        (ok {
+            recipient: to,
+            amount: amount,
+            timestamp: stacks-block-time
+        })
+    )
+)
+
+(define-public (bulk-transfer-credits (transfers (list 10 {to: principal, amount: uint})))
+    (let (
+        (total-amount u0)
+        (transfer-count (len transfers))
+    )
+        (asserts! (not (var-get protocol-paused)) ERR_UNAUTHORIZED)
+        (asserts! (> transfer-count u0) ERR_INVALID_PARAMS)
+        (asserts! (is-some (map-get? users tx-sender)) ERR_NOT_FOUND)
+        (asserts! (get is-active (unwrap! (map-get? users tx-sender) ERR_NOT_FOUND)) ERR_USER_INACTIVE)
+
+        ;; Calculate total amount needed
+        (let ((calculated-total (fold calculate-total-amount transfers u0)))
+            (asserts! (>= (get-balance tx-sender) calculated-total) ERR_INSUFFICIENT_BALANCE)
+
+            ;; Process all transfers - each will validate individually
+            (let ((results (map transfer-single transfers)))
+                ;; Update sender's activity timestamp once for all transfers
+                (try! (update-last-activity tx-sender))
+
+                (print {
+                    event: "bulk-credits-transferred",
+                    sender: tx-sender,
+                    total-transfers: transfer-count,
+                    total-amount: calculated-total,
+                    timestamp: stacks-block-time
+                })
+
+                (ok {
+                    total-transfers: transfer-count,
+                    total-amount: calculated-total,
+                    results: results
+                })
+            )
+        )
+    )
+)
+
+;; Helper function to calculate total amount from transfer list
+(define-private (calculate-total-amount (transfer {to: principal, amount: uint}) (acc uint))
+    (+ acc (get amount transfer))
+)
+
+;; Bulk credit distribution for rewards/referrals (admin only)
+(define-public (bulk-distribute-credits (distributions (list 20 {recipient: principal, amount: uint})))
+    (begin
+        (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_UNAUTHORIZED)
+        (asserts! (not (var-get protocol-paused)) ERR_UNAUTHORIZED)
+        (asserts! (> (len distributions) u0) ERR_INVALID_PARAMS)
+
+        ;; Process distributions
+        (let ((results (map distribute-single distributions)))
+            (print {
+                event: "bulk-credits-distributed",
+                distributor: tx-sender,
+                total-distributions: (len distributions),
+                timestamp: stacks-block-time
+            })
+            (ok results)
+        )
+    )
+)
+
+(define-private (distribute-single (distribution {recipient: principal, amount: uint}))
+    (let (
+        (recipient (get recipient distribution))
+        (amount (get amount distribution))
+    )
+        ;; Validate recipient exists
+        (asserts! (is-some (map-get? users recipient)) ERR_NOT_FOUND)
+        (asserts! (> amount u0) ERR_INVALID_PARAMS)
+        (asserts! (<= amount MAX_MINT_AMOUNT) ERR_INVALID_PARAMS)
+
+        ;; Add credits to recipient
+        (add-credits-internal recipient amount)
+
+        ;; Update activity
+        (try! (update-last-activity recipient))
+
+        (emit-credits-minted recipient amount)
+
+        ;; Return distribution details
+        (ok {
+            recipient: recipient,
+            amount: amount,
+            timestamp: stacks-block-time
+        })
+    )
+)
+
 ;; Update user's last activity timestamp
 (define-private (update-last-activity (user principal))
     (let ((user-data (unwrap! (map-get? users user) ERR_NOT_FOUND)))

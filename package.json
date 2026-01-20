@@ -1,0 +1,51 @@
+{
+  "name": "time-banking-protocol",
+  "version": "1.0.0",
+  "description": "Decentralized time-skill trading platform built on the Stacks blockchain that enables users to exchange expertise and services using time as currency",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "time-banking"
+  ],
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../time-banking && npm install",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "preview:frontend": "cd frontend && npm run preview",
+    "lint:frontend": "cd frontend && npm run lint",
+    "test": "cd time-banking && npm test",
+    "test:report": "cd time-banking && npm run test:report",
+    "test:watch": "cd time-banking && npm run test:watch",
+    "clarinet:check": "cd time-banking && clarinet check",
+    "clarinet:test": "cd time-banking && clarinet test",
+    "clarinet:console": "cd time-banking && clarinet console",
+    "clarinet:integrate": "cd time-banking && clarinet integrate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdekunleBamz/time-banking-protocol.git"
+  },
+  "keywords": [
+    "stacks",
+    "clarity",
+    "blockchain",
+    "time-banking",
+    "skill-trading",
+    "decentralized",
+    "smart-contracts",
+    "web3",
+    "defi",
+    "bitcoin",
+    "dapp"
+  ],
+  "author": "Adekunle Bamz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdekunleBamz/time-banking-protocol/issues"
+  },
+  "homepage": "https://github.com/AdekunleBamz/time-banking-protocol#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module"
+}
