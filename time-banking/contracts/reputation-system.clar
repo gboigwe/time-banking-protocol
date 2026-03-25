@@ -2,6 +2,9 @@
 ;; Advanced reputation calculation and badge management
 ;; Uses stacks-block-time for time-weighted reputation scoring
 
+;; Version
+(define-constant CONTRACT_VERSION "4.0.0")
+
 ;; Error Codes
 (define-constant ERR_UNAUTHORIZED (err u4001))
 (define-constant ERR_NOT_FOUND (err u4002))
@@ -292,6 +295,9 @@
         (ok true)))
 
 ;; Read-Only Functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-reputation-score (user principal))
     (map-get? reputation-scores user))
 
