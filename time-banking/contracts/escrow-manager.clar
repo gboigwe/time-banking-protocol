@@ -2,6 +2,9 @@
 ;; Manages credit escrow for secure time-banking exchanges
 ;; Uses stacks-block-time for expiration and Clarity 4 restrict-assets?
 
+;; Version
+(define-constant CONTRACT_VERSION "4.0.0")
+
 ;; Error Codes
 (define-constant ERR_UNAUTHORIZED (err u5001))
 (define-constant ERR_NOT_FOUND (err u5002))
@@ -261,6 +264,9 @@
         (ok true)))
 
 ;; Read-Only Functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-escrow-info (escrow-id uint))
     (map-get? escrows escrow-id))
 
