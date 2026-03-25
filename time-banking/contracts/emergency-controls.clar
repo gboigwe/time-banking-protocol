@@ -3,6 +3,7 @@
 ;; Uses stacks-block-time for timelocks
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u9001))
 (define-constant ERR_NOT_FOUND (err u9002))
@@ -80,6 +81,17 @@
         (ok operation-id)))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
+(define-read-only (is-operation-executable (operation-id uint))
+    (match (map-get? timelocked-operations operation-id)
+        op (ok (and (not (get executed op)) (>= stacks-block-time (get execute-after op))))
+        ERR_NOT_FOUND))
+
+(define-read-only (get-operation (operation-id uint))
+    (ok (map-get? timelocked-operations operation-id)))
+
 (define-read-only (is-globally-paused)
     (ok (var-get global-pause)))
 
