@@ -3,6 +3,7 @@
 ;; Uses stacks-block-time for voting deadlines and evidence submission
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u4001))
 (define-constant ERR_NOT_FOUND (err u4002))
@@ -139,6 +140,21 @@
             (ok outcome))))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
+(define-read-only (is-voting-open (dispute-id uint))
+    (match (map-get? disputes dispute-id)
+        dispute (ok (and
+            (>= stacks-block-time (get evidence-deadline dispute))
+            (< stacks-block-time (get voting-deadline dispute))))
+        ERR_NOT_FOUND))
+
+(define-read-only (is-evidence-period-open (dispute-id uint))
+    (match (map-get? disputes dispute-id)
+        dispute (ok (< stacks-block-time (get evidence-deadline dispute)))
+        ERR_NOT_FOUND))
+
 (define-read-only (get-dispute (dispute-id uint))
     (ok (map-get? disputes dispute-id)))
 
