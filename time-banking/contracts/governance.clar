@@ -2,6 +2,9 @@
 ;; Protocol governance with proposal creation, voting, and execution
 ;; Uses stacks-block-time for voting periods and timelock
 
+;; Version
+(define-constant CONTRACT_VERSION "4.0.0")
+
 ;; Error Codes
 (define-constant ERR_UNAUTHORIZED (err u6001))
 (define-constant ERR_NOT_FOUND (err u6002))
@@ -234,6 +237,9 @@
         (ok true)))
 
 ;; Read-Only Functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-proposal (proposal-id uint))
     (map-get? proposals proposal-id))
 
