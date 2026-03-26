@@ -1,0 +1,81 @@
+// cv-type-guards.ts — type guards for ClarityValue types
+import type {
+  ClarityValue, UIntCV, IntCV, BoolCV, StringAsciiCV, StringUtf8CV,
+  BufferCV, ListCV, TupleCV, StandardPrincipalCV, ContractPrincipalCV,
+  NoneCV, SomeCV, OkCV, ErrCV
+} from './cv-factory';
+
+/** Type guard for UIntCV */
+export function isUIntCV(cv: ClarityValue): cv is UIntCV {
+  return cv.type === 'uint';
+}
+
+/** Type guard for IntCV */
+export function isIntCV(cv: ClarityValue): cv is IntCV {
+  return cv.type === 'int';
+}
+
+/** Type guard for StringAsciiCV */
+export function isStringAsciiCV(cv: ClarityValue): cv is StringAsciiCV {
+  return cv.type === 'stringascii';
+}
+
+/** Type guard for StringUtf8CV */
+export function isStringUtf8CV(cv: ClarityValue): cv is StringUtf8CV {
+  return cv.type === 'stringutf8';
+}
+
+/** Type guard for BufferCV */
+export function isBufferCV(cv: ClarityValue): cv is BufferCV {
+  return cv.type === 'buffer';
+}
+
+/** Type guard for ListCV */
+export function isListCV(cv: ClarityValue): cv is ListCV {
+  return cv.type === 'list';
+}
+
+/** Type guard for TupleCV */
+export function isTupleCV(cv: ClarityValue): cv is TupleCV {
+  return cv.type === 'tuple';
+}
+
+/** Type guard for NoneCV */
+export function isNoneCV(cv: ClarityValue): cv is NoneCV {
+  return cv.type === 'none';
+}
+
+/** Type guard for SomeCV */
+export function isSomeCV(cv: ClarityValue): cv is SomeCV {
+  return cv.type === 'some';
+}
+
+/** Type guard for OkCV */
+export function isOkCV(cv: ClarityValue): cv is OkCV {
+  return cv.type === 'ok';
+}
+
+/** Type guard for ErrCV */
+export function isErrCV(cv: ClarityValue): cv is ErrCV {
+  return cv.type === 'err';
+}
+
+/** Type guard for StandardPrincipalCV */
+export function isStandardPrincipalCV(cv: ClarityValue): cv is StandardPrincipalCV {
+  return cv.type === 'address';
+}
+
+/** Type guard for ContractPrincipalCV */
+export function isContractPrincipalCV(cv: ClarityValue): cv is ContractPrincipalCV {
+  return cv.type === 'contract_address';
+}
+
+/** Type guard for BoolCV true */
+export function isTrueCV(cv: ClarityValue): cv is BoolCV {
+  return cv.type === 'true';
+}
+
+/** Type guard for BoolCV false */
+export function isFalseCV(cv: ClarityValue): cv is BoolCV {
+  return cv.type === 'false';
+}
