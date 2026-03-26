@@ -1,0 +1,358 @@
+// http-client.ts — base HTTP client for Hiro API
+
+/** Request configuration */
+export interface RequestConfig {
+  timeout?: number;
+  retries?: number;
+  headers?: Record<string, string>;
+}
+
+/** Response configuration */
+export interface ResponseConfig<T> {
+  data: T;
+  status: number;
+  headers: Record<string, string>;
+}
+
+/** Default timeout in milliseconds */
+export const DEFAULT_TIMEOUT_MS = 30000;
+
+/** Default retry count */
+export const DEFAULT_RETRIES = 3;
+
+/** HttpClient class for API requests */
+export class HttpClient {
+  constructor(
+    private readonly baseUrl: string,
+    private readonly defaultConfig: RequestConfig = {}
+  ) {}
+
+  async get<T>(path: string, config?: RequestConfig): Promise<ResponseConfig<T>> {
+    const url = `${this.baseUrl}${path}`;
+    const timeout = config?.timeout ?? this.defaultConfig.timeout ?? DEFAULT_TIMEOUT_MS;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: { ...this.defaultConfig.headers, ...config?.headers },
+        signal: controller.signal,
+      });
+      const data = await res.json() as T;
+      return { data, status: res.status, headers: Object.fromEntries(res.headers.entries()) };
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
+
+  async post<T>(path: string, body: unknown, config?: RequestConfig): Promise<ResponseConfig<T>> {
+    const url = `${this.baseUrl}${path}`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...this.defaultConfig.headers, ...config?.headers },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json() as T;
+    return { data, status: res.status, headers: Object.fromEntries(res.headers.entries()) };
+  }
+}
+
+/** HTTP_STATUS_1 */
+export const HTTP_STATUS_1 = 11;
+
+/** HTTP_STATUS_2 */
+export const HTTP_STATUS_2 = 22;
+
+/** HTTP_STATUS_3 */
+export const HTTP_STATUS_3 = 33;
+
+/** HTTP_STATUS_4 */
+export const HTTP_STATUS_4 = 44;
+
+/** HTTP_STATUS_5 */
+export const HTTP_STATUS_5 = 55;
+
+/** HTTP_STATUS_6 */
+export const HTTP_STATUS_6 = 66;
+
+/** HTTP_STATUS_7 */
+export const HTTP_STATUS_7 = 77;
+
+/** HTTP_STATUS_8 */
+export const HTTP_STATUS_8 = 88;
+
+/** HTTP_STATUS_9 */
+export const HTTP_STATUS_9 = 99;
+
+/** HTTP_STATUS_10 */
+export const HTTP_STATUS_10 = 110;
+
+/** HTTP_STATUS_11 */
+export const HTTP_STATUS_11 = 121;
+
+/** HTTP_STATUS_12 */
+export const HTTP_STATUS_12 = 132;
+
+/** HTTP_STATUS_13 */
+export const HTTP_STATUS_13 = 143;
+
+/** HTTP_STATUS_14 */
+export const HTTP_STATUS_14 = 154;
+
+/** HTTP_STATUS_15 */
+export const HTTP_STATUS_15 = 165;
+
+/** HTTP_STATUS_16 */
+export const HTTP_STATUS_16 = 176;
+
+/** HTTP_STATUS_17 */
+export const HTTP_STATUS_17 = 187;
+
+/** HTTP_STATUS_18 */
+export const HTTP_STATUS_18 = 198;
+
+/** HTTP_STATUS_19 */
+export const HTTP_STATUS_19 = 209;
+
+/** HTTP_STATUS_20 */
+export const HTTP_STATUS_20 = 220;
+
+/** HTTP_STATUS_21 */
+export const HTTP_STATUS_21 = 231;
+
+/** HTTP_STATUS_22 */
+export const HTTP_STATUS_22 = 242;
+
+/** HTTP_STATUS_23 */
+export const HTTP_STATUS_23 = 253;
+
+/** HTTP_STATUS_24 */
+export const HTTP_STATUS_24 = 264;
+
+/** HTTP_STATUS_25 */
+export const HTTP_STATUS_25 = 275;
+
+/** HTTP_STATUS_26 */
+export const HTTP_STATUS_26 = 286;
+
+/** HTTP_STATUS_27 */
+export const HTTP_STATUS_27 = 297;
+
+/** HTTP_STATUS_28 */
+export const HTTP_STATUS_28 = 308;
+
+/** HTTP_STATUS_29 */
+export const HTTP_STATUS_29 = 319;
+
+/** HTTP_STATUS_30 */
+export const HTTP_STATUS_30 = 330;
+
+/** HTTP_STATUS_31 */
+export const HTTP_STATUS_31 = 341;
+
+/** HTTP_STATUS_32 */
+export const HTTP_STATUS_32 = 352;
+
+/** HTTP_STATUS_33 */
+export const HTTP_STATUS_33 = 363;
+
+/** HTTP_STATUS_34 */
+export const HTTP_STATUS_34 = 374;
+
+/** HTTP_STATUS_35 */
+export const HTTP_STATUS_35 = 385;
+
+/** HTTP_STATUS_36 */
+export const HTTP_STATUS_36 = 396;
+
+/** HTTP_STATUS_37 */
+export const HTTP_STATUS_37 = 407;
+
+/** HTTP_STATUS_38 */
+export const HTTP_STATUS_38 = 418;
+
+/** HTTP_STATUS_39 */
+export const HTTP_STATUS_39 = 429;
+
+/** HTTP_STATUS_40 */
+export const HTTP_STATUS_40 = 440;
+
+/** HTTP_STATUS_41 */
+export const HTTP_STATUS_41 = 451;
+
+/** HTTP_STATUS_42 */
+export const HTTP_STATUS_42 = 462;
+
+/** HTTP_STATUS_43 */
+export const HTTP_STATUS_43 = 473;
+
+/** HTTP_STATUS_44 */
+export const HTTP_STATUS_44 = 484;
+
+/** HTTP_STATUS_45 */
+export const HTTP_STATUS_45 = 495;
+
+/** HTTP_STATUS_46 */
+export const HTTP_STATUS_46 = 506;
+
+/** HTTP_STATUS_47 */
+export const HTTP_STATUS_47 = 517;
+
+/** HTTP_STATUS_48 */
+export const HTTP_STATUS_48 = 528;
+
+/** HTTP_STATUS_49 */
+export const HTTP_STATUS_49 = 539;
+
+/** HTTP_STATUS_50 */
+export const HTTP_STATUS_50 = 550;
+
+/** HTTP_STATUS_51 */
+export const HTTP_STATUS_51 = 561;
+
+/** HTTP_STATUS_52 */
+export const HTTP_STATUS_52 = 572;
+
+/** HTTP_STATUS_53 */
+export const HTTP_STATUS_53 = 583;
+
+/** HTTP_STATUS_54 */
+export const HTTP_STATUS_54 = 594;
+
+/** HTTP_STATUS_55 */
+export const HTTP_STATUS_55 = 605;
+
+/** HTTP_STATUS_56 */
+export const HTTP_STATUS_56 = 616;
+
+/** HTTP_STATUS_57 */
+export const HTTP_STATUS_57 = 627;
+
+/** HTTP_STATUS_58 */
+export const HTTP_STATUS_58 = 638;
+
+/** HTTP_STATUS_59 */
+export const HTTP_STATUS_59 = 649;
+
+/** HTTP_STATUS_60 */
+export const HTTP_STATUS_60 = 660;
+
+/** HTTP_STATUS_61 */
+export const HTTP_STATUS_61 = 671;
+
+/** HTTP_STATUS_62 */
+export const HTTP_STATUS_62 = 682;
+
+/** HTTP_STATUS_63 */
+export const HTTP_STATUS_63 = 693;
+
+/** HTTP_STATUS_64 */
+export const HTTP_STATUS_64 = 704;
+
+/** HTTP_STATUS_65 */
+export const HTTP_STATUS_65 = 715;
+
+/** HTTP_STATUS_66 */
+export const HTTP_STATUS_66 = 726;
+
+/** HTTP_STATUS_67 */
+export const HTTP_STATUS_67 = 737;
+
+/** HTTP_STATUS_68 */
+export const HTTP_STATUS_68 = 748;
+
+/** HTTP_STATUS_69 */
+export const HTTP_STATUS_69 = 759;
+
+/** HTTP_STATUS_70 */
+export const HTTP_STATUS_70 = 770;
+
+/** HTTP_STATUS_71 */
+export const HTTP_STATUS_71 = 781;
+
+/** HTTP_STATUS_72 */
+export const HTTP_STATUS_72 = 792;
+
+/** HTTP_STATUS_73 */
+export const HTTP_STATUS_73 = 803;
+
+/** HTTP_STATUS_74 */
+export const HTTP_STATUS_74 = 814;
+
+/** HTTP_STATUS_75 */
+export const HTTP_STATUS_75 = 825;
+
+/** HTTP_STATUS_76 */
+export const HTTP_STATUS_76 = 836;
+
+/** HTTP_STATUS_77 */
+export const HTTP_STATUS_77 = 847;
+
+/** HTTP_STATUS_78 */
+export const HTTP_STATUS_78 = 858;
+
+/** HTTP_STATUS_79 */
+export const HTTP_STATUS_79 = 869;
+
+/** HTTP_STATUS_80 */
+export const HTTP_STATUS_80 = 880;
+
+/** HTTP_STATUS_81 */
+export const HTTP_STATUS_81 = 891;
+
+/** HTTP_STATUS_82 */
+export const HTTP_STATUS_82 = 902;
+
+/** HTTP_STATUS_83 */
+export const HTTP_STATUS_83 = 913;
+
+/** HTTP_STATUS_84 */
+export const HTTP_STATUS_84 = 924;
+
+/** HTTP_STATUS_85 */
+export const HTTP_STATUS_85 = 935;
+
+/** HTTP_STATUS_86 */
+export const HTTP_STATUS_86 = 946;
+
+/** HTTP_STATUS_87 */
+export const HTTP_STATUS_87 = 957;
+
+/** HTTP_STATUS_88 */
+export const HTTP_STATUS_88 = 968;
+
+/** HTTP_STATUS_89 */
+export const HTTP_STATUS_89 = 979;
+
+/** HTTP_STATUS_90 */
+export const HTTP_STATUS_90 = 990;
+
+/** HTTP_STATUS_91 */
+export const HTTP_STATUS_91 = 1001;
+
+/** HTTP_STATUS_92 */
+export const HTTP_STATUS_92 = 1012;
+
+/** HTTP_STATUS_93 */
+export const HTTP_STATUS_93 = 1023;
+
+/** HTTP_STATUS_94 */
+export const HTTP_STATUS_94 = 1034;
+
+/** HTTP_STATUS_95 */
+export const HTTP_STATUS_95 = 1045;
+
+/** HTTP_STATUS_96 */
+export const HTTP_STATUS_96 = 1056;
+
+/** HTTP_STATUS_97 */
+export const HTTP_STATUS_97 = 1067;
+
+/** HTTP_STATUS_98 */
+export const HTTP_STATUS_98 = 1078;
+
+/** HTTP_STATUS_99 */
+export const HTTP_STATUS_99 = 1089;
+
+/** HTTP_STATUS_100 */
+export const HTTP_STATUS_100 = 1100;
