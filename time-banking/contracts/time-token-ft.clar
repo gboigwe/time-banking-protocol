@@ -9,6 +9,7 @@
 (define-fungible-token time-token)
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u3001))
 (define-constant ERR_INSUFFICIENT_BALANCE (err u3002))
@@ -91,6 +92,12 @@
                 staked-at: stacks-block-time,
                 last-reward-claim: stacks-block-time,
                 total-rewards: (get total-rewards current-stake)
+            })
+            (print {
+                event: "tokens-staked",
+                staker: tx-sender,
+                amount: amount,
+                staked-at: stacks-block-time
             }))
         (ok true)))
 
@@ -111,6 +118,9 @@
         (ok true)))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-allowance (owner principal) (spender principal))
     (ok (get-allowance-or-default owner spender)))
 

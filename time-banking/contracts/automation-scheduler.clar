@@ -3,6 +3,7 @@
 ;; Uses stacks-block-time for scheduling
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u6001))
 (define-constant ERR_NOT_FOUND (err u6002))
@@ -47,6 +48,15 @@
             amount: amount
         })
         (var-set schedule-counter schedule-id)
+        (print {
+            event: "schedule-created",
+            schedule-id: schedule-id,
+            owner: tx-sender,
+            recipient: recipient,
+            interval: interval,
+            next-execution: (+ stacks-block-time interval),
+            created-at: stacks-block-time
+        })
         (ok schedule-id)))
 
 (define-public (execute-schedule (schedule-id uint))
@@ -66,6 +76,9 @@
         (ok true)))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-schedule (schedule-id uint))
     (ok (map-get? schedules schedule-id)))
 

@@ -12,6 +12,7 @@
 (define-constant ERR_NOT_ELIGIBLE (err u7007))
 
 ;; Configuration
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant REWARD_PERIOD u2592000) ;; 30 days
 (define-constant MIN_ACTIVITY_SCORE u10)
@@ -244,6 +245,9 @@
         (ok true)))
 
 ;; Read-Only Functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-period-info (period-id uint))
     (map-get? reward-periods period-id))
 

@@ -2,6 +2,9 @@
 ;; Manages skill registration, verification, and categorization
 ;; Uses contract-hash? for verified skill templates
 
+;; Version
+(define-constant CONTRACT_VERSION "4.0.0")
+
 ;; Error Codes
 (define-constant ERR_UNAUTHORIZED (err u2001))
 (define-constant ERR_NOT_FOUND (err u2002))
@@ -209,6 +212,9 @@
         (ok true)))
 
 ;; Read-Only Functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-skill-info (user principal) (skill-id uint))
     (map-get? skills {user: user, skill-id: skill-id}))
 

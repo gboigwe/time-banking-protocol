@@ -2,6 +2,9 @@
 ;; Manages user registration, time credit balances, and core banking functionality
 ;; Refactored to use Clarity 4 features: stacks-block-time, improved type safety
 
+;; Version
+(define-constant CONTRACT_VERSION "4.0.0")
+
 ;; Constants and Error Codes
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u1001))
@@ -243,6 +246,9 @@
 
 (define-read-only (get-user-balance (user principal))
     (ok (get-balance user)))
+
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
 
 (define-read-only (get-contract-owner)
     (ok CONTRACT_OWNER))

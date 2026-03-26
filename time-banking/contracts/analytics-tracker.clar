@@ -3,6 +3,7 @@
 ;; Uses stacks-block-time for time-series data
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u11001))
 
@@ -53,9 +54,23 @@
             (update-user-activity receiver day amount false))
         (var-set total-exchanges (+ (var-get total-exchanges) u1))
         (var-set total-volume (+ (var-get total-volume) amount))
+        (print {
+            event: "exchange-recorded",
+            skill-id: skill-id,
+            provider: provider,
+            receiver: receiver,
+            amount: amount,
+            timestamp: stacks-block-time
+        })
         (ok true)))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
+(define-read-only (get-current-timestamp)
+    (ok stacks-block-time))
+
 (define-read-only (get-daily-metrics (day uint))
     (ok (map-get? daily-metrics day)))
 

@@ -3,6 +3,7 @@
 ;; Uses stacks-block-time for claim filing and processing
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u5001))
 (define-constant ERR_NOT_FOUND (err u5002))
@@ -93,6 +94,9 @@
         (ok true)))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-contributor-info (contributor principal))
     (ok (map-get? contributors contributor)))
 

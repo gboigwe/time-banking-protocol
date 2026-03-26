@@ -3,6 +3,7 @@
 ;; Uses stacks-block-time for tracking
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u8001))
 (define-constant ERR_NOT_FOUND (err u8002))
@@ -63,6 +64,9 @@
             (ok true))))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-user-data (user principal))
     (ok (map-get? user-referrals user)))
 

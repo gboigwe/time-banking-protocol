@@ -3,6 +3,7 @@
 ;; Uses stacks-block-time for match proposals
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u7001))
 (define-constant ERR_NOT_FOUND (err u7002))
@@ -94,6 +95,9 @@
         (ok true)))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-demand (requester principal) (skill-id uint))
     (ok (map-get? skill-demand { requester: requester, skill-id: skill-id })))
 

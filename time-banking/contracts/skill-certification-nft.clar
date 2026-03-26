@@ -9,6 +9,7 @@
 (define-non-fungible-token skill-certification uint)
 
 ;; constants
+(define-constant CONTRACT_VERSION "4.0.0")
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_UNAUTHORIZED (err u2001))
 (define-constant ERR_NOT_FOUND (err u2002))
@@ -108,6 +109,9 @@
         (ok true)))
 
 ;; read only functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-certification-info (token-id uint))
     (ok (map-get? certification-data token-id)))
 

@@ -2,6 +2,9 @@
 ;; Manages time-skill exchange requests, agreements, and completions
 ;; Uses stacks-block-time for scheduling and deadlines
 
+;; Version
+(define-constant CONTRACT_VERSION "4.0.0")
+
 ;; Error Codes
 (define-constant ERR_UNAUTHORIZED (err u3001))
 (define-constant ERR_NOT_FOUND (err u3002))
@@ -258,6 +261,9 @@
         (ok true)))
 
 ;; Read-Only Functions
+(define-read-only (get-contract-version)
+    (ok CONTRACT_VERSION))
+
 (define-read-only (get-exchange-info (exchange-id uint))
     (map-get? exchanges exchange-id))
 
