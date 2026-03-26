@@ -1,0 +1,172 @@
+// duration-helpers.ts — block time duration conversion helpers
+
+/** Average Stacks blocks mined per hour */
+export const BLOCKS_PER_HOUR = 6;
+
+/** Average Stacks blocks mined per day */
+export const BLOCKS_PER_DAY = BLOCKS_PER_HOUR * 24;
+
+/** Average Stacks blocks mined per week */
+export const BLOCKS_PER_WEEK = BLOCKS_PER_DAY * 7;
+
+/** Average Stacks blocks mined per month (30 days) */
+export const BLOCKS_PER_MONTH = BLOCKS_PER_DAY * 30;
+
+/** Average Stacks blocks mined per year */
+export const BLOCKS_PER_YEAR = BLOCKS_PER_DAY * 365;
+
+/** Average block time in seconds */
+export const BLOCK_TIME_SECONDS = 10 * 60;
+
+/**
+ * Convert number of blocks to approximate hours
+ * @param blocks - number of Stacks blocks
+ * @returns approximate hours
+ */
+export function blocksToHours(blocks: number): number {
+  return blocks / BLOCKS_PER_HOUR;
+}
+
+/**
+ * Convert hours to approximate block count
+ * @param hours - number of hours
+ * @returns approximate block count
+ */
+export function hoursToBlocks(hours: number): number {
+  return Math.ceil(hours * BLOCKS_PER_HOUR);
+}
+
+/**
+ * Convert days to approximate block count
+ * @param days - number of days
+ * @returns approximate block count
+ */
+export function daysToBlocks(days: number): number {
+  return Math.ceil(days * BLOCKS_PER_DAY);
+}
+
+/**
+ * Convert blocks to approximate days
+ * @param blocks - number of Stacks blocks
+ * @returns approximate days
+ */
+export function blocksToDays(blocks: number): number {
+  return blocks / BLOCKS_PER_DAY;
+}
+
+/**
+ * Convert weeks to approximate block count
+ * @param weeks - number of weeks
+ * @returns approximate block count
+ */
+export function weeksToBlocks(weeks: number): number {
+  return Math.ceil(weeks * BLOCKS_PER_WEEK);
+}
+
+/**
+ * Convert blocks to approximate weeks
+ * @param blocks - number of Stacks blocks
+ * @returns approximate weeks
+ */
+export function blocksToWeeks(blocks: number): number {
+  return blocks / BLOCKS_PER_WEEK;
+}
+
+/**
+ * Convert months to approximate block count
+ * @param months - number of months (30 days each)
+ * @returns approximate block count
+ */
+export function monthsToBlocks(months: number): number {
+  return Math.ceil(months * BLOCKS_PER_MONTH);
+}
+
+/**
+ * Convert blocks to approximate months
+ * @param blocks - number of Stacks blocks
+ * @returns approximate months
+ */
+export function blocksToMonths(blocks: number): number {
+  return blocks / BLOCKS_PER_MONTH;
+}
+
+/**
+ * Convert blocks to approximate minutes
+ * @param blocks - number of Stacks blocks
+ * @returns approximate minutes
+ */
+export function blocksToMinutes(blocks: number): number {
+  return (blocks * BLOCK_TIME_SECONDS) / 60;
+}
+
+/**
+ * Convert blocks to approximate seconds
+ * @param blocks - number of Stacks blocks
+ * @returns approximate seconds
+ */
+export function blocksToSeconds(blocks: number): number {
+  return blocks * BLOCK_TIME_SECONDS;
+}
+
+/**
+ * Format a block duration as human-readable string
+ * @param blocks - number of blocks
+ * @returns string like "2 hours" or "3 days"
+ */
+export function formatBlockDuration(blocks: number): string {
+  if (blocks < BLOCKS_PER_HOUR) {
+    const minutes = Math.round(blocksToMinutes(blocks));
+    return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+  }
+  if (blocks < BLOCKS_PER_DAY) {
+    const hours = Math.round(blocksToHours(blocks));
+    return `${hours} hour${hours !== 1 ? 's' : ''}`;
+  }
+  if (blocks < BLOCKS_PER_WEEK) {
+    const days = Math.round(blocksToDays(blocks));
+    return `${days} day${days !== 1 ? 's' : ''}`;
+  }
+  const weeks = Math.round(blocksToWeeks(blocks));
+  return `${weeks} week${weeks !== 1 ? 's' : ''}`;
+}
+
+/**
+ * Parse a human-readable duration string to block count
+ * @param duration - string like "2h", "3d", "1w"
+ * @returns block count or null if unparseable
+ */
+export function parseDurationToBlocks(duration: string): number | null {
+  const match = duration.match(/^(\d+(?:\.\d+)?)\s*([mhdwMy]?)$/i);
+  if (!match) return null;
+  const value = parseFloat(match[1]);
+  const unit = match[2].toLowerCase();
+  switch (unit) {
+    case 'm': return Math.ceil(value / 10);
+    case 'h': return hoursToBlocks(value);
+    case 'd': return daysToBlocks(value);
+    case 'w': return weeksToBlocks(value);
+    case 'M': return monthsToBlocks(value);
+    default: return Math.ceil(value);
+  }
+}
+
+/**
+ * Get the most appropriate unit for a given block count
+ * @param blocks - number of blocks
+ * @returns object with value and unit for display
+ */
+export function getBestUnit(blocks: number): { value: number; unit: string } {
+  if (blocks < BLOCKS_PER_HOUR) {
+    return { value: Math.round(blocksToMinutes(blocks)), unit: 'minutes' };
+  }
+  if (blocks < BLOCKS_PER_DAY) {
+    return { value: Math.round(blocksToHours(blocks)), unit: 'hours' };
+  }
+  if (blocks < BLOCKS_PER_WEEK * 2) {
+    return { value: Math.round(blocksToDays(blocks)), unit: 'days' };
+  }
+  if (blocks < BLOCKS_PER_MONTH * 2) {
+    return { value: Math.round(blocksToWeeks(blocks)), unit: 'weeks' };
+  }
+  return { value: Math.round(blocksToMonths(blocks)), unit: 'months' };
+}
