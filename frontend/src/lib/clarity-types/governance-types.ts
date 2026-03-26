@@ -1,0 +1,86 @@
+// governance-types.ts — Clarity v4 governance protocol type definitions
+
+/** QuorumThreshold represents minimum vote percentage (0-100) */
+export type QuorumThreshold = number;
+
+/** VotingPeriod in block-time units */
+export interface VotingPeriod {
+  /** Start block height */
+  startBlock: number;
+  /** End block height */
+  endBlock: number;
+}
+
+/** CouncilMember from governance contract */
+export interface CouncilMember {
+  /** Member address */
+  address: string;
+  /** Voting power weight */
+  weight: number;
+  /** Block when membership starts */
+  startBlock: number;
+  /** Block when membership expires */
+  endBlock: number;
+  /** Whether member is currently active */
+  isActive: boolean;
+}
+
+/** VoteRecord from governance contract */
+export interface VoteRecord {
+  /** Proposal being voted on */
+  proposalId: number;
+  /** Voter address */
+  voter: string;
+  /** Vote direction */
+  vote: 'for' | 'against' | 'abstain';
+  /** Voting power used */
+  power: number;
+  /** Block height when vote was cast */
+  castedAt: number;
+}
+
+/** ProposalTuple from governance contract */
+export interface ProposalTuple {
+  /** Proposal identifier */
+  proposalId: number;
+  /** Proposal title */
+  title: string;
+  /** Full description of the proposal */
+  description: string;
+  /** Proposer address */
+  proposer: string;
+  /** Voting window */
+  period: VotingPeriod;
+  /** Number of for votes */
+  forVotes: number;
+  /** Number of against votes */
+  againstVotes: number;
+  /** Number of abstain votes */
+  abstainVotes: number;
+  /** Quorum required for this proposal */
+  quorum: QuorumThreshold;
+  /** Whether proposal has been executed */
+  executed: boolean;
+  /** Whether proposal passed */
+  passed: boolean;
+}
+
+/** Check if a proposal is currently active */
+export function isProposalActive(proposal: ProposalTuple, currentBlock: number): boolean {
+  return (
+    currentBlock >= proposal.period.startBlock &&
+    currentBlock <= proposal.period.endBlock &&
+    !proposal.executed
+  );
+}
+
+/** Check if proposal reached quorum */
+export function hasReachedQuorum(proposal: ProposalTuple, totalVotingPower: number): boolean {
+  const totalVotes = proposal.forVotes + proposal.againstVotes + proposal.abstainVotes;
+  return totalVotingPower > 0 && (totalVotes / totalVotingPower) * 100 >= proposal.quorum;
+}
+
+/** Check if proposal passed based on for vs against votes */
+export function didProposalPass(proposal: ProposalTuple): boolean {
+  return proposal.forVotes > proposal.againstVotes;
+}

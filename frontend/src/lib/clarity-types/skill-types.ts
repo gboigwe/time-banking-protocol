@@ -1,0 +1,75 @@
+// skill-types.ts — Clarity v4 skill-related type definitions
+
+/** SkillLevel represents a uint in range 1–5 from Clarity contract */
+export type SkillLevel = 1 | 2 | 3 | 4 | 5;
+
+/** CertificationStatus mirrors optional in Clarity contract */
+export type CertificationStatus = 'none' | 'pending' | 'verified' | 'revoked';
+
+/** SkillCategory tuple from skill-registry contract */
+export interface SkillCategory {
+  /** Unique category identifier */
+  categoryId: number;
+  /** Human-readable category name */
+  name: string;
+  /** Category description */
+  description: string;
+  /** Whether this category is active */
+  isActive: boolean;
+}
+
+/** SkillMetadata tuple from skill-registry contract */
+export interface SkillMetadata {
+  /** Skill identifier */
+  skillId: number;
+  /** Skill name */
+  name: string;
+  /** Category this skill belongs to */
+  categoryId: number;
+  /** Minimum level required */
+  minLevel: SkillLevel;
+  /** Maximum level attainable */
+  maxLevel: SkillLevel;
+  /** Whether skill requires certification */
+  requiresCertification: boolean;
+  /** Tags associated with this skill */
+  tags: string[];
+}
+
+/** VerifiedSkill response combining skill data and certification */
+export interface VerifiedSkill {
+  /** The skill metadata */
+  skill: SkillMetadata;
+  /** Certification status */
+  certification: CertificationStatus;
+  /** Address that certified this skill */
+  certifiedBy?: string;
+  /** Block height when certified */
+  certifiedAt?: number;
+}
+
+/** Type guard for SkillMetadata */
+export function isSkillMetadata(value: unknown): value is SkillMetadata {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'skillId' in value &&
+    'name' in value &&
+    'categoryId' in value
+  );
+}
+
+/** Default SkillLevel value */
+export const DEFAULT_SKILL_LEVEL: SkillLevel = 1;
+
+/** All valid skill levels as array */
+export const SKILL_LEVELS: SkillLevel[] = [1, 2, 3, 4, 5];
+
+/** Label map for skill levels */
+export const SKILL_LEVEL_LABELS: Record<SkillLevel, string> = {
+  1: 'Beginner',
+  2: 'Elementary',
+  3: 'Intermediate',
+  4: 'Advanced',
+  5: 'Expert',
+};
